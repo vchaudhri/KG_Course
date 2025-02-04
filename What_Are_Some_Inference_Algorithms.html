@@ -1,0 +1,830 @@
+<html>
+
+<!--=======================================================================-->
+
+<head>
+  <title>What are  Knowledge Graph Inference Algorithms?</title></head>
+
+<!--=======================================================================-->
+
+<body style='background-color:#990000'>
+  <center>
+    <table width='720' cellspacing='0' cellpadding='0' bgcolor='#ffffff'>
+      <tr>
+        <td>
+
+<!--=======================================================================-->
+
+  <table width='100%' height='120' cellspacing='0' cellpadding='0' bgcolor='#f8f7f7'>
+    <tr>
+      <td width='40'>&nbsp;</td>
+      <td width='120' align='center' valign='center'>
+        <a href='http://www.stanford.edu/class/cs520/'><img width='128' src='images/flyer-v2c.jpg'/>CS520</a>
+      </td>
+      <td align='center' valign='center'>
+        <span style='font-size:36px'>Knowledge Graphs</span><br/>
+      </td>
+      <td width='120' align='center' style='color:#000066;font-size:18px'>
+        <i>What<br/>should AI<br/>Know ?</i>
+      </td>
+      <td width='40'>&nbsp;</td>
+    </tr>
+  </table>
+
+<!--=======================================================================-->
+
+<hr style='border-top: 1px solid #888888;margin:0'/>
+<table width='100%' height='40' cellspacing='0' cellpadding='0' bgcolor='#f8f7f7'>
+  <tr><td align='center' style='font-size:18px'>6. What are some Knowledge Graph Inference Algorithms?</td></tr>
+</table>
+<hr style='border-top: 1px solid #888888;margin:0'/>
+
+<!--=======================================================================-->
+
+<center>
+  <br/>
+  <table width='640' cellpadding='0'>
+    <tr>
+      <td>
+
+<!--=======================================================================-->
+
+<h1>1. Introduction</h1>
+
+<p>Once we have created the knowledge graph, we are interested in
+retrieving information, and using that information to make new
+conclusions. We have already introduced query languages using which we
+can perform retrieval operations on the graph. In this chapter, we
+will focus on inference algorithms, that go beyond retrievals, i.e., 
+conclude new facts from the knowledge graph that are not explicitly
+  present in it.  Inference algorithms can be invoked through the
+declarative query interface.</p>
+
+<p>We will consider two broad classes of inference algorithms: graph
+algorithms, and ontology-based algorithms.  The graph algorithms are
+applicable to any graph-structured data, and support operations such
+as finding minimum paths between nodes in a graph, identifying salient
+nodes in a graph, etc. The ontology-based algorithms operate on the
+structure of the graph but take its semantics into account, for
+example, traversing specific paths, or concluding new connections
+based on background domain knowledge. In this chapter, we will
+consider both classes of these algorithms. </p>
+
+<p>In principle, we could invoke graph algorithms, and the
+  ontology-based inference through a declarative query interface of
+  the sorts we have previously considered. Ontology-based inference
+  may leverage graph-based algorithms.  For example, checking if an
+  object A is an instance of a class B, could be done by
+  checking whether a path exists in the class graph between C and B,
+  where C is the immediate type of A.</p>
+
+
+<h1>2. Graph-based Inference Algorithms</h1>
+
+<p>We will consider three broad classes of graph algorithms: path
+finding, centrality detection, and community detection. Path finding
+involves finding a path between two
+or more nodes in a graph that satisfies certain properties. Centrality
+detection is about understanding which nodes are important in a graph.
+  Different methods used to define the meaning of importance lead to
+many variations in the centrality detection algorithms.  Finally, community
+detection is about identifying a group of nodes in a graph that
+satisfies some criteria of being in a community.  Community detection
+is useful for studying emergent behaviors in graphs that may otherwise
+not be noticed.</p>
+
+<p>We will consider each of these categories of graph algorithms in
+  more detail.  For each category, we will present an overview,
+  discuss different ways it is useful, and consider some sample
+  algorithms. </p>
+
+<h2>2.1 Path Finding Algorithms</h2>
+
+<p>There are several variations of the problem of finding paths in a
+graph: finding the shortest path between any given two nodes, or
+finding the shortest paths between all pairs of nodes, finding a
+minimum spanning tree, etc. The shortest path in a graph is a path
+between two nodes in a  graph such that the sum of the weights of the
+edges is minimized. If there is no weight associated with an edge, it
+is assumed to be 1.  The shortest path between any given two nodes can
+be used in planning an optimal route in a traffic navigation system. A
+minimum spanning tree calculates the least cost for visiting all the
+nodes in a set of nodes, and can be useful in problems such as trip
+planning.</p>
+
+<p>As an example of a specific shortest path algorithm, we will
+  consider the A* algorithm which is a generalization of the classical
+  Dijkastra's algorithm. A* algorithm is also widely used as a search
+  algorithm for solving AI Planning problems.</p>
+
+<p> The A* algorithm operates by maintaining a tree of paths
+originating at the start node and extending those paths one edge at a
+time until its termination criterion is satisfied. At each step, it
+determines which of the paths to extend based on the cost
+of the path until now and the estimate of the cost required to extend
+the path all the way to the goal.  If <i>n</i> is the next node to
+visit, <i>g(n)</i> the cost until now, and <i>h(n)</i> the estimate of
+the cost required to extend the path all the way to the goal, then it
+choose the node that minimizes <i>f(n)</i>,
+  where <i>f(n)=g(n)+h(n)</i>.</p>
+
+<p>We must choose an <i>admissible</i> heuristic such that it never
+  over-estimates the cost of arriving at the goal. In one possible
+  variation, known as the best first search, the heuristic chooses the
+  path with the least overall cost until now, i.e., it
+  sets <i>h(n)=0</i>. There exists an extensive literature on the
+  different heuristics that can be used in the A* search.</p>
+
+<h2>2.2 Centrality Detection Algorithms</h2>
+
+<p>The centrality detection algorithms are used to better understand the
+  roles played by different nodes in the overall graph.  This analysis can help
+  us understand the most important nodes in a graph, the dynamics of a
+  group and possible bridges between groups.</p>
+
+<p>There are several variations of the centrality detection algorithm:
+degree centrality, closeness centrality, between-ness centrality, and
+page rank. Degree centrality simply measures the number of incoming
+and/or outgoing edges. A node with a very high outgoing degree in a
+supply chain network suggests a supplier monopoly.  A closeness
+centrality identifies nodes that have shortest paths to all other
+nodes. Such information can be useful in identifying the location of a
+new service so that it is most accessible to the widest range of
+customers. Between-ness centrality identifies a node based on the number of
+shortest paths between nodes that pass through it. Between-ness
+centrality is a measure of the sphere of influence exercised by the
+nodes in the network. Finally, the PageRank algorithm measures the
+importance of a node based on other nodes it is recursively connected
+to.</p>
+
+<p>For our discussion here, we will consider the PageRank algorithm in
+  more detail. The Page rank was originally developed for ranking
+  pages for WWW search.  It is able to measure the transitive
+  influence on a node. For example, a node connected to a few very
+  important nodes could be more important than the node connected to a
+  large number of unimportant nodes. We can define the PageRank of a
+  node as follows.</p>
+
+<center>
+PR(u) = (1-d) + d * (PR(T1)/C(T1) + ... + PR(Tn)/C(Tn))
+</center>
+
+ <p>In the above formula, we assume that the node <i>u</i> has
+ incoming edges from nodes <i>T1,...,Tn</i>. We use <i>d</i> as a
+ damping factor which is usually set at 0.85. <i>C(T1),...,C(Tn)</i> is
+ the number of outgoing edges of nodes <i>T1,...,Tn</i>. The algorithm
+ operates iteratively by first setting the PageRank for all the nodes to
+ the same value, and then iteratively improving it for a fixed number of
+   iterations, or until the values converge. </p>
+
+ <p>Beyond its original use in ranking search results for WWW queries,
+ the PageRank has found many other interesting uses. For example, it
+ is used on social media sites to recommend who should a particular
+ user follow. It has also been used in fraud analysis to identify
+ highly unusual activity associated with nodes in a graph.</p>
+
+ <h2>2.3 Community Detection Algorithms</h1>
+
+<p>
+The general principle underlying the community detection algorithms is
+that the nodes in a community have more relationships within the
+community than to nodes outside the community.  Sometimes, the
+community analysis can be the first step in analyzing a graph so that
+a more in-depth analysis could be undertaken for nodes within the
+  community. </p>
+
+
+<p>There are several flavors of community detection algorithms:
+connected components, strongly connected components, label propagation
+and fast unfolding (also known as the Louvain algorithm). The first
+two of these algorithms, connected components, and strongly connected
+components are frequently used in the initial analysis of a
+graph. Connected components algorithm and strongly connected
+components algorithm are standard techniques of graph theory. A
+connected component is a set of nodes such that there is a path
+between any two nodes in the underlying undirected graph. A strongly
+connected component is a set of nodes such that for any given nodes A
+and B in the set, there is a directed path from node A to node B, and
+path from node B to node A. Both label propagation and fast unfolding
+are bottom up algorithms for identifying communities in large
+graphs. We consider both of these algorithms in more detail.</p>
+
+<p>Label propagation begins by assigning each node in the graph to a
+different community. We then arrange the nodes in a random order to
+update their community as follows. We examine the nodes in the assigned order,
+and for each node, we examine its neighbors, and set its community to
+the community shared by a majority of its neighbors. The ties are
+broken in a unform random manner. The algorithm terminates when each
+node is assigned to a community that is shared by a majority of its
+neighbors.</p>
+
+<p>In the fast unfolding algorithm, there are two phases. We
+  initialize each node to be in a separate community. In the first
+  phase, we examine each node and each of its neighbors and evaluate
+  if there would be any overall gain in modularity in placing this
+  node in the same community as a neighbor. A suitable measure to
+  calculate modularity is defined. If there will be no gain, the node
+  is left in its original community. In the second phase of the
+  algorithm, we create a new network in which there is a node
+  corresponding to each community from Phase 1, and an edge between
+  the two nodes if there was an edge between some nodes in their
+  corresponding phase 1 communities. Links between the nodes of the
+  same community in phase 1 lead to self-loops for the node
+  corresponding to their community in Phase 2. Once Phase 2 is
+  completed, the algorithm repeats by applying phase 1 to the
+  resulting graph.</p>
+
+<p>One example of a modularity function used in the above algorithm is
+shown below.</p>
+
+<center>
+<img alt="Modularity Function" width='300' src="images/Louvain_Modularity.jpg">
+</center>
+
+<p>In the above formula, we calculate the overall modularity
+  score <i>Q</i> of a network that has been divided into <i>k</i>
+  communities where <i>e<sub>i</sub></i> and <i>d<sub>i</sub></i> are
+  respectively the number of nodes, and total degree of nodes in
+  community <i>i</i>, and <i>m</i> is the total number of edges in the
+  network.</p>
+
+<p>Both label propagation and fast unfolding algorithms reveal
+  emergent and potentially unanticipated communities.  Different
+  executions may also lead to identification of different
+  communities.</p>
+
+
+<h1>3. Ontology-based Inference Algorithms</h1>
+
+<p>Ontology-based inference distinguishes a knowledge graph system
+from a general graph-based system.  We will categorize the
+ontology-based inference into two categories: taxonomic inference and
+rule-based inference.  Taxonomic inference primarily relies on the
+hierarchy of classes and instances and inheritance of values across
+the hierarchy.  Rule-based inference can involve general logical
+rules.  We can access ontological inference through a declarative
+  query interface, and thus,  it can be used as a specialized
+  reasoning service for a certain class of queries.</p>
+
+<h2>3.1 Taxonomic Reasoning</h2>
+
+<p>Taxonomic reasoning is applicable in situations where it is useful to
+organize knowledge into classes. Classes are nothing but unary
+relations. We will consider the concepts of class membership, class
+specialization, disjoint classes, value restriction, inheritance and
+  various inferences that can be drawn using them.</p>
+
+<p>Both property graph and RDF data models support classes. For
+  property graphs, the node types are equivalent to classes.  For RDF,
+  there is an extension called RDF schema that supports the definition
+  of classes. In more advanced extensions of RDF such as Web Ontology
+  Language and Semantic Web Rule Language, a full-fledged support is
+  available for defining classes and rules.</p>
+
+<p>To discuss taxonomic reasoning, we have chosen to abstract away
+  from property graph and RDF data models. We will introduce the basic
+  concepts of taxonomies such as class membership, disjointness,
+  constraints and inheritance using Datalog as a specification language.</p>
+
+
+<h3>3.1.1 Class Membership</h3>
+
+<p>Suppose we wish to model data about kinship. We can define the
+unary relations of <tt>male</tt> and <tt>female</tt> as classes, that
+have members <tt>art</tt>, <tt>bob</tt>, <tt>bea</tt>, <tt>coe</tt>,
+etc. The member of a class is referred to as an instance of that
+class. For example, <tt>art</tt> is an instance of the
+class <tt>male</tt>.</p>
+
+
+<p>For every unary predicate that we also wish to refer to as a class, we
+introduce an object constant with the same name as the name of the
+relation constant as follows. </p>
+
+<center>
+  <table style="font-family:courier;font-size:14px" width="600">
+    <tbody><tr><td>class(male)</td><td>class(female)</td></tr>
+  </tbody></table>
+</center>
+
+<p>Thus, <tt>male</tt> is both a relation constant, and an object
+constant. This is an example use of <em>metaknowledge</em>, and is
+also sometimes known as <em>punning</em>.</p>
+
+<p>To represent that <tt>art</tt> is an instance of the
+class <tt>male</tt>, we introduce a relation
+called <tt>instance_of</tt> and use it as shown below.</p>
+
+<center>
+  <table style="font-family:courier;font-size:14px" width="600">
+    <tbody><tr><td>instance_of(art,male)</td><td>instance_of(bea,female)</td></tr>
+    </tbody><tbody><tr><td>instance_of(bob,male)</td><td>instance_of(coe,female)</td></tr>
+    </tbody><tbody><tr><td>instance_of(cal,male)</td><td>instance_of(cory,female)</td></tr>
+    </tbody><tbody><tr><td>instance_of(cam,male)</td></tr>
+  </tbody></table>
+</center>
+
+<h3>3.1.2 Class Specialization</h3>
+
+<p>Classes can be organized into a hierarchy. For example, we can introduce a class <tt>person</tt>. Both
+<tt>male</tt> and <tt>female</tt> are then <em>subclasses</em>
+of <tt>person</tt>. </p>
+
+<center>
+  <table style="font-family:courier;font-size:14px" width="600">
+    <tbody><tr><td>subclass_of(male,person)</td><td>subclass_of(female,person)</td></tr>
+  </tbody></table>
+</center>
+
+<p>The <tt>subclass_of</tt> relationship is transitive, ie, if <tt>A</tt> is a subclass of <tt>B</tt>, and
+<tt>B</tt> is a subclass of <tt>C</tt>, then <tt>A</tt> is a subclass
+of <tt>C</tt>. For example, if <tt>mother</tt> is a subclass
+of <tt>female</tt>, then <tt>mother</tt> is also a subclass
+of <tt>person</tt></p>
+
+
+<center>
+  <table style="font-family:courier;font-size:14px" width="600">
+    <tbody><tr><td>
+subclass_of(A,C) :- subclass_of(A,B) &amp; subclass_of(B,C)
+</td></tr><tr>
+  </tr></tbody></table>
+</center>
+
+<p>The <tt>subclass_of</tt> and <tt>instance_of</tt> relationships
+are related in that if <tt>A</tt> is a subclass of <tt>B</tt>, then
+all instances of <tt>A</tt> are also the instances of <tt>B</tt>. In
+our example, all instances of <tt>male</tt> are also all the instances
+of <tt>person</tt></p>
+
+<center>
+  <table style="font-family:courier;font-size:14px" width="600">
+    <tbody><tr><td>
+subclass_of(I,B) :- subclass_of(A,B) &amp; instance_of(I,A)
+</td></tr></tbody></table>
+</center>
+
+<p>A class hierarchy must not contain cycles, because that would imply
+that a class is a subclass of itself, which is semantically incorrect.</p>
+
+<h3>3.1.3 Class Disjointness</h3>
+
+<p>We say that a class <tt>A</tt> is <em>disjoint</em> from another
+class <tt>B</tt> if no instance of one can be an instance of another.
+We can declare two classes to be disjoint from each other or a set of
+classes to be a partition such that each class in the set is pairwise
+disjoint from every other class.  In our kinship example, the
+classes <tt>male</tt> and <tt>female</tt> are disjoint from each
+other.</p>
+
+<center>
+  <table style="font-family:courier;font-size:14px" width="600">
+    <tbody><tr><td>~instance_of(I,B)  :- disjoint(A,B) &amp; instance_of(I,A)</td></tr>
+	  <tr><td>~instance_of(I,A)  :- disjoint(A,B) &amp; instance_of(I,B)</td></tr>
+	  <tr><td>disjoint(A1,A2) :- partition(A1,...,An)</td></tr>
+	  <tr><td>disjoint(A2,A3) :- partition(A1,...,An)</td></tr>
+	  <tr><td>disjoint(An-1,An) :- partition(A1,...,An)</td></tr>
+</tbody></table>
+</center>
+
+
+<h3>3.1.4 Class Definition</h3>
+
+<p>Classes are defined using <em>necessary</em> and <em>sufficient</em> relation values. For example,
+<tt>age</tt> is a necessary relation value for a <tt>person</tt>.  If
+we were to define the class of a brown-haired person, it is necessary
+and sufficient for a person to have brown hair to be an instance of
+this class. </p>
+
+<center>
+  <table style="font-family:courier;font-size:14px" width="600" cellspacing="0" cellpadding="0">
+    <tbody><tr><td><xmp>instance_of(X,brown_haired_person) :-
+	  instance_of(X,person) & has_hair_color(X,brown)
+	</xmp>
+    </td></tr>
+  </tbody></table>
+</center>
+
+<p>The classes that have only necessary relation values are known
+as <em>primitive</em> classes and the classes for which we know both
+necessary and sufficient relation values are known as <em>defined</em>
+classes. The sufficient definition of a class
+has <tt>instance_of</tt> literal in its head.</p>
+
+<h3>3.1.5 Value Restriction</h3>
+
+<p>We can restrict the arguments of a relation to be instances of
+specific classes.  In the kinship example, we can restrict
+the <tt>parent</tt> relationship so that its arguments are always
+instances of the class <tt>person</tt>. Thus, if the reasoner is ever
+asked to prove <tt>parent(table,chair)</tt>, it can conclude that it
+is not true simply by noticing that neither <tt>table</tt>
+nor <tt>chair</tt> is an instance of <tt>person</tt>. The restriction
+on the first argument of a relation is usually referred as
+a <tt>domain</tt> restriction and the restriction on the second
+argument of a relation is referred to as a <tt>range</tt> restriction. Similar
+restrictions can be defined for higher arity relationships. </p>
+
+<center>
+  <table style="font-family:courier;font-size:14px" width="600">
+    <tbody><tr><td>
+	      illegal  :- domain(parent,person) &amp; parent(X,Y) &amp; ~instance_of(X,person)
+      </td></tr>
+      <tr><td>
+	  illegal  :- range(parent,person)  &amp; parent(X,Y)  &amp; ~instance_of(Y,person)
+      </td></tr>
+  </tbody></table>
+</center>
+
+
+
+<h3>3.1.6 Cardinality and Number Consraints</h3>
+
+<p>We can further restrict the values of relations by specifying
+cardinality and number constraints.  A cardinality constraint
+restricts the number of values of a relation, and the numeric
+constraint specifies the range of numeric values that a relation may
+take.  For example, we may state that a person has exactly two
+parents, and that the age of a person is between 0 and 100 years.</p>
+
+<center>
+  
+      &gt;
+      &gt;<table style="font-family:courier;font-size:14px" width="600">
+    <tbody><tr><td>
+	      illegal  :- instance_of(X,person) &amp; ~countofall(P,parent(P,X),2)
+      </td></tr><tr><td>
+	    illegal  :- instance_of(X,person) &amp; age(X,Y) &amp; min(0,Y,Y)
+      </td></tr><tr><td>
+	      illegal  :- instance_of(X,person) &amp; age(X,Y)&amp;  min(100,Y,100)
+      </td></tr>
+  </tbody></table>
+</center>
+
+
+
+<h3>3.1.6 Inheritance</h3>
+
+<p>The relation values of a class are said to inherit to its
+instances. For example, if we assert that <tt>art</tt> is an instance
+of <tt>brown_haired_person</tt>, we can conclude
+that <tt>has_hair_color(art,brown)</tt>.  In general, an object can be
+an instance of multiple classes.  In case of multiple inheritance, the
+values inherited from different superclasses can conflict and cause
+constraint violation.  For example, if <tt>art</tt> is an instance of
+the class <tt>brown_haired_person</tt>, and a
+class <tt>bald_person</tt> with a constraint that the person has no
+hair, we will have constraint violation.  In case of constraint
+violation, either the value causing the violation must be rejected, or
+techniques for para-consistent reasoning must be used to manage such
+inconsistency.</p>
+
+<h3>3.1.7 Reasoning with Classes</h3>
+
+<p>There are four broad classes of inference that are interesting with classes.</p>
+
+<ol>
+  <li>Given two classes <tt>A</tt> and <tt>B</tt>, whether <tt>A</tt>
+    is a subclass of <tt>B</tt>?</li>
+  <li>Given a class <tt>A</tt> and an instance <tt>I</tt>, whether <tt>I</tt>
+    is an instance of <tt>I</tt>?</li>
+  <li>Given a ground relation atom determine whether it is true or false.</li>
+  <li>Given a relation atom, determine different values of variables for which it is true.</li>
+</ol>
+
+<p>The first two inferences are equivalent to computing the views
+  on <tt>subclass_of</tt> and <tt>instance_of</tt> relations.  They
+  can also be implemented as path finding algorithms on the graph
+  defined by the classes and their instances.  The last two inferences
+  are equivalent to the view on the relation atom of interest.</p>
+  
+<h2>3.2 Rule-based Reasoning</h2>
+
+<p>It is not possible to draw a strict line between rule-based reasoning and
+  taxonomic reasoning. Even though we used Datalog as a specification language
+  for taxonomic reasoning, but it is possible to implement many of the desired
+  inferences in a rule engine.  In this section, we will consider
+  an example of rule-based reasoning that leverages an advanced form of rules known
+  as existential rules. We will begin with an example knowledge graph that requires
+  such reasoning, and then we will consider rule-based reasoning algorithms to perform
+  the required reasoning.</p>
+
+<h3>3.2.1 Example Scenario Requiring Rule-based Reasoning</h3>
+
+<p>Consider a property graph with the schema shown below. Companies
+produce products that contain chemicals. People are involved in studies
+about chemicals, and they can be funded by companies.</p>
+
+<center>
+<img alt="An Example Property Graph Schema" width='300' src="images/existential_rule.jpg" />
+</center>
+
+<p>Given the above property graph, we are interested in determining if a person
+  might have a conflict of interest in being involved in a study.  We can define the
+  conflict relationship using the following Datalog rule.</p>
+
+<center>
+  <table style="font-family:courier;font-size:14px" width="600">
+    <tbody><tr><td>
+	  coi(X,Y,Z) :- 
+      involved_in(X,Y) & about(Y,P) & funded_by(X,Z) & has_interest(Y,P)
+      </td>
+      </tr><tr><td>
+	  has_interest(X,Z) :-  produces(X,Y) & contains(Y,Z)
+  </tr></tbody></table>
+</center>
+
+<p>The relation <i>has_interest</i> was not in the property graph
+schema introduced above.  But, with the help of its definition using a
+rule, a rule engine can calculate the conflict of interest
+relation <i>coi</i>. In some cases, we may be interested in adding the
+computed values of the <i>coi</i> relationship to our knowledge
+graph. As <i>coi</i> is a ternary relation, we will need to reify it.
+As reification requires adding new objects in the graph, we can
+specify it using an existential rule as shown below.</p>
+
+<center>
+  <table style="font-family:courier;font-size:14px" width="600">
+    <tbody><tr><td>
+	 &Exists;c conflict_of(c,X) & conflict_reason(c,Y) & conflict_with(c,Z) :- 
+      involved_in(X,Y) & about(Y,P) & funded_by(X,Z) & has_interest(Y,P)
+      </td></tr>
+</tbody></table>
+</center>
+
+<p>In general, existential rules are needed whenever we need to create new objects
+  in our knowledge graph. Relationship reification is an obvious such situation.
+  Sometimes, we may need to create new objects to satisfy certain constraints.
+  For example, consider the constraint: every person must have two parents. For a given
+  person, the parents may not be known, and if we want our knowledge graph to
+  remain consistent with this constraint, we must introduce two new objects representing
+  the parents of a person. As this can lead to infinite number of new objects, it is
+  typical to set a limit on how the new objects are created.</p>
+
+<h3>3.2.2 Approach for Rule-based Reasoning</h3>
+
+<p>To support rule-based reasoning on a knowledge graph, one usually interfaces a rule engine
+  with the data in the knowledge graph. We consider here a few different reasoning strategies
+  used by the rule engines.</p>
+
+<p>In a bottom up reasoning strategy, also known as Chase, we apply
+  all the rules against the knowledge graph, and add new facts to it
+  until we can no longer derive new facts. As noted in the previous
+  section, we need to put in place aggressive termination strategies
+  to deal with situations where additional reasoning offers no
+  additional insight. Once we have computed the Chase, the reasoning
+  can proceed using traditional query processing methods.</p>
+
+<p>In top down query processing, we begin from the query to be
+  answered, and apply the rules on as needed basis.  A top down
+  strategy requires a tighter interaction between the query engine of
+  the knowledge graph with the rule evaluation.  This approach,
+  however, can use lot less space as compared to the bottom up
+  reasoning strategy.</p>
+
+<p>Highly efficient and scalable rule engines use query optimization
+  and rewriting techniques. They also rely on caching strategies to
+  achieve efficient execution.</p>
+
+<h1>4. Summary</h1>
+
+<p>In this chapter, we considered different inference algorithms for
+knowledge graphs. Graph algorithms such as path finding, community
+detection, etc. are supported by most practical graph engines. Graph
+engines often provide limited support for ontology and rule-based
+reasoning.  Knowledge graph engines are now starting to become
+available that support both general-purpsose graph algorithms as well
+as ontology and rule-based reasoning.</p>
+
+<h1>Exercises</h1>
+
+<p id="6.1"><a href="questions/exercise_06_01.html">Exercise 6.1</a>.
+  For the tiled puzzle problem shown below, we can define two different admissible heuristics: Hamming distance and Manhanttan distance. The Hamming distance is the total number of misplaced tiles. The Manhattan distance is the sum of the distance of each tile from its desired position. Answer the questions below assuming that in the goal state, the bottom right corner will be empty.
+
+  <center>
+<table border='2'>
+    <tr>
+      <td><table bgcolor='#eeeeee'><tr><td width='25' height='25' align='center' valign='center'>1</td></tr></table></td>
+      <td><table bgcolor='#eeeeee'><tr><td width='25' height='25' align='center' valign='center'>2</td></tr></table></td>
+      <td><table bgcolor='#eeeeee'><tr><td width='25' height='25' align='center' valign='center'>3</td></tr></table></td>
+    </tr>
+    <tr>
+      <td><table bgcolor='#eeeeee'><tr><td width='25' height='25' align='center' valign='center'>6</td></tr></table></td>
+      <td><table bgcolor='#eeeeee'><tr><td width='25' height='25' align='center' valign='center'>5</td></tr></table></td>
+      <td><table bgcolor='#eeeeee'><tr><td width='25' height='25' align='center' valign='center'>7</td></tr></table></td>
+    </tr>
+    <tr>
+      <td><table bgcolor='#eeeeee'><tr><td width='25' height='25' align='center' valign='center'>4</td></tr></table></td>
+      <td><table bgcolor='#eeeeee'><tr><td width='25' height='25' align='center' valign='center'>8</td></tr></table></td>
+      <td><table><tr><td width='25' height='25' align='center' valign='center'> </td></tr></table></td>
+ 
+    </tr>
+</table>
+</center>
+<br>
+  <table>
+    <tr>
+      <td width='20'></td>
+      <td width='20'>(<i>a</i>)</td>
+      <td>What is the Manhattan distance for the configuration shown above?</td>
+    </tr>
+    <tr>
+      <td width='20'></td>
+      <td width='20'>(<i>b</i>)</td>
+      <td>What is the Hamming distance for the configuration shown above?</td>
+    </tr>
+    <tr>
+      <td width='20'></td>
+      <td width='20'>(<i>c</i>)</td>
+      <td>If your algorithm was using the Manhattan distance as a heuristic, what would be its next move?</td>
+    </tr>
+    <tr>
+      <td width='20'></td>
+      <td width='20'>(<i>d</i>)</td>
+      <td>If your algorithm was using the Hamming distance as a heuristic, what would be its next move?</td>
+    </tr>
+   </table>
+    </p>
+
+
+<p id="6.2"><a href="questions/exercise_06_02.html">Exercise 6.2</a>.
+  Consider a graph with three nodes and the edges as shown in the
+  table below for which we will go through first few steps of
+  calculating the Page rank. We assume that the damping factor is set
+  to 1.0. We initialize the process by setting the Page rank of each
+  node to 0.33. In the first iteration, as A has only one incoming
+  edge from B with a score of 0.33, and B has only one outgoing edge,
+  the score of A remains 0.33. B has two incoming edges --- the first
+  incoming edge from A (with a score of 0.33 which will be divided
+  into 0.17 for each of the outgoing edge from A), and the second
+  incoming edge from C (with a weight of 0.33 as C has only one
+  outgoing edge). Therefore, B now has a Page rank of 0.5.  C has one
+  incoming edge from A (with a score of 0.33 which will be divided
+  into 0.17 for each of the outgoing edge from A), and therefore, the
+  Page rank of C is 0.17. Follow this process to calculate their ranks
+  at the end of iteration 2.
+ 
+  <center>
+<img alt="Page Rank Example" width='300' src="images/Page_Rank.jpg">
+  </center>
+
+<br>
+  <table>
+    <tr>
+      <td width='20'></td>
+      <td width='20'>(<i>a</i>)</td>
+      <td>What is the Page rank of A at the end of second iteration?</td>
+    </tr>
+    <tr>
+      <td width='20'></td>
+      <td width='20'>(<i>b</i>)</td>
+      <td>What is the Page rank of B at the end of second iteration?</td>
+    </tr>
+    <tr>
+      <td width='20'></td>
+      <td width='20'>(<i>c</i>)</td>
+      <td>What is the Page rank of C at the end of second iteration?</td>
+    </tr>
+    </table>
+    </p>
+
+
+<p id="6.3"><a href="questions/exercise_06_03.html">Exercise 6.3</a>.
+  For the graph shown below, calculate the overall modularity score for
+  different choices of communities.
+
+  <center>
+<img alt="Louvain modularity score" width='300' src="images/Louvain_Community.jpg">
+</center>
+
+<br>
+  <table>
+    <tr>
+      <td width='20'></td>
+      <td width='20'>(<i>a</i>)</td>
+      <td>What is the overall modularity score if all the nodes were in the same community?</td>
+    </tr>
+    <tr>
+      <td width='20'></td>
+      <td width='20'>(<i>b</i>)</td>
+      <td>What is the overall modularity score if we have two
+      communities as follows. The first community contains A, B and
+      D. The second community contains the rest of the nodes. </td>
+    </tr>
+    <tr>
+      <td width='20'></td>
+      <td width='20'>(<i>c</i>)</td>
+      <td>What is the overall modularity score if we have two
+      communities as follows. The first community contains A, B, C, D and
+      E. The second community contains the rest of the nodes. </td>
+    </tr>
+    <tr>
+      <td width='20'></td>
+      <td width='20'>(<i>d</i>)</td>
+      <td>What is the overall modularity score if we have two
+      communities as follows. The first community contains C, E, G and
+      H. The second community contains the rest of the nodes. </td>
+    </tr>
+    </table>
+    </p>
+
+
+<p id="6.4"><a href="questions/exercise_06_04.html">Exercise 6.4</a>.
+Considering the statements below, state whether each
+      of the following sentence is true or false.
+
+<center>
+  <table style="font-family:courier;font-size:14px" width="600">
+    <tbody><tr><td>subclass_of(B,A)</td><td>subclass_of(C,A)</td><td>subclass_of(D,B)</tr>
+    <tr><td>subclass_of(E,B)</td><td>subclass_of(F,C)</td><td>subclass_of(G,C)</tr>
+    <tr><td>subclass_of(H,C)</td><td>disjoint(B,C)</td><td>partition(F,G,H)</tr>
+  </tbody></table>
+</center>
+<br>
+ <table>
+    <tr>
+      <td width='20'></td>
+      <td width='20'>(<i>a</i>)</td>
+      <td><tt>disjoint(D,E)</tt></td>
+    </tr>
+    <tr>
+      <td width='20'></td>
+      <td width='20'>(<i>b</i>)</td>
+      <td><tt>disjoint(B,G)</tt></td>
+    </tr>
+    <tr>
+      <td width='20'></td>
+      <td width='20'>(<i>c</i>)</td>
+      <td><tt>disjoint(F,G)</tt></td>
+    </tr>
+    <tr>
+      <td width='20'></td>
+      <td width='20'>(<i>d</i>)</td>
+      <td><tt>disjoint(E,C)</tt></td>
+    </tr>
+    <tr>
+      <td width='20'></td>
+      <td width='20'>(<i>e</i>)</td>
+      <td><tt>disjoint(A,F)</tt></td>
+    </tr>
+  </table>
+
+<p id="6.5"><a href="questions/exercise_06_05.html">Exercise 6.5</a>.
+
+ Consider the following statements.
+	
+	<ol>
+	  <li> George is a Marine. </li>
+          <li>George is a chaplain. </li>
+          <li>Marine is  a beer drinker.</li>
+	  <li>A chaplain is not a beer drinker.</li>
+	  <li>A beer drinker is overweight.</li>
+	  <li>A Marine is  not overweight.</li>
+	</ol>
+
+	<br>
+ <table>
+    <tr>
+      <td width='20'></td>
+      <td width='20'>(<i>a</i>)</td>
+      <td>Which statement must you disallow to maintain consistency?</td>
+    </tr>
+    <tr>
+      <td width='20'></td>
+      <td width='20'>(<i>b</i>)</td>
+      <td>What are the alternative set of statements that might be true?</td>
+    </tr>
+    <tr>
+      <td width='20'></td>
+      <td width='20'>(<i>c</i>)</td>
+      <td>What conclusions you can always draw regardless of which statement you disallow?</td>
+    </tr>
+    <tr>
+      <td width='20'></td>
+      <td width='20'>(<i>d</i>)</td>
+      <td>
+      What conclusion you can draw only some of the times?</td>
+    </tr>
+  </table>
+
+</p>	
+  
+<!--=======================================================================-->
+
+      </td>
+    </tr>
+  </table>
+  <br/>
+</center>
+
+<!--=======================================================================-->
+
+        </td>
+      </tr>
+    </table>
+  </center>
+</body>
+
+<!--=======================================================================-->
+
+</html>

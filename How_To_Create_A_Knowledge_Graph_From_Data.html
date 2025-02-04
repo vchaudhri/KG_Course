@@ -1,0 +1,785 @@
+<html>
+
+<!--=======================================================================-->
+
+<head>
+  <title>How to Create a Knowledge Graph from Data?</title></head>
+
+<!--=======================================================================-->
+
+<body style='background-color:#990000'>
+  <center>
+    <table width='720' cellspacing='0' cellpadding='0' bgcolor='#ffffff'>
+      <tr>
+        <td>
+
+<!--=======================================================================-->
+
+  <table width='100%' height='120' cellspacing='0' cellpadding='0' bgcolor='#f8f7f7'>
+    <tr>
+      <td width='40'>&nbsp;</td>
+      <td width='120' align='center' valign='center'>
+        <a href='http://www.stanford.edu/class/cs520/'><img width='128' src='images/flyer-v2c.jpg'/>CS520</a>
+      </td>
+      <td align='center' valign='center'>
+        <span style='font-size:36px'>Knowledge Graphs</span><br/>
+      </td>
+      <td width='120' align='center' style='color:#000066;font-size:18px'>
+        <i>What<br/>should AI<br/>Know ?</i>
+      </td>
+      <td width='40'>&nbsp;</td>
+    </tr>
+  </table>
+
+<!--=======================================================================-->
+
+<hr style='border-top: 1px solid #888888;margin:0'/>
+<table width='100%' height='40' cellspacing='0' cellpadding='0' bgcolor='#f8f7f7'>
+  <tr><td align='center' style='font-size:18px'>How to Create a Knowledge Graph from Data?</td></tr>
+</table>
+<hr style='border-top: 1px solid #888888;margin:0'/>
+
+<!--=======================================================================-->
+
+<center>
+  <br/>
+  <table width='640' cellpadding='0'>
+    <tr>
+      <td>
+
+<!--=======================================================================-->
+
+<h3>1. Introduction</h3>
+
+<p>Large organizations generate lot of internal data, and also consume
+data produced by third party providers.  Many data providers obtain
+their data by processing unstructured sources, and invest significant
+effort in providing it in a structured form for use by others. To make
+an effective use of such external data, it must be related to company's
+internal data. Such data integration enables many popular use cases
+such as 360 view of a customer, fraud detection, risk assessment, loan
+approval etc.  For this chapter, we will discuss the problem of
+creating a knowledge graph by integrating the data available from
+structured sources.  We will consider the problem of extracting data
+from unstructured data sources in the next chapter.</p>
+
+<p>When combining data from multiple sources into a knowledge graph,
+  we can undertake some upfront design of schema as we discussed in
+  the previous chapter.  We can also begin with no schema as it is
+  straightforward to load external data as triples into a knowledge
+  graph.  The design of the initial schema is typically driven by the
+  specific business use case that one wishes to address. To the degree
+  such an initial schema exists, we must determine how the data
+  elements from a new data source should be added to the knowledge
+  graph.  This is usually known as the <i>schema mapping</i>
+  problem. In addition to relating the schemas of the two sources, we
+  also must deal with the possibility that an entity in the
+  incoming data (e.g., a Company) may already exist in our knowledge
+  graph.  The problem of inferring if the two entities in the data may
+   be the same real world entity is known as the <i>record
+  linkage</i> problem. The record linkage problem also arises when
+  third party data providers send new data feeds, and our knowledge
+  graph must be kept up-to-date with the new data feed.</p>
+
+<p>In this chapter, we will discuss the current approaches for
+  addressing the schema mapping and the record linkage problems. We
+  will outline the state-of-the-art algorithms, and discuss their
+  effectiveness on the current industry problems.</p>
+
+<h3>2. Schema Mapping</h3>
+
+<p>Schema mapping assumes the existence of a schema which will be used
+  for storing new data coming from another source. Schema mapping then
+  defines which relations and attributes in the input database
+  corresponds to which properties and relations in the knowledge
+  graph. There exist techniques for bootstrapping schema mappings. The
+  bootstrapped schema mappings can be post corrected through human
+  intervention.</p>
+
+<p>We will begin our discussion on schema mapping by outlining some of
+  the challenges and arguing that one should be prepared for the
+  eventuality that this process will be largely manual and
+  labor-intensive. We then describe an approach for specifying
+  mappings between the schema of the input source and the schema of
+  the knowledge graph. We will conclude the section by considering
+  some of the techniques that can be used to bootstrap schema mapping.</p>
+
+<h4>2.1 Challenges in Schema Mapping</h4>
+
+<p>The main challenges in automating schema mapping are: (1) difficult
+to understand schema (2) complexity of mappings, and (3) lack of
+training data available.  We next discuss these
+challenges in more detail.</p>
+
+<p>Commercial relational database schemas can be huge consisting of
+thousands of relations and tens of thousands of attributes. Sometimes,
+the relation and attribute names do not have semantics (e.g.,
+segment1, segment2) which do not lend themseves to any realistic
+  automated prediction of the mappings.</p>
+
+<p>The mappings between the input schema and the schema in the
+knowledge graph is not always simple one-to-one mapping. Mappings may
+involve calculations, applying business logic, and taking into account
+special rules for handling situations such as missing values.  It
+becomes a tall order to expect any automatic process to infer such
+complex mappings.</p>
+
+<p>Finally, many automated mapping solutions rely on machine learning
+techniques which require large amount of training data to function
+effectively. As the schema information, by definition, is much smaller
+than the data itself, it is unrealistic to expect that we will ever
+have large number of schema mappings available against which a mapping
+algorithm could be trained. </p>
+
+<h4>2.2 Specifying Schema Mapping</h4>
+
+<p>In this section, we will consider one possible approach to specify
+mappings between input data sources and a target knowledge graph
+schema. We will take an example in the domain of cookware. We can imagine
+different vendors providing products which an E-commerce site may wish
+to aggregate and advertise to its customers. We will consider two
+example sources, and then introduce the schema of the knowledge graph
+  to which we will define mappings.</p>
+
+<p>We show below some sample data from the first data source in a
+relational table called <i>cookware</i>. It has four
+attributes: <i>name</i>, <i>type</i>, <i>material</i>,
+and <i>price</i>.</p>
+
+
+  <center>
+<table><tr>
+<td valign='top'>
+<table cellspacing='0' cellpadding='3' border='1' style='font-family:courier; font-size:12px'>
+<tr><th colspan='4' bgcolor='#bbbbbb'>cookware</th></tr>
+<tr bgcolor='#bbbbbb'><th width='60'>name</th><th width='60'>type</th><th width='60'>material</th><th width='60'>price</th></tr>
+<tr><td align='center'>c01</td><td align='center'>skillet</td><td align='center'>cast iron</td><td align='center'>50</td></tr>
+<tr><td align='center'>c02</td><td align='center'>saucepan</td><td align='center'>steel</td><td align='center'>40</td></tr>
+<tr><td align='center'>c03</td><td align='center'>skillet</td><td align='center'>steel</td><td align='center'>30</td></tr>
+<tr><td align='center'>c04</td><td align='center'>saucepan</td><td align='center'>aluminium</td><td align='center'>20</td></tr>
+</table>
+</td>
+</tr></table>
+</center>
+
+
+<p>The second database shown below lists the products of a
+manufacturer.  In this case, there are multiple tables, one for each
+product attribute.  The <tt>kind</tt> table specifies the type of each
+product.  The <tt>base</tt> table specifies whether each product is
+made from a corrosible metal (aluminum or stainless), a noncorrosible
+metal (iron or steel), or something other than metal (glass or
+ceramic).  The <tt>coated</tt> table specifies those products that
+have nonstick coatings.  The <tt>price</tt> table gives the selling
+price.  There is no material information.  The company has chosen not
+to provide information about the metal used in each product.  Note
+that the <tt>coated</tt> table has only positive values; products
+without nonstick coatings are left unmentioned. </p>
+
+<center>
+<table><tr>
+<td valign='top'>
+<table cellspacing='0' cellpadding='3' border='1' style='font-family:courier; font-size:12px'>
+<tr><th colspan='2' bgcolor='#bbbbbb'>kind</th></tr>
+<tr bgcolor='#bbbbbb'><th width='60'>id</th><th width='60'>value</th></tr>
+<tr><td align='center'>m01</td><td align='center'>skillet</td></tr>
+<tr><td align='center'>m02</td><td align='center'>skillet</td></tr>
+<tr><td align='center'>m03</td><td align='center'>saucepan</td></tr>
+<tr><td align='center'>m04</td><td align='center'>saucepan</td></tr>
+</table>
+</td>
+<td width='30'></td>
+<td valign='top'>
+<table cellspacing='0' cellpadding='3' border='1' style='font-family:courier; font-size:12px'>
+<tr><th colspan='3' bgcolor='#bbbbbb'>base</th></tr>
+<tr bgcolor='#bbbbbb'><th width='60'>id</th><th width='60'>value</th></tr>
+<tr><td align='center'>m01</td><td align='center'>corrosible</td></tr>
+<tr><td align='center'>m02</td><td align='center'>noncorrosible</td></tr>
+<tr><td align='center'>m03</td><td align='center'>noncorrosible</td></tr>
+<tr><td align='center'>m04</td><td align='center'>nonmetallic</td></tr>
+</table>
+</td>
+<td width='30'></td>
+<td valign='top'>
+<table cellspacing='0' cellpadding='3' border='1' style='font-family:courier; font-size:12px'>
+<tr><th colspan='2' bgcolor='#bbbbbb'>coated</th></tr>
+<tr bgcolor='#bbbbbb'><th width='60'>id</th><th width='60'>value</th></tr>
+<tr><td align='center'>m01</td><td align='center'>yes</td></tr>
+<tr><td align='center'>m02</td><td align='center'>yes</td></tr>
+</table>
+</td>
+<td width='30'></td>
+<td valign='top'>
+<table cellspacing='0' cellpadding='3' border='1' style='font-family:courier; font-size:12px'>
+<tr><th colspan='2' bgcolor='#bbbbbb'>price</th></tr>
+<tr bgcolor='#bbbbbb'><th width='60'>id</th><th width='60'>value</th></tr>
+<tr><td align='center'>m01</td><td align='center'>60</td></tr>
+<tr><td align='center'>m02</td><td align='center'>50</td></tr>
+<tr><td align='center'>m03</td><td align='center'>40</td></tr>
+<tr><td align='center'>m04</td><td align='center'>20</td></tr>
+</table>
+</td>
+</tr></table>
+</center>
+
+<p>Suppose the desired schema for the knowledge graph expressed as a
+  property graph is as shown below.  We have two different node types:
+  one for products, and the other for suppliers. These two nodes are
+  connected by a relationship called <i>has_supplier</i>. Each product
+  node has properties "type" and "price".</p>
+
+  <center>
+<table>
+       <tr><td><img src='images/schema_mapping.jpg' width='60%'></td></tr>
+ </table>
+  </center>
+
+  <p>To specify the mappings, and to illustrate the process, we will
+  use a triple notation so that a similar process is applicable
+  regardless of whether we use an RDF or property graph data model for
+  the knowledge graph. For an RDF knowledge graph, we will need to
+  create IRIs which is a process orthogonal to relating the two
+  schemas, and hence omitted from here.  The desired triples in the
+  target knowledge graph are listed below. </p>
+
+  <center>
+  <table><tr>
+<td valign='top'>
+<table cellspacing='0' cellpadding='3' border='1' style='font-family:courier;font-size: 12px'>
+<tr><th colspan='3' bgcolor='#bbbbbb'>knowledge graph</th></tr>
+<tr bgcolor='#bbbbbb'><th width='60'>subject</th><th width='60'>predicate</th><th width='60'>object</th></tr>
+<tr><td align='center'>c01</td><td align='center'>type</td><td align='center'>skillet</td></tr>
+<tr><td align='center'>c01</td><td align='center'>price</td><td align='center'>50</td></tr>
+<tr><td align='center'>c01</td><td align='center'>has_supplier</td><td align='center'>vendor_1</td></tr>
+
+<tr><td align='center'>c02</td><td align='center'>type</td><td align='center'>saucepan</td></tr>
+<tr><td align='center'>c02</td><td align='center'>price</td><td align='center'>40</td></tr>
+<tr><td align='center'>c02</td><td align='center'>has_supplier</td><td align='center'>vendor_1</td></tr>
+
+<tr><td align='center'>c03</td><td align='center'>type</td><td align='center'>skillet</td></tr>
+<tr><td align='center'>c03</td><td align='center'>price</td><td align='center'>30</td></tr>
+<tr><td align='center'>c03</td><td align='center'>has_supplier</td><td align='center'>vendor_1</td></tr>
+
+<tr><td align='center'>c04</td><td align='center'>type</td><td align='center'>saucepan</td></tr>
+<tr><td align='center'>c04</td><td align='center'>price</td><td align='center'>20</td></tr>
+<tr><td align='center'>c04</td><td align='center'>has_supplier</td><td align='center'>vendor_1</td></tr>
+
+<tr><td align='center'>m01</td><td align='center'>type</td><td align='center'>skillet</td></tr>
+<tr><td align='center'>m01</td><td align='center'>price</td><td align='center'>60</td></tr>
+<tr><td align='center'>m01</td><td align='center'>has_supplier</td><td align='center'>vendor_2</td></tr>
+
+<tr><td align='center'>m02</td><td align='center'>type</td><td align='center'>skillet</td></tr>
+<tr><td align='center'>m02</td><td align='center'>price</td><td align='center'>50</td></tr>
+<tr><td align='center'>m02</td><td align='center'>has_supplier</td><td align='center'>vendor_2</td></tr>
+
+<tr><td align='center'>m03</td><td align='center'>type</td><td align='center'>saucepan</td></tr>
+<tr><td align='center'>m03</td><td align='center'>price</td><td align='center'>40</td></tr>
+<tr><td align='center'>m03</td><td align='center'>has_supplier</td><td align='center'>vendor_2</td></tr>
+
+<tr><td align='center'>m04</td><td align='center'>type</td><td align='center'>saucepan</td></tr>
+<tr><td align='center'>m04</td><td align='center'>price</td><td align='center'>20</td></tr>
+<tr><td align='center'>m04</td><td align='center'>has_supplier</td><td align='center'>vendor_2</td></tr>
+</table>
+</td>
+  </tr></table>
+  </center>
+
+
+
+<p> Any programming language of choice could be used to express the
+mappings. Here, we have chosen to use Datalog to express the
+mappings. The rules below are straightforward. Variables are indicated
+by using upper case letters. The third rule introduces the
+constant <i>vendor_1</i> to indicate the source of the data.</p>
+
+<center>
+<table>
+<tr><td style='font-family:courier; font-size:10pt'>
+knowledge_graph(ID,type,Type) :- cookware(ID,TYPE,MATERIAL,PRICE)<br>
+knowledge_graph(ID,price,PRICE) :- cookware(ID,TYPE,MATERIAL,PRICE)<br>
+knowledge_graph(ID,has_supplier,vendor_1) :- cookware(ID,TYPE,MATERIAL,PRICE)
+</td></tr>
+</table>
+</center>
+
+
+<p>Next, we consider the rules for mapping the second source. These
+rules are very similar to the mapping rules for the first source
+except that now the information is coming from two different tables in
+the source data.</p>
+
+
+<center>
+<table>
+<tr><td style='font-family:courier; font-size:10pt'>
+knowledge_graph(ID,type,Type) :- kind(ID,TYPE)<br>
+knowledge_graph(ID,price,PRICE) :- price(ID,PRICE)<br>
+knowledge_graph(ID,has_supplier,vendor_2) :- kind(ID,TYPE)
+</td></tr>
+</table>
+</center>
+
+<p>In general, it may not make sense to reuse the identifiers from the
+source databases, and one may wish to create new identifiers for use
+in the knowledge graph. In some cases, the knowledge graph may already
+contain objects equivalent to the ones in the data being imported. We
+will consider this issue in the section on record linkage. </p>
+  
+<h4>2.3 Bootstrapping Schema Mapping</h4>
+
+<p>As noted in Section 2.1, a fully automated approach to schema
+mapping faces numerous practical difficulties. There is a considerable
+work on bootrapping the schema mappings based on a variety
+of techniques and validating them using human input.
+Bootstrapping techniques for schema mapping can be classified into the
+following categories: linguistic matching, matching based on
+instances, and matching based on constraints. We will consider
+examples of these techniques next.</p>
+
+<p>Linguistic techniques can be used on the name of an attribute or
+  on the text description of an attribute. First and most obvious
+  approach is to check if the names of the two attributes are equal. One
+  can have greater confidence in such equality if the names were
+  IRIs. Second, one can canonicalize the names by processing them
+  through techniques such as stemming and then checking for equality. For
+  example, through such processing, we may be able to conclude the
+  mapping of <i>CName</i> to <i>Customer Name</i>. Third, one could
+  check for the mapping based on synonyms (e.g., car and automibile) or
+  hypernyms (e.g., book and publication). Fourth, we can check for
+  mapping based on common substrings, pronunciation, and how the
+  words sound. Finally, we can match the descriptions of the
+  attributes through semantic similarity techniques. For example, one
+  approach is to extract keywords from the description, and then check
+  for similarity between them using the techniques we have already
+  listed.</p>
+
+<p>In matching based on the instances, one examines the kind of data
+that exists. For example, if a particular attribute value contains
+dates, it can only match against those attributes that contain date
+values. Many such standard data types can be inferred by examining the
+data.</p>
+
+<p>In some cases, the schema may provide information about
+constraints.  For example, if the schema specifies that a particular
+attribute must be unique for an individual, and must be a number, it
+is a potential match for identification attributes such as an employee
+number or social security number. </p>
+
+
+<p>The techniques considered here are inexact, and hence, can
+  be only used to bootstrap the schema mapping process. Any mappings
+  must be verified, and validated by human experts.</p>
+
+<h3>3. Record Linkage</h3>
+
+<p>We will begin our discussion by illustrating the record linkage
+  problem with a concrete example. We will then give an overview of
+  a typical approach to solving the record linkage problem.</p>
+
+<h4>3.1 A Sample Record Linkage Problem</h4>
+
+Suppose we have data in the following two tables.
+The record linkage problem then involves
+inferring that record a<sub>1</sub> is the same as the record
+b<sub>1</sub>, and that record a<sub>3</sub> is the same as the record
+b<sub>2</sub>. Just like in schema mapping, these are inexact
+inferences, and need to undergo human validation.</p>
+
+
+<center>
+<table><tr>
+<td valign='top'>
+<table cellspacing='0' cellpadding='3' border='1' style='font-family:courier; font-size:12px'>
+<tr><th style="border:none;"></th><th colspan='3' bgcolor='#bbbbbb'>Table A</th></tr>
+<tr><th style="border:none;"></th><th width='120' bgcolor='#bbbbbb'>Company</th><th width='60' bgcolor='#bbbbbb'>City</th><th width='60' bgcolor='#bbbbbb'>State</th></tr>
+<tr><td style="border:none;">a<sub>1</sub></td><td align='center'>AB Corporation</td><td align='center'>New York</td><td align='center'>NY</td></tr>
+<tr><td style="border:none;">a<sub>2</sub></td><td align='center'>Broadway Associates</td><td align='center'>Washington</td><td align='center'>WA</td></tr>
+<tr><td style="border:none;">a<sub>3</sub></td><td align='center'>Prolific Consulting Inc.</td><td align='center'>California</td><td align='center'>CA</td></tr>
+</table>
+</td>
+<td width='30'></td>
+<td valign='top'>
+<table cellspacing='0' cellpadding='3' border='1' style='font-family:courier; font-size:12px'>
+<tr><th style="border:none;"></th><th colspan='3' bgcolor='#bbbbbb'>Table B</th></tr>
+<tr><th style="border:none;"></th><th width='120' bgcolor='#bbbbbb'>Company</th><th width='60' bgcolor='#bbbbbb'>City</th><th width='60' bgcolor='#bbbbbb'>State</th></tr>
+<tr><td style="border:none;">b<sub>1</sub></td><td align='center'>ABC</td><td align='center'>New York</td><td align='center'>NY</td></tr>
+<tr><td style="border:none;">b<sub>2</sub></td><td align='center'>Prolific Consulting</td><td align='center'>California</td><td align='center'>CA</td></tr>
+</table>
+</td>
+  </tr>
+</table>
+</center>
+
+<p>A large knowledge graph may contain information about over 10
+million companies. It may receive a data feed, that was extracted from
+natural language text. Such data feeds can contain over 100,000
+companies. Even if the knowledge graph had a standardized way to refer
+to companies, but this new data feed that was extracted from text will
+not have those standardized identifiers. The task of the record linkage
+is to relate the companies contained in this new data feed with the
+companies that already exist in the knowledge graph.  As the data
+volumes are large, performing this task efficiently is of paramount
+importance.</p>
+
+<h4>3.2 An Approach to Solve the Record Linkage Problem</h4>
+
+<p>Efficient record linkage involves two steps: <i>blocking</i>
+and <i>matching</i>. The blocking step involves a fast computation to
+select a subset of records from the source and the target that will be
+considered during a more expensive and precise matching step. In the
+matching step, we pairwise match the subset of records that were
+selected during blocking. In the example considered above, we could use a blocking
+strategy that considers matching only those records that match on the
+state. With that strategy, we need to consider matching only
+a<sub>1</sub> with b<sub>1</sub>, and a<sub>3</sub> with
+b<sub>2</sub>, thus significantly reducing the comparisons that must
+be performed.  </p>
+
+<p>Both blocking and matching steps work by learning a random forest
+  through an active learning process. A random forest is a set of
+  decision rules that gives its final prediction through a majority
+  vote returned by individual rules. Active learning is a learning
+  process that constructs the random forest by actively monitoring its
+  performance on the test data, and selectively choosing new training examples to
+  iteratively improve its performance. We will next explain each of
+  these two steps in a greater detail. </p>
+
+<h4>3.3 Random Forests</h4>
+
+<p>Blocking rules rely on standard similarity checking functions, such
+as, exact match, Jaccard similarity, overlap similarity, cosine
+similarity, etc. For example, if we were to check the overlap
+similarity between "Prolific Consulting" and "Prolific Consulting
+Inc.", we will first gather the tokens in each of them, and then check
+  which tokens are in common, giving us a similarity score of 2/3.</p>
+
+<p>We show below a snippet of a random forest for blocking. A random
+  forest can also be viewed as a set of set of rules. The random
+  forest shown below is a set of two sets of rules.  The arguments of
+  each predicate are two values to be compared.</p>
+
+
+
+
+   <center>
+<table>
+       <tr><td><img src='images/random_forest.jpg' width='100%'></td></tr>
+ </table>
+  </center>
+
+<p>Several general principles exist for automatically choosing the
+similarity functions for blocking rules. For example, for a numerical
+valued attributes such as age, weight, price, etc., candidate
+similarity functions are: exact match, absolute difference, relative
+difference, and Levenstein distance. For string valued attributes, it
+is common to use edit distance, cosine similarity, Jaccard similarity,
+and TF/IDF functions.</p>
+
+   <h4>3.4 Active Learning of Random Forests</h4>
+
+   <p>We can learn the random forest for the blocking rules through
+   the following active learning process. We randomly select a set of
+   pairs from the two datasets. By applying the similarity functions
+   on each pair, we obtain a set of feautres for each pair.  Using
+   these features, we learn a random forest. We apply the resulting
+   rules to new pairs selected from the data set, and evaluate their
+   performance. If the performance is below a certain threshold, we
+   repeat the cycle, by providing additional labeled examples until an
+   acceptable performance is obtained.  We illustrate this process
+   using the following example. </p>
+
+   <center>
+<table>
+       <tr><td><img src='images/active_learning.jpg' width='100%'></td></tr>
+ </table>
+  </center>
+
+
+<p>We assume that our first dataset contains three items: a, b, and c,
+and our second dataset contains two items, d and e. From this dataset,
+we pick two pairs (a,d) and (c,d) which are labeled by the user as
+similar and not similar respectively.  On this pair, we apply the
+similarity functions each of which results in a feature of the
+pair. We then use those features to learn a random forest. We apply
+the learned rules to the tuples which were not in the training set,
+and ask the user to verify the result. The user informs us that the
+result for the pair (b,d) is incorrect. We add (b,d) to our training
+set, and we repeat the process for another iteration. Over several
+iterations, we anticipate the process to converge, and give us a
+random forest that we can effectively use in the blocking step. </p>
+
+<p>Once a radom forest has been learned, we present each of the learned rules to
+  the user. Based on the user verification, we choose the rules that will be
+  used in the subsequent steps.</p>
+
+<h4>3.5 Applying the Rules</h4>
+
+<p>Once we have learned the rules, the next step is to apply them on
+  the actual data.  When the data size is huge, it is still not
+  possible to apply the blocking rules to all the pairs of objects.
+  Therefore, we resort to indexing.  Suppose, one of the rules
+  requires that the Jaccard index should be greater than
+  0.7, and we are looking to match the movie <i>Sound of
+  Music</i>. As the length of the movie name is  3, we need consider only those
+  movies in our data  whose length is between 3*0.7 and 3/0.7, ie,
+  between 2 and 4.  If we have indexed the dataset on the size of the
+  movies, it is efficient to choose only those movies whose sizes are
+  between 2 and 4, and filter the set even further through the
+  application of the blocking rule.</p>
+
+<h4>3.6 Performing the Matching</h4>
+
+<p>The blocking step produces a much reduced set of pairs which must
+be tested for whether they match. The general structure of the
+matching process is very similar in that we first define a set of
+features, learn a random forest, and through the active learning
+process refine it. The primary difference between the blocking and the
+matching step is that the matching process needs to be more exact and
+can require more computation. That is because this is the final step
+in the record linkage, and we need to have high confidence that the
+two entities indeed match. </p>
+
+<h3>4. Summary</h4>
+
+<p>In this chapter, we considered the problem of creating a knowledge
+graph by integrating the data coming from structured sources. The
+integrated schema of the knowledge graph can be refined and evolved as
+per the business requirements.  The mappings between the schemas of
+different sources can be bootstrapped through automated techniques,
+but they do require verification through human input.  Record
+linkage is the integration of the data at the instance level where we
+must infer the equality between two instances in the absence of 
+unique identifiers.  The general approach for record linkage is to
+learn a random forest through active learning process.  For
+applications requiring a high accuracy, automatically computed record
+  linkage may eventually need to undergo human verification.</p>
+
+<h3>Exercises</h3>
+
+<p id="4.1"><a href="questions/exercise_04_01.html">Exercise 4.1</a>.Two
+popular methods to calculate similarity between two strings are 
+  edit distance (also known as Levenshtein distance) and the Jaccard measure. <br>
+
+<p>
+  We can define the
+Levenshtein distance between two strings a, b (of length |a| and |b|
+respectively), given by lev(a,b) as follows:<br>
+  
+  <ul>
+    <li>lev(a,b) = a if |b| = 0</li>
+    <li>lev(a,b) = b if |a| = 0</li>
+    <li>lev(tail(a),tail(b)), if a[0] = b[0]
+    <li>1 + min{lev(tail(a),b), lev(a,tail(b)), lev(tail(a),tail(b))} otherwise.
+  </ul>
+  where the tail of some string x is a string of all but the first
+  character of x, and x[n] is the nth character of the string x,
+  starting with character 0.
+
+
+<p>We can define  the Jaccard measure between two strings a, b 
+as the size of the intersection divided by the size of the
+  union between the two.<br>
+  <center>
+    J(a,b) = |a &cap; b| / |a &cup; b|
+  </center>
+</p>  
+
+  <table>
+    <tr>
+      <td width='20'></td>
+      <td width='20'>(<i>a</i>)</td>
+      <td>Given the strings "JP Morgan Chase" and "JPMC Corporation", what is the edit distance between the two?</td>
+    </tr>
+    <tr>
+      <td width='20'></td>
+      <td width='20'>(<i>b</i>)</td>
+      <td>Given the strings "JP Morgan Chase" and "JPMC Corporation", what is the Jaccard measure between the two?</td>
+    </tr>
+    <tr>
+      <td width='20'></td>
+      <td width='20'>(<i>c</i>)</td>
+      <td>Given three strings: x = Apple Corporation, CA, y = IBM Corporation, CA, and z =
+Apple Corp, which of these strings would be equated by the edit distance methods?</td>
+    </tr>
+    <tr>
+      <td width='20'></td>
+      <td width='20'>(<i>d</i>)</td>
+      <td>Given three strings: x = Apple Corporation, CA, y = IBM Corporation, CA, and z =
+Apple Corp, which of these strings will be equated by the Jaccard measure?</td>
+    </tr>
+    <tr>
+      <td width='20'></td>
+      <td width='20'>(<i>e</i>)</td>
+      <td>Given three strings: x = Apple Corporation, CA, y = IBM Corporation, CA, and z =
+Apple Corp, what intuition you would use to ensure that x is equated to z?</td>
+    </tr>
+   </table>
+</p>
+
+<p id="4.2"><a href="questions/exercise_04_02.html">Exercise
+    4.2</a>.  A commonly used approach to account for the importance
+    of words is a measure known as TF/IDF. Term frequency (TF) denotes
+    the number of times a term occurs in a document. Inverse Document
+    Frequency (IDF) denotes the number of documents containing a term.
+    The TF/IDF score is calculated by taking the product of TF and
+    IDF.  Use your intuition to answer whether the following is true
+    or false.
+<br><br>
+
+  <table>
+    <tr>
+      <td width='20'></td>
+      <td width='20'>(<i>a</i>)</td>
+      <td>Higher the TF/IDF score of a word, the rarer it is.</td>
+    </tr>
+    <tr>
+      <td width='20'></td>
+      <td width='20'>(<i>b</i>)</td>
+      <td>In a general news corpus, TF/IDF for the word <i>Apple</i> is likely to be higher than the TF/IDF for the word <i>Corporation</i></td>
+    </tr>
+    <tr>
+      <td width='20'></td>
+      <td width='20'>(<i>c</i>)</td>
+      <td>Common words such as stop words will have a high TF/IDF.</td>
+    </tr>
+    <tr>
+      <td width='20'></td>
+      <td width='20'>(<i>d</i>)</td>
+      <td>If a document contains words with high TF/IDF, it is likely to be ranked higher by the search engines.</td>
+    </tr>
+    <tr>
+      <td width='20'></td>
+      <td width='20'>(<i>e</i>)</td>
+      <td>The concept of TF/IDF is not limited to words, and can also be applied to sequence of characters, for example, bigrams.</td>
+    </tr>
+   </table>
+</p>
+
+  <p id="4.3"><a href="questions/exercise_04_03.html">Exercise
+    4.3</a>.  To check if  two names might refer to the same
+    real-world organization, one strategy is to check the similarity
+    between two documents that describe them. Cosine similarity is a
+    measure of similarity between two vectors, and is defined as the
+    cosine of the angle between them.  Highly similar documents will
+    have a cosine score closer to 1.  Which of the following might be
+    a viable approach to convert a document into a vector for calculating
+    cosine similarity?
+<br><br>
+
+  <table>
+    <tr>
+      <td width='20'></td>
+      <td width='20'>(<i>a</i>)</td>
+      <td>Word embeddings of the words used in a document.</td>
+    </tr>
+    <tr>
+      <td width='20'></td>
+      <td width='20'>(<i>b</i>)</td>
+      <td>TF/IDF scores of the words used in a document.</td>
+    </tr>
+    <tr>
+      <td width='20'></td>
+      <td width='20'>(<i>c</i>)</td>
+      <td>TF/IDF of bigrams used in a document.</td>
+    </tr>
+    <tr>
+      <td width='20'></td>
+      <td width='20'>(<i>d</i>)</td>
+      <td>None of the above.</td>
+    </tr>
+    <tr>
+      <td width='20'></td>
+      <td width='20'>(<i>e</i>)</td>
+      <td>Any of (a), (b) or (c).</td>
+    </tr>
+   </table>
+</p>
+
+    <p id="4.4"><a href="questions/exercise_04_04.html">Exercise
+    4.4</a>.  Which of the following is true about schema mappings?
+<br><br>
+
+  <table>
+    <tr>
+      <td width='20'></td>
+      <td width='20'>(<i>a</i>)</td>
+      <td>Schema mapping is largely an automated process.</td>
+    </tr>
+    <tr>
+      <td width='20'></td>
+      <td width='20'>(<i>b</i>)</td>
+      <td>It is usually straightforward to learn simple schema mappings.</td>
+    </tr>
+    <tr>
+      <td width='20'></td>
+      <td width='20'>(<i>c</i>)</td>
+      <td>Complete schema documentation is almost never available.</td>
+    </tr>
+    <tr>
+      <td width='20'></td>
+      <td width='20'>(<i>d</i>)</td>
+      <td>Examining the actual data in the two sources can provide important clues for schema mapping.</td>
+    </tr>
+    <tr>
+      <td width='20'></td>
+      <td width='20'>(<i>e</i>)</td>
+      <td>Database constraints play no role in schema mapping.</td>
+    </tr>
+   </table>
+    </p>
+
+
+        <p id="4.5"><a href="questions/exercise_04_05.html">Exercise
+    4.5</a>.  Which of the following is true about record linkage?
+<br><br>
+
+  <table>
+    <tr>
+      <td width='20'></td>
+      <td width='20'>(<i>a</i>)</td>
+      <td>Blocking can be an unnecessary and expensive step in the record linkage pipeline.</td>
+    </tr>
+    <tr>
+      <td width='20'></td>
+      <td width='20'>(<i>b</i>)</td>
+      <td>A random forest is a set of set of rules.</td>
+    </tr>
+    <tr>
+      <td width='20'></td>
+      <td width='20'>(<i>c</i>)</td>
+      <td>Blocking rules must always be authored manually.</td>
+    </tr>
+    <tr>
+      <td width='20'></td>
+      <td width='20'>(<i>d</i>)</td>
+      <td>Active learning of blocking rules minimizes the training data we must provide.</td>
+    </tr>
+    <tr>
+      <td width='20'></td>
+      <td width='20'>(<i>e</i>)</td>
+      <td>Matching rules are as expensive to apply as the blocking rules.</td>
+    </tr>
+   </table>
+    </p>
+
+
+    
+<!--=======================================================================-->
+
+      </td>
+    </tr>
+  </table>
+  <br/>
+</center>
+
+<!--=======================================================================-->
+
+        </td>
+      </tr>
+    </table>
+  </center>
+</body>
+
+<!--=======================================================================-->
+
+</html>

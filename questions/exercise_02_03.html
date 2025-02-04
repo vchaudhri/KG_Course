@@ -1,0 +1,171 @@
+<html>
+
+<!--=======================================================================-->
+
+<head>
+<title>Exercise 2.3 - SPARQL Queries</title>
+  <script type='text/javascript' src='../javascript/logica.js'></script>
+  <script type='text/javascript'>
+//------------------------------------------------------------------------------
+// computegrade
+//------------------------------------------------------------------------------
+
+function computegrade ()
+ {return compgrade(document.getElementById('a').value,'c')}
+
+function compgrade (answer,correct)
+ {if (answer==correct) {return 1.0};
+  return 0.0};
+
+//------------------------------------------------------------------------------
+// showgrades
+//------------------------------------------------------------------------------
+
+var checkmark = '<img src="../images/newgreencheck.jpg"/>'
+var exmark = '<img src="../images/newredex.jpg"/>'
+
+function showgrades ()
+ {showgrade(document.getElementById('a').value,'c','ag');
+  return true}
+
+function showgrade (answer,correct,label)
+ {if (answer==correct)
+     {document.getElementById(label).innerHTML=checkmark; return true};
+  if (answer!='empty' && answer!=correct)
+     {document.getElementById(label).innerHTML=exmark; return false};
+  document.getElementById(label).innerHTML='&nbsp;';
+  return false};
+
+//------------------------------------------------------------------------------
+// showanswers
+//------------------------------------------------------------------------------
+
+function showanswers ()
+ {document.getElementById('a').value='c';
+  showgrades();
+  return true}
+
+//------------------------------------------------------------------------------
+// resetanswers
+//------------------------------------------------------------------------------
+
+function resetanswers ()
+ {document.getElementById('a').value='empty';
+  showgrades();
+  return true}
+
+  </script>
+</head>
+
+<!--=======================================================================-->
+
+<body style='background-color:#990000'>
+  <center>
+    <table width='720' cellpadding='40' bgcolor='#ffffff'>
+      <tr>
+        <td>
+
+<!--=======================================================================-->
+
+<center>
+  <span style='font-size:36px'>Knowledge Graphs</span>
+</center>
+<br/>
+
+<!--=======================================================================-->
+
+<center>
+  <table width='640' cellspacing='1' cellpadding='10' bgcolor='#eeeeee' border='1'>
+    <tr><td align='center' style='font-size:18px'>Exercise 2.3 - SPARQL Queries</td></tr>
+  </table>
+</center>
+
+<!--=======================================================================-->
+
+<center>
+  <table width='640' cellspacing='0' cellpadding='10' border='0'>
+    <tr>
+      <td>
+	<p>
+	  The following SPARQL query illustrates the use of OPTIONAL graph patterns. Within each result returned by this query, what is the minimum and the maximum possible data items it must much:
+
+  <center>
+  <table width='600' style='font-family:courier;font-size:14px'>
+  <tr><td><tt>SELECT ?foafName ?mbox ?gname ?fname</tt></td></tr>
+  <tr><td><tt>WHERE</tt></td></tr>
+ <tr><td><tt>  {  ?x foaf:name ?foafName . </td></tr>
+ <tr><td><tt>    &nbsp;  &nbsp; OPTIONAL { ?x foaf:mbox ?mbox } .   </td></tr>
+ <tr><td><tt>    &nbsp;  &nbsp; OPTIONAL {  ?x vcard:N ?vc .   </td></tr>
+ <tr><td><tt>    &nbsp;  &nbsp;  &nbsp;  &nbsp; ?vc vcard:Given ?gname .  </td></tr>
+ <tr><td><tt>     &nbsp;  &nbsp;  &nbsp;  &nbsp; OPTIONAL { ?vc vcard:Family ?fname }  </td></tr>
+ <tr><td><tt>              &nbsp;  &nbsp; &nbsp;  &nbsp;  &nbsp;  &nbsp; &nbsp;  } </td></tr>
+ <tr><td><tt> } </td></tr>
+  </table>
+  </center>
+  <table>
+    <tr>
+      <td width='20'></td>
+      <td width='20'>(<i>a</i>)</td>
+      <td> minimum 4 / maximum 4</td>
+    </tr>
+    <tr>
+      <td width='20'></td>
+      <td width='20'>(<i>b</i>)</td>
+      <td>minimum 0 / maximum 4</td>
+    </tr>
+    <tr>
+      <td width='20'></td>
+      <td width='20'>(<i>c</i>)</td>
+      <td>minimum 1 / maximum 4</td>
+    </tr>
+    <tr>
+      <td width='20'></td>
+      <td width='20'>(<i>d</i>)</td>
+      <td>minimum 2 / maximum 4</td>
+    </tr>
+    <tr>
+      <td width='20'></td>
+      <td width='20'>(<i>e</i>)</td>
+      <td>minimum 1 / maximum 3</td>
+    </tr>
+ </table>
+
+<center>
+  <table>
+    <tr>
+      <td align='center'>
+        <select id='a' onChange='showgrades()'>
+          <option value='empty'></option>
+          <option value='a'>a</option>
+          <option value='b'>b</option>
+          <option value='c'>c</option>
+          <option value='d'>d</option>
+          <option value='e'>e</option>
+        </select>
+      </td>
+      <td id='ag' width='20'></td>
+    </tr>
+  </table>
+</center>
+
+<br/>
+<center>
+  <input type='button' value='Show Answer' style='width:120px;background-color:#ffffff' onClick='showanswers()'/>
+  <input type='button' value='Reset Answers' style='width:120px;background-color:#ffffff' onClick='resetanswers()'/>
+</center>
+<br/>
+      </td>
+    </tr>
+  </table>
+</center>
+
+<!--=======================================================================-->
+
+      <br/>
+    </td></tr></table>
+  </center>
+</body>
+
+</html>
+
+

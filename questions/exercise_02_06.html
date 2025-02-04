@@ -1,0 +1,211 @@
+<html>
+
+<!--=======================================================================-->
+
+<head>
+  <title>Exercise 2.6 - RDF Data Model vs Property Graph Data Model</title>
+  <script type='text/javascript'>
+//------------------------------------------------------------------------------
+// computegrade
+//------------------------------------------------------------------------------
+
+function computegrade ()
+ {var grade = 0;
+  grade = grade + compgrade(document.getElementById('a').value,'no');
+  grade = grade + compgrade(document.getElementById('b').value,'yes');
+  grade = grade + compgrade(document.getElementById('c').value,'yes');
+  grade = grade + compgrade(document.getElementById('d').value,'yes');
+  grade = grade + compgrade(document.getElementById('e').value,'no');
+  return grade / 5.0}
+
+function compgrade (answer,correct)
+ {if (answer==correct) {return 1.0};
+  return 0.0};
+
+//------------------------------------------------------------------------------
+// showgrades
+//------------------------------------------------------------------------------
+
+var checkmark = '<img src="../images/newgreencheck.jpg"/>'
+var exmark = '<img src="../images/newredex.jpg"/>'
+
+function showgrades ()
+ {showgrade(document.getElementById('a').value,'no','ag');
+  showgrade(document.getElementById('b').value,'yes','bg');
+  showgrade(document.getElementById('c').value,'yes','cg');
+  showgrade(document.getElementById('d').value,'yes','dg');
+  showgrade(document.getElementById('e').value,'no','eg');
+  return true}
+
+function showgrade (answer,correct,label)
+ {if (answer==correct)
+     {document.getElementById(label).innerHTML=checkmark; return true};
+  if (answer!='empty' && answer!=correct)
+     {document.getElementById(label).innerHTML=exmark; return false};
+  document.getElementById(label).innerHTML='&nbsp;';
+  return false};
+
+//------------------------------------------------------------------------------
+// showanswers
+//------------------------------------------------------------------------------
+
+function showanswers ()
+    {document.getElementById('a').value='no';
+  document.getElementById('b').value='yes';
+  document.getElementById('c').value='yes';
+  document.getElementById('d').value='yes';
+  document.getElementById('e').value='no';
+  showgrades();
+  return true}
+
+//------------------------------------------------------------------------------
+// resetanswers
+//------------------------------------------------------------------------------
+
+function resetanswers ()
+ {document.getElementById('a').value='empty';
+  document.getElementById('b').value='empty';
+  document.getElementById('c').value='empty';
+  document.getElementById('d').value='empty';
+  document.getElementById('e').value='empty';
+  showgrades();
+  return true}
+
+
+  </script>
+</head>
+
+<!--=======================================================================-->
+
+<body style='background-color:#990000'>
+  <center>
+    <table width='720' cellpadding='40' bgcolor='#ffffff'>
+      <tr>
+        <td>
+
+<!--=======================================================================-->
+
+<center>
+  <span style='font-size:36px'>Knowledge Graphs</span>
+</center>
+<br/>
+
+<!--=======================================================================-->
+
+<center>
+  <table width='640' cellspacing='1' cellpadding='10' bgcolor='#eeeeee' border='1'>
+    <tr><td align='center' style='font-size:18px'>Exercise 2.6 - RDF Data Model and Proeprty Graph Data Model</td></tr>
+  </table>
+</center>
+
+<!--=======================================================================-->
+
+<center>
+  <table width='640' cellspacing='0' cellpadding='10' border='0'>
+    <tr>
+      <td>
+<p><p>Suppose we wish to associate a confidence of 0.9 with an automatically extracted statement <em> John works for ABC Corporation</em>.  Which of the following is true about relative approaches for representing this statement in RDF and property graph data models.
+	  <center>
+
+	    
+  <table>
+    <tr>
+      <td width='20'></td>
+      <td width='20'>(<i>a</i>)</td>
+      <td>To represent confidence of a statement, we must reify the it in both property graph and RDF data models.</td>
+           <td align='center'>
+        <select id='a' onChange='showgrades()'>
+          <option value='empty'></option>
+          <option value='yes'>yes</option>
+          <option value='no'>no</option>
+        </select>
+      </td>
+      <td id='ag' width='20'></td>
+
+    </tr>
+    <tr>
+      <td width='20'></td>
+      <td width='20'>(<i>b</i>)</td>
+      <td>In a property graph data model, we can represent the confidence of a statement as a relationship property.</td>
+           <td align='center'>
+        <select id='b' onChange='showgrades()'>
+          <option value='empty'></option>
+          <option value='yes'>yes</option>
+          <option value='no'>no</option>
+        </select>
+      </td>
+      <td id='bg' width='20'></td>
+
+    </tr>
+    <tr>
+      <td width='20'></td>
+      <td width='20'>(<i>c</i>)</td>
+      <td>We can represent confidence of a statement by reifying it in both property graph and RDF data models.</td>
+           <td align='center'>
+        <select id='c' onChange='showgrades()'>
+          <option value='empty'></option>
+          <option value='yes'>yes</option>
+          <option value='no'>no</option>
+        </select>
+      </td>
+      <td id='cg' width='20'></td>
+
+    </tr>
+    <tr>
+      <td width='20'></td>
+      <td width='20'>(<i>d</i>)</td>
+      <td>The only way to represent the confidence of a statement in an RDF data model is through reification.</td>
+           <td align='center'>
+        <select id='d' onChange='showgrades()'>
+          <option value='empty'></option>
+          <option value='yes'>yes</option>
+          <option value='no'>no</option>
+        </select>
+      </td>
+      <td id='dg' width='20'></td>
+
+    </tr>
+    <tr>
+      <td width='20'></td>
+      <td width='20'>(<i>e</i>)</td>
+      <td>The confidence of the statement cannot be captured in an RDF data model.</td>
+           <td align='center'>
+        <select id='e' onChange='showgrades()'>
+          <option value='empty'></option>
+          <option value='yes'>yes</option>
+          <option value='no'>no</option>
+        </select>
+      </td>
+      <td id='eg' width='20'></td>
+
+    </tr>
+  </table>
+
+
+
+  <!--=======================================================================-->
+
+      </td>
+    </tr>
+  </table>
+  <br/>
+</center>
+<br/>
+<center>
+  <input type='button' value='Show Answers' style='width:120px;background-color:#ffffff' onClick='showanswers()'/>
+  <input type='button' value='Reset Answers' style='width:120px;background-color:#ffffff' onClick='resetanswers()'/>
+</center>
+<br/>
+      </td>
+    </tr>
+  </table>
+</center>
+
+<!--=======================================================================-->
+
+      <br/>
+    </td></tr></table>
+  </center>
+</body>
+
+</html>

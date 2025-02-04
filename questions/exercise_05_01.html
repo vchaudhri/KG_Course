@@ -1,0 +1,213 @@
+<html>
+
+<!--=======================================================================-->
+
+<head>
+  <title>Exercise 5.1 - Creating a Knowledge Graph from Text</title>
+  <script type='text/javascript'>
+//------------------------------------------------------------------------------
+// computegrade
+//------------------------------------------------------------------------------
+
+function computegrade ()
+ {var grade = 0;
+  grade = grade + compgrade(document.getElementById('a').value,'1.0');
+  grade = grade + compgrade(document.getElementById('b').value,'0.6');
+  grade = grade + compgrade(document.getElementById('c').value,'1.0');
+  grade = grade + compgrade(document.getElementById('d').value,'0.2');
+  grade = grade + compgrade(document.getElementById('e').value,'0.0');
+  return grade / 5.0}
+
+function compgrade (answer,correct)
+ {if (answer==correct) {return 1.0};
+  return 0.0};
+
+//------------------------------------------------------------------------------
+// showgrades
+//------------------------------------------------------------------------------
+
+var checkmark = '<img src="../images/newgreencheck.jpg"/>'
+var exmark = '<img src="../images/newredex.jpg"/>'
+
+function showgrades ()
+ {showgrade(document.getElementById('a').value,'1.0','ag');
+  showgrade(document.getElementById('b').value,'0.6','bg');
+  showgrade(document.getElementById('c').value,'1.0','cg');
+  showgrade(document.getElementById('d').value,'0.2','dg');
+  showgrade(document.getElementById('e').value,'0.0','eg');
+  return true}
+
+function showgrade (answer,correct,label)
+ {if (answer==correct)
+     {document.getElementById(label).innerHTML=checkmark; return true};
+  if (answer!='empty' && answer!=correct)
+     {document.getElementById(label).innerHTML=exmark; return false};
+  document.getElementById(label).innerHTML='&nbsp;';
+  return false};
+
+//------------------------------------------------------------------------------
+// showanswers
+//------------------------------------------------------------------------------
+
+function showanswers ()
+    {document.getElementById('a').value='1.0';
+  document.getElementById('b').value='0.6';
+  document.getElementById('c').value='1.0';
+  document.getElementById('d').value='0.2';
+	    document.getElementById('e').value='0.0';
+  showgrades();
+  return true}
+
+//------------------------------------------------------------------------------
+// resetanswers
+//------------------------------------------------------------------------------
+
+function resetanswers ()
+ {document.getElementById('a').value='empty';
+  document.getElementById('b').value='empty';
+  document.getElementById('c').value='empty';
+  document.getElementById('d').value='empty';
+  document.getElementById('e').value='empty';
+  showgrades();
+  return true}
+
+  </script>
+</head>
+
+<!--=======================================================================-->
+
+<body style='background-color:#990000'>
+  <center>
+    <table width='720' cellpadding='40' bgcolor='#ffffff'>
+      <tr>
+        <td>
+
+<!--=======================================================================-->
+
+<center>
+  <span style='font-size:36px'>Knowledge Graphs</span>
+</center>
+<br/>
+
+<!--=======================================================================-->
+
+<center>
+  <table width='640' cellspacing='1' cellpadding='10' bgcolor='#eeeeee' border='1'>
+    <tr><td align='center' style='font-size:18px'>Exercise 5.1 - Language Models</td></tr>
+  </table>
+</center>
+
+<!--=======================================================================-->
+
+<center>
+  <table width='640' cellspacing='0' cellpadding='10' border='0'>
+    <tr>
+      <td>
+<p>  Using the concept of a language model on the following sentence corpus, answer the questions below: <br>
+  <ul>
+    <li>I love running.</li>
+    <li>Good health can be achieved by those who love running.</li>
+    <li>I love good health.</li>
+    <li>I love those who love running.</li>
+  </ul>
+
+
+<center>
+  <table>
+    <tr>
+      <td width='20'>a.</td>
+      <td>What is P(health|good)?</td>
+      <td align='center'>
+        <select id='a' onChange='showgrades()'>
+          <option value='empty'></option>
+          <option value='0.0'>0.0</option>
+          <option value='0.2'>0.2</option>
+          <option value='0.6'>0.6</option>
+          <option value='0.75'>0.75</option>
+          <option value='1.0'>1.0</option>
+        </select>
+      </td>
+      <td id='ag' width='20'></td>
+    </tr>
+    <tr>
+      <td width='20'>b.</td>
+      <td>What is P(running|love)?</td>
+      <td align='center'>
+        <select id='b' onChange='showgrades()'>
+          <option value='empty'></option>
+          <option value='0.0'>0.0</option>
+          <option value='0.2'>0.2</option>
+          <option value='0.6'>0.6</option>
+          <option value='0.75'>0.75</option>
+          <option value='1.0'>1.0</option>
+        </select>
+      </td>
+      <td id='bg' width='20'></td>
+    </tr>
+    <tr>
+      <td width='20'>c.</td>
+      <td>What is P(love|I)?</td>
+      <td align='center'>
+        <select id='c' onChange='showgrades()'>
+          <option value='empty'></option>
+          <option value='0.0'>0.0</option>
+          <option value='0.2'>0.2</option>
+          <option value='0.6'>0.6</option>
+          <option value='0.75'>0.75</option>
+          <option value='1.0'>1.0</option>
+        </select>
+      </td>
+      <td id='cg' width='20'></td>
+    </tr>
+    <tr>
+      <td width='20'>d.</td>
+      <td>What is (good|love)?</td>
+      <td align='center'>
+        <select id='d' onChange='showgrades()'>
+          <option value='empty'></option>
+          <option value='0.0'>0.0</option>
+          <option value='0.2'>0.2</option>
+          <option value='0.6'>0.6</option>
+          <option value='0.75'>0.75</option>
+          <option value='1.0'>1.0</option>
+        </select>
+      </td>
+      <td id='dg' width='20'></td>
+    </tr>
+    <tr>
+      <td width='20'>e.</td>
+      <td>What is P(love|running)?</td>
+      <td align='center'>
+        <select id='e' onChange='showgrades()'>
+          <option value='empty'></option>
+          <option value='0.0'>0.0</option>
+          <option value='0.2'>0.2</option>
+          <option value='0.6'>0.6</option>
+          <option value='0.75'>0.75</option>
+          <option value='1.0'>1.0</option>
+        </select>
+      </td>
+      <td id='eg' width='20'></td>
+    </tr>
+</table>
+</center>
+
+<br/>
+<center>
+  <input type='button' value='Show Answers' style='width:120px;background-color:#ffffff' onClick='showanswers()'/>
+  <input type='button' value='Reset Answers' style='width:120px;background-color:#ffffff' onClick='resetanswers()'/>
+</center>
+<br/>
+      </td>
+    </tr>
+  </table>
+</center>
+
+<!--=======================================================================-->
+
+      <br/>
+    </td></tr></table>
+  </center>
+</body>
+
+</html>

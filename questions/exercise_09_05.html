@@ -1,0 +1,158 @@
+<html>
+
+<!--=======================================================================-->
+
+<head>
+<title>Exercise 9.5 - Knowledge Graphs</title>
+  <script type='text/javascript' src='../javascript/logica.js'></script>
+  <script type='text/javascript'>
+//------------------------------------------------------------------------------
+// computegrade
+//------------------------------------------------------------------------------
+
+function computegrade ()
+ {return compgrade(document.getElementById('a').value,'a')}
+
+function compgrade (answer,correct)
+ {if (answer==correct) {return 1.0};
+  return 0.0};
+
+//------------------------------------------------------------------------------
+// showgrades
+//------------------------------------------------------------------------------
+
+var checkmark = '<img src="../images/newgreencheck.jpg"/>'
+var exmark = '<img src="../images/newredex.jpg"/>'
+
+function showgrades ()
+ {showgrade(document.getElementById('a').value,'a','ag');
+  return true}
+
+function showgrade (answer,correct,label)
+ {if (answer==correct)
+     {document.getElementById(label).innerHTML=checkmark; return true};
+  if (answer!='empty' && answer!=correct)
+     {document.getElementById(label).innerHTML=exmark; return false};
+  document.getElementById(label).innerHTML='&nbsp;';
+  return false};
+
+//------------------------------------------------------------------------------
+// showanswers
+//------------------------------------------------------------------------------
+
+function showanswers ()
+ {document.getElementById('a').value='a';
+  showgrades();
+  return true}
+
+//------------------------------------------------------------------------------
+// resetanswers
+//------------------------------------------------------------------------------
+
+function resetanswers ()
+ {document.getElementById('a').value='empty';
+  showgrades();
+  return true}
+
+  </script>
+</head>
+
+<!--=======================================================================-->
+
+<body style='background-color:#990000'>
+  <center>
+    <table width='720' cellpadding='40' bgcolor='#ffffff'>
+      <tr>
+        <td>
+
+<!--=======================================================================-->
+
+<center>
+  <span style='font-size:36px'>Knowledge Graphs</span>
+</center>
+<br/>
+
+<!--=======================================================================-->
+
+<center>
+  <table width='640' cellspacing='1' cellpadding='10' bgcolor='#eeeeee' border='1'>
+    <tr><td align='center' style='font-size:18px'>Exercise 9.5 - Use cases of Knowledge Graphs </td></tr>
+  </table>
+</center>
+
+<!--=======================================================================-->
+
+<center>
+  <table width='640' cellspacing='0' cellpadding='10' border='0'>
+    <tr>
+      <td>
+	<p>
+  Which of the following could not be achieved by financial ontologies such as FIBO?
+
+ <table>
+    <tr>
+      <td width='20'></td>
+      <td width='20'>(<i>a</i>)</td>
+      <td>Stock recommendations that will outperform the market</td>
+    </tr>
+    <tr>
+      <td width='20'></td>
+      <td width='20'>(<i>b</i>)</td>
+      <td>A standard vocabulary to exchange information</td>
+    </tr>
+    <tr>
+      <td width='20'></td>
+      <td width='20'>(<i>c</i>)</td>
+      <td>Index analysis for ETF development</td>
+    </tr>
+    <tr>
+      <td width='20'></td>
+      <td width='20'>(<i>d</i>)</td>
+      <td>Analysis of counter party exposure</td>
+    </tr>
+    <tr>
+      <td width='20'></td>
+      <td width='20'>(<i>e</i>)</td>
+      <td>Exchange instrument data offering</td>
+    </tr>
+  </table>
+
+<center>
+  <table>
+    <tr>
+      <td align='center'>
+        <select id='a' onChange='showgrades()'>
+          <option value='empty'></option>
+          <option value='a'>a</option>
+          <option value='b'>b</option>
+          <option value='c'>c</option>
+          <option value='d'>d</option>
+          <option value='e'>e</option>
+        </select>
+      </td>
+      <td id='ag' width='20'></td>
+    </tr>
+  </table>
+</center>
+
+<br/>
+<center>
+  <input type='button' value='Show Answer' style='width:120px;background-color:#ffffff' onClick='showanswers()'/>
+  <input type='button' value='Reset Answers' style='width:120px;background-color:#ffffff' onClick='resetanswers()'/>
+</center>
+<br/>
+      </td>
+    </tr>
+  </table>
+</center>
+
+<!--=======================================================================-->
+
+      <br/>
+    </td></tr></table>
+  </center>
+</body>
+
+</html>
+
+

@@ -1,0 +1,198 @@
+<html>
+
+<!--=======================================================================-->
+
+<head>
+  <title>Exercise 8.2 - How to Evolve a Knowledge Graph?</title>
+  <script type='text/javascript'>
+//------------------------------------------------------------------------------
+// computegrade
+//------------------------------------------------------------------------------
+
+function computegrade ()
+ {var grade = 0;
+  grade = grade + compgrade(document.getElementById('a').value,'schema evolution');
+  grade = grade + compgrade(document.getElementById('b').value,'view maintenance');
+  grade = grade + compgrade(document.getElementById('c').value,'view maintenance');
+  grade = grade + compgrade(document.getElementById('d').value,'truth maintenance');
+  grade = grade + compgrade(document.getElementById('e').value,'schema evolution');
+  return grade / 5.0}
+
+function compgrade (answer,correct)
+ {if (answer==correct) {return 1.0};
+  return 0.0};
+
+//------------------------------------------------------------------------------
+// showgrades
+//------------------------------------------------------------------------------
+
+var checkmark = '<img src="../images/newgreencheck.jpg"/>'
+var exmark = '<img src="../images/newredex.jpg"/>'
+
+function showgrades ()
+ {showgrade(document.getElementById('a').value,'schema evolution','ag');
+  showgrade(document.getElementById('b').value,'view maintenance','bg');
+  showgrade(document.getElementById('c').value,'view maintenance','cg');
+  showgrade(document.getElementById('d').value,'truth maintenance','dg');
+  showgrade(document.getElementById('e').value,'schema evolution','eg');
+  return true}
+ 
+function showgrade (answer,correct,label)
+ {if (answer==correct)
+     {document.getElementById(label).innerHTML=checkmark; return true};
+  if (answer!='empty' && answer!=correct)
+     {document.getElementById(label).innerHTML=exmark; return false};
+  document.getElementById(label).innerHTML='&nbsp;';
+  return false};
+
+//------------------------------------------------------------------------------
+// showanswers
+//------------------------------------------------------------------------------
+
+function showanswers ()
+    {document.getElementById('a').value='schema evolution';
+  document.getElementById('b').value='view maintenance';
+  document.getElementById('c').value='view maintenance';
+  document.getElementById('d').value='truth maintenance';
+	    document.getElementById('e').value='schema evolution';
+  showgrades();
+  return true}
+
+//------------------------------------------------------------------------------
+// resetanswers
+//------------------------------------------------------------------------------
+
+function resetanswers ()
+ {document.getElementById('a').value='empty';
+  document.getElementById('b').value='empty';
+  document.getElementById('c').value='empty';
+  document.getElementById('d').value='empty';
+  document.getElementById('e').value='empty';
+  showgrades();
+  return true}
+
+  </script>
+</head>
+
+<!--=======================================================================-->
+
+<body style='background-color:#990000'>
+  <center>
+    <table width='720' cellpadding='40' bgcolor='#ffffff'>
+      <tr>
+        <td>
+
+<!--=======================================================================-->
+
+<center>
+  <span style='font-size:36px'>Knowledge Graphs</span>
+</center>
+<br/>
+
+<!--=======================================================================-->
+
+<center>
+  <table width='640' cellspacing='1' cellpadding='10' bgcolor='#eeeeee' border='1'>
+    <tr><td align='center' style='font-size:18px'>Exercise 8.2 -  Knowledge Graph Evolution Techniques</td></tr>
+  </table>
+</center>
+
+<!--=======================================================================-->
+
+<center>
+  <table width='640' cellspacing='0' cellpadding='10' border='0'>
+    <tr>
+      <td>
+	<p>     For each of the following change, which of the knowledge graph change management technique would be
+  most directly applicable?  (Recall that the change management techniques are: schema evolution, view
+  maintenance and truth maintenance).
+	  
+<center>
+  <table>
+    <tr>
+      <td width='20'>a.</td>
+      <td>Eliminating a product category</td>
+      <td align='center'>
+        <select id='a' onChange='showgrades()'>
+          <option value='empty'></option>
+          <option value='schema evolution'>schema evolution</option>
+          <option value='view maintenance'>view maintenance</option>
+          <option value='truth maintenance'>truth maintenance</option>
+        </select>
+      </td>
+      <td id='ag' width='20'></td>
+    </tr>
+    <tr>
+      <td width='20'>b.</td>
+      <td>Wiki Data integrates data from different museums, city governments, and bibliographic databases</td>
+      <td align='center'>
+        <select id='b' onChange='showgrades()'>
+          <option value='empty'></option>
+          <option value='schema evolution'>schema evolution</option>
+          <option value='view maintenance'>view maintenance</option>
+          <option value='truth maintenance'>truth maintenance</option>
+        </select>
+      </td>
+      <td id='bg' width='20'></td>
+    </tr>
+    <tr>
+      <td width='20'>c.</td>
+      <td>Evolving Microsoft academic publications knowledge graph</td>
+      <td align='center'>
+        <select id='c' onChange='showgrades()'>
+          <option value='empty'></option>
+          <option value='schema evolution'>schema evolution</option>
+          <option value='view maintenance'>view maintenance</option>
+          <option value='truth maintenance'>truth maintenance</option>
+        </select>
+      </td>
+      <td id='cg' width='20'></td>
+    </tr>
+    <tr>
+      <td width='20'>d.</td>
+      <td>Updates in the schema mapping rules</td>
+      <td align='center'>
+        <select id='d' onChange='showgrades()'>
+          <option value='empty'></option>
+          <option value='schema evolution'>schema evolution</option>
+          <option value='view maintenance'>view maintenance</option>
+          <option value='truth maintenance'>truth maintenance</option>
+        </select>
+      </td>
+      <td id='dg' width='20'></td>
+    </tr>
+    <tr>
+      <td width='20'>e.</td>
+      <td>Splitting a category into two different categories</td>
+      <td align='center'>
+        <select id='e' onChange='showgrades()'>
+          <option value='empty'></option>
+          <option value='schema evolution'>schema evolution</option>
+          <option value='view maintenance'>view maintenance</option>
+          <option value='truth maintenance'>truth maintenance</option>
+        </select>
+      </td>
+      <td id='eg' width='20'></td>
+    </tr>
+</table>
+</center>
+
+<br/>
+<center>
+  <input type='button' value='Show Answers' style='width:120px;background-color:#ffffff' onClick='showanswers()'/>
+  <input type='button' value='Reset Answers' style='width:120px;background-color:#ffffff' onClick='resetanswers()'/>
+</center>
+<br/>
+      </td>
+    </tr>
+  </table>
+</center>
+
+<!--=======================================================================-->
+
+      <br/>
+    </td></tr></table>
+  </center>
+</body>
+
+</html>

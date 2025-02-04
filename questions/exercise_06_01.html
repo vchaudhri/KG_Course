@@ -1,0 +1,204 @@
+<html>
+
+<!--=======================================================================-->
+
+<head>
+  <title>Exercise 6.1 - What are some Inference Algorithms for Knowledge Graphs?</title>
+  <script type='text/javascript'>
+//------------------------------------------------------------------------------
+// computegrade
+//------------------------------------------------------------------------------
+
+function computegrade ()
+ {var grade = 0;
+  grade = grade + compgrade(document.getElementById('a').value,'3');
+  grade = grade + compgrade(document.getElementById('b').value,'7');
+  grade = grade + compgrade(document.getElementById('c').value,'a');
+  grade = grade + compgrade(document.getElementById('d').value,'a');
+  return grade / 5.0}
+
+function compgrade (answer,correct)
+ {if (answer==correct) {return 1.0};
+  return 0.0};
+
+//------------------------------------------------------------------------------
+// showgrades
+//------------------------------------------------------------------------------
+
+var checkmark = '<img src="../images/newgreencheck.jpg"/>'
+var exmark = '<img src="../images/newredex.jpg"/>'
+
+function showgrades ()
+ {showgrade(document.getElementById('a').value,'3','ag');
+  showgrade(document.getElementById('b').value,'7','bg');
+  showgrade(document.getElementById('c').value,'a','cg');
+  showgrade(document.getElementById('d').value,'a','dg');
+  return true}
+
+function showgrade (answer,correct,label)
+ {if (answer==correct)
+     {document.getElementById(label).innerHTML=checkmark; return true};
+  if (answer!='empty' && answer!=correct)
+     {document.getElementById(label).innerHTML=exmark; return false};
+  document.getElementById(label).innerHTML='&nbsp;';
+  return false};
+
+//------------------------------------------------------------------------------
+// showanswers
+//------------------------------------------------------------------------------
+
+function showanswers ()
+    {document.getElementById('a').value='3';
+  document.getElementById('b').value='7';
+  document.getElementById('c').value='a';
+  document.getElementById('d').value='a';
+  showgrades();
+  return true}
+
+//------------------------------------------------------------------------------
+// resetanswers
+//------------------------------------------------------------------------------
+
+function resetanswers ()
+ {document.getElementById('a').value='empty';
+  document.getElementById('b').value='empty';
+  document.getElementById('c').value='empty';
+  document.getElementById('d').value='empty';
+  document.getElementById('e').value='empty';
+  showgrades();
+  return true}
+
+  </script>
+</head>
+
+<!--=======================================================================-->
+
+<body style='background-color:#990000'>
+  <center>
+    <table width='720' cellpadding='40' bgcolor='#ffffff'>
+      <tr>
+        <td>
+
+<!--=======================================================================-->
+
+<center>
+  <span style='font-size:36px'>Knowledge Graphs</span>
+</center>
+<br/>
+
+<!--=======================================================================-->
+
+<center>
+  <table width='640' cellspacing='1' cellpadding='10' bgcolor='#eeeeee' border='1'>
+    <tr><td align='center' style='font-size:18px'>Exercise 6.1 - Path Finding using A*</td></tr>
+  </table>
+</center>
+
+<!--=======================================================================-->
+
+<center>
+  <table width='640' cellspacing='0' cellpadding='10' border='0'>
+    <tr>
+      <td>
+<p>  <p id="6.1"><a href="questions/exercise_06_01.html">Exercise 6.1</a>.
+  For the tiled puzzle problem shown below, we can define two different admissible heuristics: Hamming distance and Manhanttan distance. The Hamming distance is the total number of misplaced tiles. The Manhattan distance is the sum of the distance of each tile from its desired position. Answer the questions below assuming that in the goal state, the bottom right corner will be empty.
+
+  <center>
+<table border='2'>
+    <tr>
+      <td><table bgcolor='#eeeeee'><tr><td width='25' height='25' align='center' valign='center'>1</td></tr></table></td>
+      <td><table bgcolor='#eeeeee'><tr><td width='25' height='25' align='center' valign='center'>2</td></tr></table></td>
+      <td><table bgcolor='#eeeeee'><tr><td width='25' height='25' align='center' valign='center'>3</td></tr></table></td>
+    </tr>
+    <tr>
+      <td><table bgcolor='#eeeeee'><tr><td width='25' height='25' align='center' valign='center'>6</td></tr></table></td>
+      <td><table bgcolor='#eeeeee'><tr><td width='25' height='25' align='center' valign='center'>5</td></tr></table></td>
+      <td><table bgcolor='#eeeeee'><tr><td width='25' height='25' align='center' valign='center'>7</td></tr></table></td>
+    </tr>
+    <tr>
+      <td><table bgcolor='#eeeeee'><tr><td width='25' height='25' align='center' valign='center'>4</td></tr></table></td>
+      <td><table bgcolor='#eeeeee'><tr><td width='25' height='25' align='center' valign='center'>8</td></tr></table></td>
+      <td><table><tr><td width='25' height='25' align='center' valign='center'> </td></tr></table></td>
+ 
+    </tr>
+</table>
+
+<br>
+<center>
+  <table>
+    <tr>
+      <td width='20'>a.</td>
+      <td>What is the Manhattan distance for the configuration shown above?</td>
+      <td align='center'>
+        <select id='a' onChange='showgrades()'>
+          <option value='empty'></option>
+          <option value='1'>1</option>
+          <option value='3'>3</option>
+          <option value='5'>5</option>
+          <option value='7'>7</option>
+          <option value='9'>9</option>
+        </select>
+      </td>
+      <td id='ag' width='20'></td>
+    </tr>
+    <tr>
+      <td width='20'>b.</td>
+      <td>What is the Hamming distance for the configuration shown above?</td>
+      <td align='center'>
+        <select id='b' onChange='showgrades()'>
+          <option value='empty'></option>
+          <option value='1'>1</option>
+          <option value='3'>3</option>
+          <option value='5'>5</option>
+          <option value='7'>7</option>
+          <option value='9'>9</option>
+        </select>
+      </td>
+      <td id='bg' width='20'></td>
+    </tr>
+    <tr>
+      <td width='20'>c.</td>
+      <td>If your algorithm was using the Manhattan distance as a heuristic, what would be its next move?</td>
+      <td align='center'>
+        <select id='c' onChange='showgrades()'>
+          <option value='empty'></option>
+          <option value='a'>Move 7 down</option>
+          <option value='b'>Move 8 to the right</option>
+        </select>
+      </td>
+      <td id='cg' width='20'></td>
+    </tr>
+    <tr>
+      <td width='20'>d.</td>
+      <td>If your algorithm was using the Hamming distance as a heuristic, what would be its next move?</td>
+      <td align='center'>
+        <select id='d' onChange='showgrades()'>
+          <option value='empty'></option>
+          <option value='a'>Move 7 down</option>
+          <option value='b'>Move 8 to the right</option>
+        </select>
+      </td>
+      <td id='dg' width='20'></td>
+    </tr>
+ </table>
+</center>
+
+<br/>
+<center>
+  <input type='button' value='Show Answers' style='width:120px;background-color:#ffffff' onClick='showanswers()'/>
+  <input type='button' value='Reset Answers' style='width:120px;background-color:#ffffff' onClick='resetanswers()'/>
+</center>
+<br/>
+      </td>
+    </tr>
+  </table>
+</center>
+
+<!--=======================================================================-->
+
+      <br/>
+    </td></tr></table>
+  </center>
+</body>
+
+</html>
