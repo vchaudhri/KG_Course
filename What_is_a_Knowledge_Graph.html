@@ -164,7 +164,11 @@ Wikidata includes data from several independent providers, for
   Winterthur, the information released by Library of Congress can be
   easily linked with information available from other sources.
   Wikidata makes it easy to establish such links by publishing the
-definitions of relationships used in it in <i>Schema.Org</i>.</p>
+  definitions of relationships used in it
+  in <i>Schema.Org</i>. (Schema.org is a collaborative,
+  community-driven initiative that provides a shared vocabulary for
+  structured data on the web, enabling search engines and other tools
+  to better understand and display website content.)</p>
 
 <p>The vocabulary of relations in <i>Schema.Org</i> gives us, at
   least, three advantages. First, it is possible to write queries that
@@ -180,10 +184,8 @@ definitions of relationships used in it in <i>Schema.Org</i>.</p>
 <p>A recent version of Wikidata had over 80 million objects, with over
   one billion relationships among those objects.  Wikidata makes
   connections across over 4872 different catalogs in 414 different
-  languages published by independent data providers. As per the recent
-  estimate, 31% of the websites, and over 12 million data providers
-  publish Schema.Org annotations are currently using the vocabulary of
-  <i>Schema.Org</i>.
+  languages published by independent data providers. According to recent estimates, 31% of websites and over 12 million data providers publish annotations using its vocabulary.
+    <i>Schema.Org</i> vocabulary.
 </p>
 
 <p>Let us observe several key features of the Wikidata knowledge
@@ -336,7 +338,7 @@ knowledge graph are the outputs of an object detector.  Current research in
 computer vision focuses on developing techniques that can correctly
 infer the relationships between the objects, such as,
 man <i>holding</i> a bucket, and horse <i>feeding</i> from the bucket,
-etc. The knowledge graph shown to the right is an example of a knowledge graph.
+etc. The sample knowledge graph is shown to the right.
 
 
 <h2>4.2 Knowledge Graphs as input to Machine Learning</h2>
@@ -405,21 +407,28 @@ any given text. </p>
 many natural language processing tasks including entity extraction,
 relation extraction, parsing, passage retrieval, etc. One of the most
 common applications of word embeddings is in auto completion of search
-queries. Word embeddings give us a straightforward way to predict
-the words that are likely to follow the partial query that a user has
-already typed.</p>
+queries. Word embeddings give us a way to predict the words that are
+likely to follow the partial query that a user has already typed.</p>
 
 
-<p>As a text is a sequence of words, and word embeddings calculate
-  co-occurrences of words in it, we can view the text as a knowledge
+<p>As a sentence is a sequence of words, we can view it as a knowledge
   graph in which every word is a node, and there is a directed edge
-  between each word and another word that immediately follows it.
-  Graph embeddings generalize this notion for general network
-  structure. The goal and approach, however, remains the same:
-  represent each node in a knowledge graph by a vector, so that the similarity
-  between the nodes can be calculated as a difference between their
-  corresponding vectors. The vectors for each node are also referred
-  to as graph embeddings.</p>
+  from a node A to node B, if the word represented by node B
+  immeditely follows the word represented by node A. The resulting
+  graph is a path graph. We have seen that embeddings use the
+  cooccurrence information about the words in a sentence to calculate
+  similarity between the words.</p>
+
+<p> Graph embeddings generalize a knowledge graph from a path graph to
+  a general network structure. The goal and approach, however, remain
+  the same: represent each node in a network structure by a vector of
+  cooccurrences, so that the similarity between the nodes can be
+  calculated as a difference between their corresponding vectors. The
+  vectors for each node are also referred to as node embeddings.  The
+  embeddings for the whole graph, also known as graph embeddings, can
+  be calculated by aggregating the embeddings for all the nodes in the
+  graph. One potentially approach to aggregate the node embeddings is
+  to simply add them. Other methods for aggregation also exist.</p>
 
 <p>To calculate knowledge graph embeddings, we define a method for
   encoding each node in the graph into a vector, a function to
