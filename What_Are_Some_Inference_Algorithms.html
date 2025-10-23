@@ -120,13 +120,13 @@ planning.</p>
 <p> The A* algorithm operates by maintaining a tree of paths
 originating at the start node and extending those paths one edge at a
 time until its termination criterion is satisfied. At each step, it
-determines which of the paths to extend based on the cost
-of the path until now and the estimate of the cost required to extend
-the path all the way to the goal.  If <i>n</i> is the next node to
-visit, <i>g(n)</i> the cost until now, and <i>h(n)</i> the estimate of
-the cost required to extend the path all the way to the goal, then it
-choose the node that minimizes <i>f(n)</i>,
-  where <i>f(n)=g(n)+h(n)</i>.</p>
+determines which of the paths to extend based on the cost of the path
+until now and the estimate of the cost required to extend the path all
+the way to the goal.  If <i>n</i> is the next node to
+visit, <i>g(n)</i> the cost until now, and <i>h(n)</i> the heuristic
+estimate of the cost required to extend the path all the way to the
+goal, then it choose the node that minimizes <i>f(n)</i>,
+where <i>f(n)=g(n)+h(n)</i>.</p>
 
 <p>We must choose an <i>admissible</i> heuristic such that it never
   over-estimates the cost of arriving at the goal. In one possible
@@ -487,16 +487,15 @@ inconsistency.</p>
   <li>Given two classes <tt>A</tt> and <tt>B</tt>, whether <tt>A</tt>
     is a subclass of <tt>B</tt>?</li>
   <li>Given a class <tt>A</tt> and an instance <tt>I</tt>, whether <tt>I</tt>
-    is an instance of <tt>I</tt>?</li>
+    is an instance of <tt>A</tt>?</li>
   <li>Given a ground relation atom determine whether it is true or false.</li>
   <li>Given a relation atom, determine different values of variables for which it is true.</li>
 </ol>
 
-<p>The first two inferences are equivalent to computing the views
-  on <tt>subclass_of</tt> and <tt>instance_of</tt> relations.  They
-  can also be implemented as path finding algorithms on the graph
+<p>The first two inferences 
+  can be implemented as path finding algorithms on the graph
   defined by the classes and their instances.  The last two inferences
-  are equivalent to the view on the relation atom of interest.</p>
+  are central to the calculations performed by a Datalog engine.</p>
   
 <h2>3.2 Rule-based Reasoning</h2>
 

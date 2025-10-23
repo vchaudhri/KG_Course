@@ -113,6 +113,28 @@ x<sub>n</sub> is any word in the vocabulary. Language models are used
 extensively in auto completing search requests on the web, in auto
   correcting words in word processing, etc.</p>
 
+<p>To better understand language modeling, as described above, let us
+  consider the following tiny corpus.</p>
+
+<center>
+<table>
+    <tr><td>dogs chase cats<td></tr>
+    <tr><td>cats love milk<td></tr>
+    <tr><td>dogs love people<td></tr>
+ </table>
+</center>
+
+<p>This corpus has six words: <i>dogs, chase, cats, love, milk</i> and <i>people</i>. The number
+of times each of them occurs in the corpus is respectively 2, 1, 2, 2,
+1, 1.  We can also observe that any pair of words that appears in the corpus occurs exactly
+once.  For example, <i>love</i>  is followed by <i>cats</i> only once. If we wanted
+to calculate the probability P(milk|love), we could calculate that
+value to be 0.5 as the ratio of<i> count (love milk)</i> and
+<i>count(love)</i>. Here <I>count(love milk)</i> denotes the number of
+times <i>milk</i> is followed by <i>love</i> in the corpus (i.e., 1),
+and the number of times <i>love</i> appears in the corpus (i.e., 2).
+
+
 <p>Modern language models are created by training a deep learning
 model, such as a Recurring Neural Network, on a large corpus of text.
 Numerous variations of pre-trained language models are available as
@@ -402,7 +424,7 @@ sentences, we can define a new pattern. We can then test such patterns
 against the corpus. One such algorithm is known as Dual Iterative
 Pattern Relation Expansion (DIPRE). We illustrate its working on the
 problem of extracting the (author, title) pairs from a corpus. We
-begin with a small set set of known (author, title) pairs, and we find
+begin with a small set of known (author, title) pairs, and we find
 all their occurrences in the corpus, and from those we generate more
 patterns. The algorithm continues recursively by using the new
 patterns to discover more books, and from their discovering new
@@ -437,22 +459,35 @@ then combined using a probabilistic function.</p>
 part</i> relation. For this relation, it has not been possible to
 develop the syntactic patterns of the sort suggested above.  A
 possible weak labeling function for this relation is to first produce
-a dependency parse of the sentence, and then look for two nodes in the
-  parse that have a path of length one that contains the verbs has or
-have.  For taxonomic relationships, an additional weak labeling
-function is that if two entities end with the same base word but
-one has an additional modifier in front of it, this suggests a
-taxonomic relation (e.g., eukaryotic cell SUBCLASS cell).</p>
+a parse tree of the sentence, and then look for two nodes in the
+  parse tree that have a path of length one that contains the verbs <i>has</i> or
+  <i>have</i>. As an example, consider the sentence: Most prokaryotes
+  have a cell wall located outside the cell membrane. In the parse
+  tree of this sentence <i>prokaryotes</i> and <i>cell wall</i> are
+  connected through a path with the lavel <i>haved</i> suggesting
+  a <i> has part</i> relationship.
+
+For taxonomic relationships, an additional weak labeling
+function is that if two entities end with the same base word but one
+has an additional modifier in front of it, this suggests a taxonomic
+relation (e.g., eukaryotic cell SUBCLASS cell).</p>
 
 <p>To adapt a language model to the task of relation extraction, we
   change the input representation of a sentence so that each of the
-  individual terms are explicity marked. For example, we input a
-  sentence such as ["All", "[TERM1-START]", "cells", "[TERM1-END]",
-  "have", "a", "[TERM2-START]", "cell" "membrane", "[TERM2-END]",
-  "."], and expect the model to output the probability distribution
-  over different relationships that might exist between the two
-  terms. The predicted relationship depends on the input training
-  data.</p>
+  individual terms are explicity marked. For example, consider the sentence: All
+  cells have a cell membrane. This sentence has two terms <i>cells</i> and
+  <i>cell membrane</i>.  We will indicate the presence of these terms
+  in the sentence by enclosing them in markers [TERM1-START] and
+  [TERM1-END] respectively denoting the start and the end of a term.
+  The set of tokens in the resulting sentence will be: ["All",
+  "[TERM1-START]", "cells", "[TERM1-END]", "have", "a",
+  "[TERM2-START]", "cell" "membrane", "[TERM2-END]", "."]. Our
+  training data then consists of sentences paired with the expected
+  relationship between the two terms. Once trained on that data, the
+  task for the model is to predict the relationships between the two
+  terms indicated in an input sentence. With this slight change in the
+  input sentences, we are able to repurpose a language model to the
+  task predicting relationships between terms.</p>
 
   
 <h4>4.3 Challenges in Relation Extraction</h4>
@@ -490,16 +525,14 @@ pre-trained language models, and customizing them to the specific
   training data required for the deep learning models.  Validating the
   output of extraction remains an ongoing challenge. </p>
   
-<p>The problem of entity linking or entity resolution is an equally
-important problem for creating knowledge graphs, but we have chosen to
-omit it from the discussion here for two reasons. First, we believe
-that the challenge of getting good performance on entity and relation
-extraction, by itself, is a significant hurdle. Second, a prerequisite
-to a good performance on entity linking is the availability of a good
-lexicon. For these reasons, entity resolution is an advanced
-technique, and it may or may not be the primary bottleneck in solving
-the business problem for which we are creating the knowledge
-graph.</p>
+<p>Entity linking or entity resolution is an equally important problem
+for creating a knowledge graph from text.  It is the task of mapping
+an entity mention found in a text to its corresponding unique node in
+a knowledge graph.  Getting good performance on entity and relation
+extraction is a prerequisite for entity linking. For this reason,
+entity resolution is an advanced technique, and it may or may not be
+the primary bottleneck in solving the business problem for which we
+are creating the knowledge graph.</p>
 
 <h3>Exercises</h3>
 
