@@ -266,7 +266,87 @@ rules.  We can access ontological inference through a declarative
   query interface, and thus,  it can be used as a specialized
   reasoning service for a certain class of queries.</p>
 
-<h2>3.1 Taxonomic Reasoning</h2>
+<p>To discuss taxonomic and rule-based inference, we will use Datalog
+  extended by negation as a specification language. Therefore, we
+  begin with a brief introduction to the syntax and semantics of
+  Datalog.</p>
+
+<h2>3.1 Introduction to Datalog</h2>
+
+<p>A Datalog program consists of a finte set of facts and rules. Facts
+are assertions about the world, such as: "John is the father of
+Harry". Rules are sentences which allow us to deduce facts from other
+facts, for example, "If <i>X</i> is a parent of <i>Y</i> and
+if <i>Y</i> is a parent of <i>Z</i>, then <i>X</i> is a grand-parent
+  of <i>Z</i>". Facts and rules are written as a clause of the following form:</p>
+
+<center>
+  <table style="font-family:courier;font-size:14px" width="600">
+    <tbody><tr><td>
+L<sub>0</sub> :- L<sub>1</sub>, ... ,L<sub>n</sub> 
+</td></tr><tr>
+  </tr></tbody></table>
+</center>
+
+<p>Each <tt>L<sub>i</sub></tt> is a literal of the
+form <tt>p<sub>i</sub></tt>(<tt>t<sub>1</sub>, ... ,t<sub>n</sub></tt>) such
+that <tt>p<sub>i</sub></tt> is a <tt>predicate symbol</tt> and
+the <tt>t<sub>j</sub></tt> is a  <i>term</i>. A term is either
+a <i>constant</i> or a <i>variable</i>. The left-hand side of a
+Datalog clause is called its <i>head</i>, and the right-hand side is
+called its <i>body</i>. The body of a clause may be empty. The clauses
+with empty body represent facts; clauses with at least one literal in
+the body represent rules.
+
+The fact that "John is the father of
+Harry" can be represented as <tt>father(john, harry).</tt> The rule "If <i>X</i> is a parent of <i>Y</i> and
+if <i>Y</i> is a parent of <i>Z</i>, then <i>X</i> is a grand-parent
+  of <i>Z</i>" can be represented as: </p>
+
+<center>
+  <table style="font-family:courier;font-size:14px" width="600">
+    <tbody><tr><td>
+grand_parent(X,Z)  :- parent(X,Y), parent(Y,Z) 
+</td></tr><tr>
+  </tr></tbody></table>
+</center>
+
+
+
+<p>Here the symbols <tt>parent</tt> and <tt>grand_parent</tt> are predicate symbols, the symbols <tt>john</tt> and <tt>harry</tt> are constants, and the symbols <tt>X, Y</tt> and <tt>Z</tt> are variables.</p>
+
+<p>Any Datalog program <i>P</i> must satisfy the
+following <i>safety</i> conditions: each fact of <i>P</i> is ground,
+that is, does not contain any variables; and each variable which
+occurs in the head of a rule of <i>P</i> must also occur in the body
+of the same rule. These conditions guarantee that the set of all facts
+  that can be drived from a Datalog program is finite.</p>
+
+<p>A Datalog program defines what is true by starting from known facts
+and repeatedly applying rules until nothing new can be inferred, and
+  queries simply ask what can be derived from this process.</p>
+
+<p>In the pure Datalog introduced above, the negation sign "~" is not
+  allowed to appear, and we cannot infer negative facts.  with a
+  simple extension, also known as the closed world assumption we can
+  infer negative facts: if a fact does not follow from a set of
+  Datalog clauses, then we conclude that the negation of this fact is
+  true. Negative facts are positive facts precded by the negation
+  symbol ""~".  For example, in the simple program introduced until
+  now, we can conclude ~parent(john, peter).</p>
+
+
+<p>With the extension suggested above, we can also allow negated literals
+  in the rules bodies. To ensure a unique answer, however, we need to
+  impose one additional condition: stratification: no predicate appearing
+  in the head of a rule can be negated in the body of the same rule, or indirectly,
+  through multiple rule applications. Stratification ensures that the Datalog program
+  has a unique answer.</p>
+
+
+
+
+<h2>3.2 Taxonomic Reasoning</h2>
 
 <p>Taxonomic reasoning is applicable in situations where it is useful to
 organize knowledge into classes. Classes are nothing but unary
@@ -281,13 +361,14 @@ specialization, disjoint classes, value restriction, inheritance and
   Language and Semantic Web Rule Language, a full-fledged support is
   available for defining classes and rules.</p>
 
-<p>To discuss taxonomic reasoning, we have chosen to abstract away
-  from property graph and RDF data models. We will introduce the basic
-  concepts of taxonomies such as class membership, disjointness,
-  constraints and inheritance using Datalog as a specification language.</p>
+<p>We will introduce the basic concepts of taxonomies such as class
+  membership, disjointness, constraints and inheritance using Datalog
+  as a specification language without making any specfic reference to
+  RDF or property graph model of graphs..</p>
 
 
-<h3>3.1.1 Class Membership</h3>
+
+<h3>3.2.1 Class Membership</h3>
 
 <p>Suppose we wish to model data about kinship. We can define the
 unary relations of <tt>male</tt> and <tt>female</tt> as classes, that
@@ -324,7 +405,7 @@ called <tt>instance_of</tt> and use it as shown below.</p>
   </tbody></table>
 </center>
 
-<h3>3.1.2 Class Specialization</h3>
+<h3>3.2.2 Class Specialization</h3>
 
 <p>Classes can be organized into a hierarchy. For example, we can introduce a class <tt>person</tt>. Both
 <tt>male</tt> and <tt>female</tt> are then <em>subclasses</em>
@@ -367,7 +448,7 @@ subclass_of(I,B) :- subclass_of(A,B) &amp; instance_of(I,A)
 <p>A class hierarchy must not contain cycles, because that would imply
 that a class is a subclass of itself, which is semantically incorrect.</p>
 
-<h3>3.1.3 Class Disjointness</h3>
+<h3>3.2.3 Class Disjointness</h3>
 
 <p>We say that a class <tt>A</tt> is <em>disjoint</em> from another
 class <tt>B</tt> if no instance of one can be an instance of another.
@@ -375,12 +456,12 @@ We can declare two classes to be disjoint from each other or a set of
 classes to be a partition such that each class in the set is pairwise
 disjoint from every other class.  In our kinship example, the
 classes <tt>male</tt> and <tt>female</tt> are disjoint from each
-other.</p>
+  other. The atom <tt>illegal</tt> concludes that the condition specified
+in the body of the rule is not allowed.</p>
 
 <center>
   <table style="font-family:courier;font-size:14px" width="600">
-    <tbody><tr><td>~instance_of(I,B)  :- disjoint(A,B) &amp; instance_of(I,A)</td></tr>
-	  <tr><td>~instance_of(I,A)  :- disjoint(A,B) &amp; instance_of(I,B)</td></tr>
+    <tbody><tr><td>illegal  :- disjoint(A,B) &amp; instance_of(I,A)  &amp; instance_of(I,B) </td></tr>
 	  <tr><td>disjoint(A1,A2) :- partition(A1,...,An)</td></tr>
 	  <tr><td>disjoint(A2,A3) :- partition(A1,...,An)</td></tr>
 	  <tr><td>disjoint(An-1,An) :- partition(A1,...,An)</td></tr>
@@ -388,7 +469,7 @@ other.</p>
 </center>
 
 
-<h3>3.1.4 Class Definition</h3>
+<h3>3.2.4 Class Definition</h3>
 
 <p>Classes are defined using <em>necessary</em> and <em>sufficient</em> relation values. For example,
 <tt>age</tt> is a necessary relation value for a <tt>person</tt>.  If
@@ -411,7 +492,7 @@ necessary and sufficient relation values are known as <em>defined</em>
 classes. The sufficient definition of a class
 has <tt>instance_of</tt> literal in its head.</p>
 
-<h3>3.1.5 Value Restriction</h3>
+<h3>3.2.5 Value Restriction</h3>
 
 <p>We can restrict the arguments of a relation to be instances of
 specific classes.  In the kinship example, we can restrict
@@ -438,7 +519,7 @@ restrictions can be defined for higher arity relationships. </p>
 
 
 
-<h3>3.1.6 Cardinality and Number Consraints</h3>
+<h3>3.2.6 Cardinality and Number Consraints</h3>
 
 <p>We can further restrict the values of relations by specifying
 cardinality and number constraints.  A cardinality constraint
@@ -449,8 +530,8 @@ parents, and that the age of a person is between 0 and 100 years.</p>
 
 <center>
   
-      &gt;
-      &gt;<table style="font-family:courier;font-size:14px" width="600">
+      
+      <table style="font-family:courier;font-size:14px" width="600">
     <tbody><tr><td>
 	      illegal  :- instance_of(X,person) &amp; ~countofall(P,parent(P,X),2)
       </td></tr><tr><td>
@@ -463,7 +544,7 @@ parents, and that the age of a person is between 0 and 100 years.</p>
 
 
 
-<h3>3.1.6 Inheritance</h3>
+<h3>3.2.7 Inheritance</h3>
 
 <p>The relation values of a class are said to inherit to its
 instances. For example, if we assert that <tt>art</tt> is an instance
@@ -479,7 +560,7 @@ violation, either the value causing the violation must be rejected, or
 techniques for para-consistent reasoning must be used to manage such
 inconsistency.</p>
 
-<h3>3.1.7 Reasoning with Classes</h3>
+<h3>3.2.8 Reasoning with Classes</h3>
 
 <p>There are four broad classes of inference that are interesting with classes.</p>
 
@@ -497,7 +578,7 @@ inconsistency.</p>
   defined by the classes and their instances.  The last two inferences
   are central to the calculations performed by a Datalog engine.</p>
   
-<h2>3.2 Rule-based Reasoning</h2>
+<h2>3.3 Rule-based Reasoning</h2>
 
 <p>It is not possible to draw a strict line between rule-based reasoning and
   taxonomic reasoning. Even though we used Datalog as a specification language
@@ -508,7 +589,7 @@ inconsistency.</p>
   such reasoning, and then we will consider rule-based reasoning algorithms to perform
   the required reasoning.</p>
 
-<h3>3.2.1 Example Scenario Requiring Rule-based Reasoning</h3>
+<h3>3.3.1 Example Scenario Requiring Rule-based Reasoning</h3>
 
 <p>Consider a property graph with the schema shown below. Companies
 produce products that contain chemicals. People are involved in studies
@@ -551,20 +632,25 @@ specify it using an existential rule as shown below.</p>
 </tbody></table>
 </center>
 
-<p>In general, existential rules are needed whenever we need to create new objects
-  in our knowledge graph. Relationship reification is an obvious such situation.
-  Sometimes, we may need to create new objects to satisfy certain constraints.
-  For example, consider the constraint: every person must have two parents. For a given
-  person, the parents may not be known, and if we want our knowledge graph to
-  remain consistent with this constraint, we must introduce two new objects representing
-  the parents of a person. As this can lead to infinite number of new objects, it is
-  typical to set a limit on how the new objects are created.</p>
+<p>Existential rules are beyond the scope Datalog extended with
+  negation that we have considered until now, and require a more
+  powerful rule language. In general, existential rules are needed
+  whenever we need to create new objects in our knowledge
+  graph. Relationship reification is an obvious such situation.
+  Sometimes, we may need to create new objects to satisfy certain
+  constraints.  For example, consider the constraint: every person
+  must have two parents. For a given person, the parents may not be
+  known, and if we want our knowledge graph to remain consistent with
+  this constraint, we must introduce two new objects representing the
+  parents of a person. As this can lead to infinite number of new
+  objects, it is typical to set a limit on how the new objects are
+  created.</p>
 
-<h3>3.2.2 Approach for Rule-based Reasoning</h3>
+<h3>3.3.2 Approach for Rule-based Reasoning</h3>
 
-<p>To support rule-based reasoning on a knowledge graph, one usually interfaces a rule engine
+<p>To support rule-based reasoning on a knowledge graph, one usually interfaces a Datalog rule engine
   with the data in the knowledge graph. We consider here a few different reasoning strategies
-  used by the rule engines.</p>
+  used by Datalog engines.</p>
 
 <p>In a bottom up reasoning strategy, also known as Chase, we apply
   all the rules against the knowledge graph, and add new facts to it
