@@ -95,10 +95,11 @@ labels <i>L</i>, a knowledge graph is a subset of the cross
   friendship relationship is also known as a data graph. A directed
   graph in which the nodes are classes of objects (e.g., Book,
   Textbook, etc.), and the edges capture the <i>subclass</i>
-  relationship, is also known as a taxonomy.  In some data
-  models, <i>A</i> is referred to as <i>subject</i>, <i>B</i> is
-  referred to as <i>predicate</i>, and <i>C</i> is referred to as
-  object.
+  relationship, is also known as a taxonomy.  In some data models, the
+  source of an edge (e.g., <i>A</i>) is referred to as
+  the <i>subject</i>, the label on the edge (e.g., <i>B</i>) is
+  referred to as the <i>predicate</i>, and the target of the edge
+  (e.g., <i>C</i>) is referred to as the object.
 </p>
 
 
@@ -155,7 +156,22 @@ called <i>twinned administrative body</i> that lists the city of
 Ontario. As this relationship is symmetric, the Wikidata page for the
 city of Ontario automatically includes Winterthur. Thus, when Wikidata
 knowledge graph will be fully integrated into Wikipedia, such
-discrepancies will naturally disappear.</p>
+  discrepancies will naturally disappear.</p>
+
+<center>
+<table>
+  <tr>
+    <td align='center'>
+  <table>
+    <tr><td><img src='images/winterthur_graph.jpg' height='300'/></td></tr>
+ </table>
+    </td>
+  </tr>
+  <tr><td></td></tr>
+</table>
+</center>
+
+
 
 <p>
 Wikidata includes data from several independent providers, for
@@ -326,7 +342,7 @@ goal, including image classification and object detection.</p>
   <table>
     <tr><td><img src='images/vision.jpg' height='200'/></td></tr>
  </table>
-    </td>
+    </td>
   </tr>
   <tr><td></td></tr>
 </table>
@@ -336,8 +352,9 @@ goal, including image classification and object detection.</p>
 system should produce a knowledge graph shown to the right. The nodes in the
 knowledge graph are the outputs of an object detector.  Current research in
 computer vision focuses on developing techniques that can correctly
-infer the relationships between the objects, such as,
-man <i>holding</i> a bucket, and horse <i>feeding</i> from the bucket,
+  infer the relationships between the objects, such as,
+  such as a woman, a cow, and a mask, and relationships such as
+ <i>holding</i>, <i>feeding</i>, 
 etc. The sample knowledge graph is shown to the right.
 
 
@@ -471,9 +488,8 @@ have applications in all areas of computer science. Most notable uses
 of graphs in knowledge representation and databases have taken the
 form of data graphs, taxonomies and ontologies. Traditionally, such
 applications have been driven by a top down design.  As a knowledge
-graph is a directed labeled graphs, we are able to leverage theory,
-algorithms and implementations from more general graph-based systems
-in computer science.
+graph is a directed labeled graph, we are able to leverage graph theory
+algorithms and implementations.
 </p>
 
 <p>Recent surge in the use of knowledge graphs is driven because of
@@ -519,6 +535,28 @@ schema is not required at the outset.</p>
   these applications can certainly benefit from the classical work on
   the top down representation design techniques, and in fact, we
   envision that eventually the two will converge.   </p> 
+
+<h1>6. Further Reading</h1>
+
+Knowledge Graphs surged into popularity after Google started using
+them as part of its search
+engine <a href="https://blog.google/products/search/introducing-knowledge-graph-things-not/">[Singhal
+2012]</a>. The current chapter is based on an article that appeared in
+the AI
+Magazine <a href="https://onlinelibrary.wiley.com/doi/10.1002/aaai.12033">[Chaudhri
+et. al. 2022]</a>.  A recent survey covers how knowledge graphs are
+being used in the
+industry <a href="https://dl.acm.org/doi/10.1145/3331166">[Noy
+et. al. 2022]</a>. A comprehensive overview of knowledge graphs has
+been jointly written by several working on this
+topic <a href="https://arxiv.org/abs/2003.02320">[Hogan
+et. al. 2020]</a>.
+
+
+
+
+
+
 
 <h1>Exercises</h1>
 
