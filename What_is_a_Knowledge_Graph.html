@@ -182,19 +182,20 @@ Wikidata includes data from several independent providers, for
   Wikidata makes it easy to establish such links by publishing the
   definitions of relationships used in it
   in <i>Schema.Org</i>. (Schema.org is a collaborative,
-  community-driven initiative that provides a shared vocabulary for
-  structured data on the web, enabling search engines and other tools
-  to better understand and display website content.)</p>
+  community-driven initiative that provides a shared vocabulary ---
+  that is the names of classes and their properties --- for structured
+  data on the web, enabling search engines and other tools to better
+  understand and display website content.)</p>
 
-<p>The vocabulary of relations in <i>Schema.Org</i> gives us, at
-  least, three advantages. First, it is possible to write queries that
-  span across multiple datasets that would not have been possible
-  otherwise. One example of such a query is: Display on a map the
-  birth cities of people who died in Winterthour?  Second, with such a
-  query capability, it is possible to easily generate structured
-  information boxes within Wikipedia. Third, structured information
-  returned by queries also can appear in the search results which is
-  now a standard feature for the leading search engines.
+<p>The vocabulary of <i>Schema.Org</i> gives us, at least, three
+  advantages. First, it is possible to write queries that span across
+  multiple datasets that would not have been possible otherwise. One
+  example of such a query is: Display on a map the birth cities of
+  people who died in Winterthour?  Second, with such a query
+  capability, it is possible to easily generate structured information
+  boxes within Wikipedia. Third, structured information returned by
+  queries also can appear in the search results which is now a
+  standard feature for the leading search engines.
 </p>
 
 <p>A recent version of Wikidata had over 80 million objects, with over
@@ -262,16 +263,17 @@ example.
 <p>Knowledge graphs, known as semantic networks, have been used as a
   representation for Artificial Intelligence since the early days of
   the field.  Over the years, semantic networks were evolved into
-  different representations such as conceptual graphs, description
-  logics, and rule languages. To capture uncertain knowledge,
+  different representations such as description
+  logics and rule languages. To capture uncertain knowledge,
   probabilistic graphical models were invented.</p>
 
-<p> A widely known application of the representation
-  languages that originated from semantic networks is in capturing ontologies. An ontology is formal
-  specification of the conceptualization of a domain. An ontology
-  plays important role in information exchange and in capturing the
-  background knowledge of a domain that could be used for reasoning
-  and answering questions.</p>
+<p> A widely known application of the representation languages that
+  originated from semantic networks is in capturing ontologies. An
+  ontology is a specification of the classes, their properties, and
+  the individual instances in a domain. An ontology plays important
+  role in information exchange and in capturing the background
+  knowledge of a domain that could be used for reasoning and answering
+  questions.</p>
 
 <p> World Wide Web Consortium (W3C) standardized a family of knowledge
   representation languages that are now widely used for capturing
@@ -281,12 +283,12 @@ example.
   and the Semantic Web Rule Language (SWRL). </p>
 
 <p>Orthogonal to the representation of knowledge, a central challenge
-  in AI is knowledge acquisition bottleneck, ie, how to capture 
+  in AI is knowledge acquisition bottleneck, ie, how to capture
   knowledge into the chosen representation in an economically scalable
-  manner. Early approaches relied on knowledge engineering. Efforts
-  to automate portions of knowledge engineering led to techniques such
-  as inductive learning, and the current generation of machine
-  learning.</p>
+  manner. Early approaches relied on knowledge engineers to manually
+  author knowledge. Efforts to automate portions of knowledge
+  engineering led to techniques such as inductive learning, and the
+  current generation of machine learning.</p>
 
 <p>Therefore, it is natural that the knowledge graphs are being used
 as a representation of choice for storing the knowledge automatically
@@ -296,8 +298,9 @@ learning.</p>
 
 <h2>4.1 Knowledge Graphs as the output of Machine Learning</h2>
 
-<p>We will consider how graphs are being used as a target output representation for
-natural language processing and computer vision algorithms.</p>
+<p>We will consider how graphs are being used as a target output
+representation for natural language processing and computer vision
+systems.</p>
 
 <p>Entity extraction and relation extraction from text are two
   fundamental tasks in natural language processing.  The extracted
@@ -307,7 +310,7 @@ natural language processing and computer vision algorithms.</p>
   entities <i>Albert Einstein</i>, <i>Germany</i>, <i>Theoretical Physicist</i>, and
   <i>Theory of Relativity</i>; and the relations <i>born in</i>, <i>occupation</i> and
   <i>developed</i>. Once this snippet of the knowledge graph is incorporated
-  into a larger knowledge graph, we get additional links (shown by dotted edges)
+  into a larger knowledge graph, we get additional inferences (shown by dotted edges)
   such as a Theoretical Physicist is a <i>kind of</i> Physicist
   who <i>practices</i> Physics, and that Theory of Relativity is
   a <i>branch of </i> Physics.</p>
@@ -355,7 +358,7 @@ computer vision focuses on developing techniques that can correctly
   infer the relationships between the objects, such as,
   such as a woman, a cow, and a mask, and relationships such as
  <i>holding</i>, <i>feeding</i>, 
-etc. The sample knowledge graph is shown to the right.
+ etc. 
 
 
 <h2>4.2 Knowledge Graphs as input to Machine Learning</h2>
@@ -436,7 +439,7 @@ likely to follow the partial query that a user has already typed.</p>
   cooccurrence information about the words in a sentence to calculate
   similarity between the words.</p>
 
-<p> Graph embeddings generalize a knowledge graph from a path graph to
+<p> Graph embeddings generalize the embeddings from a path graph to
   a general network structure. The goal and approach, however, remain
   the same: represent each node in a network structure by a vector of
   cooccurrences, so that the similarity between the nodes can be
@@ -555,6 +558,127 @@ et. al. 2020]</a>.
 
 
 
+
+<h1>Chapter Glossary</h1>
+
+        <dl id="chapter-glossary" class="space-y-4">
+            <!-- 
+              Each term has a <div> wrapper.
+              The <dt> (definition term) has the ID that matches the 'data-term' attribute in the text.
+              The <dd> (definition description) contains the definition.
+            -->
+	   <div> 
+                <dt id="connected component" class="text-lg font-semibold text-gray-900">connected component</dt>
+                <dd class="ml-4 mt-1 text-gray-700">
+                    A connected component of a directed graph is the
+                    maximal group of nodes such that there is path
+                    from one node to another in the underlying
+                    undirected graph.
+                </dd>
+          </div>  
+	   <div> 
+                <dt id="description logic" class="text-lg font-semibold text-gray-900">description logic</dt>
+                <dd class="ml-4 mt-1 text-gray-700">
+                    A family of logic-based knowledge representation
+                    languages designed to describe classes,
+                    properties, and individual instances (i.e., data).
+                </dd>
+          </div>  
+	   <div> 
+                <dt id="directed graph" class="text-lg font-semibold text-gray-900">directed graph</dt>
+                <dd class="ml-4 mt-1 text-gray-700">
+                    A directed graph is a <a href="#graph" class="glossary-link">graph</a> in which the edges have directions.
+                </dd>
+          </div>  
+           <div> 
+                <dt id="directed labeled graph" class="text-lg font-semibold text-gray-900">directed labeled graph</dt>
+                <dd class="ml-4 mt-1 text-gray-700">
+                    A directed labeled graph is a <a href='#directed graph' class='glossary-link'>directed graph</a> in which the edges have labels.
+                </dd>
+           </div>
+	   <div> 
+                <dt id="graph" class="text-lg font-semibold text-gray-900">graph</dt>
+                <dd class="ml-4 mt-1 text-gray-700">
+                    A graph <i>G</i> is a pair <i>(V,E)</i>, where <i>V</i> is a set whose
+                    elements are called the <i>nodes</i>, and <i>E</i> is a
+                    set of unordered pairs {v<sub>i</sub>, v<sub>j</sub>} of nodes whose
+                    elements are called the edges.
+                </dd>
+           </div>
+	   <div> 
+                <dt id="graphical model" class="text-lg font-semibold text-gray-900">graphical model</dt>
+                <dd class="ml-4 mt-1 text-gray-700">
+                    A graphical model, often known as a probablistic
+                    graphical model, represents conditional dependence
+                    between a set of random variables. Each node in
+                    the graph is a random variable, and each edge
+                    represents the probablistic dependence between the
+                    nodes.
+                </dd>
+           </div>
+	   <div> 
+                <dt id="hamiltonian path" class="text-lg font-semibold text-gray-900">hamiltonian path</dt>
+                <dd class="ml-4 mt-1 text-gray-700">
+                    A Hamiltonian path is a path in a graph that
+                    visits each vertex exactly once. A Hamiltonian
+                    path in a directed graph must respect the
+                    direction of the edges.
+                </dd>
+          </div>  
+	   <div> 
+                <dt id="shortest path" class="text-lg font-semibold text-gray-900">shortest path</dt>
+                <dd class="ml-4 mt-1 text-gray-700">
+                    A shortest path in a graph is a path between two
+                    nodes that has the minimum total "cost" or
+                    "length" among all possible paths connecting those
+                    two nodes.
+                </dd>
+          </div>  
+	   <div> 
+                <dt id="schema" class="text-lg font-semibold text-gray-900">schema</dt>
+                <dd class="ml-4 mt-1 text-gray-700">
+                    A schema is a description of the structure of the
+                    data. For a knowledge graph, it specifies
+                    different node types and their properties.  For a
+                    relational database, the schema specifies the
+                    relations, their attributes or columns and
+                    constraints (e.g., foreign keys).
+                </dd>
+          </div>  
+	   <div> 
+                <dt id="semantic network" class="text-lg font-semibold text-gray-900">semantic network</dt>
+                <dd class="ml-4 mt-1 text-gray-700">
+                    A graphical representation of knoweldge in which
+                    nodes represent concepts or enttie and edges
+                    represent the relationships between them. Modern
+                    knowledge graphs put more emphasis on graphical
+                    representation of data (or real-world entities).
+                </dd>
+          </div>  
+
+	   <div> 
+                <dt id="strongly connected component" class="text-lg font-semibold text-gray-900">strongly connected component</dt>
+                <dd class="ml-4 mt-1 text-gray-700">
+                    A strongly connected component of a directed graph
+                    is the maximal group of nodes such that for any
+                    pair of notes <i>u</i> and <i>v</i> in it, there
+                    is a path from <i>u </i> to <i>v</i> and <i>v </i>
+                    to <i>u</i>.
+                </dd>
+          </div>  
+
+	   <div> 
+                <dt id="taxonomy" class="text-lg font-semibold text-gray-900">taxonomy</dt>
+                <dd class="ml-4 mt-1 text-gray-700">
+		  A <a href ="directed labeled graph">directed labeled graph</a> in which the nodes are classes of objects (e.g., Book,
+		  Textbook, etc.), and the edges capture the <i>subclass</i>
+		  relationship, is also known as a taxonomy. 
+                </dd>
+           </div>
+
+
+	   
+	</dl>  
 
 
 
