@@ -3,7 +3,9 @@
 <!--=======================================================================-->
 
 <head>
-  <title>What is a Knowledge Graph?</title></head>
+  <title>What is a Knowledge Graph?</title>
+
+</head>
 
 <!--=======================================================================-->
 
@@ -87,7 +89,13 @@ labels <i>L</i>, a knowledge graph is a subset of the cross
   product <i>N &times; L &times; N</i>.  Each member of this set is
   referred to as a triple, and can be visualized as shown below. </p>
 
-<center><img src='images/triple.jpg' height='140'/></center>
+  <center><img src='images/triple.jpg' height='140'/></center>
+  <blockquote>Figure 1: A triple &lt; A, B, C &gt;, where A and C are
+		     nodes connected by an edge, and B is label of
+		     that edge, is a building block of a knowledge
+    graph.</blockquote>
+
+		     
 
 <p>The directed graph representation is used in a variety of ways
   depending on the needs of an application. A directed graphs such as
@@ -167,10 +175,9 @@ knowledge graph will be fully integrated into Wikipedia, such
  </table>
     </td>
   </tr>
-  <tr><td></td></tr>
 </table>
 </center>
-
+<blockquote>Figure 2: An example knowledge graph from Wikidata starting from the entity Winterthur</blockquote>
 
 
 <p>
@@ -326,9 +333,13 @@ physicist</b> who developed the <b>theory of relativity</b>.
  </table>
     </td>
   </tr>
-  <tr><td></td></tr>
 </table>
 </center>
+<blockquote>Figure 4: An example knowledge graph resulting from entity
+and relationship extraction through natural language process. The
+dotted edges illustrate the additional inferences that might follow
+once the extracted information is merged into a larger knowledge
+graph.</blockquote>
 
 <p>A holy grail of computer vision is the complete understanding of an
 image, that is, creating a model that can name and detect
@@ -347,9 +358,12 @@ goal, including image classification and object detection.</p>
  </table>
     </td>
   </tr>
-  <tr><td></td></tr>
 </table>
 </center>
+
+<blockquote>Figure 5: An example knowledge graph resulting from object
+detection and edge detection performed by a computer vision
+system.</blockquote>
 
 <p>For example, from the image shown above, an image understanding
 system should produce a knowledge graph shown to the right. The nodes in the
@@ -407,6 +421,9 @@ therefore, its counts for these two words are 2 and 1 respectively,
 	  
 </table>
 </center>
+<blockquote>Table 1: Word cooccurrence counts showing how often each
+word appears next to another word in the corpus.</blockquote>
+
 
 <p>Above table constitutes a matrix which is often referred to
 as <em>word cooccurrence</em> counts.  We say that the meaning of each
@@ -556,6 +573,12 @@ topic <a href="https://arxiv.org/abs/2003.02320">[Hogan
 et. al. 2020]</a>.
 
 
+<ul>
+    <li><a href="https://blog.google/products/search/introducing-knowledge-graph-things-not/">[Singhal 2012]</a> Singhal, A. (2012, May 16). <em>Introducing the Knowledge Graph: Things, not Strings</em>. Google Blog.</li>
+    <li><a href="https://onlinelibrary.wiley.com/doi/10.1002/aaai.12033">[Chaudhri et al. 2022]</a> Chaudhri, V., et al. (2022). <em>Knowledge Graphs: Introduction, History and Perspectives </em>. AI Magazine.</li>
+    <li><a href="https://dl.acm.org/doi/10.1145/3331166">[Noy et al. 2022]</a> Noy, N. F., Gao, Y., Jain, A., Narayanan, A., Patterson, A., & Taylor, J. (2022). <em>Industry use of Knowledge Graphs: A survey</em>. Communications of the ACM, 55(10), Article 201.</li>
+    <li><a href="https://arxiv.org/abs/2003.02320">[Hogan et al. 2020]</a> Hogan, A., Blomqvist, E., Cochez, M., dAmato, C., de Melo, G., Gutiérrez, C., ... & Navigli, R. (2020). <em>Knowledge Graphs</em>. arXiv.</li>
+</ul>
 
 
 
