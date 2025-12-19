@@ -51,65 +51,84 @@
 
 <h3>1. Introduction</h3>
 
-<p>Large organizations generate lot of internal data, and also consume
-data produced by third party providers.  Many data providers obtain
-their data by processing unstructured sources, and invest significant
-effort in providing it in a structured form for use by others. To make
-an effective use of such external data, it must be related to company's
-internal data. Such data integration enables many popular use cases
-such as 360 view of a customer, fraud detection, risk assessment, loan
-approval etc.  For this chapter, we will discuss the problem of
-creating a knowledge graph by integrating the data available from
-structured sources.  We will consider the problem of extracting data
-from unstructured data sources in the next chapter.</p>
+<p>Large organizations generate huge amounts of internal data and
+also consume data from third-party providers. These providers often
+extract information from unstructured sources and invest considerable
+effort in delivering it in structured form. To use this external data
+effectively, it must be integrated with the company's internal
+data. Such integration supports many important applications, including
+a 360-degree view of the customer, fraud detection, risk assessment,
+and loan approval.  In this chapter, we focus on building a knowledge
+graph by integrating data from structured sources. The next chapter
+addresses techniques for extracting structured data from unstructured
+  inputs.</p>
 
-<p>When combining data from multiple sources into a knowledge graph,
-  we can undertake some upfront design of schema as we discussed in
-  the previous chapter.  We can also begin with no schema as it is
-  straightforward to load external data as triples into a knowledge
-  graph.  The design of the initial schema is typically driven by the
-  specific business use case that one wishes to address. To the degree
-  such an initial schema exists, we must determine how the data
-  elements from a new data source should be added to the knowledge
-  graph.  This is usually known as the <i>schema mapping</i>
-  problem. In addition to relating the schemas of the two sources, we
-  also must deal with the possibility that an entity in the
-  incoming data (e.g., a Company) may already exist in our knowledge
-  graph.  The problem of inferring if the two entities in the data may
-   be the same real world entity is known as the <i>record
-  linkage</i> problem. The record linkage problem also arises when
-  third party data providers send new data feeds, and our knowledge
-  graph must be kept up-to-date with the new data feed.</p>
 
-<p>In this chapter, we will discuss the current approaches for
-  addressing the schema mapping and the record linkage problems. We
-  will outline the state-of-the-art algorithms, and discuss their
-  effectiveness on the current industry problems.</p>
+<p>When integrating data from multiple sources into a knowledge graph,
+we can either design a schema upfront --- as discussed in the previous
+chapter --- or begin without a predefined schema and load external
+data directly as triples. In practice, the initial schema is usually
+guided by the specific business use case being addressed. When such a
+schema exists, we must determine how the data elements in a new source
+should be aligned with it. This task is known as <i>schema
+mapping</i>.</p>
+
+<p>In addition to aligning the structures of the two sources, we must
+also determine whether entities in the new data correspond to entities
+already represented in the knowledge graph. Inferring whether two
+entity descriptions refer to the same real-world entity is known as
+the <i>record linkage</i> problem. Record linkage arises both when
+onboarding a new data source and when keeping the knowledge graph up
+to date as third-party providers deliver ongoing data feeds.</p>
+
+<p>In this chapter, we examine current approaches for addressing both
+the schema mapping and record linkage problems. We outline
+state-of-the-art algorithms and evaluate their effectiveness in
+tackling contemporary industry challenges.</p>
+
 
 <h3>2. Schema Mapping</h3>
 
 <p>Schema mapping assumes the existence of a schema which will be used
-  for storing new data coming from another source. Schema mapping then
-  defines which relations and attributes in the input database
-  corresponds to which properties and relations in the knowledge
-  graph. There exist techniques for bootstrapping schema mappings. The
-  bootstrapped schema mappings can be post corrected through human
-  intervention.</p>
+for storing new data coming from another source. Schema mapping then
+defines which relations and attributes in the input database
+corresponds to which properties and relations in the knowledge
+graph. There exist techniques for bootstrapping schema mappings. The
+bootstrapped schema mappings can be post corrected through human
+intervention.</p>
 
-<p>We will begin our discussion on schema mapping by outlining some of
-  the challenges and arguing that one should be prepared for the
-  eventuality that this process will be largely manual and
-  labor-intensive. We then describe an approach for specifying
-  mappings between the schema of the input source and the schema of
-  the knowledge graph. We will conclude the section by considering
-  some of the techniques that can be used to bootstrap schema mapping.</p>
+
+<p>We begin our discussion of schema mapping by outlining some of the
+key challenges, emphasizing that the process is often manual and
+labor-intensive. Next, we describe an approach for specifying mappings
+between the schema of the input source and the schema of the knowledge
+graph. Finally, we conclude the section by examining techniques that
+can be used to bootstrap schema mapping and reduce the manual effort
+involved.</p>
 
 <h4>2.1 Challenges in Schema Mapping</h4>
 
-<p>The main challenges in automating schema mapping are: (1) difficult
-to understand schema (2) complexity of mappings, and (3) lack of
-training data available.  We next discuss these
-challenges in more detail.</p>
+
+<p>Automating schema mapping presents several key challenges:
+understanding complex schemas, handling intricate mappings, and coping
+with limited training data.</p>
+
+<p>Relational database schemas can be large, often containing
+thousands of tables and tens of thousands of attributes. Many
+attribute names, such as segment1 or segment2, provide little semantic
+meaning, making automatic mapping difficult.</p>
+
+<p>Mappings between the input schema and the knowledge graph are
+rarely simple one-to-one correspondences. They may require
+calculations, the application of business rules, or special handling
+of missing values, which makes fully automated mapping
+challenging.</p>
+
+<p>Finally, many automated approaches rely on machine learning, which
+requires substantial training data. Because schema information is
+inherently smaller and less abundant than the data itself, there are
+typically too few schema mappings available to train a reliable
+algorithm.</p>
 
 <p>Commercial relational database schemas can be huge consisting of
 thousands of relations and tens of thousands of attributes. Sometimes,
@@ -117,32 +136,18 @@ the relation and attribute names do not have semantics (e.g.,
 segment1, segment2) which do not lend themseves to any realistic
   automated prediction of the mappings.</p>
 
-<p>The mappings between the input schema and the schema in the
-knowledge graph is not always simple one-to-one mapping. Mappings may
-involve calculations, applying business logic, and taking into account
-special rules for handling situations such as missing values.  It
-becomes a tall order to expect any automatic process to infer such
-complex mappings.</p>
-
-<p>Finally, many automated mapping solutions rely on machine learning
-techniques which require large amount of training data to function
-effectively. As the schema information, by definition, is much smaller
-than the data itself, it is unrealistic to expect that we will ever
-have large number of schema mappings available against which a mapping
-algorithm could be trained. </p>
-
 <h4>2.2 Specifying Schema Mapping</h4>
 
-<p>In this section, we will consider one possible approach to specify
-mappings between input data sources and a target knowledge graph
-schema. We will take an example in the domain of cookware. We can imagine
-different vendors providing products which an E-commerce site may wish
-to aggregate and advertise to its customers. We will consider two
-example sources, and then introduce the schema of the knowledge graph
-  to which we will define mappings.</p>
+<p>In this section, we explore one approach for specifying mappings
+between input data sources and a target knowledge graph schema. To
+illustrate the process, we use an example from the domain of
+cookware. Imagine multiple vendors providing product information that
+an e-commerce site wants to aggregate and present to its customers. We
+will examine two example sources and then introduce the schema of the
+knowledge graph, to which we will define the mappings.</p>
 
-<p>We show below some sample data from the first data source in a
-relational table called <i>cookware</i>. It has four
+<p>Below is some sample data from the first data source, stored in a
+relational table ,called <i>cookware</i>. The table  contains four
 attributes: <i>name</i>, <i>type</i>, <i>material</i>,
 and <i>price</i>.</p>
 
@@ -163,18 +168,19 @@ and <i>price</i>.</p>
 </center>
 
 
-<p>The second database shown below lists the products of a
-manufacturer.  In this case, there are multiple tables, one for each
-product attribute.  The <tt>kind</tt> table specifies the type of each
-product.  The <tt>base</tt> table specifies whether each product is
-made from a corrosible metal (aluminum or stainless), a noncorrosible
-metal (iron or steel), or something other than metal (glass or
-ceramic).  The <tt>coated</tt> table specifies those products that
-have nonstick coatings.  The <tt>price</tt> table gives the selling
-price.  There is no material information.  The company has chosen not
-to provide information about the metal used in each product.  Note
-that the <tt>coated</tt> table has only positive values; products
-without nonstick coatings are left unmentioned. </p>
+<p>The second database, shown below, lists the products of a
+manufacturer.  In this case, the data is spread across multiple
+tables, each representing a different product attribute.
+The <tt>kind</tt> table specifies the type of each product.
+The <tt>base</tt> table specifies whether each product is made from a
+corrosible metal (aluminum or stainless), a noncorrosible metal (iron
+or steel), or something other than metal (glass or ceramic).
+The <tt>coated</tt> table lists products that have nonstick coatings.
+The <tt>price</tt> table gives the selling price.  There is no
+material information.  The company has chosen not to provide
+information about the metal used in each product.  The <tt>coated</tt>
+table has only positive values; products without nonstick coatings are
+left unmentioned. </p>
 
 <center>
 <table><tr>
@@ -222,26 +228,27 @@ without nonstick coatings are left unmentioned. </p>
 </tr></table>
 </center>
 
-<p>Suppose the desired schema for the knowledge graph expressed as a
-  property graph is as shown below.  We have two different node types:
-  one for products, and the other for suppliers. These two nodes are
-  connected by a relationship called <i>has_supplier</i>. Each product
-  node has properties "type" and "price".</p>
+<p>Suppose the desired schema for the knowledge graph, expressed as a
+  property graph, is as shown below. The graph has two different node
+  types: one for products, and the other for suppliers. These nodes
+  are connected by a relationship called <i>has_supplier</i>. Each
+  product node has properties "type" and "price".</p>
 
-  <center>
+<center>
 <table>
        <tr><td><img src='images/schema_mapping.jpg' width='60%'></td></tr>
  </table>
   </center>
 
   <p>To specify the mappings, and to illustrate the process, we will
-  use a triple notation so that a similar process is applicable
-  regardless of whether we use an RDF or property graph data model for
-  the knowledge graph. For an RDF knowledge graph, we will need to
-  create IRIs which is a process orthogonal to relating the two
-  schemas, and hence omitted from here.  The desired triples in the
-  target knowledge graph are listed below. </p>
+  use a triple notation, making the approach applicable whether the
+  knowledge graph follows the RDF or property graph data model. In the
+  case of an RDF knowledge graph, creating IRIs is required, but this
+  step is orthogonal to schema mapping and is therefore omitted here.
+  The desired triples in the target knowledge graph are listed
+  below. </p>
 
+  
   <center>
   <table><tr>
 <td valign='top'>
@@ -284,13 +291,12 @@ without nonstick coatings are left unmentioned. </p>
   </tr></table>
   </center>
 
+<p>Any programming language can be used to express the mappings. In
+this example, we use Datalog to specify the mappings. The rules shown
+below are straightforward, with variables indicated by uppercase
+letters. The third rule introduces the constant <i>vendor_1</i> to
+indicate the source of the data.</p>
 
-
-<p> Any programming language of choice could be used to express the
-mappings. Here, we have chosen to use Datalog to express the
-mappings. The rules below are straightforward. Variables are indicated
-by using upper case letters. The third rule introduces the
-constant <i>vendor_1</i> to indicate the source of the data.</p>
 
 <center>
 <table>
@@ -304,9 +310,9 @@ knowledge_graph(ID,has_supplier,vendor_1) :- cookware(ID,TYPE,MATERIAL,PRICE)
 
 
 <p>Next, we consider the rules for mapping the second source. These
-rules are very similar to the mapping rules for the first source
-except that now the information is coming from two different tables in
-the source data.</p>
+rules are similar to those for the first source, except that the
+information now comes from two different tables in the source
+data.</p>
 
 
 <center>
@@ -319,51 +325,62 @@ knowledge_graph(ID,has_supplier,vendor_2) :- kind(ID,TYPE)
 </table>
 </center>
 
-<p>In general, it may not make sense to reuse the identifiers from the
-source databases, and one may wish to create new identifiers for use
-in the knowledge graph. In some cases, the knowledge graph may already
-contain objects equivalent to the ones in the data being imported. We
-will consider this issue in the section on record linkage. </p>
-  
+<p>In general, it may not be appropriate to reuse identifiers from the
+source databases, and new identifiers may need to be created for the
+knowledge graph. In some cases, the knowledge graph may already
+contain objects equivalent to those in the incoming data. We will
+consider this issue in the section on record linkage. </p>
+
+
+
 <h4>2.3 Bootstrapping Schema Mapping</h4>
 
-<p>As noted in Section 2.1, a fully automated approach to schema
-mapping faces numerous practical difficulties. There is a considerable
-work on bootrapping the schema mappings based on a variety
-of techniques and validating them using human input.
-Bootstrapping techniques for schema mapping can be classified into the
-following categories: linguistic matching, matching based on
-instances, and matching based on constraints. We will consider
-examples of these techniques next.</p>
+<p>As noted in Section 2.1, fully automated schema mapping faces
+numerous practical difficulties. Research has focused on bootrapping
+the schema mappings based on a variety of techniques, with human input
+often used to validate the results.  Bootstrapping techniques can be
+classified into three main categories: linguistic matching,
+instance-based matching, and constraint-based matching. We will
+examine examples of each technique in the following sections.
+</p>
 
-<p>Linguistic techniques can be used on the name of an attribute or
-  on the text description of an attribute. First and most obvious
-  approach is to check if the names of the two attributes are equal. One
-  can have greater confidence in such equality if the names were
-  IRIs. Second, one can canonicalize the names by processing them
-  through techniques such as stemming and then checking for equality. For
-  example, through such processing, we may be able to conclude the
-  mapping of <i>CName</i> to <i>Customer Name</i>. Third, one could
-  check for the mapping based on synonyms (e.g., car and automibile) or
-  hypernyms (e.g., book and publication). Fourth, we can check for
-  mapping based on common substrings, pronunciation, and how the
-  words sound. Finally, we can match the descriptions of the
-  attributes through semantic similarity techniques. For example, one
-  approach is to extract keywords from the description, and then check
-  for similarity between them using the techniques we have already
-  listed.</p>
 
-<p>In matching based on the instances, one examines the kind of data
-that exists. For example, if a particular attribute value contains
-dates, it can only match against those attributes that contain date
-values. Many such standard data types can be inferred by examining the
-data.</p>
+<p>Linguistic techniques can be applied to attribute names or descriptions. Common approaches include:</p>
 
-<p>In some cases, the schema may provide information about
-constraints.  For example, if the schema specifies that a particular
-attribute must be unique for an individual, and must be a number, it
-is a potential match for identification attributes such as an employee
-number or social security number. </p>
+<ol>
+  <li><strong>Exact Name Matching:</strong> Check whether the names of
+  two attributes are identical. Confidence is higher if the names are
+  expressed as IRIs.</li>
+  
+  <li><strong>Canonicalization:</strong> Process names through
+  techniques such as stemming before checking for equality (e.g.,
+  mapping <em>CName</em> to <em>Customer Name</em>).</li>
+  
+  <li><strong>Synonyms and Hypernyms:</strong> Identify mappings using
+  synonyms (e.g., <em>car</em> and <em>automobile</em>) or hypernyms
+  (e.g., <em>book</em> and <em>publication</em>).</li>
+  
+  <li><strong>Substrings and Phonetic Similarity:</strong> Compare
+  attributes based on common substrings, pronunciation, or how words
+  sound.</li>
+  
+  <li><strong>Semantic Similarity of Descriptions:</strong> Extract
+  keywords from attribute descriptions and assess similarity using the
+  techniques above.</li>
+</ol>
+
+<p>In instance-based matching, the actual data values are examined to
+determine possible mappings. For example, if an attribute contains
+date values, it can only be mapped to other attributes that also
+contain dates. Many standard data types can be inferred by analyzing
+the data itself.
+  </p>
+
+<p>In constraint based matching, we have to rely on the the schema to
+  provided information about the constraints.  For example, For
+  example, if an attribute is defined as both unique and numeric, it
+  is a potential match for identification fields such as an employee
+  number or a social security number.</p>
 
 
 <p>The techniques considered here are inexact, and hence, can
@@ -372,18 +389,19 @@ number or social security number. </p>
 
 <h3>3. Record Linkage</h3>
 
-<p>We will begin our discussion by illustrating the record linkage
-  problem with a concrete example. We will then give an overview of
-  a typical approach to solving the record linkage problem.</p>
+<p>We begin our discussion by illustrating the record linkage problem
+with a concrete example. We then provide an overview of a typical
+approach used to address record linkage in practice.</p>
+
 
 <h4>3.1 A Sample Record Linkage Problem</h4>
 
-Suppose we have data in the following two tables.
-The record linkage problem then involves
-inferring that record a<sub>1</sub> is the same as the record
-b<sub>1</sub>, and that record a<sub>3</sub> is the same as the record
-b<sub>2</sub>. Just like in schema mapping, these are inexact
-inferences, and need to undergo human validation.</p>
+Suppose we have data in the two tables shown below.  The record
+linkage problem involves inferring that record a<sub>1</sub> refers to
+the same real-world entity as record b<sub>1</sub>, and that record
+a<sub>3</sub> refers to the same real-world entity as the record
+b<sub>2</sub>. As in schema mapping, these are inexact inferences, and
+need to undergo human validation.</p>
 
 
 <center>
@@ -410,52 +428,62 @@ inferences, and need to undergo human validation.</p>
 </table>
 </center>
 
-<p>A large knowledge graph may contain information about over 10
-million companies. It may receive a data feed, that was extracted from
-natural language text. Such data feeds can contain over 100,000
-companies. Even if the knowledge graph had a standardized way to refer
-to companies, but this new data feed that was extracted from text will
-not have those standardized identifiers. The task of the record linkage
-is to relate the companies contained in this new data feed with the
-companies that already exist in the knowledge graph.  As the data
-volumes are large, performing this task efficiently is of paramount
-importance.</p>
+<p>A large knowledge graph may contain information for over 10 million
+companies, and may periodically receive new data feeds extracted from
+natural language text. Such feeds can contain hundreds of thousands of
+companies. Even if the knowledge graph uses standardized identifiers
+for companies, the incoming data extracted from text will typically
+lack such identifiers. The goal of record linkage is to relate the
+companies contained in this new data feed with the corresponding
+companies that already exist in the knowledge graph.  Because of the
+large data volumes involved, performing this task efficiently is of
+paramount importance.</p>
 
 <h4>3.2 An Approach to Solve the Record Linkage Problem</h4>
 
-<p>Efficient record linkage involves two steps: <i>blocking</i>
-and <i>matching</i>. The blocking step involves a fast computation to
-select a subset of records from the source and the target that will be
-considered during a more expensive and precise matching step. In the
-matching step, we pairwise match the subset of records that were
-selected during blocking. In the example considered above, we could use a blocking
-strategy that considers matching only those records that match on the
-state. With that strategy, we need to consider matching only
-a<sub>1</sub> with b<sub>1</sub>, and a<sub>3</sub> with
-b<sub>2</sub>, thus significantly reducing the comparisons that must
-be performed.  </p>
+<p>Efficient record linkage typically consists of two
+stages: <i>blocking</i> and <i>matching</i>. The blocking stage
+involves a fast and coarse grained computation to select a subset of
+records from the source and the target datasets that are likely to
+match. This reduces the number of comparisons required in the
+subsequent, more expensive matching stage.  During matching, records
+within each block are compared pairwise using more precise
+criteria. </p>
 
-<p>Both blocking and matching steps work by learning a random forest
-  through an active learning process. A random forest is a set of
-  decision rules that gives its final prediction through a majority
-  vote returned by individual rules. Active learning is a learning
-  process that constructs the random forest by actively monitoring its
-  performance on the test data, and selectively choosing new training examples to
-  iteratively improve its performance. We will next explain each of
-  these two steps in a greater detail. </p>
+<p>In the example considered above, a simple blocking strategy might
+consider only records that share the same state. Under this strategy,
+only records a<sub>1</sub> and b<sub>1</sub>, and a<sub>3</sub> and
+b<sub>2</sub> need to be compared, significantly reducing the
+  comparisons required.  </p>
 
-<h4>3.3 Random Forests</h4>
+<p>Both the blocking and matching stages can be implemented using a
+random forest trained through an active learning process. A random
+forest is an ensemble of decision trees, where each tree makes a
+prediction and the final decision is determined by a majority
+vote. This approach is well suited to record linkage because it can
+combine many weak, noisy signals -- such as partial name matches or
+similar addresses -- into a robust overall decision.</p>
+
+<p>Active learning further improves efficiency by focusing human
+effort where it is most valuable. Instead of labeling a large number
+of random training examples, the model actively identifies cases where
+it is uncertain and requests human input for those examples. These
+labeled examples are then used to iteratively refine the random
+forest. Together, random forests and active learning provide an
+effective and scalable approach to both blocking and matching.</p>
+
+<h4>3.3 Blocking</h4>
 
 <p>Blocking rules rely on standard similarity checking functions, such
 as, exact match, Jaccard similarity, overlap similarity, cosine
-similarity, etc. For example, if we were to check the overlap
-similarity between "Prolific Consulting" and "Prolific Consulting
-Inc.", we will first gather the tokens in each of them, and then check
-  which tokens are in common, giving us a similarity score of 2/3.</p>
+similarity, etc. For example, to compute the overlap similarity
+between "Prolific Consulting" and "Prolific Consulting Inc.", we will
+first gather the tokens in each of them, and then check which tokens
+are in common, giving us a similarity score of 2/3.</p>
 
-<p>We show below a snippet of a random forest for blocking. A random
-  forest can also be viewed as a set of set of rules. The random
-  forest shown below is a set of two sets of rules.  The arguments of
+<p>Below is  a snippet of a random forest used for blocking. A random
+  forest can also be viewed as a collection of rule sets. The random
+  forest shown below consists of two sets of rules.  The arguments of
   each predicate are two values to be compared.</p>
 
 
@@ -467,26 +495,26 @@ Inc.", we will first gather the tokens in each of them, and then check
  </table>
   </center>
 
-<p>Several general principles exist for automatically choosing the
-similarity functions for blocking rules. For example, for a numerical
-valued attributes such as age, weight, price, etc., candidate
-similarity functions are: exact match, absolute difference, relative
-difference, and Levenstein distance. For string valued attributes, it
-is common to use edit distance, cosine similarity, Jaccard similarity,
-and TF/IDF functions.</p>
+<p>Several general principles guide the automatic selection of the
+similarity functions for blocking. For numerical
+attributes such as age, weight, price, etc., candidate
+similarity functions include exact match, absolute difference, relative
+difference, and Levenstein distance. For string valued attributes, typical
+choices include edit distance, cosine similarity, Jaccard similarity,
+and TF/IDF-based similarity measures.</p>
 
    <h4>3.4 Active Learning of Random Forests</h4>
 
    <p>We can learn the random forest for the blocking rules through
-   the following active learning process. We randomly select a set of
-   pairs from the two datasets. By applying the similarity functions
-   on each pair, we obtain a set of feautres for each pair.  Using
-   these features, we learn a random forest. We apply the resulting
-   rules to new pairs selected from the data set, and evaluate their
-   performance. If the performance is below a certain threshold, we
-   repeat the cycle, by providing additional labeled examples until an
-   acceptable performance is obtained.  We illustrate this process
-   using the following example. </p>
+   the following active learning process. First, we randomly select a
+   set of record pairs from the two datasets. By applying the
+   similarity functions to each pair, we generate a set of feautres
+   for each pair.  Using these features, we train a random forest. The
+   resulting rules are then aplied to new record pairs, and their
+   performance evaluated.  If the performance falls below a specified
+   threshold, the process is repeated by providing additional labeled
+   examples until an acceptable performance is obtained.  We
+   illustrate this process using the following example. </p>
 
    <center>
 <table>
@@ -494,19 +522,24 @@ and TF/IDF functions.</p>
  </table>
   </center>
 
+   <p>Suppose our first dataset contains three
+   items: <em>a</em>, <em>b</em>, and <em>c</em>, and our second
+   dataset contains two items: <em>d</em> and <em>e</em>. From these
+   datasets, we select two pairs, (<em>a, d</em>) and (<em>c, d</em>),
+   which are labeled by the user as similar and not similar,
+   respectively.</p>
 
-<p>We assume that our first dataset contains three items: a, b, and c,
-and our second dataset contains two items, d and e. From this dataset,
-we pick two pairs (a,d) and (c,d) which are labeled by the user as
-similar and not similar respectively.  On this pair, we apply the
-similarity functions each of which results in a feature of the
-pair. We then use those features to learn a random forest. We apply
-the learned rules to the tuples which were not in the training set,
-and ask the user to verify the result. The user informs us that the
-result for the pair (b,d) is incorrect. We add (b,d) to our training
-set, and we repeat the process for another iteration. Over several
-iterations, we anticipate the process to converge, and give us a
-random forest that we can effectively use in the blocking step. </p>
+<p>For each pair, we apply the
+ similarity functions to generate
+features, which are then used to train a random forest. The learned
+rules are applied to the remaining pairs not in the training set, and
+the user verifies the results. If the user identifies an incorrect
+prediction, such as for the pair (<em>b, d</em>), it is added to the
+training set for the next iteration.</p>
+
+<p>Repeating this process over several iterations allows the random
+forest to converge to a model that can be effectively used in the
+blocking step.</p>
 
 <p>Once a radom forest has been learned, we present each of the learned rules to
   the user. Based on the user verification, we choose the rules that will be
@@ -514,45 +547,122 @@ random forest that we can effectively use in the blocking step. </p>
 
 <h4>3.5 Applying the Rules</h4>
 
-<p>Once we have learned the rules, the next step is to apply them on
-  the actual data.  When the data size is huge, it is still not
-  possible to apply the blocking rules to all the pairs of objects.
-  Therefore, we resort to indexing.  Suppose, one of the rules
-  requires that the Jaccard index should be greater than
-  0.7, and we are looking to match the movie <i>Sound of
-  Music</i>. As the length of the movie name is  3, we need consider only those
-  movies in our data  whose length is between 3*0.7 and 3/0.7, ie,
-  between 2 and 4.  If we have indexed the dataset on the size of the
-  movies, it is efficient to choose only those movies whose sizes are
-  between 2 and 4, and filter the set even further through the
-  application of the blocking rule.</p>
+<p>Once the blocking rules have been learned, the next step is to
+apply them to the actual data. When the dataset is very large, it is
+impractical to apply the rules to all possible pairs of objects. To
+address this, we use indexing.</p>
 
-<h4>3.6 Performing the Matching</h4>
+<p>For example, suppose one rule requires that the Jaccard index
+between two strings be greater than 0.7, and we want to match the
+movie <em>Sound of Music</em>. Since the length of this movie name is
+3, we only need to consider movies whose lengths are between <code>3 ×
+0.7</code> and <code>3 / 0.7</code>, i.e., between 2 and 4. If the
+dataset is indexed by string length, we can efficiently select only
+those movies with lengths in this range and then further filter them
+by applying the blocking rule.</p>
 
-<p>The blocking step produces a much reduced set of pairs which must
-be tested for whether they match. The general structure of the
-matching process is very similar in that we first define a set of
-features, learn a random forest, and through the active learning
-process refine it. The primary difference between the blocking and the
-matching step is that the matching process needs to be more exact and
-can require more computation. That is because this is the final step
-in the record linkage, and we need to have high confidence that the
-two entities indeed match. </p>
+
+<h4>3.6 Matching</h4>
+
+<p>The blocking step produces a much smaller set of record pairs that
+need to be evaluated for matches. The structure of the matching
+process is similar: we first define a set of features, train a random
+forest, and iteratively refine it through active learning. The primary
+difference between blocking and matching is that the matching step
+requires greater precision and often more computation. This is because
+matching is the final step in record linkage, and it is essential to
+have high confidence that the two records indeed refer to the same
+real-world entity.</p>
 
 <h3>4. Summary</h4>
 
-<p>In this chapter, we considered the problem of creating a knowledge
-graph by integrating the data coming from structured sources. The
-integrated schema of the knowledge graph can be refined and evolved as
-per the business requirements.  The mappings between the schemas of
-different sources can be bootstrapped through automated techniques,
-but they do require verification through human input.  Record
-linkage is the integration of the data at the instance level where we
-must infer the equality between two instances in the absence of 
-unique identifiers.  The general approach for record linkage is to
-learn a random forest through active learning process.  For
-applications requiring a high accuracy, automatically computed record
-  linkage may eventually need to undergo human verification.</p>
+<p>In this chapter, we examined the problem of creating a knowledge
+graph by integrating data from structured sources. The integrated
+schema of the knowledge graph can be refined and evolved to meet
+changing business requirements. Mappings between the schemas of
+different sources can be bootstrapped using automated techniques, but
+they still require verification by human experts. Record linkage
+addresses integration at the instance level, where we must infer
+whether two records refer to the same real-world entity in the absence
+of unique identifiers. A common approach for record linkage is to
+learn a random forest through an active learning process. For
+applications that demand high accuracy, automatically computed record
+linkages may also require human validation.
+</p>
+
+<h3>5. Further Reading</h4>
+
+<p>The schema mapping problem has attracted attention of both database
+researchers <a href="https://homes.cs.aau.dk/~torp/Teaching/E10/papers/a_survey_of_approaches_to_automatic_schmea_matching.pdf">[Rahm
+& Bernstein 2001]</a> and ontology
+researchers <a href="https://drops.dagstuhl.de/storage/16dagstuhl-seminar-proceedings/dsp-vol04391/DagSemProc.04391.13/DagSemProc.04391.13.pdf">[Noy
+&amp; Stuckenschmidt 2005]</a> with each community producing its own
+survey of techniques.  Ontology Alignment
+Evaluation Initiative (OAEI) is an international effort to evaluate
+and compare ontology and schema matching techniques in a standardized
+way <a href="https://oaei.ontologymatching.org/">[OAEI]</a>. Its
+primary goals are to assess the strengths and weaknesses of alignment
+systems, compare performance across methods, improve evaluation
+  techniques, and foster communication among researchers.</p>
+
+<p>The disucssion on the record linkage in this chapter is based on
+  the Magellan system developed at University of Wisconsin at
+  Madison <a href="https://cacm.acm.org/research/magellan/">[Doan
+  et. al. 2020]</a>. Record linking is referred to by several other
+  names including deduplication and entity resolution.  For an
+  appreciation of the complexities of real-world record linking, refer
+  to the explanation by Jeff
+  Jonas <a href="https://www.youtube.com/watch?v=VFE3kGdoXzA">[Jonas
+  21]</a>. Recent trends on record linking include leveraging deep
+  learning
+  architectures <a href="https://doi.org/10.1145/3183713.319692">[Mudgal
+  et. al. 2020]</a> including the recent Large Language
+  Models <a href="https://doi.org/10.48550/arXiv.2305.03423">[Peeters
+  & Bizer 2023]</a>.
+
+
+
+
+<p><a href="https://homes.cs.aau.dk/~torp/Teaching/E10/papers/a_survey_of_approaches_to_automatic_schmea_matching.pdf">[Rahm
+& Bernstein 2001]</a> Rahm, Erhard, and Philip A. Bernstein. "A survey
+of approaches to automatic schema matching." the VLDB Journal 10.4
+(2001): 334-350.</p>
+
+<p><a href="https://drops.dagstuhl.de/storage/16dagstuhl-seminar-proceedings/dsp-vol04391/DagSemProc.04391.13/DagSemProc.04391.13.pdf">[Noy
+&amp; Stuckenschmidt 2005]</a> Noy, Natasha, and Heiner
+Stuckenschmidt. "Ontology alignment: An annotated bibliography."
+Schloss Dagstuhl–Leibniz-Zentrum für Informatik, 2005.</p>
+
+
+<p><a href="https://oaei.ontologymatching.org/">[OAEI]</a> Ontology
+Alignment Evaluation Initiative. (n.d.). Ontology Alignment Evaluation
+Initiative. Retrieved December 12, 2025, from
+https://oaei.ontologymatching.org/</p>
+
+<p><a href="https://cacm.acm.org/research/magellan/">[Doan
+et. al. 2020]</a> Doan, A., Konda, P., Paulsen, D., Chandrasekhar, K.,
+Martinkus, P., Christie, M., Govind, Y., & Suganthan,
+P. C. (2020). Magellan: Toward building ecosystems of entity matching
+solutions. Communications of the ACM, 63(8),
+  83–91. https://doi.org/10.1145/3405476</p>
+
+<p><a href="https://www.youtube.com/watch?v=VFE3kGdoXzA">[Jonas
+21]</a> Jonas, J. (2021, approx.). Entity resolution explained step by
+step [Video]. YouTube. https://www.youtube.com/watch?v=VFE3kGdoXzA</p>
+ 
+ <p><a href="https://doi.org/10.1145/3183713.319692">[Mudgal
+ et. al. 2020]</a> Mudgal, S., Li, H., Rekatsinas, T., Doan, A., Park,
+ Y., Krishnan, G., Deep, R., Arcaute, E., & Raghavendra,
+ V. (2018). Deep learning for entity matching: A design space
+ exploration. In Proceedings of the 2018 International Conference on
+ Management of Data (SIGMOD ’18)
+   (pp. 19–34). ACM. https://doi.org/10.1145/3183713.319692
+
+<p><a href="https://doi.org/10.48550/arXiv.2305.03423">[Peeters &
+Bizer 2023]</a> Peeters, R., & Bizer, C. (2023). Using ChatGPT for
+entity matching (arXiv:2305.03423)
+[Preprint]. arXiv. https://doi.org/10.48550/arXiv.2305.03423
+</p>
 
 <h3>Exercises</h3>
 
@@ -760,8 +870,24 @@ Apple Corp, what intuition you would use to ensure that x is equated to z?</td>
       <td>Matching rules are as expensive to apply as the blocking rules.</td>
     </tr>
    </table>
-    </p>
+	</p>
 
+
+<p id="4.6">Exercise 4.6. Implement a schema mapper for
+the <a href="https://oaei.ontologymatching.org/2025/conference/index.html">conference
+domain</a> of the Ontology Alignment Evaluation Initiative.  The
+domain consists of 16 different schemas describing conferences.
+  </p>
+
+
+<p id="4.7">Exercise 4.7. Create a knowledge graph of companies by
+linking the records across Wikidata and the SEC data considered as
+part the problem 3.7.  To connect the two data sets, you can either
+implement your own record linker, or use any available open-source
+tools. Report on the quality of the resulting data set in terms of the
+precision and recall of identifying the correct links across the SEC
+company data and the Wikidata company information.
+</p>
 
     
 <!--=======================================================================-->
