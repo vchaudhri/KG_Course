@@ -51,86 +51,123 @@
 
 <h3>1. Introduction</h3>
 
-<p>In previous chapters, we have discussed the design of a knowledge
-  graph, different methods for creating it, and techniques for doing
-  inference with it. We will now turn our attention to how users
-  interact with a knowledge graph. To some degree, the design of 
-  interaction begins with the design of a knowledge graph schema as
-  the schema is meant to be easily understood. In fact, a key
-  advantage of knowledge graphs is that the conceptual view of a
-  domain expressed in the schema is also the basis for its
-  implementation.  In this chapter, we will
-  consider interaction techniques once the knowledge graph schema has
-  been populated with instances.</p>
+<p>In previous chapters, we discussed how to design a knowledge graph,
+how to construct it using different methods, and how to perform
+inference over it. In this chapter, we shift our focus to how users
+interact with a knowledge graph. User interaction is closely connected
+to schema design: a well-designed schema is intended to be
+understandable not only by machines, but also by people. One of the
+key advantages of knowledge graphs is that the same conceptual model
+of a domain, captured in the schema, also serves as the foundation for
+the graph&apos;s implementation.</p>
 
-<p>The purpose of a knowledge graph is to answer a user's questions.
-Some of the questions may be known upfront, while some questions users
-may never think of themselves. The interaction of a user with the
-knowledge graph could be real-time, or a batch process might be run to
-produce certain reports to answer some predefined questions and to
-produce certain analytics. This results in a matrix of four different
-modes of interaction interactions with the knowledge graph along the
-dimensions of whether the interaction is initiated by the user (ie,
-Pull), or in response to information presented to the user (ie, Push),
-and whether the questions are known in advance vs questions are not
-known in advance.</p>
+<p>For example, in a knowledge graph about academic publications, the
+schema may include concepts such as Paper, Author, and Venue, along
+with relationships like writes and publishedIn. Because these concepts
+closely reflect how users naturally think about the domain, a user can
+explore the knowledge graph by asking questions such as "Which papers
+did this author write?" or "Where was this paper published?" without
+needing to understand how the data is physically stored.</p>
+
+<p>In this chapter, we examine common interaction techniques that
+become possible once a knowledge graph schema has been populated with
+instances.</p>
+
+
+<h3>2. Modes of Interaction with a Knowledge Graph</h3>
+
+<P>The primary purpose of a knowledge graph is to help answer users&apos;
+questions. Some of these questions are known in advance, for example,
+standard queries that support reports or dashboards, while others may
+emerge only after users begin exploring the data or when the system
+itself reveals unexpected patterns.</p>
+
+<p>User interaction with a knowledge graph can take different
+forms. In some cases, interaction happens in real time, such as when a
+user submits a query and immediately receives results. In other cases,
+interaction occurs through batch processes, where the knowledge graph
+is analyzed offline to generate reports, summaries, or analytics for
+later use.</p>
+
+<p>Together, these considerations lead to four broad modes of
+interaction, which can be organized along two dimensions: whether the
+interaction is initiated by the user (a pull model) or initiated by
+the system in response to available information (a push model), and
+whether the questions being answered are known in advance or emerge
+dynamically. In the following sections, we examine each of these
+interaction modes in more detail.</p>
+
 
 <center>
-<img alt="An Example Property Graph Schema" width='300' src="images/kg_interaction.jpg" />
+<img alt="Knowledge Graph Interaction Modes" width='300' src="images/kg_interaction.jpg" />
 </center>
+<blockquote>Figure 1: Different Modes for Interacting with a Knowledge Graph</blockquote>
 
-<p>Above modes of interaction are usually supported through a
-combination of search, query answering, and graphical interfaces. A
-search interface is like the interface of a search engine where
-the user may simply type keywords.  The query interfaces range from a
-formal query language to a natural language interface. A graphical
-interface may be used for composing a query, for viewing the results
-of a query or for browsing the graph defined by the instances in the
-knowledge graph.</p>
+<p>Knowledge graph interaction modes are typically supported through a
+combination of search, query answering, and graphical interfaces. For
+example, in an academic publications knowledge graph, a user might
+look for information about authors, papers, or venues. A search
+interface resembles a search engine, allowing users to type keywords
+such as an author&apos;s name or a paper title to quickly locate relevant
+entities or facts. Query interfaces enable more precise questions, for
+instance, a user could ask, "Which papers did Dr. Smith publish in
+2024?", using either a formal query language or a natural language
+interface. Graphical interfaces allow users to visualize
+relationships, compose queries by connecting entities, and explore the
+network of papers, authors, and venues interactively.</p>
 
-<p>The actual interface to a knowledge graph will typically use a
-  combination of methods. For example, a query might be composed
-  through a combination of search and structured query interface.
-  Similarly, the results may be partly graphical, and partly textual.
-  In this section, we will consider graphical visualization of
-  knowledge, structured query interface, and a natural language query
-  interface.  Formal query languages such as Cypher and SPARQL have
-  already been covered in the previous chapters.  </p>
-
-<h3>2. Visualization of a Knowledge Graph</h3>
-
-<p>It is too common for us to see graphical visualizations of
-knowledge graphs containing thousands of nodes and edges on a screen.
-Many times, the graphical visualization is simply a backdrop for the
-points to be made in contrast to driving and contributing to the insights
-that help us identify what points to make.  Just because we are
-working with a knowledge graph, it should not automatically imply that
-a graphical visualization is the best way to interact with it. One
-should turn to the best principles for visualization design, and
-choose the most effective medium for presenting the
-information. Consequently, we begin this section by summarizing the key
-principles for visualization design, and then outline a few best
-practices for graphically visualizing knowledge graphs. </p>
+<p>In practice, knowledge graph systems often combine these interface
+types to support diverse user needs. For example, a query about an
+author&apos;s publications might be composed using both keyword search
+and a structured query builder, with the results displayed as a graph
+showing authors linked to their papers, alongside a textual list of
+publication details. In this section, we examine three key interface
+types in detail -- graphical visualization, structured query
+interfaces, and natural language queries -- focusing on how they help
+users explore and retrieve knowledge effectively. Formal query
+languages such as SPARQL and Cypher have been covered in previous
+chapters, so our focus here will be on their practical application in
+user -- facing interfaces.</p>
 
 
-<h4>2.1 General Principles for Visualization Design </h4>
+
+<h3>3. Visualization of a Knowledge Graph</h3>
+
+<p>It is common to see graphical visualizations of knowledge graphs
+containing thousands of nodes and edges. For example, a knowledge
+graph showing all publications, authors, and citations in a large
+research domain might render every paper and author at once, creating
+a dense "hairball" that is difficult to interpret. These
+visualizations often serve merely as a backdrop, rather than actively
+contributing to insights or helping users identify the most important
+patterns. Simply working with a knowledge graph does not automatically
+make a graphical representation the best way to interact with
+it. Instead, we should rely on established principles of visualization
+design and select the medium that most effectively conveys the
+intended information.</p>
+
+<p>In this section, we begin by summarizing key visualization
+  principles, and then outline several best practices for visualizing
+  knowledge graphs in ways that support meaningful user interaction.
+</p>
+
+
+<h4>3.1 General Principles for Visualization Design </h4>
 
 <p>
-  The overall purpose for visualizing a knowledge graph is to
-  come up with a representation of the data to significantly amplify
-  its understanding by the end-user.  The improvement in user
-  understanding results from the effective use of the following
-  elements. First, the visualization presents more information in a
-  display than the user might be able to remember at one time. Second,
-  it takes away the burden from the user for having to look for
-  important pieces of information. Third, by placing relevant data
-  next to each other, it enhances the ability to make
-  comparisons. Fourth, it keeps track of user's attention as they are
-  navigating the information. Fifth, it provides a more abstract view
-  of a situation through omission and recoding of
-  information. Finally, by letting the user interact and manipulate
-  the visualization, it helps the user in deeply engaging and
-  immersing in the information.
+The purpose of visualizing a knowledge graph is to create a representation that significantly amplifies the user's understanding of the data. Effective visualizations help users by:
+</p>
+<ul>
+  <li>Presenting more information than they could remember at one time.</li>
+  <li>Highlighting important pieces of information, reducing the need to search.</li>
+  <li>Placing relevant data next to each other to facilitate comparisons.</li>
+  <li>Guiding attention as users navigate the visualization.</li>
+  <li>Providing an abstract view by selectively omitting or recoding information.</li>
+  <li>Allowing interaction, which supports deeper engagement and exploration of the data.</li>
+</ul>
+
+<p>
+For example, in an academic publications knowledge graph, visualization can help a researcher quickly see patterns such as which authors collaborate most frequently, which papers are most cited, and how research topics are connected -- all without having to manually parse hundreds of records.
 </p>
 
 <p>A visualization is an adjustable mapping from the data to a visual
@@ -143,97 +180,122 @@ practices for graphically visualizing knowledge graphs. </p>
   need to explicitly undertake a design of visual structures for best
   presenting knowledge graph data.</p>
 
-<p>The design of a visual structure involves mapping the desired
-  information into a combination of ways for visual encoding: spatial
-  substrate, marks, connection and enclosure, retinal properties, and
-  temporal encoding. Choosing an appropriate spatial encoding for our
-  information is the first and the most important step. For example, if we
-  want to display geographical data, usually its representation on a
-  map is most intuitive. For non-graphical data, we may choose
-  suitable axes and coordinates along which to display
-  information. Marks are visible things that occur in space, and help
-  a user in distinguishing different data values (e.g., points, lines,
-  area and volume). Connections include graphs, trees, and other
-  hierarchical organizations.  Enclosing lines can be drawn around
-  certain objects. Retinal properties include elements such as color,
-  crispness, resolution, transparency, hue, saturation, etc. to
-  visually highlight certain aspects of the data. Finally, a temporal
-  encoding as an animation can enhance a visualization and help us see
-  the dynamics of how the data change over a period of time.</p>
 
-<p>We can group the visualizations into four categories: simple,
-  composed, interactive, and attentive reactive. In a simple
-  visualization, we show up to three different dimensions/variables
-  which is considered the barrier for human understandability. In a
-  composed visualization, we combine one or more simple visualizations
-  so that we can capture more variables in the same display. In an
-  interactive visualization, the user can selectively explore, expand
-  and navigate through the information.  Finally, in an
-  attentive/reactive visualization, the system responds to user
-  actions, and the system potentially anticipates the most useful
-  things to display next.</p>
+<p>
+Designing a visual structure involves encoding information in several ways:
+</p>
+<ul>
+  <li>Spatial substrate: Determining how elements are positioned. For instance, nodes representing authors might be arranged to minimize edge crossings, or papers could be grouped by topic.</li>
+  <li>Marks: Visible elements such as points, lines, or areas that represent data values. In our example, nodes for papers might be circles, with the size representing citation count.</li>
+  <li>Connections: Lines or edges that show relationships. Hierarchical or tree structures can be used for nested data, such as grouping papers under their respective authors.</li>
+  <li>Enclosure: Shapes or borders that group related elements, like enclosing all papers from the same research lab.</li>
+  <li>Retinal properties: Color, hue, saturation, transparency, or shape to highlight attributes. For example, papers could be colored by research area.</li>
+  <li>Temporal encoding: Animation or time-based representation can show changes over time, such as the growth of citations for a particular paper or author network.</li>
+</ul>
 
+
+<p>
+Visualizations can be grouped into four categories:
+</p>
+
+<ul>
   
-<h4>2.2 Best Practices for Knowledge Graph Visualization</h4>
+  <li>Simple: Displays up to three variables, which is generally
+  considered the limit for easy human comprehension. For instance, a
+  scatter plot of papers by publication year, citation count, and
+  topic area.</li>
+  
+  <li>Composed: Combines multiple simple visualizations to show
+  additional variables, such as a scatter plot alongside a bar chart
+  of author collaborations.</li>
+  
+  <li>Interactive: Lets users explore and navigate the data. In our
+  academic knowledge graph example, a user could click on an author
+  node to expand connected papers or see co-authors.</li>
+  
+  <li>Attentive/Reactive: Responds to user actions and may anticipate
+  useful information. For example, when a researcher selects a highly
+  cited paper, the system could highlight related papers or emerging
+  topics automatically.</li>
+  
+</ul>
 
+<p>
+By following these principles, knowledge graph visualizations can
+transform complex data into insights that are understandable,
+actionable, and engaging for users.
+</p>
 
-<p>In the previous section, we reviewed some of the principles for
-designing visualizations, and argued that we should never assume that
-displaying all the data in a graph in a cluttered display is the most
-useful presentation. In this section, we consider a recipe for the
-design of a knowledge graph visualization that leverages some of the
-  principles considered in the previous section.</p>
+<h4>3.2 Best Practices for Knowledge Graph Visualization</h4>
 
-<p>The design of visualization for a knowledge graph could be divided
-into the following steps. First, determine which variables of the
-problem domain to map into spatial position in the visual
-structure. Second, combine these mappings to increase
-dimensionality. Third, use retinal properties as an overlay to add
-more dimensions. Fourth, add controls for user interaction so that
-selective navigation is possible. Finally, consider attention-reactive
-features to expand space and manage attention.</p>
+<p>
+In the previous section, we reviewed principles for designing effective visualizations and emphasized that showing all data in a cluttered graph is rarely the best approach. In this section, we outline a step-by-step approach for designing knowledge graph visualizations that leverage these principles.
+</p>
 
-<p>A possible visualization for a knowledge graph would have the
-  following elements: overview, dynamic queries, zooming in, details
-  on demand, and retrieval by example.  As the amount of data in a
-  knowledge graph is huge, we could begin by presenting an aggregated
-  summary of the data.  The user can then filter the data and focus on
-  an area of interest by either posing queries or zooming into certain
-  parts of the data. While viewing a segment of knowledge
-  graph, the user could ask for details on a particular
-  element. Finally, as a use of attentive-reactive feature, the system
-  could proactively make suggestions of the kind of data elements that
-  already exist in the knowledge graph, and offer a choice to the user
-  to select retrieving them.</p>
+<p>
+The design process can include the following steps:
+</p>
+<ul>
+  <li>Determine which variables to encode in the spatial layout. For
+  example, in an academic publications knowledge graph, nodes
+  representing authors could be positioned to minimize edge crossings,
+  while papers could be grouped by research area.</li>
+  
+  <li>Combine multiple spatial encodings to increase dimensionality,
+  allowing different relationships or attributes to be represented
+  simultaneously.</li>
+  
+  <li>Use retinal properties, such as color, size, or shape, to add
+  additional dimensions of information. For instance, node size could
+  indicate citation count, and color could indicate research
+  area.</li>
+  
+  <li>Add interactive controls to allow selective exploration,
+  filtering, and zooming, so users can navigate the graph without
+  being overwhelmed.</li>
+  
+  <li>Incorporate attentive-reactive features, where the system
+  highlights relevant nodes or suggests related data elements based on
+  the user&amp;s focus.</li>
+</ul>
 
-<h3>3. Structured Query Interfaces</h3>
+<p>
+A practical visualization could include several key features. First,
+an aggregated overview presents a summary of the data to help users
+orient themselves. Users can then zoom into specific areas or pose
+queries to focus on subsets of interest. While exploring a segment of
+the knowledge graph, users can request details on individual nodes or
+relationships. Finally, attentive-reactive features can proactively
+suggest important papers, authors, or emerging topics, helping users
+discover relevant information without needing to search exhaustively.
+</p>
 
-<p>A structured query interface can be an important ingredient to
-interacting with a knowledge graph. In such an interface, the user
-starts typing expressions, with system suggesting completions in a way
-that the resulting expression can be mapped into an underlying query
-language such as Cypher or SPARQL. To illustrate structured queries,
-consider the following snippet of a knowledge graph schema from
-Wikidata.</p>
+<h3>4. Structured Query Interfaces</h3>
+
+<p>
+A structured query interface (SQI) is an important way for users to interact with a knowledge graph. In such an interface, users start typing expressions, and the system suggests completions that can be mapped into an underlying query language, such as Cypher or SPARQL. 
+</p>
+
+<p>
+To illustrate, consider the following snippet of a knowledge graph schema from Wikidata:
+</p>
 
 <center>
-<img alt="An Example Property Graph Schema" width='400' src="images/country_schema.jpg" />
+  <img alt="An Example Property Graph Schema" width="400" src="images/country_schema.jpg" />
 </center>
 
-<p>For the instance data corresponding to the above schema, we can
-pose the following queries.</p>
+<p>
+Based on this schema, users can pose queries such as:
+</p>
 
-<center>
-  <table style="font-family:courier;font-size:14px">
-    <tbody>
-      <tr><td>city with largest area</td></tr>
-      <tr><td>top five cities by area</td></tr>
-      <tr><td>countries whose capitals have area at least 500 squared kilometers</td></tr>
-      <tr><td>states bordering Oregon and Washington</tr></td>
-      <tr><td>second tallest mountain in France</td></tr>
-      <tr><td>country with the most number of rivers</td></tr>
-</tbody></table>
-</center>
+<ul style="font-family:courier; font-size:14px;">
+  <li>city with largest area</li>
+  <li>top five cities by area</li>
+  <li>countries whose capitals have area at least 500 square kilometers</li>
+  <li>states bordering Oregon and Washington</li>
+  <li>second tallest mountain in France</li>
+  <li>country with the most number of rivers</li>
+</ul>
 
 <p>One way to specify a structured query interface is to specify rules
 of grammar in the Backus Naur Form (BNF). The rules shown below
@@ -259,9 +321,9 @@ of grammar in the Backus Naur Form (BNF). The rules shown below
 <tr><td>  &lt;ranking&gt; ::= "by"  </td></tr>
 </tbody></table>
 </center>
-
-<p>We can reduce the queries above to expressions that conform to the
-grammar above. For example, the first query, "city with the largest
+ 
+<p>We can reduce the queries above to expressions that conform to this
+grammar. For example, the first query, "city with the largest
 area", conforms to the following expression:</p>
 
 <center>
@@ -350,7 +412,7 @@ and try to overcome the problem of required engineering of the grammar
 through a machine learning approach.</p>
 
 
-<h3>4. Natural Language Query Interfaces</h3>
+<h3>5. Natural Language Query Interfaces</h3>
 
 <p>A possible approach to go beyond the structured queries, and to get
 around the problem of massive engineering of the grammar, is to use a
@@ -388,13 +450,14 @@ describe each of these components and then illustrate them using
 
 <p>The first rule in the above grammar can be used to process "city
 with the largest area".  The right-hand side of each rule specifies an
-executable form. For the first rule, <i>argmax(M,N,X,R)</i> is a
-relation that consists of a ranked list of X (ranked between M and N)
-such that the ranking is defined on the <i>R</i> values
-of <i>X</i>. Similarly, the third rule handles the query "countries
-  whose capital has area at least 15000 square kilomter".  In the right hand side of the rule,
-  <i>(< arg(X,R), N)</i>  specifies the computation to determine those <i>X</i> such that their
-	<i>R</i> value is less than <i>N</i>.</p>
+executable form. For the first rule, <i>argmax(m,n,x,r)</i> is a
+relation that consists of a ranked list of <i>x</i> (ranked
+between <i>m</i> and <i>n</i>) such that the ranking is defined on
+the <i>r</i> values of <i>x</i>. Similarly, the third rule handles the
+query "countries whose capital has area at least 15000 square
+kilomter".  In the right hand side of the rule,
+  <i>(< arg(x,r), n)</i>  specifies the computation to determine those <i>x</i> such that their
+	<i>r</i> value is less than <i>n</i>.</p>
 
 
   <p>Given an input question, the application of grammar may result in
@@ -450,23 +513,96 @@ improve each component in isolation.
   of the system depends on the tight scope of the desired set of
   queries and availability of training data and computation power.</p>
 
+<h3>6. Summary</h3>
 
-<h3>5. Summary</h3>
+<p>
+In this chapter, we explored the various ways end-users can interact
+with knowledge graphs. The key takeaway is that simply displaying many
+nodes and edges on a screen is rarely the most effective
+approach. Graphical views can be useful for understanding the schema,
+which is typically small and structured, but they are often less
+effective for exploring instance-level data.
+</p>
 
-<p>In this chapter, we considered different ways end-users interact
-with knowledge graphs.  Perhaps, the most important take away from
-this chapter should be that just because we are working with knowledge
-graphs, it does not imply that displaying many  nodes and
-edges on a computer screen is the most appropriate way to interact
-with it. Graphical views are often appropriate for the schema
-information because of its limited size, but not always effective for
-interacting with the instance data. We argued that the best user
-interface needs to be designed by considering the business
-problem to be solved, the kind of data we are working with, and the
-resources that can be invested into the design and engineering.  Best
-interfaces, often, will use a combination of methods that leverage
-search, structured queries, and use natural language question
-  answering only to a limited degree.</p>
+<p>
+Designing an effective interface requires considering the business
+problem, the type of data, and the resources available for interface
+development. In practice, the best interfaces often combine multiple
+interaction methods: search for quickly locating information,
+structured queries for precise data retrieval, and natural language
+question answering for limited, targeted use cases. For example, a
+user might start with a search to find a city, refine results with a
+structured query, and then ask a natural language question to compare
+specific properties across cities.
+</p>
+
+<p>
+By thoughtfully combining these approaches, we can design knowledge
+graph interfaces that are both usable and informative, supporting
+real-world decision-making rather than just visual exploration.
+</p>
+
+<h3>7. Further Reading</h3>
+
+<p>The discussion on visualization design in this chapter draws on the
+work of Stu Card, which provides many detailed examples and
+illustrations of effective visualization
+principles <a href="https://www.researchgate.net/publication/311706649_Information_Visualization">[Card
+2008]</a>. For readers interested in structured queries, these can be
+seen as a subset of controlled natural languages, which have also been
+used for knowledge capture. Our examples in this chapter focus on
+controlled language solely for querying purposes. A good starting
+point for a more extensive discussion is Kowalski&apos;s position
+paper <a href="https://www.doc.ic.ac.uk/~rak/papers/LPOP.pdf">
+[Kowalski 2020]</a>.</p>
+
+<p>Natural language query interfaces have been explored extensively
+  through semantic parsing. Percy Liang&apos;s work demonstrates how a
+  semantic parser can map user questions into formal queries over a
+  knowledge
+  graph <a href="https://dl.acm.org/doi/epdf/10.1145/2866568">[Liang
+  2016]</a>. This approach allows precise translation of natural
+  language into SPARQL or Cypher queries while handling variations in
+  phrasing.</p>
+
+<p>Much recent research leverages large language models (LLMs) to
+generate queries over knowledge graphs. For example, given a question
+like "Which countries have capitals with an area greater than 500
+km²?", an LLM can be prompted with the schema and example queries to
+produce the equivalent SPARQL query. Accuracy improves significantly
+when the model has access to schema
+information <a href="https://arxiv.org/pdf/2405.11706"> [Allemang
+&amp; Sequeda 2024]</a>. Due to the unpredictable performance of
+current LLMs, a common strategy is to have the model map input
+questions to a set of predefined query templates in SPARQL or Cypher,
+combining natural language understanding with precise, tested query
+  structures.</p>
+
+<p><a href="https://www.graphistry.com/">Graphistry</a> is the example
+of a commercial company solely focused on the visual aspects of
+leveraging a knoweldge graph. This illustrates the value of good
+visualizations for a comprehensive knowledge graph offering.</p>
+
+<p><a href="https://www.researchgate.net/publication/311706649_Information_Visualization">[Card
+2008]</a> Card, S. K. (2008). Information visualization. In
+J. A. Jacko & A. Sears (Eds.), The Human Computer Interaction
+Handbook: Fundamentals, Evolving Technologies and Emerging
+Applications (pp. 509-543). Lawrence Erlbaum Associates.
+
+<p><a href="https://www.doc.ic.ac.uk/~rak/papers/LPOP.pdf"> [Kowalski
+2020]</a> Kowalski, R. (2020). Logical English. Position paper
+  prepared for Logic and Practice of Programming (LPOP) 2020.</p>
+
+<p><a href="https://dl.acm.org/doi/epdf/10.1145/2866568">[Liang
+2016]</a> Liang, P. (2016). Learning executable semantic parsers for
+natural language understanding. Communications of the ACM, 59(9),
+68-76. https://doi.org/10.1145/2866568</p>
+
+<p><a href="https://arxiv.org/pdf/2405.11706"> [Allemang &amp; Sequeda
+2024]</a> Allemang, D. & Sequeda, J. F. (2024). Increasing the LLM
+Accuracy for Question Answering: Ontologies to the Rescue! arXiv
+preprint arXiv:2405.11706. https://arxiv.org/abs/2405.11706
+</p>
 
 
 <h3>Exercises</h3>
@@ -643,6 +779,60 @@ search, structured queries, and use natural language question
    </table>
     </p>
 
+<p id="7.6">Exercise 7.6. In this exercise, your goal is to design a
+user interface for the company knowledge graph you have been building
+in the previous chapters. Choose one of the use case scenarios below
+and apply the principles and techniques discussed in this chapter,
+including visualization, structured queries, and natural language
+interfaces. Your interface should leverage the queries and inferences
+you have developed so far, and you should be able to demonstrate how a
+user can explore the knowledge graph effectively.</p>
+
+<ul>
+  <li><strong>Company Insight:</strong> Create a 360-degree view of a
+  company that combines information from multiple sources. Using data
+  from Wikidata, SEC filings, or other public sources, design an
+  interface that presents an integrated view of the company. The
+  interface should allow users to search, query, and visualize the
+  information. Consider adding filters, dashboards, or summaries to
+  help users quickly grasp key insights. <br>
+  <em>Example task:</em> Allow a user to find the top five companies with the highest revenue in the last fiscal year, and visualize how their subsidiaries are connected across different regions.</li>
+  
+  <li><strong>Causal Graph:</strong> Explore headwinds and tailwinds
+  that might affect a company&apos;s performance. Design an interface
+  that visualizes causal relationships, incorporating inferences such
+  as shortest paths, communities, and centrality measures derived from
+  your knowledge graph. Users should be able to navigate, query, and
+  visualize these relationships to understand potential drivers of
+  company performance. <br>
+  <em>Example task:</em> Allow a user to identify which market events are most likely to influence a company&apos;s stock performance and display the causal pathways connecting these events to financial outcomes.</li>
+</ul>
+
+<p><em>Optional extensions:</em> Include a short justification for
+your design choices, highlighting how your interface supports user
+interaction with the knowledge graph. You may provide sketches,
+screenshots, or a prototype built using tools such as Dash, Streamlit,
+  or Neo4j Browser.</p>
+
+<p id="7.7">Exercise 7.7. Design a user interface to integrate the textbook knowledge graph into an actual online textbook. Please refer to this <a href="https://www.youtube.com/watch?v=2MxZQOUKIdE">online video</a> as an example of an existing interface. This interface combines elements of search, visualization, and structured queries. Consider the following scenarios when designing your new interface:</p>
+
+<ul>
+
+  <li><strong>First-Time Learning:</strong> Assume the student is
+  approaching the textbook for the first time. They may not fully
+  understand all concepts and might have gaps in prior knowledge. <br>
+    <em>Example task:</em> Allow the student to explore the knowledge graph to see prerequisite concepts, get definitions, and visualize relationships among new topics, helping them navigate the material more effectively.</li>
+
+  <li><strong>Exam Revision:</strong> Assume a student is preparing
+  for an exam. The interface should help them review key concepts,
+  test their knowledge, and build confidence. <br>
+  <em>Example task:</em> Provide a tool that lets the student answer practice questions generated from the knowledge graph, highlight relevant sections in the textbook, and visualize connections between concepts.</li>
+  
+
+
+</ul>
+
+<p><em>Optional extensions:</em> Include a short rationale for your design decisions, showing how your interface supports effective learning. You may provide mockups, annotated screenshots, or a working prototype using tools such as Jupyter Book, Streamlit, or web frameworks.</p>
 
 
 <!--=======================================================================-->
