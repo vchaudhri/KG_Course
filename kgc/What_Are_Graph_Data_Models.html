@@ -1,0 +1,734 @@
+<html>
+
+<!--=======================================================================-->
+
+
+<head>
+  <title>What are Graph Data Models??</title>
+</head>
+
+<!--=======================================================================-->
+
+
+<body style='background-color:#990000'>
+  <center>
+    <table width='720' cellspacing='0' cellpadding='0' bgcolor='#ffffff'>
+      <tr>
+        <td>
+
+<!--=======================================================================-->
+
+  <table width='100%' height='120' cellspacing='0' cellpadding='0' bgcolor='#f8f7f7'>
+    <tr>
+      <td width='40'>&nbsp;</td>
+      <td width='120' align='center' valign='center'>
+        <a href='http://www.stanford.edu/class/cs520/'><img width='128' src='images/flyer-v2c.jpg'/>CS520</a>
+      </td>
+      <td align='center' valign='center'>
+
+        <span style='font-size:36px'>Knowledge Graphs</span><br/>
+      </td>
+      <td width='120' align='center' style='color:#000066;font-size:18px'>
+        <i>What<br/>should AI<br/>Know ?</i>
+      </td>
+      <td width='40'>&nbsp;</td>
+    </tr>
+  </table>
+
+<!--=======================================================================-->
+
+
+<hr style='border-top: 1px solid #888888;margin:0'/>
+<table width='100%' height='40' cellspacing='0' cellpadding='0' bgcolor='#f8f7f7'>
+  <tr><td align='center' style='font-size:18px'>What are some Graph Data Models?</td></tr>
+</table>
+<hr style='border-top: 1px solid #888888;margin:0'/>
+
+<!--=======================================================================-->
+
+<center>
+  <br/>
+  <table width='640' cellpadding='0'>
+    <tr>
+      <td>
+
+<!--=======================================================================-->
+
+<h3>1. Introduction</h3>
+
+<p>Two popular knowledge graph data models are Resource Description Framework
+  (RDF), and the property graphs (PG). The query language for RDF
+  is SPARQL, and the query language for the property graph model is
+  Cypher. In this chapter, we present an informal overview of both of
+  these data models and give example queries for them. This chapter
+  introduces the two models without giving their comprehensive technical
+  overview. We consider translation of data represented using one of
+  the models to data represented in the other, and also compare these
+  graph data models to using a conventional relational data model.</p>
+
+
+<h3>2. Resource Description Framework</h3>
+
+<p>RDF is a framework for representing information on the web. The RDF
+data model and its query language SPARQL have been standardized by the
+  World Wide Web Consortium.</p>
+
+
+<h3>2.1 RDF Data Model</h3>
+
+<p>An RDF triple, the basic unit of representation in this model,
+consists of a subject, a predicate, and an object. A set of such
+triples is called an RDF graph. We can visualize an RDF triple as a
+node and a directed edge diagram in which each triple is represented
+as a node-edge-node graph as shown below. </p>
+
+<figure>
+  <center>
+    <img alt="An RDF graph with two nodes (Subject and Object) and a triple connecting them (Predicate)" src="images/rdf-graph.svg" />
+  </center>
+</figure>
+<blockquote>Figure 1. A subject, predicate, object triple is the building block in an RDF data model.</blockquote>
+
+<p>There can be three kinds of nodes: IRIs, literals, and blank
+nodes. An IRI is an Internationalized Resource Identifier used to
+uniquely identify resources on the web. A literal is a value of a
+certain data type, for example, string, integer, etc. A blank node is
+a node that does not have an identifier. It works like an unnamed
+placeholder for <i>something exists here</i> without saying exactly
+what.</p>
+
+<p>As an example of the information expressed using RDF,
+  let us take the example of representing <i>knows</i> relationship
+  between people.  In this example, a person with name
+  <i>art</i> is denoted by the IRI http://example.org/art. In the
+  notation used below, the IRIs can be abbreviated by defining a
+  prefix. For example, the prefix <i>foaf</i> stands
+  for <i>&lt;http://xmlns.com/foaf/0.1/&gt;</i>.  Using this prefix, the
+   <i>knows</i> relation is defined by the IRI
+  <i>foaf:knows</i></p>
+
+
+<center>
+  <table style='font-family:courier;font-size:14px'>
+
+<tr><td>@prefix foaf:  	&lt;http://xmlns.com/foaf/0.1/&gt;</td></tr>
+<tr><td>@prefix ex:  	&lt;http://example.org/&gt;</td></tr>
+<tr><td></td></tr>
+<tr><td></td></tr>
+<tr><td>ex:art foaf:knows ex:bob</td></tr>
+<tr><td>ex:art foaf:knows ex:bea</td></tr>
+<tr><td>ex:bob foaf:knows ex:cal</td></tr>
+<tr><td>ex:bob foaf:knows ex:cam</td></tr>
+<tr><td>ex:bea foaf:knows ex:coe</td></tr>
+<tr><td>ex:bea foaf:knows ex:cory</td></tr>
+<tr><td>ex:bea foaf:age 23</td></tr>
+<tr><td>ex:bea foaf:based_near _:o1</td></tr>
+  </table>
+</center>
+
+<p>The last two triples illustrate a literal node and a blank
+node. The value of <i>foaf:age</i> is the integer 23 which is an
+example of a literal. A string is another common literal data
+type. The value of <i>foaf:based_near</i> is an anonymous resource,
+represented using a blank node (shown with an underscore). The
+identifier <i>o1</i> is an internal label which has no meaning outside
+the current graph.</p>
+
+<p>An RDF vocabulary is a collection of IRIs intended for use in RDF
+  graphs.  These IRIs often begin with a common
+  substring known as a namespace IRI. In the example
+  above, <i>	&lt;http://xmlns.com/foaf/0.1/&gt;</i> is a namespace IRI.
+ By convention, a  namespace IRI can be associated with a
+  short name known as a namespace prefix. In the example above, we
+  defined <i>foaf</i> and <i>ex</i> as name space prefixes.</p>
+
+<p>RDF graphs are atemporal in the sense that they provide a static
+snapshot of data. With suitable vocabulary extension, they can express
+information about events, or other dynamic properties of
+entities. </p>
+
+<p>An RDF dataset is a collection of RDF graphs. It contains exactly
+one default graph that can be empty and does not need to have a name,
+and zero or more named graphs. Each named graph consists of a name --- an IRI or a
+blank node --- and an RDF graph associated with that name. </p>
+
+
+<h3>2.2 SPARQL Query Language</h3>
+
+<p>SPARQL (pronounced "sparkle", a recursive acronym for Simple
+Protocol and RDF Query Language) is a query language to retrieve and
+update data stored in the Resource Description Framework (RDF).
+SPARQL can be used to express queries across diverse data sources,
+whether the data is stored natively as RDF or exposed as RDF. SPARQL
+contains capabilities for querying required and optional graph
+patterns along with their conjunctions and disjunctions. SPARQL also
+supports extensible value testing and constraining queries by source
+RDF graph. The results of SPARQL queries can be sets of RDF
+graphs. </p>
+
+
+<p>Most SPARQL queries contain a set of triples patterns called
+a basic graph pattern. Triple patterns are like RDF triples, but
+each of the subject, predicate and object can be a variable. A
+  basic graph pattern matches a subgraph of the RDF data when the variables can be
+  replaced with RDF terms from the data so that the resulting triples
+  exist in the graph.
+</p>
+
+
+<p>The example below shows a SPARQL query that retrieves the people
+people known by a specific person.  The query consists of two parts:
+the SELECT clause specifies which variables appear in the results, and
+the WHERE clause contains the graph pattern to match. In this example,
+the graph pattern has a single triple with the variable ?person in the
+object position.</p>
+
+
+<center>
+  <table width='600' style='font-family:courier;font-size:14px'>
+  <tr><td><tt>SELECT ?person</tt></td></tr>
+  <tr><td><tt>WHERE {</tt></td></tr>
+  <tr><td><tt> 	&lt;http://example.org/art&gt;	&lt;http://xmlns.com/foaf/0.1/knows&gt;  ?person . </td></tr>
+   <tr><td><tt> 	}</td></tr>
+  </table>
+</center>
+
+<p>Above query returns the following result set on our data graph. </p>
+
+<center>
+<table cellspacing='0' cellpadding='2' border='1'>
+    <tr><th colspan='1'>?person1</th></tr>
+  <tr><td><tt>&lt;http://example.org/bob&gt;</tt> </td></tr> 
+  <tr><td><tt>&lt;http://example.org/bea&gt;</tt> </td></tr>
+  </table>
+</center>
+
+<p>The  graph pattern can contain multiple triples. For example, in the query below,
+  we ask for <i>art</i>'s friends of friends.</p>
+
+<center>
+  <table width='600' style='font-family:courier;font-size:14px'>
+  <tr><td><tt>SELECT ?person ?person1</tt></td></tr>
+  <tr><td><tt>WHERE {</tt></td></tr>
+  <tr><td><tt> 	&lt;http://example.org/art&gt;	&lt;http://xmlns.com/foaf/0.1/knows&gt;  ?person . </td></tr>
+  <tr><td><tt> ?person	&lt;http://xmlns.com/foaf/0.1/knows&gt;  ?person1 . </td></tr>
+    <tr><td><tt>} </td></tr>
+  </table>
+</center>
+
+<p>Above query returns the following result set on our data graph. </p>
+
+<center>
+<table cellspacing='0' cellpadding='2' border='1'>
+    <tr><th colspan='1'>?person1</th><th colspan='1'>?person2</th></tr>
+  <tr><td><tt>&lt;http://example.org/bob&gt;</tt></td><td><tt>&lt;http://example.org/cal&gt;</tt></td></tr>
+  <tr><td><tt>&lt;http://example.org/bob&gt;</tt></td><td><tt>&lt;http://example.org/cam&gt;</tt></td></tr>
+  <tr><td><tt>&lt;http://example.org/bea&gt;</tt></td><td><tt>&lt;http://example.org/coe&gt;</tt></td></tr>
+  <tr><td><tt>&lt;http://example.org/bea&gt;</tt></td><td><tt>&lt;http://example.org/cory&gt;</tt></td></tr>
+  </table>
+</center>
+
+<p>Each solution gives one way in which the selected variables can be
+bound to RDF terms so that the query pattern matches the data. The
+result set gives all the possible solutions. In the above example, two
+different subsets of the data provided the matches that resulted in
+the answers. Above examples illustrate a basic graph pattern match;
+all the variables used in the query pattern must be bound in every
+solution.</p>
+
+<p>SPARQL queries can return blank nodes in the result. The
+  identifiers assigned to these blank nodes used in the query results
+  may differ identifiers used in the original RDF graph.  The WHERE
+  clause allows matching specific literal types and to filtering the
+  results based on conditions such as numerical constraints. </p>
+
+<p>SPARQL queries have various forms. The SELECT form 
+   returns the variable bindings. The CONSTRUCT
+  form can creates an RDF graph as the result of a query.  The
+  queries can include multiple graph patterns, which can be combined so that all
+  patterns must match against the RDF data, or only some need to match. The
+  query results can also be further processed using directives
+  to order results, remove duplicates, limit the total
+  number of results returned.</p>
+
+<p>For example, the following query creates an RDF graph marking
+people aged 18 or older as adults. It also limits the number of
+triples return to 5.</p>
+
+<center>
+  <table width='600' style='font-family:courier;font-size:14px'>
+  <tr><td><tt>CONSTRUCT {?person ex:isAdult true . } </tt></td></tr>
+  <tr><td><tt>WHERE {</tt></td></tr>
+  <tr><td><tt> 	?person foaf:age ?age . FILTER (?age >= 18) } </td></tr>
+ <tr><td><tt> 	LIMIT 5 </td></tr>
+     <tr><td><tt>} </td></tr>
+  </table>
+</center>
+
+
+
+
+
+aflac
+
+
+<h3>3. Property Graphs</h3>
+
+<p>The property graph data model is used by many popular graph
+  database systems. Unlike RDF, which was explicitly motivated by a
+  need to model information on the web, the graph database systems
+  were motivate by a need to handle general-purpose graph data storage
+  and analysis.  They differ from traditional relational databases in
+  that they rely little on a predefined schema, and optimize
+  operations that traverse the graph. In this section, we will explore
+  the property graph data model and the Cypher language used to query
+  it.</p>
+
+<h3>3.1 Property Graph Data Model</h3>
+
+<p>The property graph data model consists of nodes, relationships and
+properties. Each node has a label, and a set of properties represented as
+ key-value pairs, where keys are strings and the values  can be of 
+any data type.  A relationship is a directed edge from one node to another;
+  it also has a label, and may include its own set of properties.</p>
+
+<p>In the property graph shown below, we have two nodes, each of
+type <i>Person</i>.  Each node has three
+properties: <i>name</i>, <i>age</i> and <i>based_near</i>.  The nodes
+are connected by an edge labeled <i>knows</i>, which has the
+property <i>since</i> that indicates the year from which <i>art</i>
+and <i>bea</i> have known each other.</p>
+
+<center>
+<figure>
+       <img src='images/property_graph.jpg' width='60%'>
+ </figure>
+<blockquote>Figure 2. A simple property graph schema.</blockquote>
+</center>
+
+<p>While defining a property graph data model, one must decide which entities are represented as 
+  nodes, which as edges, and which as properties.  For example, instead of representing a person&apos;s
+  city as a property, we could represent the city itself as a node,  and create an edge
+  labeled as <i>based_near</i> connecting the person to the city. In
+  general, any value that may be related to multiple other nodes in the
+  graph, that we need to access efficiently, or for which we need to associate
+  addiational properties, should
+   be represented as a node.  In this example, if we intend to
+  traverse the <i>based_near</i> relationships, the following design
+  would be more appropriate. This design also allows us to associate
+   properties with the
+  <i>based_near</i> relationship, such as, the length of the time a person 
+  has  lived in that city. </p>
+
+<center>
+<figure>
+  <img src='images/property_graph_2.jpg'  width='60%'>
+ </figure>
+ </center>
+ <blockquote>Figure 3. An alternative design of the property graph
+ shown in Figure 2 in which instead of representing a city as a
+ property, we represent it as a node.</blockquote>
+
+<h3>3.2 Cypher Query Language</h3>
+
+<p>Cypher is a language for querying data in a property graph
+database. Its design concepts are being considered for adoption into
+an ISO standard for graph query languages. In addition to querying,
+Cypher also supports creating, updating and deleting data in a graph
+database. In this section, we will focus on Cypher&apos;s query
+capabilities.</p>
+
+<p>The example below shows the Cypher query against the data graph
+  considered earlier and queries for the the persons known
+  by <i>art</i>.  The query consists of two parts: the MATCH clause
+  specifies a graph pattern that should match against the data graph
+  and the RETURN clause specifies what should the query return.  The
+  graph pattern is specified in an ASCII notation for graphs: each
+  node is written in parentheses, and each edge is written as an
+  arrow. Both node and relation specifications include their respective types, and
+  any additional properties that should be matched.
+</p>
+
+<center>
+  <table width='600' style='font-family:courier;font-size:14px'>
+  <tr><td><tt>MATCH (p1:Person {name: art}) -[:knows]-> (p2: Person)</tt></td></tr>
+  <tr><td><tt>RETURN p2</tt></td></tr>
+  </table>
+</center>
+
+<p>In the example below, we show the Cypher query that asks for all the friends of
+  a person that have existed since 2010.
+
+
+<center>
+  <table width='600' style='font-family:courier;font-size:14px'>
+    <tr><td><tt>MATCH (p1:Person {name:art}) -[:knows {since: 2010}]-> (p2: Person)</tt></td></tr>
+  <tr><td><tt>RETURN p2</tt></td></tr>
+  </table>
+</center>
+
+<p>From the above query, we can see that it is equally easy to
+associate properties with relations as it is with nodes.  A person
+may have friends from years before 2010, and if we wanted the query to
+include those friends as well, it can be done by adding a WHERE clause.</p>
+      
+<center>
+  <table width='600' style='font-family:courier;font-size:14px'>
+    <tr><td><tt>MATCH (p1:Person {name:art}) -[:knows {since: Y}]-> (p2: Person)</tt></td></tr>
+        <tr><td><tt>WHERE Y <= 2010</tt></td></tr>
+  <tr><td><tt>RETURN p2</tt></td></tr>
+  </table>
+</center>
+
+<p>Through the WHERE clause, it is possible to specify a variety of
+  filtering constraints as well as patterns that can be used to
+  restrict the query results. In addition, Cypher provides language
+  constructs for counting results, grouping data by values, and
+  finding minimum/maximum values, and other mathematical and
+  aggregation operations. </p>
+
+<h3>4. Comparison of Data Models</h3>
+
+In this section, we will start off by comparing the RDF and the
+property graph data models. We will then compare both of them to
+relational data model.</p>
+
+<h3>4.1 Comparison of RDF and Property Graph Data Models</h3>
+
+<p>Beyond the features of RDF considered in the previous section, it
+has several additional layers, for example, RDF schema, Web Ontology
+Language (OWL), etc. Our discussion here will not consider those
+advanced features.  The primary differences between the basic RDF
+model and the property graph model are that: (a) the property graph
+model allows edges to have properties (b) the property graph model
+does not require IRIs and does not support blank nodes. To support
+the edge properties, the RDF model supports an extension known
+as <i>reification</i>. We will consider this extension, and then
+describe different ways in which the data represented in either data
+model can be converted into the other format.</p>
+
+
+<p>To understand reification in RDF, consider a situation in which we
+need to represent the provenance of the triple shown below. This
+triple asserts the weight of an item.  The literal "2.4"^^xsd:decimal
+denotes the number 2.4 which is of type xsd:decimal. We are interested
+in specifying the person who took this measurement.</p>
+
+<center>
+  <table width='600' style='font-family:courier;font-size:14px'>
+    <tr><td><tt>exproducts:item10245   exterms:weight   "2.4"^^xsd:decimal </tt></td></tr>
+  </table>
+</center>
+
+<p>We can associate provenance information with the above triple using
+  the RDF reification vocabulary. The RDF reification vocabulary
+  consists of the type <i>rdf:Statement</i>, and the properties <i>rdf:subject</i>,
+  <i>rdf:predicate</i>, and <i>rdf:object</i>. Using the reification vocabulary, a
+  reification of the statement about the weight of the item would be
+  given by assigning the statement an IRI such as
+  <i>exproducts:triple12345</i> (so statements can be written
+  describing it), and then describing the statement as shown below.
+  The last triple in the list below specifies the desired provenance
+  information by asserting the identifier for the person who created
+  the original triple.  </p>
+
+<center>
+  <table width='600' style='font-family:courier;font-size:14px'>
+        <tr><td><tt>exproducts:triple12345   rdf:type        rdf:Statement .</tt></td></tr>
+        <tr><td><tt>exproducts:triple12345   rdf:subject     exproducts:item10245 .</tt></td></tr>
+        <tr><td><tt>exproducts:triple12345   rdf:predicate   exterms:weight . </tt></td></tr>
+        <tr><td><tt>exproducts:triple12345   rdf:object      "2.4"^^xsd:decimal . </tt></td></tr>
+        <tr><td><tt>exproducts:triple12345   dc:creator      exstaff:85740 .  </tt></td></tr>
+  </table>
+</center>
+
+
+<p>These statements say that the resource identified by the IRI
+<i>exproducts:triple12345</i>  is an RDF statement, that the subject of the
+statement refers to the resource identified by <i>exproducts:item10245</i>,
+the predicate of the statement refers to the resource identified by
+<i>exterms:weight</i>, and the object of the statement refers to the
+decimal value identified by the typed
+literal <i>"2.4"^^xsd:decimal</i>. The final statement asserts
+that <i>exproducts:triple12345</i> was provided by the person with the
+IRI <i> exstaff:8574</i>.</p>
+
+<p>With the above reification vocabulary, it becomes possible to mechanically translate
+  the data in the property graph model to RDF. Each node and its property value in the property
+  graph data becomes a triple.  Each edge in property graph data also becomes an RDF triple.
+  Every edge in the property graph data that has a property is reified, and the properties
+  of the edge become the triples of the reified edge that use the reification vocabulary
+  as explained above.</p>
+
+<p>To translate data expressed in the RDF model to the property graph
+  model, a straightforward approach is to map each node and an edge
+  to the corresponding node and an edge in the property graph.  A
+  possible refinement is that we create new property nodes only for
+  those nodes that are either IRIs or blanks nodes. For any triple in
+  RDF in which the target is a literal, we make it a property of the
+  node in the property graph data. </p>
+
+<p>In addition to converting data between RDF and property graph
+  models, we are also interested in converting the syntactic form of
+  data and the queries. For property graph model, there is no syntatic
+  standard for their expression, and therefore, a custom translator
+  needs to be written for the format one is working with. Once a
+  translation scheme is fixed between the two data models, the
+  corresponding translation between SPARQL and Cypher is
+  straightforward.</p>
+
+<h3>4.2 Comparison of Graph Models and Relational Data Model</h3>
+
+<p>We can define a translation to and from the data expressed using
+relational model to data expressed using the RDF model and the
+property graph model. Some argue that the graph models are easier for
+humans to understand and that the graph query languages are more
+compact for certain queries.  In principle, we can implement a user
+interface to visualize the relational schemas, and implement a query
+compiler that can map a query written in a graph query language into
+an equivalent form that operates on the relational tables.  If an
+application requires navigating relationships, 
+a graph database has an edge as it is optimized for graph traversals.  For the
+rest of the section, we will consider an example to illustrate how the
+graph queries can be more compact than the corresponding relational
+queries, and conclude by mentioning the systems that attempt to
+support graph processing on a relational system.</p>
+
+<p>To understand the contrast between graph queries and relational
+  queries, we will consider a simple example in which we have three
+  tables: an <i>Employee</i> table, a <i>Department</i> table, and an
+  <i>Employee-Department</i> join table. An employee can be associated with
+  multiple departments because of which they are stored in separate
+  tables. Two tables are related with a join table that contains
+  their foreign keys employee id and department id. We show these tables
+  below. </p>
+
+<table><tr>
+<td valign='top'>
+<table cellspacing='0' cellpadding='3' border='1' style='font-family:courier; font-size:12px'>
+<tr><th colspan='3' bgcolor='#bbbbbb'>Employee</th></tr>
+<tr bgcolor='#bbbbbb'><th width='60'>id</th><th width='60'>name</th><th width='60'>ssn</th></tr>
+<tr><td align='center'>e01</td><td align='center'>alice</td><td align='center'>...</td></tr>
+<tr><td align='center'>e02</td><td align='center'>bob</td><td align='center'>...</td></tr>
+<tr><td align='center'>e03</td><td align='center'>charlie</td><td align='center'>...</td></tr>
+<tr><td align='center'>e04</td><td align='center'>dana</td><td align='center'>...</td></tr>
+</table>
+</td>
+<td width='30'></td>
+<td valign='top'>
+<table cellspacing='0' cellpadding='3' border='1' style='font-family:courier; font-size:12px'>
+<tr><th colspan='3' bgcolor='#bbbbbb'>Employee_Department</th></tr>
+<tr bgcolor='#bbbbbb'><th width='120'>employee id</th><th width='120'>department id</th></tr>
+<tr><td align='center'>e01</td><td align='center'>d01</td></tr>
+<tr><td align='center'>e01</td><td align='center'>d02</td></tr>
+<tr><td align='center'>e02</td><td align='center'>d01</td></tr>
+<tr><td align='center'>e03</td><td align='center'>d02</td></tr>
+<tr><td align='center'>e04</td><td align='center'>d03</td></tr>
+</table>
+</td>
+<td width='30'></td>
+<td valign='top'>
+<table cellspacing='0' cellpadding='3' border='1' style='font-family:courier; font-size:12px'>
+<tr><th colspan='3' bgcolor='#bbbbbb'>Department</th></tr>
+<tr bgcolor='#bbbbbb'><th width='60'>id</th><th width='60'>name</th><th width='60'>manager</th></tr>
+<tr><td align='center'>d01</td><td align='center'>IT</td><td align='center'>...</td></tr>
+<tr><td align='center'>d02</td><td align='center'>Finance</td><td align='center'>...</td></tr>
+<tr><td align='center'>d03</td><td align='center'>HR</td><td align='center'>...</td></tr>
+</table>
+</td>
+<td width='30'></td>
+</tr></table>
+</center>
+<br/>
+
+<p>Given the tables as shown above, suppose we wish to list the
+  employees in the IT department.  The SQL query to perform this task
+  will first need to join the <i>employee</i> and
+  the <i>department</i> tables, and then filter the results on
+  the <i>department</i> name.  The required query is shown below. </p>
+
+<center>
+  <table width='600' style='font-family:courier;font-size:14px'>
+  <tr><td><tt>SELECT name FROM Employee </tt></td></tr>
+  <tr><td><tt>LEFT JOIN Employee_Department </tt></td></tr>
+  <tr><td><tt>&emsp; ON Employee.Id = Employee_Department.EmployeeId</tt></td></tr>
+  <tr><td><tt>LEFT JOIN Department </tt></td></tr>
+  <tr><td><tt>&emsp; ON Department.Id = Employee_Department.DepartmentId</tt></td></tr>
+  <tr><td><tt>WHERE Department.name = "IT"</tt></td></tr>
+  </table>
+</center>
+
+<p>If we were to represent the same information using a property graph
+data model, we will have a node for <i>department</i> and
+<i>employee</i>. The employee <i>ssn</i> and department <i>name</i>
+will be the node properties.  The
+<i>Employee_Department</i> table will be captured using a relationship in the property graph representation. If
+the <i>Employee_Department</i> table had additional attributes, they will be
+represented as edge properties in the property graph data model. A
+sample node in such a property graph is shown below.</p>
+
+<center>
+<table>
+       <tr><td><img src='images/property_graph_3.jpg' width='60%'></td></tr>
+ </table>
+</center>
+
+<p>We can query this data using the following Cypher query:</p>
+
+<center>
+  <table width='600' style='font-family:courier;font-size:14px'>
+    <tr><td><tt>MATCH (p:Employee) -[:works_in]-> (d:Department)</tt></td></tr>
+        <tr><td><tt>WHERE d = "IT"</tt></td></tr>
+  <tr><td><tt>RETURN p</tt></td></tr>
+  </table>
+</center>
+
+<p>The Cypher query above is much more compact than its SQL
+  counterpart.  This compactness stems from the fact that the joins
+  are naturally captured using graph patterns. </p>
+
+<p>There have been some recent systems that represent the relational
+data in a schema free manner by representing each node property as a
+triple in one table, and each edge property as a four tuple in a
+second table. Such systems provide a query planner that accepts
+queries in a language like Cypher that computes an efficient
+execution plan over the two relational tables. Such systems are able
+to leverage the existing relational technology, and are also able to
+perform optimizations when some of the legacy data is in a traditional
+relational table.</p>
+
+
+  
+<h3>5. Limitations of a Graph Data Model</h3>
+
+<p>A graph data model is not the most appropriate choice when the
+  application contains primarily numeric data, and the reliance on
+  only binary relationships is limiting. For example, the relational
+  model is more effective in capturing timeseries data such as
+  evolution of the population of a country.  Even though we can
+  represent such data using a graph, but it results in a huge number
+  of triples without necessarily giving us advantages of better
+  conceptual understanding and/or faster query performance through
+  graph traversals.  There are many relationships that cannot be
+  naturally represented using binary relations. For
+  example, <i>between</i> relation that captures that an
+  object <i>A</i> is between two other objects <i>B</i> and <i>C</i>
+  is inherently a ternary relationship. A ternary relationship can be
+  transformed into a set of binary relationships using the
+  reification technique, but by doing so, we lose the advantage of
+  better conceptual understanding that we get from the graph data
+  model. Graphs are also not the most natural representation for
+  mathematical equations and chemical reactions where easy to
+  understand domain specific representations exist.</p>
+
+
+<h3>6. Summary</h3>
+
+<p>In this chapter, we reviewed two popular graph data models: RDF and
+  property graphs. RDF was devised for representing information over
+  the web, and makes an extensive use of IRIs.  The property graph
+  model is a popular choice in many graph database systems, and
+  provides a direct support for associating properties with both nodes
+  and edges.  Even though there are small differences between the two
+  models, it is possible to inter-translate the data represented in
+  one to the other.  SPARQL is the query language for accessing data
+  in RDF, and Cypher is the corresponding language for the data
+  represented in property graphs.  In a graph query language, queries
+  requiring traversals are much more compact in comparison to an
+  equivalent formulation in a relational data model.  A graph data
+  model can also provide a better user understanding of the knowledge
+  in the subject domain. There are some systems that use a relational
+  database as the storage for graph data and provide query optimizers
+  to still allow queries to be expressed in a graph query language.
+  Finally, a graph data model offers significant advantages for
+  application that have rich relationships between objects, and
+  require extensive traversal of those relationships.</p>
+
+
+<h3>7. Further Reading</h3>
+
+<p>A comprehensive overview of RDF and SPARQL is available in two
+    existing
+    textbooks <a href="https://www.sciencedirect.com/book/monograph/9780123859655/semantic-web-for-the-working-ontologist">[Allemang
+    & Hendler 2011]</a>
+    and <a href="https://www.semantic-web-book.org/">[Hitzler,
+    Krötzsch & Rudolph 2009]</a>. More details on the property graphs
+    and Cypher are available in a textbook on graph
+    databases <a href="https://www.oreilly.com/library/view/graph-databases-2nd/9781491930885/">[Robinson,
+    Webber & Eifrem 2015]</a>. Different ways of translating relational data into knowledge graphs have been investigate <a href="https://www.amazon.com/Designing-Enterprise-Knowledge-Synthesis-Semantics/dp/3031007883/">[Sequeda & Lasilla 2021]</a>. Different vendors provides tools for
+    converting data expressed in an RDF data model into property
+    graphs and vice versa. Two such examples are tools supported by
+    Neo4j <a href="https://neo4j.com/labs/neosemantics/4.3/import/">[Neo4j
+    Labs neosemantics 4.3]</a> and
+    Oracle <a href="https://docs.oracle.com/en/database/oracle/oracle-database/21/rdfrm/rdf-integration-property-graph-data.html">[Oracle
+    Database 21c]</a>.  There have been recent attempts to extend the
+    RDF data model to a variant called RDF* that allows making
+    statements about triples <a href="https://w3c.github.io/rdf-star/cg-spec/editors_draft.html">[Hartig, Kellogg
+    & Seaborne 2021]</a>. RDF* eliminates the need for reification
+    while importing the property graph data into an RDF graph.
+</p>
+
+
+  <ul>
+    <li><a href="https://www.sciencedirect.com/book/monograph/9780123859655/semantic-web-for-the-working-ontologist">[Allemang
+    & Hendler 2011]</a> Allemang, D., & Hendler, J. (2011). Semantic
+    Web for the Working Ontologist: Effective Modeling in RDFS and
+      OWL (2nd ed.). Morgan Kaufmann. ISBN 978-0-12-3859655. </li>
+
+    <li><a href="https://w3c.github.io/rdf-star/cg-spec/editors_draft.html">[Hartig, Kellogg
+    & Seaborne 2021]</a> Hartig, O., Kellogg, G., &
+    Seaborne, A. (2021). RDF‑star and SPARQL‑star: Editor’s
+    Draft. RDF‑DEV Community Group. Retrieved from W3C Community
+    Group.</li>
+
+    <li><a href="https://www.semantic-web-book.org/">[Hitzler, Krötzsch
+    & Rudolph 2009]</a> Hitzler, P., Krötzsch, M., & Rudolph,
+    S. (2009). Foundations of Semantic Web Technologies. Chapman &
+      Hall/CRC. ISBN 978‑1‑4200‑9050‑5. </li>
+
+    <li><a href="https://www.amazon.com/Designing-Enterprise-Knowledge-Synthesis-Semantics/dp/3031007883/">[Sequeda
+    & Lasilla 2021]</a> Sequeda, Juan, and Ora Lassila. Designing and
+    Building Enterprise Knowledge Graphs. Cham: Springer / Morgan &
+    Claypool, 2021.</li>
+
+    <li><a href="https://neo4j.com/labs/neosemantics/4.3/import/">[Neo4j Labs neosemantics 4.3]</a>
+    Neo4j Labs. (n.d.). Importing RDF Data — Neosemantics (n10s)
+      4.3*. Retrieved from Neo4j Labs. </li>
+
+    <li><a href="https://docs.oracle.com/en/database/oracle/oracle-database/21/rdfrm/rdf-integration-property-graph-data.html">[Oracle Database 21c]</a>
+    Oracle Corporation. (n.d.). RDF Integration with Property Graph
+    Data Model. Retrieved from Oracle Database Documentation.</li>
+
+    <li><a href="https://www.oreilly.com/library/view/graph-databases-2nd/9781491930885/">[Robinson,
+    Webber & Eifrem 2015]</a> Robinson, I., Webber, J., & Eifrem,
+    E. (2015). Graph Databases (2nd ed.). O’Reilly Media. ISBN
+    978‑1491930885. </li>
+
+    </ul>
+
+
+
+
+
+  <!--=======================================================================-->
+
+
+      </td>
+    </tr>
+  </table>
+  <br/>
+</center>
+
+<!--=======================================================================-->
+
+
+        </td>
+      </tr>
+    </table>
+  </center>
+</body>
+
+<!--=======================================================================-->
+
+
+</html>

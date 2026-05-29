@@ -1,0 +1,736 @@
+<html>
+
+<!--=======================================================================-->
+
+
+<head>
+  <title>What is a Knowledge Graph?</title>
+
+
+</head>
+
+<!--=======================================================================-->
+
+
+<body style='background-color:#990000'>
+  <center>
+    <table width='720' cellspacing='0' cellpadding='0' bgcolor='#ffffff'>
+      <tr>
+        <td>
+
+<!--=======================================================================-->
+
+  <table width='100%' height='120' cellspacing='0' cellpadding='0' bgcolor='#f8f7f7'>
+    <tr>
+      <td width='40'>&nbsp;</td>
+      <td width='120' align='center' valign='center'>
+        <a href='http://www.stanford.edu/class/cs520/'><img width='128' src='images/flyer-v2c.jpg'/>CS520</a>
+      </td>
+      <td align='center' valign='center'>
+
+        <span style='font-size:36px'>Knowledge Graphs</span><br/>
+      </td>
+      <td width='120' align='center' style='color:#000066;font-size:18px'>
+        <i>What<br/>should AI<br/>Know ?</i>
+      </td>
+      <td width='40'>&nbsp;</td>
+    </tr>
+  </table>
+
+<!--=======================================================================-->
+
+
+<hr style='border-top: 1px solid #888888;margin:0'/>
+<table width='100%' height='40' cellspacing='0' cellpadding='0' bgcolor='#f8f7f7'>
+  <tr><td align='center' style='font-size:18px'>What is a Knowledge Graph?</td></tr>
+</table>
+<hr style='border-top: 1px solid #888888;margin:0'/>
+
+<!--=======================================================================-->
+
+<center>
+  <br/>
+  <table width='640' cellpadding='0'>
+    <tr>
+      <td>
+
+<!--=======================================================================-->
+
+<h1>1. Introduction</h1>
+
+<p>Knowledge graphs have emerged as a compelling abstraction for
+organizing world's structured knowledge over the internet, and a way
+to integrate information extracted from multiple data
+sources. Knowledge graphs have also started to play a central role in
+machine learning as a method to incorporate world knowledge, as a
+target knowledge representation for extracted knowledge, and for
+explaining what is learned.</p>
+
+<p>Our goal here is to explain the basic terminology, concepts and
+usage of knowledge graphs in a simple to understand manner. We do not
+intend to give here an exhaustive survey of the past and current work
+on the topic of knowledge graphs.</p>
+
+<p>We will begin by defining knowledge graphs, some applications that
+  have contributed to the recent surge in the popularity of knowledge
+  graphs, and then use of knowledge graphs in machine learning.  We
+  will conclude this chapter by summarizing what is new and different
+  about the recent use of knowledge graphs. </p>
+
+<h1>2. Knowledge Graph Definition</h1>
+
+<p>A knowledge graph is a directed labeled graph in which the labels
+  have well-defined meanings. A directed labeled graph consists of
+  nodes, edges, and labels.  Anything can act as a node, for example,
+  people, company, computer, etc. An edge connects a pair of nodes and
+  captures the relationship of interest between them, for example,
+  friendship relationship between two people, customer relationship
+  between a company and person, or a network connection between two
+  computers.  The labels capture the meaning of the relationship, for
+  example, the friendship relationship between two people. </p>
+
+<p>More formally, given a set of nodes <i>N</i>, and a set of
+labels <i>L</i>, a knowledge graph is a subset of the cross
+  product <i>N &times; L &times; N</i>.  Each member of this set is
+  referred to as a triple, and can be visualized as shown below. </p>
+
+  <center><img src='images/triple.jpg' height='140'/></center>
+  <blockquote>Figure 1: A triple &lt; A, B, C &gt;, where A and C are
+		     nodes connected by an edge, and B is label of
+		     that edge, is a building block of a knowledge
+    graph.</blockquote>
+
+		     
+
+<p>The directed graph representation is used in a variety of ways
+  depending on the needs of an application. A directed graphs such as
+  the one in which the nodes are people, and the edges capture
+  friendship relationship is also known as a data graph. A directed
+  graph in which the nodes are classes of objects (e.g., Book,
+  Textbook, etc.), and the edges capture the <i>subclass</i>
+  relationship, is also known as a taxonomy.  In some data models, the
+  source of an edge (e.g., <i>A</i>) is referred to as
+  the <i>subject</i>, the label on the edge (e.g., <i>B</i>) is
+  referred to as the <i>predicate</i>, and the target of the edge
+  (e.g., <i>C</i>) is referred to as the object.
+</p>
+
+
+<p>Many interesting computations over graphs can be reduced to
+  navigation. For example, in a friendship knowledge graph,
+  to calculate the friends of a friends of a person <i>A</i>, we can
+  navigate the knowledge graph from <i>A</i> to all nodes <i>B</i>
+  connected to it by a relation labeled as friend, and then
+  recursively to all nodes <i>C</i> connected by the friend relation to
+  each <i>B</i>.
+  
+<p>A <b><em>path</b></em> in a graph <i>G</i> is a series of nodes
+(v<sub>1</sub>, v<sub>2</sub>,..., v<sub>n</sub>) where for any i
+&isin; N with 1 &le; i < n, there is an edge from v<sub>i</sub> to
+v<sub>i+1</sub>.  A <b><em>simple path</em></b> is a path with no
+repeated nodes. A <b><em>cycle</em></b> is a path in which the first
+and the last nodes are the same. Usually, we are interested in only
+those paths in which the edge label is the same for every pair of
+nodes. It is possible to define numerous additional properties over
+the graphs (e.g., connected components, strongly connected
+components), and provide different ways to traverse the graphs (e.g.,
+shortest path, Hamiltonian path, etc.).  </p>
+
+
+
+<h1>3. Recent Applications of Knowledge Graphs</h1>
+
+There are numerous applications of knowledge graphs both in research
+and industry.  Within computer science, there are many uses of a
+directed graph representation, for example, data flow graphs, binary
+decision diagrams, state charts, etc.  For our discussion here, we
+have chosen to focus on two concrete applications that have led to
+recent surge in popularity of knowledge graphs: organizing information
+over internet and data integration.
+
+<h2>3.1 Knowledge Graphs for organizing Knowledge over the Internet</h2>
+
+<p>We will explain the use of a knowledge graph over the web by taking
+the concrete example of Wikidata. Wikidata acts as the central storage
+for the structured data for Wikipedia. To show the interplay between
+the two, and to motivate the use of Wikidata knowledge graph, consider
+the city of Winterthur in Switzerland which has a page in
+Wikipedia. The Wikipedia page for Winterthur lists its twin towns: two
+ are in Switerzland, one in Czech Republic, and one in
+Austria.  The city of Ontario in California that has a Wikipedia page
+titled <i>Ontario, California</i>, lists Winterthur as its sister
+city.  The sister city and twin city relationships are identical as
+well as reciprocal. Thus, if a city A is a sister city of another city
+B, then B must be a sister city of A. This inference should be
+automatic, but because this information is stated in English in
+Wikipedia, it is not easy to detect this discrepancy.  In contrast, in
+the Wikidata representation of Winterthur, there is a relationship
+called <i>twinned administrative body</i> that lists the city of
+Ontario. As this relationship is symmetric, the Wikidata page for the
+city of Ontario automatically includes Winterthur. Thus, when Wikidata
+knowledge graph will be fully integrated into Wikipedia, such
+  discrepancies will naturally disappear.</p>
+
+<center>
+<table>
+  <tr>
+    <td align='center'>
+  <table>
+    <tr><td><img src='images/winterthur_graph.jpg' height='300'/></td></tr>
+ </table>
+    </td>
+
+  </tr>
+</table>
+</center>
+<blockquote>Figure 2: An example knowledge graph from Wikidata starting from the entity Winterthur</blockquote>
+
+
+<p>
+Wikidata includes data from several independent providers, for
+  example, the Library of Congress that publishes data containing
+  information about Winterthur. By using the Wikidata identifier for
+  Winterthur, the information released by Library of Congress can be
+  easily linked with information available from other sources.
+  Wikidata makes it easy to establish such links by publishing the
+  definitions of relationships used in it
+  in <i>Schema.Org</i>. (Schema.org is a collaborative,
+  community-driven initiative that provides a shared vocabulary ---
+  that is the names of classes and their properties --- for structured
+  data on the web, enabling search engines and other tools to better
+  understand and display website content.)</p>
+
+<p>The vocabulary of <i>Schema.Org</i> gives us, at least, three
+  advantages. First, it is possible to write queries that span across
+  multiple datasets that would not have been possible otherwise. One
+  example of such a query is: Display on a map the birth cities of
+  people who died in Winterthour?  Second, with such a query
+  capability, it is possible to easily generate structured information
+  boxes within Wikipedia. Third, structured information returned by
+  queries also can appear in the search results which is now a
+  standard feature for the leading search engines.
+</p>
+
+<p>A recent version of Wikidata had over 80 million objects, with over
+  one billion relationships among those objects.  Wikidata makes
+  connections across over 4872 different catalogs in 414 different
+  languages published by independent data providers. According to recent estimates, 31% of websites and over 12 million data providers publish annotations using its vocabulary.
+    <i>Schema.Org</i> vocabulary.
+</p>
+
+<p>Let us observe several key features of the Wikidata knowledge
+  graph. First, it is a graph of unprecedented scale, and is the
+  largest knowledge graph available today. Second, it is being jointly
+  created by a community of contributors.  Third, some of the data in
+  Wikidata may come from automatically extracted information, but it
+  must be easily understood and verified as per the Wikidata
+  editorial policies. Fourth, there is an explicit effort to provide
+  semantic definitions of different relation names through the
+  vocabulary in <i>Schema.Org</i>.  Finally, the primary driving use
+  case for Wikidata is to improve the web search. Even though Wikidata
+  has several applications using it for analytical and visualization
+  tasks, but its use over the web continues to be the most compelling
+  and easily understood application.
+</p>
+
+
+<h2>3.2 Knowledge Graphs for Data Integration in Enterprises</h2>
+
+<p>Data integration is the process of combining data from different
+sources, and providing the user with a unified view of data.  A large
+fraction of data in the enterprises resides in the relational
+databases.  One approach to data integration relies on a global schema
+that captures the interrelationships between the data items
+represented across these databases.  Creating a global schema is an
+extremely difficult process because there are many tables
+and attributes; the experts who created these databases are usually
+not available; and because of lack of documentation, it is difficult
+to understand the meaning of the data. Because of the challenges in
+creating a global schema, it is convenient to sidestep this issue, and
+convert the relational data into a database with the generic schema of
+triples, ie, a knowledge graph. The mappings between the attributes
+are created on as needed basis, for example, in response to addressing
+specific business questions, and can themselves be represented within
+a knowledge graph.  We illustrate this process using a concrete
+example.
+</p>
+
+<p>Many financial institutions are interested in creating a company
+  knowledge graph that combines the internal customer data with the
+  data licensed from third parties.  Some examples of such third party
+  datasets include Dunn & Bradstreet, S&amp;P 500, etc. An example usage
+  of a company knowledge graph is to assess the risk while making loan
+  decisions. The external data contain information such as the
+  suppliers of a company. If a company is going through financial
+  difficulty, it increases the risk of awarding loan to the suppliers
+  of that company.  To combine this external data with the internal
+  data, one has to relate the external schemas with the internal
+  company schema. Furthermore, the company names used in the external
+  sources have to be related to the corresponding customer identifiers
+  used by the financial institutions.  While using a knowledge graph
+  approach to data integration, determining such relationships can be
+  delayed until they are actually required.</p>
+  
+<h1>4. Knowledge Graphs in Artificial Intelligence</h1>
+
+<p>Knowledge graphs, known as semantic networks, have been used as a
+  representation for Artificial Intelligence since the early days of
+  the field.  Over the years, semantic networks were evolved into
+  different representations such as description
+  logics and rule languages. To capture uncertain knowledge,
+  probabilistic graphical models were invented.</p>
+
+<p> A widely known application of the representation languages that
+  originated from semantic networks is in capturing ontologies. An
+  ontology is a specification of the classes, their properties, and
+  the individual instances in a domain. An ontology plays important
+  role in information exchange and in capturing the background
+  knowledge of a domain that could be used for reasoning and answering
+  questions.</p>
+
+<p> World Wide Web Consortium (W3C) standardized a family of knowledge
+  representation languages that are now widely used for capturing
+  knowledge on the internet.  We will consider one such language known
+  as the Resource Description Frame (RDF) in the next chapter. This
+  family of languages also includes the Web Ontology Language (OWL),
+  and the Semantic Web Rule Language (SWRL). </p>
+
+<p>Orthogonal to the representation of knowledge, a central challenge
+  in AI is knowledge acquisition bottleneck, ie, how to capture
+  knowledge into the chosen representation in an economically scalable
+  manner. Early approaches relied on knowledge engineers to manually
+  author knowledge. Efforts to automate portions of knowledge
+  engineering led to techniques such as inductive learning, and the
+  current generation of machine learning.</p>
+
+<p>Therefore, it is natural that the knowledge graphs are being used
+as a representation of choice for storing the knowledge automatically
+learned. There is also an increasing interest to leverage domain
+knowledge that is expressed in knowledge graphs to improve machine
+learning.</p>
+
+<h2>4.1 Knowledge Graphs as the output of Machine Learning</h2>
+
+<p>We will consider how graphs are being used as a target output
+representation for natural language processing and computer vision
+systems.</p>
+
+<p>Entity extraction and relation extraction from text are two
+  fundamental tasks in natural language processing.  The extracted
+  information from multiple portions of the text needs be correlated,
+  and knowledge graphs provide a natural medium to accomplish such a goal.  For
+  example, from the sentence shown on the left, we can extract the
+  entities <i>Albert Einstein</i>, <i>Germany</i>, <i>Theoretical Physicist</i>, and
+  <i>Theory of Relativity</i>; and the relations <i>born in</i>, <i>occupation</i> and
+  <i>developed</i>. Once this snippet of the knowledge graph is incorporated
+  into a larger knowledge graph, we get additional inferences (shown by dotted edges)
+  such as a Theoretical Physicist is a <i>kind of</i> Physicist
+  who <i>practices</i> Physics, and that Theory of Relativity is
+  a <i>branch of </i> Physics.</p>
+
+<center>
+<table>
+  <tr>
+    <td align='center'>
+  <table>
+    <tr><td><b>Albert Einstein</b> was a <b>German-born</b> <b>theoretical
+physicist</b> who developed the <b>theory of relativity</b>.
+    </td><td><img src='images/nlp_v2.jpg' height='200'/></td></tr>
+ </table>
+    </td>
+  </tr>
+</table>
+</center>
+<blockquote>Figure 4: An example knowledge graph resulting from entity
+and relationship extraction through natural language process. The
+dotted edges illustrate the additional inferences that might follow
+once the extracted information is merged into a larger knowledge
+graph.</blockquote>
+
+<p>A holy grail of computer vision is the complete understanding of an
+image, that is, creating a model that can name and detect
+objects, describe their attributes, and recognize their
+relationships. Understanding scenes would enable important
+applications such as image search, question answering, and robotic
+interactions. Much progress has been made in recent years towards this
+goal, including image classification and object detection.</p>
+
+<center>
+<table>
+  <tr>
+    <td align='center'>
+  <table>
+    <tr><td><img src='images/vision.jpg' height='200'/></td></tr>
+ </table>
+    </td>
+
+  </tr>
+</table>
+</center>
+
+<blockquote>Figure 5: An example knowledge graph resulting from object
+detection and edge detection performed by a computer vision
+system.</blockquote>
+
+<p>For example, from the image shown above, an image understanding
+system should produce a knowledge graph shown to the right. The nodes in the
+knowledge graph are the outputs of an object detector.  Current research in
+computer vision focuses on developing techniques that can correctly
+  infer the relationships between the objects, such as,
+  such as a woman, a cow, and a mask, and relationships such as
+ <i>holding</i>, <i>feeding</i>, 
+ etc. 
+
+
+<h2>4.2 Knowledge Graphs as input to Machine Learning</h2>
+
+<p>Popular deep machine learning models rely on a numerical input
+which requires that any symbolic or discrete structures should first
+be converted into a numerical representation. <em>Embeddings</em> that
+transform a symbolic input into a vector of numbers have emerged as a
+representation of choice for input to machine learning models.  We
+will explain this concept and its relationship to knowledge graphs
+by taking the example of <em>word embeddings</em> and
+<em>graph embeddings</em>.</p>
+
+<p> <em>Word embeddings</em> were developed for calculating similarity
+  between words. To understand the word embeddings, we consider the
+  following set of sentences.</p>
+
+<center>
+<table>
+    <tr><td>I like knowledge graphs.<td></tr>
+    <tr><td>I like databases.<td></tr>
+    <tr><td>I enjoy running.<td></tr>
+ </table>
+</center>
+
+<p>In the above set of sentences, we will count how often a word appears
+next to another word, and record the counts in a matrix shown
+below. For example, the word <i>I</i> appears next to the
+word <i>like</i> twice, and next to word <i>enjoy</i> once, and
+therefore, its counts for these two words are 2 and 1 respectively,
+  and 0 for every other word.  We can calculate the counts for other
+  words in a similar manner to fill out the table.
+</p>
+
+<center>
+        <table>
+	  <tr><td width='60' align='center'>counts</td><td width='60' align='center'>I</td><td width='60' align='center'>like</td><td width='60' align='center'>enjoy</td><td width='60' align='center'>knowledge</td><td width='60' align='center'>graphs</td><td width='60' align='center'>databases</td><td width='60' align='center'>running</td><td width='60' align='center'>.</td></tr>
+	  <tr><td width='60' align='center'>I<td width='60' align='center'>0</td><td width='60' align='center'>2</td><td width='60' align='center'>1</td><td width='60' align='center'>0</td><td width='60' align='center'>0</td><td width='60' align='center'>0</td><td width='60' align='center'>0</td><td width='60' align='center'>0</td></tr>
+	  <tr><td width='60' align='center'>like<td width='60' align='center'>2</td><td width='60' align='center'>0</td><td width='60' align='center'>0</td><td width='60' align='center'>1</td><td width='60' align='center'>0</td><td width='60' align='center'>1</td><td width='60' align='center'>0</td><td width='60' align='center'>0</td></tr>
+	  <tr><td width='60' align='center'>enjoy<td width='60' align='center'>1</td><td width='60' align='center'>0</td><td width='60' align='center'>0</td><td width='60' align='center'>0</td><td width='60' align='center'>0</td><td width='60' align='center'>0</td><td width='60' align='center'>1</td><td width='60' align='center'>0</td></tr>
+	  <tr><td width='60' align='center'>knowledge<td width='60' align='center'>0</td><td width='60' align='center'>1</td><td width='60' align='center'>0</td><td width='60' align='center'>0</td><td width='60' align='center'>1</td><td width='60' align='center'>0</td><td width='60' align='center'>0</td><td width='60' align='center'>0</td></tr>
+	  <tr><td width='60' align='center'>graphs<td width='60' align='center'>0</td><td width='60' align='center'>0</td><td width='60' align='center'>0</td><td width='60' align='center'>1</td><td width='60' align='center'>0</td><td width='60' align='center'>0</td><td width='60' align='center'>0</td><td width='60' align='center'>1</td></tr>
+	  <tr><td width='60' align='center'>databases<td width='60' align='center'>0</td><td width='60' align='center'>1</td><td width='60' align='center'>0</td><td width='60' align='center'>0</td><td width='60' align='center'>0</td><td width='60' align='center'>0</td><td width='60' align='center'>0</td><td width='60' align='center'>1</td></tr>
+	  <tr><td width='60' align='center'>running<td width='60' align='center'>0</td><td width='60' align='center'>0</td><td width='60' align='center'>1</td><td width='60' align='center'>0</td><td width='60' align='center'>0</td><td width='60' align='center'>0</td><td width='60' align='center'>0</td><td width='60' align='center'>1</td></tr>
+	  <tr><td width='60' align='center'>.<td width='60' align='center'>0</td><td width='60' align='center'>0</td><td width='60' align='center'>0</td><td width='60' align='center'>0</td><td width='60' align='center'>1</td><td width='60' align='center'>1</td><td width='60' align='center'>1</td><td width='60' align='center'>0</td></tr>
+	  
+</table>
+</center>
+<blockquote>Table 1: Word cooccurrence counts showing how often each
+word appears next to another word in the corpus.</blockquote>
+
+
+<p>Above table constitutes a matrix which is often referred to
+as <em>word cooccurrence</em> counts.  We say that the meaning of each
+word is captured by the vector in the row corresponding to that
+word. To calculate similarity between words, we can simply calculate
+the similarity between the vectors corresponding to them. In practice,
+we are interested in text that may contain millions of words, and a
+more compact representation is desired. As the above matrix is sparse,
+we can use techniques from Linear Algebra (e.g., singular value
+decomposition) to reduce its dimensions.  The resulting vector
+corresponding to a word is known as <em>word embedding</em>. Typical
+word embeddings in use today rely on vectors of length 200. There are
+numerous variations and extensions of the basic idea presented
+here. Techniques exist for automatically learning word embeddings for
+any given text. </p>
+
+<p>Use of word embeddings has been found to improve the performance of
+many natural language processing tasks including entity extraction,
+relation extraction, parsing, passage retrieval, etc. One of the most
+common applications of word embeddings is in auto completion of search
+queries. Word embeddings give us a way to predict the words that are
+likely to follow the partial query that a user has already typed.</p>
+
+
+<p>As a sentence is a sequence of words, we can view it as a knowledge
+  graph in which every word is a node, and there is a directed edge
+  from a node A to node B, if the word represented by node B
+  immeditely follows the word represented by node A. The resulting
+  graph is a path graph. We have seen that embeddings use the
+  cooccurrence information about the words in a sentence to calculate
+  similarity between the words.</p>
+
+<p> Graph embeddings generalize the embeddings from a path graph to
+  a general network structure. The goal and approach, however, remain
+  the same: represent each node in a network structure by a vector of
+  cooccurrences, so that the similarity between the nodes can be
+  calculated as a difference between their corresponding vectors. The
+  vectors for each node are also referred to as node embeddings.  The
+  embeddings for the whole graph, also known as graph embeddings, can
+  be calculated by aggregating the embeddings for all the nodes in the
+  graph. One potentially approach to aggregate the node embeddings is
+  to simply add them. Other methods for aggregation also exist.</p>
+
+<p>To calculate knowledge graph embeddings, we define a method for
+  encoding each node in the graph into a vector, a function to
+  calculate similarity between the nodes, and then optimize the
+  encoding function. Encoding of a node into a vector is also known as
+  a <i>node embedding</i>. One possible encoding function is to use
+   <em>random walks</em> of the knowledge graph (typically 32 to 64
+  such random walks) and calculate co-occurrence counts of nodes on
+  the knowledge graph yielding a matrix similar to co-occurrence
+  counts of words in text. There are numerous variations of this basic
+  method to calculate knowledge graph embeddings. Just like we have
+  encoded a node into a vector, we can also encode the whole graph
+  into a vector which is known as graph embedding. There are many
+  approaches to calcuate graph embeddings, but perhaps, the simplest
+  approach is to add the vectors for each of nodes in the graph and
+   obtain a vector representing the whole graph.</p>
+
+<p>We have chosen to explain graph embeddings by first explaining word
+embeddings because as it is easy to understand them, and their use is
+common place.  Graph embeddings are a generalization of the word
+embeddings. They are a way to input domain knowledge expressed in a
+  knowledge graph into a machine learning algorithm.  Graph embeddings
+do not induce a knowledge representation, but are a way to turn
+symbolic representation into a numeric representation for consumption
+  by a machine learning algorithm.</p>
+
+<p>Once we have calculated knowledge graph embeddings, they can be used for a
+  variety of applications. One obvious use for the knowledge graph embeddings
+  calculated from a friendship graph is to recommend new friends. A more
+  advanced task involves link prediction (ie, the likelihood of a link
+  between two nodes). Link prediction in a company graph could be
+  used to identify potential new customers.</p>
+
+
+
+<h1>5. Summary</h1>
+
+<p>Graphs are a fundamental construct in discrete mathematics, and
+have applications in all areas of computer science. Most notable uses
+of graphs in knowledge representation and databases have taken the
+form of data graphs, taxonomies and ontologies. Traditionally, such
+applications have been driven by a top down design.  As a knowledge
+graph is a directed labeled graph, we are able to leverage graph theory
+algorithms and implementations.
+</p>
+
+<p>Recent surge in the use of knowledge graphs is driven because of
+the confluence of three different advances: data linking and sharing
+over the web graph computations over data, and progress in in NLP and
+vision to extract relations from texts and images. A common thread
+across all three of these advances is scale.  The knowledge graphs
+that are available today are of unprecedented scale. We have already
+noted that a recent version of Wikidata had over 80 million objects,
+and over 1 Billion relationships. Several industry knowledge graphs
+are even bigger, for example, a recent version of the Google knowledge
+graph had over 570 million entities, and over 18 Billion
+relationships.  This large scale of knowledge graphs makes the
+efficiency and scalability of the graph algorithms paramount.</p>
+
+<p>For organizing information on the web, and in many data integration
+applications, it is extremely difficult to come up with a top down
+design of a schema. The machine learning applications are driven by
+the availability of the data, and what can be usefully inferred from
+it. Bottom up uses of knowledge graphs do not diminish the value of a
+top down design of the schema or an ontology. Indeed, the Wikidata
+project leverages ontologies for ensuring data quality, and most
+enterprise data integration projects advocate defining the schema on
+as needed basis.  Machine learning applications also benefit
+significantly with the use of rich ontology for making inferences from
+the information that is learned even though a global ontology or a
+schema is not required at the outset.</p>
+
+<p>Word-embeddings and graph-embeddings both leverage a graph
+  structure in the input data, but they are necessarily more general
+  than <em>knowledge graphs</em> in that there is no implicit or
+  explicit need for a schema or an ontology.  For example, graph
+  embeddings can be used over the network defined by exchange of
+  messages between nodes on the internet, and then used in machine
+  learning algorithms to predict rogue nodes.  In contrast, for the
+  Wikidata knowledge graph, knowledge graphs in the enterprises, and
+  in the output representation of machine learning algorithms, a
+  schema or ontology can play a central role.</p>
+
+<p>We conclude by observing that the recent surge in interest in
+  knowledge graphs is primarily driven by the bottom up requirements
+  of several compelling business applications. Knowledge graphs in
+  these applications can certainly benefit from the classical work on
+  the top down representation design techniques, and in fact, we
+  envision that eventually the two will converge.   </p> 
+
+<h1>6. Further Reading</h1>
+
+Knowledge Graphs surged into popularity after Google started using
+them as part of its search
+engine <a href="https://blog.google/products/search/introducing-knowledge-graph-things-not/">[Singhal
+2012]</a>. The current chapter is based on an article that appeared in
+the AI
+Magazine <a href="https://onlinelibrary.wiley.com/doi/10.1002/aaai.12033">[Chaudhri
+et. al. 2022]</a>.  A recent survey covers how knowledge graphs are
+being used in the
+industry <a href="https://dl.acm.org/doi/10.1145/3331166">[Noy
+et. al. 2022]</a>. A comprehensive overview of knowledge graphs has
+been jointly written by several researchers working on this
+topic <a href="https://arxiv.org/abs/2003.02320">[Hogan
+et. al. 2020]</a>.
+
+
+<ul>
+    <li><a href="https://blog.google/products/search/introducing-knowledge-graph-things-not/">[Singhal 2012]</a> Singhal, A. (2012, May 16). <em>Introducing the Knowledge Graph: Things, not Strings</em>. Google Blog.</li>
+    <li><a href="https://onlinelibrary.wiley.com/doi/10.1002/aaai.12033">[Chaudhri et al. 2022]</a> Chaudhri, V., et al. (2022). <em>Knowledge Graphs: Introduction, History and Perspectives </em>. AI Magazine.</li>
+    <li><a href="https://dl.acm.org/doi/10.1145/3331166">[Noy et al. 2022]</a> Noy, N. F., Gao, Y., Jain, A., Narayanan, A., Patterson, A., & Taylor, J. (2022). <em>Industry use of Knowledge Graphs: A survey</em>. Communications of the ACM, 55(10), Article 201.</li>
+    <li><a href="https://arxiv.org/abs/2003.02320">[Hogan et al. 2020]</a> Hogan, A., Blomqvist, E., Cochez, M., dAmato, C., de Melo, G., Gutiérrez, C., ... & Navigli, R. (2020). <em>Knowledge Graphs</em>. arXiv.</li>
+</ul>
+
+
+
+<h1>Chapter Glossary</h1>
+
+        <dl id="chapter-glossary" class="space-y-4">
+            <!-- 
+              Each term has a <div> wrapper.
+              The <dt> (definition term) has the ID that matches the 'data-term' attribute in the text.
+              The <dd> (definition description) contains the definition.
+            -->
+	   <div> 
+                <dt id="connected component" class="text-lg font-semibold text-gray-900">connected component</dt>
+                <dd class="ml-4 mt-1 text-gray-700">
+                    A connected component of a directed graph is the
+                    maximal group of nodes such that there is path
+                    from one node to another in the underlying
+                    undirected graph.
+                </dd>
+          </div>  
+	   <div> 
+                <dt id="description logic" class="text-lg font-semibold text-gray-900">description logic</dt>
+                <dd class="ml-4 mt-1 text-gray-700">
+                    A family of logic-based knowledge representation
+                    languages designed to describe classes,
+                    properties, and individual instances (i.e., data).
+                </dd>
+          </div>  
+	   <div> 
+                <dt id="directed graph" class="text-lg font-semibold text-gray-900">directed graph</dt>
+                <dd class="ml-4 mt-1 text-gray-700">
+                    A directed graph is a <a href="#graph" class="glossary-link">graph</a> in which the edges have directions.
+                </dd>
+          </div>  
+           <div> 
+                <dt id="directed labeled graph" class="text-lg font-semibold text-gray-900">directed labeled graph</dt>
+                <dd class="ml-4 mt-1 text-gray-700">
+                    A directed labeled graph is a <a href='#directed graph' class='glossary-link'>directed graph</a> in which the edges have labels.
+                </dd>
+           </div>
+	   <div> 
+                <dt id="graph" class="text-lg font-semibold text-gray-900">graph</dt>
+                <dd class="ml-4 mt-1 text-gray-700">
+                    A graph <i>G</i> is a pair <i>(V,E)</i>, where <i>V</i> is a set whose
+                    elements are called the <i>nodes</i>, and <i>E</i> is a
+                    set of unordered pairs {v<sub>i</sub>, v<sub>j</sub>} of nodes whose
+                    elements are called the edges.
+                </dd>
+           </div>
+	   <div> 
+                <dt id="graphical model" class="text-lg font-semibold text-gray-900">graphical model</dt>
+                <dd class="ml-4 mt-1 text-gray-700">
+                    A graphical model, often known as a probablistic
+                    graphical model, represents conditional dependence
+                    between a set of random variables. Each node in
+                    the graph is a random variable, and each edge
+                    represents the probablistic dependence between the
+                    nodes.
+                </dd>
+           </div>
+	   <div> 
+                <dt id="hamiltonian path" class="text-lg font-semibold text-gray-900">hamiltonian path</dt>
+                <dd class="ml-4 mt-1 text-gray-700">
+                    A Hamiltonian path is a path in a graph that
+                    visits each vertex exactly once. A Hamiltonian
+                    path in a directed graph must respect the
+                    direction of the edges.
+                </dd>
+          </div>  
+	   <div> 
+                <dt id="shortest path" class="text-lg font-semibold text-gray-900">shortest path</dt>
+                <dd class="ml-4 mt-1 text-gray-700">
+                    A shortest path in a graph is a path between two
+                    nodes that has the minimum total "cost" or
+                    "length" among all possible paths connecting those
+                    two nodes.
+                </dd>
+          </div>  
+	   <div> 
+                <dt id="schema" class="text-lg font-semibold text-gray-900">schema</dt>
+                <dd class="ml-4 mt-1 text-gray-700">
+                    A schema is a description of the structure of the
+                    data. For a knowledge graph, it specifies
+                    different node types and their properties.  For a
+                    relational database, the schema specifies the
+                    relations, their attributes or columns and
+                    constraints (e.g., foreign keys).
+                </dd>
+          </div>  
+	   <div> 
+                <dt id="semantic network" class="text-lg font-semibold text-gray-900">semantic network</dt>
+                <dd class="ml-4 mt-1 text-gray-700">
+                    A graphical representation of knoweldge in which
+                    nodes represent concepts or enttie and edges
+                    represent the relationships between them. Modern
+                    knowledge graphs put more emphasis on graphical
+                    representation of data (or real-world entities).
+                </dd>
+          </div>  
+
+	   <div> 
+                <dt id="strongly connected component" class="text-lg font-semibold text-gray-900">strongly connected component</dt>
+                <dd class="ml-4 mt-1 text-gray-700">
+                    A strongly connected component of a directed graph
+                    is the maximal group of nodes such that for any
+                    pair of notes <i>u</i> and <i>v</i> in it, there
+                    is a path from <i>u </i> to <i>v</i> and <i>v </i>
+                    to <i>u</i>.
+                </dd>
+          </div>  
+
+	   <div> 
+                <dt id="taxonomy" class="text-lg font-semibold text-gray-900">taxonomy</dt>
+                <dd class="ml-4 mt-1 text-gray-700">
+		  A <a href ="directed labeled graph">directed labeled graph</a> in which the nodes are classes of objects (e.g., Book,
+		  Textbook, etc.), and the edges capture the <i>subclass</i>
+		  relationship, is also known as a taxonomy. 
+                </dd>
+           </div>
+
+
+	   
+	</dl>  
+
+
+
+<!--=======================================================================-->
+
+
+      </td>
+    </tr>
+  </table>
+  <br/>
+</center>
+
+<!--=======================================================================-->
+
+
+        </td>
+      </tr>
+    </table>
+  </center>
+</body>
+
+<!--=======================================================================-->
+
+
+</html>

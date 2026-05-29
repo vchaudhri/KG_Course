@@ -1,0 +1,624 @@
+<html>
+
+<!--=======================================================================-->
+
+
+<head>
+  <title>How to Create a Knowledge Graph?</title>
+</head>
+
+<!--=======================================================================-->
+
+
+<body style='background-color:#990000'>
+  <center>
+    <table width='720' cellspacing='0' cellpadding='0' bgcolor='#ffffff'>
+      <tr>
+        <td>
+
+<!--=======================================================================-->
+
+  <table width='100%' height='120' cellspacing='0' cellpadding='0' bgcolor='#f8f7f7'>
+    <tr>
+      <td width='40'>&nbsp;</td>
+      <td width='120' align='center' valign='center'>
+        <a href='http://www.stanford.edu/class/cs520/'><img width='128' src='images/flyer-v2c.jpg'/>CS520</a>
+      </td>
+      <td align='center' valign='center'>
+
+        <span style='font-size:36px'>Knowledge Graphs</span><br/>
+      </td>
+      <td width='120' align='center' style='color:#000066;font-size:18px'>
+        <i>What<br/>should AI<br/>Know ?</i>
+      </td>
+      <td width='40'>&nbsp;</td>
+    </tr>
+  </table>
+
+<!--=======================================================================-->
+
+
+<hr style='border-top: 1px solid #888888;margin:0'/>
+<table width='100%' height='40' cellspacing='0' cellpadding='0' bgcolor='#f8f7f7'>
+  <tr><td align='center' style='font-size:18px'>How to Create a Knowledge Graph?</td></tr>
+</table>
+<hr style='border-top: 1px solid #888888;margin:0'/>
+
+<!--=======================================================================-->
+
+<center>
+  <br/>
+  <table width='640' cellpadding='0'>
+    <tr>
+      <td>
+
+<!--=======================================================================-->
+
+<h3>1. Introduction</h3>
+
+<p>It is possible to get started with a knowledge graph with no
+  upfront design of its schema.  To the degree an upfront
+  design of a knowledge graph is practical, it can significantly
+  improve its usefulness. Such a design involves making a suitable
+  choice of the nodes, node labels, node properties, relations and
+  relation properties.</p>
+
+<p>he data used to build or update a knowledge graph can come from
+many places: structured databases, semi-structured formats (like JSON
+or XML), unstructured sources such as plain text or images, or even
+information typed in directly by people.</p>
+
+<p>When the data is structured or semi-structured, two main tasks are needed:
+
+  <ul>
+    <li>Schema mapping: matching the fields in the input data (e.g.,
+    columns in a table) to the classes and properties in the knowledge
+    graph. For example, a table column called <i>cust_name</i> may
+    need to be mapped to the <i>name</i> property of the <i>Person</i>
+    node in a knowledge graph.</li>
+
+    <li>Record linkage: deciding whether a new piece of data refers to
+    an existing entity in the graph or should be added as a new one.
+    For example, if the input says “John Smith, born 1999”, we must
+    decide whether this is the same John Smith already in the graph or
+    a different person who should be added as a new node.</li>
+    </ul>
+</p>
+
+<p>These tasks are the same ones you see in general data integration,
+except here the final result is stored in a graph format.</p>
+
+  <p>When the data is unstructured, such as natural-language text, we
+  instead need information extraction methods—mainly entity extraction
+  (finding people, places, organizations, etc.) and relation
+  extraction (figuring out how those entities are connected). For
+  example, from the sentence “Google acquired DeepMind in 2014,” the
+  entity extraction should detect <i>Google</i> and <i>DeepMind</i> as
+  organizations. The relation extraction should detect that the
+  relationship between <i>Google</i> and <i>Deep Mind</i> is <i>has
+      acquired</i>.</p>
+
+  <p>The methods used to populate a knowledge graph depend on how
+  large the system is and how accurate the data needs to be. For very
+  large, web-scale knowledge graphs used in search engines or
+  information retrieval, it’s impossible to check every triple by
+  hand, and the system can tolerate some errors. In contrast,
+  enterprise knowledge graphs—such as those used inside a company for
+  compliance, finance, or operations—often require very high accuracy,
+  so human review becomes essential, even if it happens right before
+  the data is used. Because accuracy is always important but full
+  manual verification is expensive, many systems rely on crowdsourcing
+  or other low-cost ways of getting human input to balance quality,
+  cost, and scalability.</p>
+  
+<p>In this chapter, we will focus on knowledge graph schema design.
+  In the next two chapters we will discuss the problems that arise in
+  populating a knowledge graph from structured data, i.e., the
+  problems of record linkage and schema mapping, and the problems that
+  arise while populating from text, i.e., entity extraction and
+  relation extraction.</p>
+
+<h3>2. Knowledge Graph Design</h3>
+
+<p>Both property graphs and RDF graphs come with design challenges—some
+shared by both models and others unique to each. For instance, both
+models sometimes need to use reification (i.e., turning a statement
+into a first-class object) when a fact cannot be expressed directly as
+a simple triple.</p>
+
+<p>However, the models also differ in important ways. RDF requires a
+consistent scheme for creating and managing IRIs (global identifiers
+for entities), while property graphs do not. On the other hand,
+property graph designers must decide whether a piece of information
+should be stored as a property on a node or as a separate node
+connected by an edge—a choice that RDF largely avoids because RDF
+treats almost everything as a node with relationships.</p>
+
+<p>In the rest of this section, we outline the key design issues
+encountered in each model, highlighting which ones are shared and
+which ones are specific to RDF or property graphs.</p>
+
+<h3>2.1 Design of an RDF Graph</h3>
+
+
+<p>The standard guidelines for creating and publishing RDF data on the
+Web are known as the Linked Data Principles. They describe how to name
+things, how to make those names accessible, and how to connect data
+across the Web. The principles are:</p>
+
+<ol>
+  <li>Use URIs as names for things. (URIs uniquely identify resources;
+  modern systems also support IRIs—Internationalized Resource
+  Identifiers—which allow non-ASCII characters.) For example, the city
+  of Paris can be identified by the URI
+  http://dbpedia.org/resource/Paris</li>
+  <li>Use HTTP URIs so that people and programs can look up those
+  names. For example, typing the URI above in a browser or querying it
+  with SPARQL returns useful information about Paris.</li>
+  <li>When someone looks up a URI, provide useful information, using
+  the Web standards (RDF, SPARQL).</i>
+  <li>Include links to other URIs to help users discover additional
+  related information. For example, the Paris URI might link to
+  http://dbpedia.org/resource/France to indicate that Paris is a city
+  in France.</li>
+</ol>
+
+<p>We will consider each of these guidelines in greater detail. </p>
+
+<h4>2.1.1 Use URIs as names for things</h4>
+
+
+<p>To publish a knowledge graph on the Web, we first need to identify
+the key items in our domain—these are the things whose properties and
+relationships we want to capture in the graph. In Web terminology, all
+such items are called resources. Resources can be divided into two
+types: information resources and non-information resources.</p>
+
+<ul>
+  <li>Information resources are resources that exist on the Web
+  itself, such as documents, images, videos, and other media
+  files. For example, a Wikipedia page about the city of Paris is an
+  information resource.</li>
+
+<li>Non-information resources are things that exist in the real world
+but are not themselves web documents. These include people, physical
+products, places, proteins, scientific concepts, and other real-world
+objects. For example, the city of Paris or the Eiffel Tower are
+non-information resources, even though they may be described on the
+Web.
+</ul>
+
+<p>As a simple rule of thumb: anything that exists outside of the
+Web—what we usually think of as “real-world objects”—is considered a
+non-information resource.</p>
+
+<p>Publishers of knowledge graphs should design URIs so that they are
+simple, stable, and easy to manage. Short, meaningful (mnemonic) URIs
+are less likely to break when shared—for example, in emails—and are
+easier for people to remember. Once a URI has been assigned to a
+resource, it should remain unchanged for as long as possible. To
+support long-term persistence, it is best to avoid including
+implementation-specific details such as “.php” or “.asp” in the
+URI. Finally, URIs should be constructed in a way that allows the
+publisher to control and maintain them over time.
+  </p>
+
+
+<h4>2.1.2 Use HTTP URIs so that people can look up those names</h4>
+
+<p>We identify resources using Uniform Resource Identifiers (URIs). In
+practice, we use HTTP URIs exclusively and avoid other URI
+schemes—such as Uniform Resource Names (URNs) or Digital Object
+Identifiers (DOIs)**—because only HTTP URIs can be directly looked up
+and dereferenced on the Web. This means that when someone accesses an
+HTTP URI, the publisher can return useful information about the
+resource, making it easier to integrate, link, and reuse data across
+  the Web.</p>
+
+<p>For example, a DOI like <i>doi:10.1000/xyz123</i> identifies a
+resource but cannot be dereferenced without a special resolver
+service. An HTTP URI like <i>http://example.org/resource/Paris</i> can
+be opened directly in a browser or queried by a machine, and it can
+return structured RDF data about the city of Paris.</p>
+
+<p>The process of looking up a name on the Web is called URI
+dereferencing. When we dereference a URI that identifies an
+information resource, we expect to receive a direct representation of
+that resource—for example, a text document, an image, or a video. In
+contrast, when we dereference a URI that identifies a non-information
+resource (such as a person, place, or physical object), we cannot
+retrieve the object itself. Instead, we receive an RDF description
+that provides structured information about that resource.
+ </p>
+
+<h4>2.1.3 When someone looks up a URI, provide useful information
+using RDF and SPARQL</h4>
+
+<p>
+  When someone looks up a URI, the publisher should return a knowledge
+  graph encoded in RDF. This data should make use of standardized
+  vocabularies so that the IRIs used in the RDF description are
+  consistent and interoperable. Many well-established vocabularies
+  exist for describing data catalogs, organizations, and
+  multidimensional datasets such as statistical data on the Web. In
+  addition, Schema.org, a large open-source community effort, provides
+  widely used vocabularies for describing people, places, products,
+  events, and many other Web resources. In the following section, we
+  review several examples of these vocabularies.
+</p>
+
+
+<p>The following RDF data describes a snippet of the organizational
+structure of the UK Cabinet office.</p>
+
+
+<center>
+  <table style='font-family:courier;font-size:14px'>
+<tr><td>@prefix uk_cabinet:  	&lt;http://reference.data.gov.uk/id/department/&gt;</td></tr>
+<tr><td>uk_cabinet:co rdf:type org:Organization</td></tr>
+<tr><td>uk_cabinet:co skos:prefLabel  "Cabinet Office"</td></tr>
+<tr><td>uk_cabinet:co org:hasUnit  uk_cabinet:cabinet-office-communications</td></tr>
+<tr><td>uk_cabinet:cabinet-office-communications rdf:type org:OrganizationUnit</td></tr>
+<tr><td>uk_cabinet:cabinet-office-communications skos:prefLabel "Cabinet Office Communications"</td></tr>
+<tr><td>uk_cabinet:cabinet-office-communications org:hasPost uk_cabinet:post_246</td></tr>
+<tr><td>uk_cabinet:post_246 skos:prefLabel "Deputy Director, Deputy Prime Minister's Spokesperson"</td></tr>
+  </table>
+</center>
+
+<p>In the data above, the first triple uses the
+class <i>org:Organization</i> from the Organization ontology. The
+second triple uses the relation <i>skos:prefLabel</i> drawn from the
+SKOS ontology. SKOS stands for a Simple Knowledge Organization System,
+and provides a few commonly useful relations such
+as <i>skos:prefLabel</i> for describing data. In this
+case, <i>skos:prefLabel</i> simply allows us to associate a text label
+  with <i>uk_cabinet:co</i>. The third triple uses the predicate
+  <i>org:hasUnit</i> from the Organization ontology to describe a unit
+within the UK Cabinet office. The next two triples make additional
+assertions about this unit. The sixth triple uses
+the <i>org:hasPost</i>  to describe a position with in a
+department, and the final two triples give additional information
+about that position. </i></p>
+
+<p>It is not always possible to find existing vocabularies suitable
+for creating an RDF dataset. When it becomes necessary to create a new
+vocabulary, certain best practices should be followed. The vocabulary
+should be well-documented, self-describing, have a versioning policy,
+support multiple languages, and be published by a trusted source to
+ensure that the URIs it defines remain stable over time. A vocabulary
+is considered self-describing if each term or property includes a
+label, a definition, and a comment explaining its meaning.
+  </p>
+
+
+<h4>2.1.4 Include links to other URIs, so that they can discover more
+things</h4>
+
+<p>While publishing data in RDF, it is important to provide links to
+  other resources, as this significantly increases the usefulness and
+  interconnectedness of data. These links can be categorized into
+  three types: <i>relationship links</i>, <i>identity links</i>,
+  and <i>vocabulary links</i>. We will consider an example of each of
+  these kinds of links.  </p>
+
+<p><i>Relationship links</i> connect resources to related things in
+other datasets, such as people, places or organizations.  These links
+allow data to reference additional information, for example, linking a
+person to background information about their city or to bibliographic
+data about their publications.  In the triple below, we illustrate a
+relationship link in which a person from one dataset is asserted to be
+based near a geographical location identified by a URI in another data
+set.</p>
+
+<center>
+  <table style='font-family:courier;font-size:14px'>
+    <tr><td>@prefix big:  	&lt;http://biglynx.co.uk/people/&gt;<td></tr>
+    <tr><td>@prefix dbpedia:  	&lt;http://dbpedia.org/resource/&gt;<td></tr>
+    <tr><td>	big:dave-smith foaf:based_near	dbpedia:Birmingham </td></tr>
+    
+  </table>
+  </center>
+
+<p><i>Identity Links</i> point at URI aliases used by other data
+sources to identify the same real-world object or abstract
+concept. Identity links enable clients to retrieve further
+descriptions about an entity, and serve an important social function
+as they enable different views of the world to be expressed on the WWW
+of Data.  It is a standard practice to use the link
+type <i>http://www.w3.org/2002/07/owl#sameAs</i> to state that two URI
+aliases refer to the same resource. For example, if <i>Dave Smith</i> would
+also maintain a private data homepage besides the data that <i>Big Lynx</i>
+publishes about him, he could add a
+<i>http://www.w3.org/2002/07/owl#sameAs</i> link to his private data
+homepage, stating that the URI used to refer to him in this document
+and the URI used by <i>Big Lynx</i> both refer to the same real-world
+entity. A triple capturing this information is shown below.</p>
+
+<center>
+  <table style='font-family:courier;font-size:14px'>
+    <tr><td>@prefix ds:  	&lt;http://www.dave-smith.eg.uk&gt;<td></tr>
+    <tr><td>@prefix owl:  	&lt;http://www.w3.org/2002/07/owl&gt;<td></tr>
+    <tr><td>@prefix big:  	&lt;http://biglynx.co.uk/people/&gt;<td></tr>
+<tr><td>ds:me owl:sameAs big:dave-smith </td></tr>
+  </table>
+  </center>
+
+<p>Vocabulary links connect data to the definitions of the vocabulary
+terms used to describe it, and also link those definitions to related
+terms in other vocabularies.  These links make data self-descriptive
+and enable applications to understand and integrate data across
+vocabularies. In the example below, the
+class <i>SmallMediumEnterprise</i> defined by BigLynx is defined to be
+a subclass of the class <i>Company</i> in DBpedia. By establishing
+this link, it is possible to retrieve various assertions about the
+class Company from DBPedia, and apply them to
+class <i>SmallMediumEnterprise</i> facilitating richer data
+integration and reasoning.</p>
+
+
+<center>
+  <table style='font-family:courier;font-size:14px'>
+    <tr><td>@prefix dbpedia:  	&lt;http://dbpedia.org/ontology/&gt;<td></tr>
+    <tr><td>big:sme#SmallMediumEnterprise rdfs:subClassOf dbpedia:Company<td></tr>
+  </table>
+  </center>
+   
+<h3>2.2 Design of a Property Graph</h3>
+
+<p>The design of a property graph involves choosing nodes, node
+  labels, node properties, edges and edge properties.  The basic
+  design questions are whether to model a piece of information as a
+  property, label or as a separate object; when to introduce relation
+  properties; and how to to handle higher arity relationships. We will
+  illustrate the process of making these choices using examples.</p>
+
+
+<h4>2.2.1 Choosing Nodes, Labels and Properties</h4>
+
+<p>In a property graph model, the nodes usually represent entities in
+the domain. If we were interested in representing information about
+people, we will create a node for each individual person (e.g., John),
+  and associate the label Person with that node.</p>
+
+<p>When making further design decisions about node labels, node
+properties, and edges in a property graph, several factors should be
+considered. These include the naturalness and clarity of labels,
+whether the labels are likely to change over time, the impact on
+runtime query performance, and the cardinality of property values.</p>
+
+<p>To illustrate the choice of whether to model a piece of information
+as a label, property, or as a separate object, consider the task of
+representing the gender of a person.  We have three potential ways to
+  capture this information.</p>
+
+<ul>
+  <li><b> As labels</b>: Create <i>:Male</i>
+and <i>:Female</i> as labels and associate them with the <i>Person</i>
+    nodes.</li>
+
+  <li><b>As a property</b>:   Createreate a property called "gender", and associate it
+with <i>Person</i> nodes and allow it to have the values "male" and
+    "female". </li>
+
+  <li><b>As a separate object</b>: we Create a <i>Gender</i> object, associate it
+with <i>Person</i> using a <i>has_gender</i> relationship, and give it
+    a property called "name" that can take "male" and "female" as values.</li>
+  </ul>
+Each approach has different implications for flexibility, query simplicity, and data modeling clarity.
+
+</p>
+
+<p>The labels in a property graph model are used to group nodes into
+sets. All nodes labeled with the same label belong to the same
+set. Queries can work with these sets instead of the whole graph,
+making queries easier to write and more efficient. A node may be
+labeled with any number of labels, including none, making labels an
+optional addition to the graph. As a label groups nodes into a set, it
+can be viewed as a class. The question of whether to introduce a new
+label can be restated as whether to introduce a new class.</p>
+
+<p>Creating new classes <i>Male</i> and <i>Female</i> vs introducing a
+  node property "gender" that can take two values of "male" and
+  "female" conveys the same information.  In general, whenever a
+  phrase naturally occurring in language is frequently used in a
+  domain, it is a candidate to be introduced as a class as long as the
+  membership in the class does not change over time. As some
+  implementations optimize the retrieval based on the use of node
+  labels, it can result in a faster performance on queries that need
+  to filter the results based on the membership in the class. If class
+  membership changes with time, neither a label nor a node property
+  value is an appropriate choice, and we need to use a relation. We
+  will consider this in the next section.</p>
+
+<h4>2.2.2 When to introduce Relationships between Objects</h4>
+
+<p>For situations that could be modeled either by using a node
+property or by introducing a separate object connected by a
+relationship, at least two considerations come into play. The first,
+discussed in the previous section, is whether class membership changes
+over time. The second consideration is query performance, as some
+modeling choices can make queries faster or more efficient. We will
+examine these considerations next.
+   </p>
+
+<p>Continuing the example from the previous section, if the gender
+  of a person could change over a period of time, then the information should
+  be represented  as a separate <i>Gender</i> node
+  connected to the <i>Person</i> node via a  <i>has_gender</i>
+  relationship. A relationship property can be used on 
+  the <i>has_gender</i> edge to indicate the time duration
+  for which that particular gender value applies.</p>
+
+<p>However, dreating a separate <i>Gender</i> node for every person
+  could lead to a very large number of edges which is inefficient as
+  for most people the gender does not change. In such cases, a hybrid
+  approach may be preferable: for most people, the gender is stored as
+  a node property, while for the small subset of individuals whose
+  gender changes over time, it is represented via a relationship to
+  a <i>Gender</i> node.</p>
+
+<p>Let us consider a situation where better query performance is a key
+  consideration. Suppose we wish to model movies, and their genres.
+  In one design, for a node of type <i>Movie</i>, we can introduce a
+  property "genre" that can take values such as "Action", "SciFci",
+  etc.  In another design, we can introduce a new node
+  type <i>Genre</i> that "name" property which can take values such as
+  s "Action", "SciFci". We will then relate a node of
+  type <i>Movie</i> with a node of type <i>Genre</i> using
+  the <i>has_genre</i> relationship.  In general, a movie can belong
+  to more than one genre.  Suppose we wish to query for those movies
+  that have at least one common genre. In the first solution in which
+  we use the node property "genre", this query would be stated in
+  Cypher as follows:</p>
+
+<center>
+  <table width='600' style='font-family:courier;font-size:14px'>
+  <tr><td><tt>MATCH (m1:Movie), (m2:Movie)</tt></td></tr>
+  <tr><td><tt>WHERE any(x IN m1.genre WHERE x IN m2.genre)</tt></td></tr>
+  <tr><td><tt>AND m1 <> m2</tt></td></tr>
+  <tr><td><tt>RETURN m1, m2</tt></td></tr>
+  </table>
+</center>
+
+<p>When we model genre as a separate object, the same query can be stated as follows:</p>
+
+<center>
+  <table width='600' style='font-family:courier;font-size:14px'>
+  <tr><td><tt>MATCH (m1:Movie)-[:has_genre]->(g:Genre),</tt></td></tr>
+  <tr><td><tt>&nbsp; &nbsp; &nbsp;   (m2:Movie)-[:has_genre]->(g)</tt></td></tr>
+  <tr><td><tt>WHERE m1 <> m2</tt></td></tr>
+  <tr><td><tt>RETURN m1, m2</tt></td></tr>
+  </table>
+</center>
+
+<p>In the second query above, we are able to more directly make use of
+graph patterns, and in some graph engines, this query has a faster
+runtime performance because of indexing on relations. Hence, in this
+case, one has to choose between the two designs depending on the kind
+of queries that will be expected.</p>
+
+<h4>2.2.3 When to introduce Relationship Properties</h4>
+
+<p>We have already seen an example of using a property on a
+relationship to handle cases where the relationship changes over
+time. Other common reasons to attach properties to relationships
+include capturing weights or confidence scores, or recording
+provenance and other metadata.</p>
+
+<p>Some graph engines do not index relationship properties. If the use
+case allows most queries to be evaluated without accessing these
+properties—using them only for final filtering—then the lack of
+indexing may not significantly impact performance. However, if
+accessing relationship properties is critical for query performance,
+it is better to reify the relationship as a separate node, which we
+will discuss in the next section.</p>
+
+
+<h4>2.2.4 Handling non-binary Relationships</h4>
+
+<p>We often need to model relationships that involve more than two entities. A common
+example  is the <i>between</i> relationship that
+given objects <i>A</i>, <i>B</i> and <i>C</i> captures that <i>C</i>
+is between <i>A</i> and <i>B</i>. A standard approach to capturing
+  such higher arity relationships in a graph is <i>reification</i>.</p>
+
+<p>Although we have previously discussed <i>reification</i> in the
+context of RDF, but this technique is equally useful and desirable for
+property graphs. To capture the <i>between</i> relationship we
+introduce a new node type, <i>Between_Relationship</i> that has two
+properties: <i>has_object</i> (holding values <i>A</i> and <i>B</i>)
+and <i>has_between_object</i> (holding value <i>C</i>). This approach
+can be generalized to relationships of any arity: create a new node
+type for the relationship and add node properties for each argument of
+that relation. </p>
+
+<h3>3. Summary</h3>
+
+<p>In this chapter, we considered the design of the graph data model
+for both RDF and property graphs.  Many design concerns -- such
+as whether to reify a relationship, handling non-binary relationships,
+--  are common to both models. The choice of whether to use a property vs a relation is
+  unique to the property graph data model.</p>
+
+<p>The data publishing guidelines for the RDF encourage the use of
+IRIs, reuse of existing vocabularies, and making links across
+vocabularies.  While such data linking practices are not intrinsic to
+property graphs, adopting them can enhance a property graph’s
+  interoperability and usefulness in data integration.</p>
+
+
+<h3>4. Further Reading</h3>
+
+<p>Further elaboration of the guidelines for publishing RDF data on
+the web are available in a
+monograph <a href="https://link.springer.com/book/10.1007/978-3-031-79432-2">[Heath & Bizer 2011]</a>.  A similar monograph is available for ontology design <a href="https://link.springer.com/book/10.1007/978-3-031-79486-5">[Kendall & McGuinness 2019]</a>.
+  A course on the design of the Wikidata schema was recently
+offered <a href="https://www.wikidata.org/wiki/Wikidata:WikiProject_Ontology/Ontology_Course">[Wikidata
+Ontology Course 2025]</a> The course introduces the Wikidata ontology, and
+covers numerous design challenges in creating it.
+
+  </p>
+
+
+<p>For designing property graph schemas, extensive documentation is
+available from graph database vendors such as
+Neo4j <a href="https://neo4j.com/docs/getting-started/data-modeling/">[Neo4j
+Data Modeling]</a> and
+TigerGraph <a href="https://docs.tigergraph.com/gsql-ref/4.2/tutorials/schema-design-guide?utm_source=chatgpt.com">[TigerGraph
+    Schema Design]</a>.</p>
+
+
+
+
+<ul>
+  
+<li><a href="https://link.springer.com/book/10.1007/978-3-031-79432-2">[Heath & Bizer 2011]</a> Heath, Tom, and Christian Bizer. Linked Data: Evolving
+    the Web into a Global Data Space. 1st ed. Synthesis Lectures on
+    the Semantic Web: Theory and Technology. Morgan & Claypool,
+    2011.</a></li>
+
+<li><a href="https://link.springer.com/book/10.1007/978-3-031-79486-5">[Kendall
+& McGuinness 2019]</a>Kendall, Elisa F., and Deborah
+L. McGuinness. Ontology Engineering. Springer International
+Publishing, 2019. https://doi.org/10.1007/978-3-031-79486-5</li>
+
+<li><a href="https://www.wikidata.org/wiki/Wikidata:WikiProject_Ontology/Ontology_Course">[Wikidata
+Ontology Course 2025]</a> Peter F. Patel Schneider and Ege Atacan
+Do&#287;an. “Wikidata: WikiProject Ontology/Ontology Course.” Last
+modified July 10, 2025. Accessed December 5,
+2025. https://www.wikidata.org/wiki/Wikidata:WikiProject_Ontology/Ontology_Course </li>
+
+<li> <a href="https://neo4j.com/docs/getting-started/data-modeling/">[Neo4j
+Data Modeling]</a> Neo4j, Inc. n.d. “What Is Graph Data Modeling?” Accessed December 5, 2025. https://neo4j.com/docs/getting-started/data-modeling/ </li>
+
+<li><a href="https://docs.tigergraph.com/gsql-ref/4.2/tutorials/schema-design-guide?utm_source=chatgpt.com">[TigerGraph
+    Schema Design]</a> TigerGraph. “Schema Design Guide.” GSQL
+    Language Reference, 4.2. Accessed December 5,
+    2025. https://docs.tigergraph.com/gsql-ref/4.2/tutorials/schema-design-guide</li>
+
+
+</ul>
+
+  
+<!--=======================================================================-->
+
+
+      </td>
+    </tr>
+  </table>
+  <br/>
+</center>
+
+<!--=======================================================================-->
+
+
+        </td>
+      </tr>
+    </table>
+  </center>
+</body>
+
+<!--=======================================================================-->
+
+
+</html>

@@ -1,0 +1,777 @@
+<html>
+
+<!--=======================================================================-->
+
+
+<head>
+  
+  <title>How to Create a Knowledge Graph from Text?</title>
+
+
+<meta charset="UTF-8">
+</head>
+
+<!--=======================================================================-->
+
+
+<body style='background-color:#990000'>
+  <center>
+    <table width='720' cellspacing='0' cellpadding='0' bgcolor='#ffffff'>
+      <tr>
+        <td>
+
+<!--=======================================================================-->
+
+  <table width='100%' height='120' cellspacing='0' cellpadding='0' bgcolor='#f8f7f7'>
+    <tr>
+      <td width='40'>&nbsp;</td>
+      <td width='120' align='center' valign='center'>
+        <a href='http://www.stanford.edu/class/cs520/'><img width='128' src='images/flyer-v2c.jpg'/>CS520</a>
+      </td>
+      <td align='center' valign='center'>
+
+        <span style='font-size:36px'>Knowledge Graphs</span><br/>
+      </td>
+      <td width='120' align='center' style='color:#000066;font-size:18px'>
+        <i>What<br/>should AI<br/>Know ?</i>
+      </td>
+      <td width='40'>&nbsp;</td>
+    </tr>
+  </table>
+
+<!--=======================================================================-->
+
+
+<hr style='border-top: 1px solid #888888;margin:0'/>
+<table width='100%' height='40' cellspacing='0' cellpadding='0' bgcolor='#f8f7f7'>
+  <tr><td align='center' style='font-size:18px'>How to Create a Knowledge Graph from Text?</td></tr>
+</table>
+<hr style='border-top: 1px solid #888888;margin:0'/>
+
+<!--=======================================================================-->
+
+<center>
+  <br/>
+  <table width='640' cellpadding='0'>
+    <tr>
+      <td>
+
+<!--=======================================================================-->
+
+<h3>1. Introduction</h3>
+
+<p>Textual sources—ranging from financial news and SEC filings to
+digital publications like the <em>Wall Street Journal</em>—contain a
+wealth of data critical for market research and business
+intelligence. By leveraging Natural Language Processing (NLP), we can
+transform this unstructured text into knowledge graphs to enable
+advanced analytics.</p>
+
+<p>Because NLP is a vast and evolving field, this section does not aim
+to provide an exhaustive overview. Instead, we focus on the core NLP
+concepts essential for building knowledge graphs. Understanding these
+fundamentals is increasingly important regardless of the specific NLP
+method used for information extraction. Many specialized data vendors
+have created dedicated systems to extract structured data from the
+vast sea of natural language text.
+</p>
+
+<p>To construct a robust knowledge graph from unstructured text, we primarily rely on three fundamental NLP tasks:
+
+<ul>
+<li> <b>Entity Extraction:</b> Also known as Named Entity Recognition
+(NER), this is the process of identifying and classifying key entities
+within the text—such as Organizations, People, or Locations. In the
+context of a knowledge graph, these extracted entities serve as the
+primary nodes.</li>
+
+<li><b>Relation Extraction:</b> Once entities are identified, the next
+step is to determine the associations between them. For example, from
+a financial report, we might extract the relation "is CEO of" between
+a Person entity and an Organization entity. This process is also used
+to identify specific properties of an entity, such as "Net Sales" or
+"Headquarters." These relations and properties form the edges or node
+attributes within the graph.</li>
+
+<li><b>Entity Resolution:</b> This task ensures that multiple mentions
+across a text refer to the correct single entity. This involves
+coreference resolution (linking "John Smith" to the pronoun "he" later
+in a paragraph) and entity linking (recognizing that "Apple," "Apple
+Inc.," and "the Cupertino-based tech giant" all refer to the same
+node). Proper resolution prevents the creation of duplicate nodes and
+ensures the graph remains accurate and connected</li>
+</ul>
+</p>
+
+
+<p>In this chapter, we provide an overview of the techniques used for
+entity and relation extraction. We have omitted entity resolution from
+this discussion, as it is an advanced topic that falls outside the
+scope of this volume.</p>
+
+<p>Most modern extraction techniques rely on adapting pre-trained
+language models to specific tasks. For our requirements, we treat
+these models and their underlying machine learning architectures as
+"black boxes," as they are now widely available as accessible,
+off-the-shelf tools. This shift in the NLP landscape allows knowledge
+graph creators to focus on the final product—the graph itself—rather
+than the intricacies of model architecture. Instead, the primary
+responsibility of the developer shifts toward providing high-quality
+training and evaluation data to fine-tune these models.</p>
+
+<p>We will begin with a high-level overview of language models before
+diving into the specifics of the entity and relation extraction
+tasks.</p>
+  
+
+<h3>2. Overview of Language Models</h3>
+
+<p>Language modeling is the task of predicting the next word in a
+   sequence based on the words that preceded it.  For example, given a
+   sentence fragment: "students opened their", a language model
+   predicts the most likely subsequent words, such as, "book", "exam",
+   "laptop", etc.</p>
+
+
+<p>More formally, given a set of words x<sub>1</sub>, ... ,
+x<sub>n-1</sub>, a language model calculates the probability P(
+x<sub>n</sub> | x<sub>1</sub>, ... , x<sub>n-1</sub>), for every word
+x<sub>n</sub> in its vocabulary. This technology is the backbone of
+familiar tools like search engine autocomplete, smartphone auto
+correcting, and modern generative AI.</p>
+
+<p>To understand how these probabilities are calculated, consider the
+  following tiny corpus consisting of only three sentences.</p>
+
+<center>
+<table>
+    <tr><td>dogs chase cats<td></tr>
+    <tr><td>cats love milk<td></tr>
+    <tr><td>dogs love people<td></tr>
+ </table>
+</center>
+
+<p>This corpus has six words: <i>dogs, chase, cats, love, milk</i> and <i>people</i>. The number
+of times each of them occurs in the corpus is respectively 2, 1, 2, 2,
+1, 1.  We can also observe that any pair of words that appears in the corpus occurs exactly
+once.  For example, <i>love</i>  is followed by <i>cats</i> only once. If we wanted
+to calculate the probability P(milk|love), we could calculate that
+value to be 0.5 as the ratio of<i> count (love milk)</i> and
+<i>count(love)</i>. Here <I>count(love milk)</i> denotes the number of
+times <i>love</i> is followed by <i>milk</i> in the corpus (i.e., 1),
+and the number of times <i>love</i> appears in the corpus (i.e., 2).
+
+
+<p>Modern language models are created by training a deep learning
+model, such as a Recurring Neural Network, on a large corpus of text.
+Numerous variations of pre-trained language models are available as
+open source products that can be adapted for the purpose of the
+specific task at hand. As we explore the techniques for entity and
+relation extraction in the following sections, we will describe how
+these models are adapted to transform raw sentences into the
+triples required for a knowledge graph.
+  </p>
+  
+
+<h3>3. Entity Extraction</h3>
+
+
+<p>We will begin by considering a concrete example of entity
+extraction, and then give an overview of different approaches to
+entity extraction, and conclude the section by discussing some
+  challenges in performing well at this task. </p>
+
+
+<h4>3.1 An Example of Entity Extraction</h4>
+
+<p>A named entity is generally defined as anything that can be
+referred to by a proper name, such as a person, location, or
+organization. In practice, this definition is often extended to
+include "entity-like" values such as dates, times, currencies, and
+numerical expressions.</p>
+
+<p>Consider the following sentence from a news story:</p>
+
+<center>
+  <table>
+    <tr><td>&#160;&#160;&#160;&#160;</td><td>Cecilia Love, 52, a
+retired police investigator who lives in Massachusetts, said she paid
+around $370 a ticket with tax for nonstop United Airlines flights to
+Sacramento from Boston for her niece's high school graduation in
+June, 2020.</td><td>&#160;&#160;&#160;&#160;</td></tr>
+  </table>
+    </center>
+
+<p>To a computer, this sentence is just a string of characters. An
+entity extraction model "extracts" the entities by tagging the
+segments of text with their corresponding types:</p>
+
+<center>
+  <table>
+    <tr><td>&#160;&#160;&#160;&#160;</td><td>[<sub>PER</sub> Cecilia
+Love], 52, a retired police investigator who lives in [<sub>LOC</sub>
+ Massachusetts], said she paid around [<sub>MONEY</sub> $370] a ticket
+with tax for nonstop [<sub>ORG</sub> United Airlines] flight to
+[<sub>LOC</sub> Sacramento] from [<sub>LOC</sub> Boston] for her
+niece's high school graduation in [<sub>TIME</sub>
+June, 2020].</td><td>&#160;&#160;&#160;&#160;</td></tr>
+  </table>
+    </center>
+
+<p>The paragraph contains seven named entities, one of which is a
+person (indicated by PER), three are locations (indicated by LOC), one
+is money (indicated by MONEY), one is an organization (indicated by
+ORG), and one is a time (indicated by TIME).  Depending on the domain
+of application, we may introduce more or less named entity types. For
+example, in the task of identifying key terms in a text, there is only
+  one entity type that captures a key term. </p>
+
+<p> Entity extraction is a versatile tool used across many modern
+software applications. 
+
+        <ul>
+            <li>
+                <strong>Question Answering (QA):</strong> When a user
+                asks a specific question, entity extraction helps the
+                system isolate potential answers from a retrieved
+                passage. For instance, if a user asks, <em>"Which
+                airline did Cecilia fly?"</em>, the system uses NER to
+                identify <strong>[ORG United Airlines]</strong> as the
+                target answer.
+            </li>
+            <li>
+                <strong>Semantic Augmentation:</strong> In word
+                processing or web browsing, entity extraction can
+                identify entities in real-time and provide
+                "hover-over" definitions, historical facts, or direct
+                links to external databases like Wikipedia or a
+                corporate CRM.
+            </li>
+            <li>
+                <strong>Knowledge Discovery:</strong> By extracting
+                entities across thousands of documents, researchers
+                can identify hidden patterns, such as a specific
+                person appearing frequently in proximity to a
+                particular location or organization.
+            </li>
+        </ul>
+    </div>
+
+    </p>
+
+
+<h4>3.2 Approaches to Entity Extraction</h4>
+
+<p>
+At its core, entity extraction is framed as a <strong>sequence
+        labeling</strong> problem. In this framework, we associate a
+        label with every word (or token) in a sentence, and the
+        model's task is to predict the most likely label for each.
+    </p>
+
+    
+
+<p>We can perform entity extraction using three broad approaches:</p>
+
+    <ul>
+        <li>
+            <strong>Classical Sequence Labeling:</strong> These are
+            statistical models, such as Conditional Random Fields
+            (CRF), that analyze features of a word and its neighbors
+            to determine the most probable sequence of labels.
+        </li>
+        <li>
+            <strong>Deep Learning Models:</strong> Modern
+            approaches use neural architectures like Transformers to
+            learn complex linguistic patterns. These models represent
+            the current state-of-the-art and are highly effective at
+            understanding context.
+        </li>
+        <li>
+            <strong>Rule-Based Approaches:</strong> These rely on
+            predefined patterns, regular expressions, or dictionaries
+            (gazetteers). They are particularly useful for highly
+            structured data such as phone numbers, dates, or
+            standardized product codes.
+        </li>
+    </ul>
+
+<p> To facilitate the labeling, we introduce a labeling scheme that is
+  known as BIOES in which the meaning of different tags is as follows:
+  B stands for the beginning of an entity, I stands for the interior
+  of an entity, O stands for a word that is not part of an entity, E
+  stands for the end of an entity, and S stands for a single word
+  entity.  As an example, the words in the text snippet shown above
+  will be labeled as shown below.</p>
+
+
+<center>
+  <table>
+<th width='70'></th><th width='25'></th><th width='70'></th><th width='25'></th><th width='90'></th><th width='25'></th><th width='70'></th><th width='25'></th><th width='70'></th><th width='25'></th>
+<tr>
+<td>Cecilia</td><td>  B</td>
+<td>Love   </td><td>  E</td>
+<td>,      </td><td>  O</td>
+<td>52     </td><td>  O</td>
+<td>,      </td><td>  O</td></tr>
+<td>a      </td><td>  O</td>
+<td>retired</td><td>  O</td>
+<td>police </td><td>  O</td>
+<td>investigator </td><td>  O</td>
+<td>who </td><td>  O</td></tr>
+<td>lives</td><td> O</td>
+<td>in  </td><td>  O</td>
+<td>Massachusetts</td><td>  S</td>
+<td>,      </td><td>  O</td>
+<td>said   </td><td>  O</td></tr>
+<td>she    </td><td>  O</td>
+<td>paid   </td><td>  O</td>
+<td>around </td><td>  O</td>
+<td>$370   </td><td>  S</td>
+<td>a      </td><td>  O</td></tr>
+<td>ticket </td><td>  O</td>
+<td>with   </td><td>  O</td>
+<td>tax    </td><td>  O</td>
+<td>for    </td><td>  O</td>
+<td>nonstop</td><td>  O</td></tr>
+<td>United </td><td>  B</td>
+<td>Airlines</td><td> E</td>
+<td>flights</td><td>  O</td>
+<td>to     </td><td>  O</td>
+<td>Sacramento</td><td>S</td></tr>
+<td>from</td><td>  O</td>
+<td>Boston</td><td>  S</td>
+<td>for</td><td>  O</td>
+<td>her</td><td>  O</td>
+<td>niece's</td><td>O</td></tr>
+<td>high</td><td>  O</td>
+<td>school</td><td> O</td>
+<td>graduation</td><td>O</td>
+<td>in</td><td>O</td>
+<td>June</td><td> B</td></tr>
+<td>,  </td><td>  I</td>
+<td>2020</td><td> E</td>
+</tr>
+  </table>
+</center>
+
+
+<p>
+In the <strong>sequence labeling</strong> approach, we train a
+statistical model—such as conditional random fields (CRF) —to predict
+the correct BIOES tag for each token. This method is characterized by
+a heavy reliance on feature engineering, where developers must
+manually identify and extract relevant attributes from the text to
+guide the model's decisions. These features often include linguistic
+attributes like part-of-speech tags and the base form of the word, as
+well as orthographic patterns such as whether the word is in all-caps,
+contains digits, or possesses specific prefixes and
+suffixes. Furthermore, models may incorporate lexical lookups against
+a <em>gazetteer</em> (a list of known entities) or leverage word
+embeddings to capture semantic context.  A significant challenge of
+this approach is that the performance can vary drastically depending
+on the application domain and the choice of features. As a result,
+moving from a general news corpus to a specialized field like medicine
+or law requires substantial effort to "hand-craft" and tune a new
+feature set that can accommodate the specific terminologies and
+structures of that domain.
+    </p>
+
+<p>In a deep learning approach, there is no feature engineering, and
+  we simply input word embeddings to a language model. Instead of
+  predicting the next word, the language model now predicts one of the
+  five tags (B, I, O, E, S) tags that are required for entity
+  recognition. To adapt the language model to this new task, we first
+  pre-train it using the corpus for that domain, and then train it for
+  the task at hand.  In the task-specific training of the language
+  model, we provide the training by adding a distinguished token [CLS]
+  that denotes the beginning of an entity, and a second distinguished
+  token [SEP] that denotes the end of an entity.  This training allows
+  the model to predict these distinguished tags in response to a text
+  input. Such predictions are enough for us to produce one of the
+  five required tags for each word.</p>
+
+<p>Finally, in a rule-based approach, one specifies labeling rules in
+a formal query language. The rules can include regular expressions,
+references to dictionaries, semantic constraints, and may also  invoke automated
+extractors and reference table structures.  The rules may also invoke
+machine learning modules for specific tasks.  Rule application can be
+sequenced in a way that we first use high precision rules, followed by
+lookup in standard name list, followed by language-based heuristics,
+and when all else fails, resort to probabilistic machine learning
+  techniques. </p>
+
+
+<h4>3.3 Challenges in Entity Extraction</h4>
+
+<p>Although entity extractors can achieve precision and recall above
+90% on specific tasks, maintaining strong performance across diverse
+domains remains challenging. Differences in vocabulary, writing style,
+and underlying assumptions often cause methods that work well in one
+setting to degrade in another. In this section, we examine several key
+challenges encountered in entity extraction.</p>
+
+
+<p>When labeling entities with semantic classes, ambiguity often
+arises.  For example, the name <i>Louis Vuitton</i>, can refer to
+either a person, or an organization, or a commercial product.
+Resolving such ambiguities typically requires analyzing surrounding
+context, such as nearby words, sentence structure, and the broader
+topic of the text.
+</p>
+
+<p>Machine learning models typically require large amounts of labeled
+training data. In practice, such data may be unavailable or
+significantly largely incomplete. Training models on incomplete or
+biased datasets can substantially degrade their performance and limit
+their ability to generalize.
+  </p>
+
+<p>A related variation of entity extraction is key phrase
+identification, which aims to extract salient phrases from text rather
+than instances of a small, fixed set of entity classes. Because key
+phrases can belong to many possible categories—or may not fit cleanly
+into any predefined class—identifying key phrases is more
+difficult. In addition, key phrases can vary widely in complexity,
+ranging from highly specific expressions (e.g., duplication of a cell
+by fission) to very general terms (e.g., attach), making it difficult
+to design a single technique that performs well in all cases.</p>
+
+<p>Entities can appear in many different surface forms, including
+synonyms, acronyms, plural forms, and other morphological
+variations. For example, the organization Louis Vuitton may also be
+referred to simply as LV in text, while key phrases such as
+duplication of a cell by fission may appear in shortened or rephrased
+forms like cell fission or cell duplication. Effective entity
+extraction therefore requires access to lexical knowledge that
+captures these variations—knowledge that is often unavailable when
+working in a new domain. Consequently, lexicon extraction, the task of
+automatically identifying relevant terms and their variants, becomes
+an important complementary problem for improving entity extraction
+performance.</p>
+
+
+<h3>4. Relation Extraction</h3>
+
+<p>In this section, we begin with several concrete examples of
+relation extraction to build intuition for the task. We then provide
+an overview of common approaches used to extract relations from text,
+and conclude by discussing the key challenges involved in achieving
+strong performance.</p>
+
+<h4>4.1 Examples of Relation Extraction</h4>
+
+<p>Considering the text snippet from the previous section, we can
+extract relations such as Cecilia Love <i>lives in</i> Massachusetts,
+United Airlines <i>flies from</i> Boston, and United Airlines <i>flies
+to</i> Sacramento, etc. In a typical relation extraction task, the
+relevant entities are assumed to have already been identified;
+relation extraction therefore builds directly on entity extraction. In
+addition, the set of relations to be extracted (e.g., lives in, flies
+from, flies to) is usually defined in advance.
+</p>
+
+<p>A common example of relation extraction task is to extract
+information from Wikipedia Infoboxes.  This information can be used 
+ to improve the search results over the internet.  Wikipedia
+infoboxes define relationships such as <i>preceded
+by</i>, <i>succeeded by</i>, <i>children</i>, <i>spouse</i>, etc.
+Achieving high accuracy on this task is challenging because of
+numerous corner cases. For example, Larry King has been married
+multiple times, and therefore, the extractor must be able to take that
+into account the time duration for which the marriage existed.</i>
+
+<p>The relation extraction is often applied for extracting
+domain-specific relationships. For example, the Unified Medical
+Language Systems supports relationships such
+as <i>causes</i>, <i>treats</i>, <i>disrupts</i>, etc. In addition to
+standard relations like <i>subclass-of</i>, and <i>has_part</i>,
+extracting domain-specific relationships requires careful design and
+selection of relationships ahead of time.  Some approaches attempt to
+extract relations without specifying them ahead of time, but in
+practice, these methods are generally less usefulness for producing
+accurate and meaningful results.</i>
+
+
+<h4>4.2 Approaches to Relation Extraction</h4>
+
+<p>There are three broad approaches to relation extraction: syntactic
+patterns,  supervised machine learning, and
+unsupervised machine learning.  As discussed earlier, the
+unsupervised machine learning has limited use in practice. Therefore,
+we will primarily consider the use of syntactic patterns and supervised
+machine learning for relation extraction.</p>
+
+<p>A classical approach to extract relations relies on syntactic
+  patterns known as Hearst Patterns, which are designed to identify
+  specific semantic relationships in the text. For example, consider
+  the following sentence.:</p>
+
+<center>
+  <table>
+    <tr><td>&#160;&#160;&#160;&#160;</td><td>The bow lute, such as the
+    Bambara ndang, is plucked and has an individual curved neck for
+    each string. </td><td>&#160;&#160;&#160;&#160;</td></tr>
+  </table>
+    </center>
+
+<p>Even though we may have never heard of Bambara ndang, we can still
+infer that it is a kind of bow lute. More generally, we can identify
+syntactic patterns, that are strong indicators of the <i>subclass
+of</i> relationship.  The following five syntactic patterns for
+identifying <i>subclass-of</i> relations are well established and have
+been shown to be highly effective in practice.
+</p>
+
+<center>
+  <table>
+   <th></th> <th width='120'>Pattern Name</th><th>Example</th>
+   <tr><td>&#160;&#160;&#160;&#160;</td><td align='center'><i>such as</i></td><td>... works by authors <i>such as</i> Herric, Goldsmith, and Shakespear ...</td><td>&#160;&#160;&#160;&#160;</td></tr>
+       <tr><td>&#160;&#160;&#160;&#160;</td><td align='center'><i>or other</i></td><td>Bruises, wounds, broken bones, <i>or other</i> injuries  ...</td><td>&#160;&#160;&#160;&#160;</td></tr>
+   <tr><td>&#160;&#160;&#160;&#160;</td><td align='center'><i>and other</i></td><td>... temples, treasuries, <i>and other</i> Civic Buildings, ... </td><td>&#160;&#160;&#160;&#160;</td></tr>
+   <tr><td>&#160;&#160;&#160;&#160;</td><td align='center'><i>including</i></td><td>All common law countries <i>including</i> Canada and England ... </td><td>&#160;&#160;&#160;&#160;</td></tr>
+             <tr><td>&#160;&#160;&#160;&#160;</td><td align='center'><i>especially</i></td><td>Most European countries <i>especially</i> France, England, and Spain,  ... </td><td>&#160;&#160;&#160;&#160;</td></tr>
+  </table>
+</center>
+
+<p>New syntactic patterns for extracting relationships can be
+discovered using a bootstrapping approach. First, we collect a small
+set of entity pairs for which the relationship is already known. We
+then search for sentences in a corpus where these pairs co-occur. By
+identifying common structures across such sentences, we can define new
+patterns, which are then tested against the corpus to extract
+  additional entity pairs.</p>
+
+<p>A well-known algorithm for this approach is Dual Iterative Pattern
+Relation Expansion (DIPRE). Consider the task of extracting (author,
+title) relationships. We start with a small set of known pairs
+(entities) and locate all sentences containing these pairs. From these
+sentences, we generate new syntactic patterns. The algorithm
+recursively uses the newly discovered patterns to identify additional
+  entity pairs, which in turn are used to generate further patterns.</p>
+
+<p>For example, given the seed pair of (William
+  Shakespear, The Comedy of Errors), and the following sentences,
+
+    <ul>
+    <li>The    Comedy    of    Errors,    by        William    Shakespeare,    was ...</li>
+    <li>The    Comedy    of    Errors,    by        William    Shakespeare,    is ...</li>
+    <li>The    Comedy    of    Errors,    one    of William    Shakespeare's    earliest    attempts ...</li>
+    <li>The    Comedy    of    Errors, one    of    William    Shakespeare's    most  ...</li>
+  </ul>
+  we can derive the following patterns:
+  <ul>
+    <li>?x , by ?y,  </li>
+    <li>?x , one of ?y‘s  </li>
+  </ul>
+Using the newly derived patterns, the extraction process continues
+recursively.</p>
+  
+
+<p>Supervised approaches to relation extraction require large amounts
+of labeled training data. When such data is available, standard
+machine learning algorithms can be trained to extract relationships
+effectively. However, in many domains, obtaining sufficient labeled
+data is difficult. To address this, weak supervision techniques have
+become popular. The basic idea of weak supervision is to write several
+approximate labeling functions that can automatically generate noisy
+training data. These weak labels are then combined using a
+probabilistic model to produce a final set of training labels, which
+can be used to train a supervised relation extraction system.</p>
+
+
+<p>As an example of a weak labeling function, consider the <i>has
+part</i> relation. For this relation, it has been difficult to
+develop reliable syntactic patterns of the sort suggested above.  One
+possible weak labeling function is to first generate
+a parse tree of the sentence, and then look for two entity nodes 
+  connected by a path of length one that contains the verbs <i>has</i> or
+  <i>have</i>. For example, consider the sentence: Most prokaryotes
+  have a cell wall located outside the cell membrane. In the parse
+  tree of this sentence <i>prokaryotes</i> and <i>cell wall</i> are
+  connected through a path of length one that has a labe <i>have</i>
+  indicating a <i> has part</i> relationship.  For taxonomic
+  (subclass-of) relationships, another weak labeling function is based
+  on entity modifiers: if two entities share the same base word but
+  one includes an additional modifier, this can indicate a taxonomic
+  relationship. For example, eukaryotic cell can be identified as a
+  subclass of cell.</p>
+
+
+<p>To adapt a language model for relation extraction, we modify the
+  input representation of a sentence so that each individual term is
+  explicity marked. For example, consider the sentence: All cells have
+  a cell membrane. This sentence has two terms <i>cells</i> and
+  <i>cell membrane</i>.  We will indicate the presence of these terms
+  in the sentence by enclosing them in markers [TERM1-START] and
+  [TERM1-END] respectively denoting the start and the end of a term.
+  The set of tokens in the resulting sentence will be: ["All",
+  "[TERM1-START]", "cells", "[TERM1-END]", "have", "a",
+  "[TERM2-START]", "cell" "membrane", "[TERM2-END]", "."]. Our
+  training data then consists of sentences paired with the expected
+  relationship between the two terms. Once trained on that data, the
+  task for the model is to predict the relationships between the two
+  terms indicated in an input sentence. With this simple modification
+  to the input representation, a general-purpose language model can be
+  repurposed for relation extraction.
+  </p>
+
+  
+<h4>4.3 Challenges in Relation Extraction</h4>
+
+<p>A major challenge in relation extraction is obtaining sufficient
+labeled training data. Manually annotating text with relation labels
+is time-consuming and expensive, which limits the scale of supervised
+approaches. Weak supervision offers a promising alternative by
+allowing models to be trained on data that contain noisy or imperfect
+labels. In this approach, external knowledge bases such as Wikidata
+and lexical resources like WordNet can be used to define labeling
+functions—heuristic rules that automatically assign tentative labels
+to text. Although these labels may be inaccurate for individual
+examples, learning algorithms can often aggregate many such weak
+signals to produce effective models. Designing better and more
+expressive weak labeling functions, and methods for combining them,
+remains an active area of research.
+  </p>
+
+<p>In addition to training, an effective workflow is needed to
+validate the outputs of relation extraction systems. In many cases,
+this validation can be performed through crowdsourcing, where human
+annotators check whether extracted relations are correct. To reduce
+annotation effort, validation can be prioritized for extracted
+relations with low confidence scores, which are more likely to contain
+errors. This selective validation process naturally leads to active
+learning loops, in which human feedback is used to iteratively improve
+the model. Designing efficient validation workflows and active
+learning strategies for relation extraction remains an important and
+active area of research.</p>
+
+
+
+<h3>5. Summary</h3>
+
+<p>In this chapter, we examined the problem of automatically
+constructing a knowledge graph from text. We focused on two
+fundamental tasks: entity extraction and relation extraction. Early
+approaches to both tasks relied on manually defined rules and
+syntactic patterns derived from linguistic analysis. In contrast, most
+modern methods build on large pre-trained language models, which are
+then fine-tuned or adapted to the specific text corpus and extraction
+task of interest.</p>
+
+
+<p>For both entity extraction and relation extraction, the most
+prevalent current approach is to adapt pre-trained language models
+learned using deep learning techniques. Earlier syntactic and
+rule-based methods continue to play an important role, particularly in
+bootstrapping the training data needed for these models through weak
+or heuristic labeling. Despite these advances, validating the outputs
+of entity and relation extraction systems at scale remains an
+important and unresolved challenge.</p>
+
+
+<p>Entity linking, also known as entity resolution, is another
+important task in constructing a knowledge graph from text. It
+involves mapping an entity mention in a document (such as a person,
+organization, or location) to the corresponding unique node in a
+knowledge graph. Accurate entity and relation extraction are
+prerequisites for effective entity linking, since errors at earlier
+stages propagate downstream. For this reason, entity linking is often
+considered a more advanced technique. In practice, however, it may or
+may not be the primary bottleneck in a given application, depending on
+factors such as the quality of the extracted entities, the ambiguity
+of entity names, and the goals of the underlying business problem.</p>
+
+<h3>6. Further Reading</h3>
+
+<p>The discussion on entity and relation extraction in this chapter draws
+from the information extraction chapter of the NLP textbook by Jurafsky and Martin
+<a href="https://web.stanford.edu/~jurafsky/slp3/">[Jurafsky &
+  Martin 2025]</a> which is also an excellent source for more
+  in-depth discussion of modern approaches to natural language
+  processing.  The weak labeling approach was pioneered in the Snorkel project at Stanford.
+  <a href="https://arxiv.org/abs/1711.10160">[Ratner
+    et. al. 2017]</a>.  The methodology described here was used in
+    bootstrapping an ontology graph from a
+    textbook <a href="https://www.akbc.ws/2021/assets/pdfs/nDe2D8DDXKR.pdf">[Chaudhri
+    et. al. 2022]</a>.
+
+<p>Much recent work focuses on leveraging generative AI models for
+  knowledge graph construction.  Overview of efforts in the knowledge
+  engineering community is available
+  in <a href="https://www.sciencedirect.com/science/article/pii/S1570826825000022">[Shimizu
+  & Hitzler 2025]</a>.  The work, however, remains preliminary and
+  aspirational with ample room for systematic studies [Walker
+  et. al. 2024]. A workshop on this topic is being held as part of the
+  International Semantic Web
+  Conference <a href="https://sites.google.com/view/llms4ol2025">[LLMs4OL
+  2025].</p>
+
+
+
+
+
+<p><a href="https://web.stanford.edu/~jurafsky/slp3/">[Jurafsky & Martin 2025]</a> Jurafsky, D., & Martin,
+J. H. (2025). Speech and Language Processing: An Introduction to
+Natural Language Processing, Computational Linguistics, and Speech
+Recognition with Language Models (3rd ed., online draft). Stanford
+University. Retrieved from
+  https://web.stanford.edu/~jurafsky/slp3/</p>
+
+<p><a href="https://arxiv.org/abs/1711.10160">[Ratner et. al. 2017]</a> Ratner, Alexander, Stephen
+Bach, Henry Ehrenberg, Jason Fries, Sen Wu, and Christopher
+Ré. “Snorkel: Rapid Training Data Creation With Weak Supervision”,
+Proceedings of the VLDB Endowment, 11, no. 3 (November 1, 2017):
+  269–282. https://doi.org/10.14778/3157794.3157797.</p>
+
+<p><a href="https://www.akbc.ws/2021/assets/pdfs/nDe2D8DDXKR.pdf"> [Chaudhri
+et. al. 2022]</a> Chaudhri, V. K., Boggess, M., Aung, H. L., Mallick,
+D. B., Waters, A. C., & Baraniuk, R. E. (2021). A case study in
+bootstrapping ontology graphs from textbooks. In Proceedings of the
+3rd Conference on Automated Knowledge Base Construction (AKBC).</p>
+
+<p><a href="https://www.sciencedirect.com/science/article/pii/S1570826825000022"> [Shimizu
+& Hitzler 2025]</a> Shimizu, C., & Hitzler, P. (2025). Accelerating
+knowledge graph and ontology engineering with large language
+models. Journal of Web Semantics, 85,
+  100862. https://doi.org/10.1016/j.websem.2025.100862</a></p>
+
+<p><a href="https://dl.acm.org/doi/full/10.1145/3613905.3650844"> [Walker
+et. al. 2024]</a> Walker, J., Koutsiana, E., Nwachukwu, M.,
+Meroño Peñuela, A., & Simperl, E. (2024). The promise and challenge of
+large language models for knowledge engineering: Insights from a
+hackathon. In Extended Abstracts of the 2024 CHI Conference on Human
+Factors in Computing Systems
+  (pp. 1–9). ACM. https://doi.org/10.1145/3613905.3650844</p>
+
+<p><a href="https://sites.google.com/view/llms4ol2025">[LLMs4OL
+2025]</a> LLMs4OL 2025: The 2nd Large Language Models for Ontology
+Learning Challenge @ ISWC 2025. (2025). Retrieved December 14, 2025,
+from https://sites.google.com/view/llms4ol2025</a></p>
+
+
+
+
+
+<!--=======================================================================-->
+
+
+      </td>
+    </tr>
+  </table>
+  <br/>
+</center>
+
+<!--=======================================================================-->
+
+
+        </td>
+      </tr>
+    </table>
+  </center>
+</body>
+
+<!--=======================================================================-->
+
+
+</html>

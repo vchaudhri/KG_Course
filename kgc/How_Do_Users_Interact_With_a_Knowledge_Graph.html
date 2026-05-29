@@ -1,0 +1,639 @@
+<html>
+
+<!--=======================================================================-->
+
+
+<head>
+  <title>How to Users Interact with a Knowledge Graph?</title>
+</head>
+
+<!--=======================================================================-->
+
+
+<body style='background-color:#990000'>
+  <center>
+    <table width='720' cellspacing='0' cellpadding='0' bgcolor='#ffffff'>
+      <tr>
+        <td>
+
+<!--=======================================================================-->
+
+  <table width='100%' height='120' cellspacing='0' cellpadding='0' bgcolor='#f8f7f7'>
+    <tr>
+      <td width='40'>&nbsp;</td>
+      <td width='120' align='center' valign='center'>
+        <a href='http://www.stanford.edu/class/cs520/'><img width='128' src='images/flyer-v2c.jpg'/>CS520</a>
+      </td>
+      <td align='center' valign='center'>
+
+        <span style='font-size:36px'>Knowledge Graphs</span><br/>
+      </td>
+      <td width='120' align='center' style='color:#000066;font-size:18px'>
+        <i>What<br/>should AI<br/>Know ?</i>
+      </td>
+      <td width='40'>&nbsp;</td>
+    </tr>
+  </table>
+
+<!--=======================================================================-->
+
+
+<hr style='border-top: 1px solid #888888;margin:0'/>
+<table width='100%' height='40' cellspacing='0' cellpadding='0' bgcolor='#f8f7f7'>
+  <tr><td align='center' style='font-size:18px'>7. How do Users Interact with a Knowledge Graph?</td></tr>
+</table>
+<hr style='border-top: 1px solid #888888;margin:0'/>
+
+<!--=======================================================================-->
+
+<center>
+  <br/>
+  <table width='640' cellpadding='0'>
+    <tr>
+      <td>
+
+<!--=======================================================================-->
+
+<h3>1. Introduction</h3>
+
+<p>In previous chapters, we discussed how to design a knowledge graph,
+how to construct it using different methods, and how to perform
+inference over it. In this chapter, we shift our focus to how users
+interact with a knowledge graph. User interaction is closely connected
+to schema design: a well-designed schema is intended to be
+understandable not only by machines, but also by people. One of the
+key advantages of knowledge graphs is that the same conceptual model
+of a domain, captured in the schema, also serves as the foundation for
+the graph&apos;s implementation.</p>
+
+<p>For example, in a knowledge graph about academic publications, the
+schema may include concepts such as Paper, Author, and Venue, along
+with relationships like writes and publishedIn. Because these concepts
+closely reflect how users naturally think about the domain, a user can
+explore the knowledge graph by asking questions such as "Which papers
+did this author write?" or "Where was this paper published?" without
+needing to understand how the data is physically stored.</p>
+
+<p>In this chapter, we examine common interaction techniques that
+become possible once a knowledge graph schema has been populated with
+instances.</p>
+
+
+<h3>2. Modes of Interaction with a Knowledge Graph</h3>
+
+<P>The primary purpose of a knowledge graph is to help answer users&apos;
+questions. Some of these questions are known in advance, for example,
+standard queries that support reports or dashboards, while others may
+emerge only after users begin exploring the data or when the system
+itself reveals unexpected patterns.</p>
+
+<p>User interaction with a knowledge graph can take different
+forms. In some cases, interaction happens in real time, such as when a
+user submits a query and immediately receives results. In other cases,
+interaction occurs through batch processes, where the knowledge graph
+is analyzed offline to generate reports, summaries, or analytics for
+later use.</p>
+
+<p>Together, these considerations lead to four broad modes of
+interaction, which can be organized along two dimensions: whether the
+interaction is initiated by the user (a pull model) or initiated by
+the system in response to available information (a push model), and
+whether the questions being answered are known in advance or emerge
+dynamically. In the following sections, we examine each of these
+interaction modes in more detail.</p>
+
+
+<center>
+<img alt="Knowledge Graph Interaction Modes" width='300' src="images/kg_interaction.jpg" />
+</center>
+<blockquote>Figure 1: Different Modes for Interacting with a Knowledge Graph</blockquote>
+
+<p>Knowledge graph interaction modes are typically supported through a
+combination of search, query answering, and graphical interfaces. For
+example, in an academic publications knowledge graph, a user might
+look for information about authors, papers, or venues. A search
+interface resembles a search engine, allowing users to type keywords
+such as an author&apos;s name or a paper title to quickly locate relevant
+entities or facts. Query interfaces enable more precise questions, for
+instance, a user could ask, "Which papers did Dr. Smith publish in
+2024?", using either a formal query language or a natural language
+interface. Graphical interfaces allow users to visualize
+relationships, compose queries by connecting entities, and explore the
+network of papers, authors, and venues interactively.</p>
+
+<p>In practice, knowledge graph systems often combine these interface
+types to support diverse user needs. For example, a query about an
+author&apos;s publications might be composed using both keyword search
+and a structured query builder, with the results displayed as a graph
+showing authors linked to their papers, alongside a textual list of
+publication details. In this section, we examine three key interface
+types in detail -- graphical visualization, structured query
+interfaces, and natural language queries -- focusing on how they help
+users explore and retrieve knowledge effectively. Formal query
+languages such as SPARQL and Cypher have been covered in previous
+chapters, so our focus here will be on their practical application in
+user -- facing interfaces.</p>
+
+
+
+<h3>3. Visualization of a Knowledge Graph</h3>
+
+<p>It is common to see graphical visualizations of knowledge graphs
+containing thousands of nodes and edges. For example, a knowledge
+graph showing all publications, authors, and citations in a large
+research domain might render every paper and author at once, creating
+a dense "hairball" that is difficult to interpret. These
+visualizations often serve merely as a backdrop, rather than actively
+contributing to insights or helping users identify the most important
+patterns. Simply working with a knowledge graph does not automatically
+make a graphical representation the best way to interact with
+it. Instead, we should rely on established principles of visualization
+design and select the medium that most effectively conveys the
+intended information.</p>
+
+<p>In this section, we begin by summarizing key visualization
+  principles, and then outline several best practices for visualizing
+  knowledge graphs in ways that support meaningful user interaction.
+</p>
+
+
+<h4>3.1 General Principles for Visualization Design </h4>
+
+<p>
+The purpose of visualizing a knowledge graph is to create a representation that significantly amplifies the user's understanding of the data. Effective visualizations help users by:
+</p>
+<ul>
+  <li>Presenting more information than they could remember at one time.</li>
+  <li>Highlighting important pieces of information, reducing the need to search.</li>
+  <li>Placing relevant data next to each other to facilitate comparisons.</li>
+  <li>Guiding attention as users navigate the visualization.</li>
+  <li>Providing an abstract view by selectively omitting or recoding information.</li>
+  <li>Allowing interaction, which supports deeper engagement and exploration of the data.</li>
+</ul>
+
+<p>
+For example, in an academic publications knowledge graph, visualization can help a researcher quickly see patterns such as which authors collaborate most frequently, which papers are most cited, and how research topics are connected -- all without having to manually parse hundreds of records.
+</p>
+
+<p>A visualization is an adjustable mapping from the data to a visual
+  form for a human perceiver. A Knowledge graphs is powerful because
+  its schema can be visualized directly in the same form in which it
+  is stored as a data, i.e., without requiring any transformation.  We
+  should not assume this approach to always carry over when we are
+  visualizing the data stored in the knowledge graph, because, the
+  stored data size is much larger than the size of the schema. We, therefore,
+  need to explicitly undertake a design of visual structures for best
+  presenting knowledge graph data.</p>
+
+
+<p>
+Designing a visual structure involves encoding information in several ways:
+</p>
+<ul>
+  <li>Spatial substrate: Determining how elements are positioned. For instance, nodes representing authors might be arranged to minimize edge crossings, or papers could be grouped by topic.</li>
+  <li>Marks: Visible elements such as points, lines, or areas that represent data values. In our example, nodes for papers might be circles, with the size representing citation count.</li>
+  <li>Connections: Lines or edges that show relationships. Hierarchical or tree structures can be used for nested data, such as grouping papers under their respective authors.</li>
+  <li>Enclosure: Shapes or borders that group related elements, like enclosing all papers from the same research lab.</li>
+  <li>Retinal properties: Color, hue, saturation, transparency, or shape to highlight attributes. For example, papers could be colored by research area.</li>
+  <li>Temporal encoding: Animation or time-based representation can show changes over time, such as the growth of citations for a particular paper or author network.</li>
+</ul>
+
+
+<p>
+Visualizations can be grouped into four categories:
+</p>
+
+<ul>
+  
+  <li>Simple: Displays up to three variables, which is generally
+  considered the limit for easy human comprehension. For instance, a
+  scatter plot of papers by publication year, citation count, and
+  topic area.</li>
+  
+  <li>Composed: Combines multiple simple visualizations to show
+  additional variables, such as a scatter plot alongside a bar chart
+  of author collaborations.</li>
+  
+  <li>Interactive: Lets users explore and navigate the data. In our
+  academic knowledge graph example, a user could click on an author
+  node to expand connected papers or see co-authors.</li>
+  
+  <li>Attentive/Reactive: Responds to user actions and may anticipate
+  useful information. For example, when a researcher selects a highly
+  cited paper, the system could highlight related papers or emerging
+  topics automatically.</li>
+  
+</ul>
+
+<p>
+By following these principles, knowledge graph visualizations can
+transform complex data into insights that are understandable,
+actionable, and engaging for users.
+</p>
+
+<h4>3.2 Best Practices for Knowledge Graph Visualization</h4>
+
+<p>
+In the previous section, we reviewed principles for designing effective visualizations and emphasized that showing all data in a cluttered graph is rarely the best approach. In this section, we outline a step-by-step approach for designing knowledge graph visualizations that leverage these principles.
+</p>
+
+<p>
+The design process can include the following steps:
+</p>
+<ul>
+  <li>Determine which variables to encode in the spatial layout. For
+  example, in an academic publications knowledge graph, nodes
+  representing authors could be positioned to minimize edge crossings,
+  while papers could be grouped by research area.</li>
+  
+  <li>Combine multiple spatial encodings to increase dimensionality,
+  allowing different relationships or attributes to be represented
+  simultaneously.</li>
+  
+  <li>Use retinal properties, such as color, size, or shape, to add
+  additional dimensions of information. For instance, node size could
+  indicate citation count, and color could indicate research
+  area.</li>
+  
+  <li>Add interactive controls to allow selective exploration,
+  filtering, and zooming, so users can navigate the graph without
+  being overwhelmed.</li>
+  
+  <li>Incorporate attentive-reactive features, where the system
+  highlights relevant nodes or suggests related data elements based on
+  the user&amp;s focus.</li>
+</ul>
+
+<p>
+A practical visualization could include several key features. First,
+an aggregated overview presents a summary of the data to help users
+orient themselves. Users can then zoom into specific areas or pose
+queries to focus on subsets of interest. While exploring a segment of
+the knowledge graph, users can request details on individual nodes or
+relationships. Finally, attentive-reactive features can proactively
+suggest important papers, authors, or emerging topics, helping users
+discover relevant information without needing to search exhaustively.
+</p>
+
+<h3>4. Structured Query Interfaces</h3>
+
+<p>
+A structured query interface (SQI) is an important way for users to interact with a knowledge graph. In such an interface, users start typing expressions, and the system suggests completions that can be mapped into an underlying query language, such as Cypher or SPARQL. 
+</p>
+
+<p>
+To illustrate, consider the following snippet of a knowledge graph schema from Wikidata:
+</p>
+
+<center>
+  <img alt="An Example Property Graph Schema" width="400" src="images/country_schema.jpg" />
+</center>
+<blockquote>Figure 2: A snippet of the Wikidata Schema</blockquote>
+<p>
+Based on this schema, users can pose queries such as:
+</p>
+
+<ul style="font-family:courier; font-size:14px;">
+  <li>city with largest area</li>
+  <li>top five cities by area</li>
+  <li>countries whose capitals have area at least 500 square kilometers</li>
+  <li>states bordering Oregon and Washington</li>
+  <li>second tallest mountain in France</li>
+  <li>country with the most number of rivers</li>
+</ul>
+
+<p>One way to specify a structured query interface is to specify rules
+of grammar in the Backus Naur Form (BNF). The rules shown below
+  illustrate this approach for the set of examples considered above.</p>
+
+
+<center>
+  <table style="font-family:courier;font-size:14px">
+    <tbody>
+      <tr><td>&lt;np&gt; ::= &lt;noun&gt; "and" &lt;noun&gt;</td></tr>
+<tr><td> &lt;np&gt; ::= &lt;geographical-region&gt; | </td></tr>
+<tr><td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;geographical-region&gt; &lt;spatial-relation&gt; &lt;geographical-region&gt; </td></tr>
+<tr><td>&lt;geographical-region&gt; ::= "capital of country" | "city" | "country" | </td></tr>
+      <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	  "mountain" | "river" | "state" </td></tr>
+<tr><td>&lt;property&gt; ::= "area" | "height" </td></tr>
+<tr><td>&lt;aggregate-relator&gt; ::= "with the most number of" | "with largest" |"with" </td></tr>
+<tr><td>&lt;aggregate-modifier&gt; ::= "top" &lt;number&gt; | "second tallest" </td></tr>
+<tr><td>&lt;spatial-relation&gt; ::= "bordering" | "inside" </td></tr>
+<tr><td>&lt;number-constaint&gt; ::= "atleast" &lt;quantity&gt;  </td></tr>
+<tr><td>&lt;quantity&gt; ::= &lt;number&gt; &lt;unit&gt;  </td></tr>
+<tr><td>&lt;unit&gt; ::= "Square Kilometer"  </td></tr>
+<tr><td>  &lt;ranking&gt; ::= "by"  </td></tr>
+</tbody></table>
+</center>
+ 
+<p>We can reduce the queries above to expressions that conform to this
+grammar. For example, the first query, "city with the largest
+area", conforms to the following expression:</p>
+
+<center>
+  <table style="font-family:courier;font-size:14px">
+    <tbody>
+      <tr><td>&lt;geographical-region&gt; &lt;aggregate-relator&gt; &lt;property&gt; </td></tr>
+</tbody></table>
+</center>
+
+<p>Next consider the query "top five cities by area". The following
+expression that captures this query is equivalent to "top five city
+by area".  For our structured query interface to be faithful to
+original English, we will need to incoporate the lexical knowledge
+about plurals.</p>
+
+<table style="font-family:courier;font-size:14px">
+    <tbody>
+      <tr><td>&lt;aggregate-modifier&gt; &lt;geographical-region&gt; &lt;ranking&gt; &lt;property&gt; </td></tr>
+</tbody></table>
+</center>
+
+<p>Finally, we show below the expression for the third query:
+"countries whose capitals have area at least 500 squared
+kilometers". The expression show below has the following version in
+English: "country with capital with area at least 500 squared
+kilometers". In addition to the incorrect pluralization, it uses
+different words, for example, "with" instead of "whose", and "with"
+instead of "have".  Most reasonable speakers of English would consider
+both the queries to be equivalent.  This example highlights the
+tradeoffs in designing structured query interfaces: they may not be
+faithful to all the different ways of posing the query in English, but
+they can handle a large number of practical useful cases.  For
+example, the above grammar will correctly handle the query "state with
+  largest area", and a numerous other variations.</p>
+
+<table style="font-family:courier;font-size:14px">
+    <tbody>
+      <tr><td> &lt;geographical-region&gt; &lt;aggregate-relator&gt; &lt;geographical-region&gt;  </td></tr>
+            <tr><td>&nbsp; &nbsp; &nbsp;&lt;aggregate-relator&gt; &lt;property&gt; &lt;number-constraint&gt; &lt;quantity&gt; </td></tr>
+</tbody></table>
+</center>
+
+<p>Once we have developed a BNF grammar for a structured query
+  interface that specifies the range of queries of interest, it is
+  straightforward to check whether an input query is legal, and also
+  to generate a set of legal queries which could be suggested to the
+  user proactively to autocomplete what they have already typed.  We
+  show below a logic programming translation of the above BNF
+  grammar.</p>
+
+
+<center>
+  <table style="font-family:courier;font-size:14px">
+    <tbody>
+      <tr><td>np(X) :- np(Y) &amp; np(Z) &amp; append(X,Y,Z) </td></tr>
+<tr><td> np(X) :- geographical_region(X)  </td></tr>
+<tr><td> np(A) :- geographical_region(X) &amp; spatial_relation(Y) &amp; geographical_region(Z) &amp; append(A,X,Y,Z) </td></tr>
+      <tr><td>geographical_region(capital)</td></tr>
+      <tr><td>geographical_region(city)</td></tr>
+      <tr><td>geographical_region(country)</td></tr>
+     <tr><td>geographical_region(mountain)</td></tr>
+     <tr><td>geographical_region(river)</td></tr>
+     <tr><td>geographical_region(state)</td></tr>
+     <tr><td>property(area)</td></tr>
+      <tr><td>property(height)</td></tr>
+      <tr><td>aggregate_relator(with_the_most_number_of)</tr></td>
+<tr><td>aggregate_relator(with_largest)</tr></td>
+<tr><td>aggregate_relator(with)</tr></td>
+<tr><td>aggregate_modifier(second_tallest)</tr></td>
+<tr><td>aggregate_modifier(X) :- number(N) &amp; append(X,top,N)</tr></td>
+<tr><td>spatial_relation(bordering)</tr></td>
+<tr><td>aggregate_relation(insider)</tr></td>
+<tr><td>number_constraint(X) :- quantity(Q) &amp; append(X,atleast,Q)</tr></td>
+<tr><td>quantity(Q) :- number(N) &amp; unit(U) &amp; append(Q,N,U)</tr></td>
+<tr><td>unit(square_kilomters)</tr></td>
+<tr><td>ranking(by)</tr></td>
+</tbody></table>
+</center>
+
+<p>Improvements in structured queries accepted by the system require
+improving the grammar. This approach can be very cost-effective for
+situations where the entities of interest and their desired
+relationships can be easily captured in a grammar. In the next
+section, we consider approaches that aim to accept queries in English,
+and try to overcome the problem of required engineering of the grammar
+through a machine learning approach.</p>
+
+
+<h3>5. Natural Language Query Interfaces</h3>
+
+<p>A possible approach to go beyond the structured queries, and to get
+around the problem of massive engineering of the grammar, is to use a
+semantic parsing framework.  In this framework, we begin with a
+minimal grammar and use it with a natural
+language parser that is trained to
+choose the most likely interpretation of a question. A semantic
+parsing system for understanding natural language questions has five
+components: executor, grammar, model, parser and learner. We briefly
+describe each of these components and then illustrate them using
+  examples.</p>
+
+<p>Unlike traditional natural language parsers that produce a parse
+  tree, a semantic parsing system produces a representation that can
+  be directly executed on a suitable platform. For example, it could
+  produce a SPARQL or a Cypher query.  The engine that evaluates the
+  resulting query then becomes the executor for the semantic parsing
+  system.</p>
+
+<p>The grammar in a semantic parsing system specifies a set of rules
+  for processing the input sentences. It connects utterances to
+  possible derivations of logical forms. Formally, a grammar is set of
+  rules of the form &alpha; &#8658; &beta;.  We show below a snippet
+  of a grammar used by a semantic parsing system.</p>
+
+<center>
+  <table style="font-family:courier;font-size:14px">
+    <tbody>
+      <tr><td>NP(x) with the largest RelNP(r)  &#8658; argmax(1,1,x,r) </td></tr>
+      <tr><td>top NP(n) NP(X) by the RelNP(r)  &#8658; argmax(1,n,x,r) </td></tr>
+            <tr><td>NP(x) has RelNP(r) at least NP(n)  &#8658; (< arg(x,r) n) </td></tr>
+</tbody></table>
+</center>
+
+
+<p>The first rule in the above grammar can be used to process "city
+with the largest area".  The right-hand side of each rule specifies an
+executable form. For the first rule, <i>argmax(m,n,x,r)</i> is a
+relation that consists of a ranked list of <i>x</i> (ranked
+between <i>m</i> and <i>n</i>) such that the ranking is defined on
+the <i>r</i> values of <i>x</i>. Similarly, the third rule handles the
+query "countries whose capital has area at least 15000 square
+kilomter".  In the right hand side of the rule,
+  <i>(< arg(x,r), n)</i>  specifies the computation to determine those <i>x</i> such that their
+	<i>r</i> value is less than <i>n</i>.</p>
+
+
+  <p>Given an input question, the application of grammar may result in
+  multiple alternative interpretations.  A model defines a probability
+  distribution over those interpretations to specify which of them is
+  most likely.  A common approach is to use the log-linear machine
+  learning model that takes as input the features of each
+  interpretation. We define the features of
+  an interpretation by  maintaining a vector in which each position is
+  a count of how many times a particular rule of the grammar was
+  applied in arriving at that interpretation.  The model also contains
+  another vector that specifies the weight of each feature for
+  capturing the importance of each feature. One goal of the learning
+  then is to determine an optimal weight vector.</p>
+
+<p>Given a trained model, and an input, the parser computes its high
+probability interpretation. Assuming that the utterance is given as a
+sequence of tokens, the parser (usually a chart parser), recrusively
+builds interpretations for each span of text.  As the total number of
+interpretations can be exponential, we typically limit the number of
+interpretations at each step to a pre-specified number (e.g., 20).  As a
+result, the final interpretation is not guaranteed to be optimal, but it
+very often turns out to be an effective heuristic.</p>
+
+<p> The learner computes the parameters of the model, and in some
+  cases, additions to the grammar, by processing the training
+  examples.  The learner optimizes the parameters to maximize the
+  likelihood of observing the examples in the training data. Even
+  though we may have the training data, but we do not typically have
+  the correct interpretation for each instance in the data. Therefore, the
+  training process will consider any interpretation that can reproduce an
+  instance in the training data to be correct. We typically use a
+  stochastic gradient descent to optimize the model.</p>
+
+
+<p>
+The components of a semantic parsing system are relatively loosely
+coupled. The executor is concerned purely with what we want to express
+independent of how it would be expressed in natural language. The
+grammar describes how candidate logical forms are constructed from the
+utterance but does not provide algorithmic guidance nor specifies a way
+to score the candidates. The model focuses on a interpretation
+and defines features that could be helpful for predicting
+accurately. The parser and the learner provide algorithms largely
+independent of semantic representations. This modularity allows us to
+improve each component in isolation.
+</p>
+
+<p>Understanding natural language queries accurately is an extremely difficult
+  problem.  Most semantic parsing systems report an accuracy in the
+  range of 50-60%.  Improving the performance further requires
+  amassing training data or engineering the grammar.  Overall success
+  of the system depends on the tight scope of the desired set of
+  queries and availability of training data and computation power.</p>
+
+<h3>6. Summary</h3>
+
+<p>
+In this chapter, we explored the various ways end-users can interact
+with knowledge graphs. The key takeaway is that simply displaying many
+nodes and edges on a screen is rarely the most effective
+approach. Graphical views can be useful for understanding the schema,
+which is typically small and structured, but they are often less
+effective for exploring instance-level data.
+</p>
+
+<p>
+Designing an effective interface requires considering the business
+problem, the type of data, and the resources available for interface
+development. In practice, the best interfaces often combine multiple
+interaction methods: search for quickly locating information,
+structured queries for precise data retrieval, and natural language
+question answering for limited, targeted use cases. For example, a
+user might start with a search to find a city, refine results with a
+structured query, and then ask a natural language question to compare
+specific properties across cities.
+</p>
+
+<p>
+By thoughtfully combining these approaches, we can design knowledge
+graph interfaces that are both usable and informative, supporting
+real-world decision-making rather than just visual exploration.
+</p>
+
+<h3>7. Further Reading</h3>
+
+<p>The discussion on visualization design in this chapter draws on the
+work of Stu Card, which provides many detailed examples and
+illustrations of effective visualization
+principles <a href="https://www.researchgate.net/publication/311706649_Information_Visualization">[Card
+2008]</a>. For readers interested in structured queries, these can be
+seen as a subset of controlled natural languages, which have also been
+used for knowledge capture. Our examples in this chapter focus on
+controlled language solely for querying purposes. A good starting
+point for a more extensive discussion is Kowalski&apos;s position
+paper <a href="https://www.doc.ic.ac.uk/~rak/papers/LPOP.pdf">
+[Kowalski 2020]</a>.</p>
+
+<p>Natural language query interfaces have been explored extensively
+  through semantic parsing. Percy Liang&apos;s work demonstrates how a
+  semantic parser can map user questions into formal queries over a
+  knowledge
+  graph <a href="https://dl.acm.org/doi/epdf/10.1145/2866568">[Liang
+  2016]</a>. This approach allows precise translation of natural
+  language into SPARQL or Cypher queries while handling variations in
+  phrasing.</p>
+
+<p>Much recent research leverages large language models (LLMs) to
+generate queries over knowledge graphs. For example, given a question
+like "Which countries have capitals with an area greater than 500
+km<sup>2</sup>?", an LLM can be prompted with the schema and example queries to
+produce the equivalent SPARQL query. Accuracy improves significantly
+when the model has access to schema
+information <a href="https://arxiv.org/pdf/2405.11706"> [Allemang
+&amp; Sequeda 2024]</a>. Due to the unpredictable performance of
+current LLMs, a common strategy is to have the model map input
+questions to a set of predefined query templates in SPARQL or Cypher,
+combining natural language understanding with precise, tested query
+  structures.</p>
+
+<p><a href="https://www.graphistry.com/">Graphistry</a> is a
+commercial company focused on the visual aspects of leveraging
+knowledge graphs. Their work illustrates how high-quality
+visualizations can help users explore complex relationships, uncover
+insights, and make sense of large-scale knowledge graph data,
+highlighting the value of visualization in a comprehensive knowledge
+graph offering.</p>
+
+
+<p><a href="https://www.researchgate.net/publication/311706649_Information_Visualization">[Card
+2008]</a> Card, S. K. (2008). Information visualization. In
+J. A. Jacko & A. Sears (Eds.), The Human Computer Interaction
+Handbook: Fundamentals, Evolving Technologies and Emerging
+Applications (pp. 509-543). Lawrence Erlbaum Associates.
+
+<p><a href="https://www.doc.ic.ac.uk/~rak/papers/LPOP.pdf"> [Kowalski
+2020]</a> Kowalski, R. (2020). Logical English. Position paper
+  prepared for Logic and Practice of Programming (LPOP) 2020.</p>
+
+<p><a href="https://dl.acm.org/doi/epdf/10.1145/2866568">[Liang
+2016]</a> Liang, P. (2016). Learning executable semantic parsers for
+natural language understanding. Communications of the ACM, 59(9),
+68-76. https://doi.org/10.1145/2866568</p>
+
+<p><a href="https://arxiv.org/pdf/2405.11706"> [Allemang &amp; Sequeda
+2024]</a> Allemang, D. & Sequeda, J. F. (2024). Increasing the LLM
+Accuracy for Question Answering: Ontologies to the Rescue! arXiv
+preprint arXiv:2405.11706. https://arxiv.org/abs/2405.11706
+</p>
+
+
+
+<!--=======================================================================-->
+
+
+      </td>
+    </tr>
+  </table>
+  <br/>
+</center>
+
+<!--=======================================================================-->
+
+
+        </td>
+      </tr>
+    </table>
+  </center>
+</body>
+
+<!--=======================================================================-->
+
+
+</html>

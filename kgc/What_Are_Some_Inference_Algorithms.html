@@ -1,0 +1,1034 @@
+<html>
+
+<!--=======================================================================-->
+
+
+<head>
+  <title>What are  Knowledge Graph Inference Algorithms?</title>
+
+</head>
+
+<!--=======================================================================-->
+
+
+<body style='background-color:#990000'>
+  <center>
+    <table width='720' cellspacing='0' cellpadding='0' bgcolor='#ffffff'>
+      <tr>
+        <td>
+
+<!--=======================================================================-->
+
+  <table width='100%' height='120' cellspacing='0' cellpadding='0' bgcolor='#f8f7f7'>
+    <tr>
+      <td width='40'>&nbsp;</td>
+      <td width='120' align='center' valign='center'>
+        <a href='http://www.stanford.edu/class/cs520/'><img width='128' src='images/flyer-v2c.jpg'/>CS520</a>
+      </td>
+      <td align='center' valign='center'>
+
+        <span style='font-size:36px'>Knowledge Graphs</span><br/>
+      </td>
+      <td width='120' align='center' style='color:#000066;font-size:18px'>
+        <i>What<br/>should AI<br/>Know ?</i>
+      </td>
+      <td width='40'>&nbsp;</td>
+    </tr>
+  </table>
+
+<!--=======================================================================-->
+
+
+<hr style='border-top: 1px solid #888888;margin:0'/>
+<table width='100%' height='40' cellspacing='0' cellpadding='0' bgcolor='#f8f7f7'>
+  <tr><td align='center' style='font-size:18px'>6. What are some Knowledge Graph Inference Algorithms?</td></tr>
+</table>
+<hr style='border-top: 1px solid #888888;margin:0'/>
+
+<!--=======================================================================-->
+
+<center>
+  <br/>
+  <table width='640' cellpadding='0'>
+    <tr>
+      <td>
+
+<!--=======================================================================-->
+
+<h1>1. Introduction</h1>
+
+<p>Once a knowledge graph has been constructed, we can ask questions
+about it and use its contents to draw new conclusions. For example, a
+query might retrieve the fact that Alice works for Intuit and that
+and is located in California. Retrieval alone returns these
+stored facts exactly as they appear in the graph. Inference goes a
+step further: using these facts and the rules of inference, the
+system can conclude that Alice recently moved to California, even if this
+statement is not explicitly stored. In this chapter, we study
+inference algorithms that enable such reasoning. These algorithms are
+accessed through the same declarative query interface used for
+retrieval, allowing users to seamlessly obtain both explicitly stored
+facts and newly inferred ones.</p>
+
+
+<p>We will consider two broad classes of inference algorithms: graph
+algorithms and ontology-based algorithms. Graph algorithms use graph
+operations such as finding shortest paths between nodes and
+identifying important or influential nodes in a graph. Ontology-based
+algorithms, in contrast, operate over the same graph structure but
+explicitly take its semantics into account. For example, they may
+traverse only semantically meaningful paths or infer new relationships
+using background domain knowledge. In this chapter, we examine both
+classes of algorithms and how they complement each other.
+</p>
+
+
+<h1>2. Graph-based Inference Algorithms</h1>
+
+<p>We will consider three broad classes of graph algorithms: path
+finding, centrality detection, and community detection. Path finding
+focuses on identifying paths between two or more nodes that satisfy
+specific properties, such as minimal length or cost. Centrality
+detection aims to determine which nodes are most important within a
+graph. Because "importance" can be defined in different ways, a
+variety of centrality measures and algorithms have been
+developed. Finally, community detection seeks to identify groups of
+nodes that are more strongly related to each other than to the rest of
+the graph. Community detection is particularly useful for studying
+emergent patterns and behaviors in graphs that may not be apparent
+from local or pairwise relationships alone.</p>
+
+<p>We will take a closer look at each of these categories of graph
+algorithms. For every category, we will start with an overview, show
+how it can be applied to real-world problems, and introduce a few
+representative algorithms that illustrate the key ideas in action.</p>
+
+
+<h2>2.1 Path Finding Algorithms</h2>
+
+<p>Path-finding in a graph can take several forms. One common task is
+finding the shortest path between two nodes -- the route that minimizes
+the total cost of traveling along the edges. If the edges have no
+weights, we simply count the number of steps. For example, in a city
+map, the shortest path between two intersections might correspond to
+the route that takes the fewest turns or covers the least
+distance.</p>
+
+<p>Another variation is computing a minimum spanning tree, which
+connects all nodes in the graph using the least total cost. Imagine
+planning a trip where you want to visit several landmarks while
+traveling as little as possible; the minimum spanning tree helps
+identify the most efficient set of connections.</p>
+
+<p>Finally, we can also look at finding shortest paths between all
+pairs of nodes, which can be useful for applications like routing
+delivery trucks across a city or designing efficient communication
+networks. These path-finding algorithms help us navigate and organize
+complex networks in ways that are both practical and efficient.</p>
+
+<p>As an example of a specific shortest-path algorithm, we will
+consider the A* algorithm, which generalizes the classical Dijkstra's
+algorithm. The A* algorithm not only finds the shortest path in a
+graph but also uses a heuristic to guide the search, making it more
+efficient in many cases. It is widely used in applications such as
+route planning in maps and solving search problems in AI planning.</p>
+
+							
+<p> The A* algorithm operates by maintaining a tree of paths
+starting from the initial node and extending those paths one edge at a
+time until its termination criterion is satisfied. At each step, it
+determines which of the paths to extend based on the cost of the path
+until now and the estimate of the cost required to extend the path all
+the way to the goal.  If <i>n</i> is the next node to
+visit, <i>g(n)</i> the cost until now, and <i>h(n)</i> the heuristic
+estimate of the cost required to extend the path all the way to the
+  goal, then it chooses the node that minimizes</p>
+
+<center>
+  <i>f(n)=g(n)+h(n)</i>.</p>
+</center>
+
+<p>This combination of actual cost and estimated remaining cost allows
+A* to efficiently find a shortest path while prioritizing paths that
+appear most promising.</p>
+
+<p>To ensure that A* finds an optimal mapth, we must use
+  an <i>admissible</i> heuristic, meaning it never over-estimates the
+  true cost of arriving at the goal. One possible variation, known as
+  the best first search, ignores the remaining cost by
+  setting <i>h(n)=0</i>, effectively, choosing the path with the least
+  accumulated cost so far. There is an extensive literature on the
+  different heuristics that can be used in the A* search, each
+  offering trade-offs between efficiency and accuracy depending on the
+  problem domain.</p>
+
+<h2>2.2 Centrality Detection Algorithms</h2>
+
+<p>The centrality detection algorithms are used to better understand the
+  roles played by different nodes in the overall graph.  This analysis can help
+  us understand the most important nodes in a graph, the dynamics of a
+  group and possible bridges between groups.</p>
+
+<p>There are several common variations of centrality detection
+algorithms: degree centrality, closeness centrality, betweenness
+centrality, and PageRank.</p>
+
+<ul>
+
+  <li><strong>Degree centrality</strong> counts the number of incoming
+  and/or outgoing edges connected to a node. For example, in a supply
+  chain network, a node with a very high outgoing degree might
+  indicate a supplier with a monopoly.</li>
+  
+  <li><strong>Closeness centrality</strong> identifies nodes that have
+  the shortest paths to all other nodes in the graph. This can help
+  determine optimal locations for new services so that they are
+  accessible to the widest range of customers.</li>
+  
+  <li><strong>Betweenness centrality</strong> measures how often a
+  node lies on the shortest paths between other nodes, reflecting the
+  node's influence as a bridge or intermediary within the
+  network.</li>
+  
+  <li><strong>PageRank</strong> assesses the importance of a node based on the importance of the nodes that link to it, using a recursive approach originally developed for ranking web pages.</li>
+
+</ul>
+
+<p>Each of these measures highlights a different aspect of a node's
+role and influence within a network.
+For our discussion here, we will consider the PageRank algorithm in
+  more detail. </p>
+
+<p>The PageRank algorithm was originally developed
+for ranking web pages in search engines. It measures
+the <em>transitive influence</em> of a node: a node connected to a few
+highly important nodes may be considered more influential than a node
+connected to many less important nodes. We can define the PageRank of
+a node mathematically as follows.</p>
+
+<center>
+PR(u) = (1-d) + d * (PR(T1)/C(T1) + ... + PR(Tn)/C(Tn))
+</center>
+
+ <p>In the above formula, the node <i>u</i> has incoming edges from
+ nodes <i>T<sub>1</sub>,...,T<sub>n</sub></i>. We use <i>d</i> as a
+ damping factor which is usually set at 0.85. <i>C(T1),...,C(Tn)</i>
+ is the number of outgoing edges of
+ nodes <i>T<sub>1</sub>,...,T<sub>n</sub></i>. The algorithm operates
+ iteratively by first setting the PageRank for all the nodes to the
+ same value, and then improving it for a fixed number of iterations,
+ or until the values converge. </p>
+
+ <p>Beyond its original use in ranking web pages for search
+ engines, PageRank has found many other interesting
+ applications. For example, it is used on social media platforms to
+ recommend which users a person might follow. It has also been applied
+ in fraud detection to identify nodes in a graph that exhibit highly
+ unusual or suspicious activity.</p>
+
+
+ <h2>2.3 Community Detection Algorithms</h1>
+
+<p>The general principle underlying community detection
+algorithms is that nodes within a community have more
+connections to each other than to nodes outside the
+community. Community analysis can often serve as a first step in
+understanding a graph, allowing for more detailed analysis of nodes
+and relationships within each identified community.</p>
+
+<p>There are several variations of community detection
+algorithms: connected
+components, strongly connected
+components, label propagation,
+and <fast unfolding (also known as the <em>Louvain
+algorithm</em>).</p>
+
+<p>The first two, connected components and strongly connected components, are often used in the initial analysis of a graph. These are standard techniques from graph theory:</p>
+<ul>
+  
+  <li>A <strong>connected component</strong> is a set of nodes in an
+  undirected graph such that there is a path between any two nodes in
+  the set.</li>
+  
+  <li>A <strong>strongly connected component</strong> is a set of
+  nodes in a directed graph such that, for any two nodes A and B in
+  the set, there is a path from A to B and a path from B to A.</li>
+  
+</ul>
+
+<p>Both label propagation and fast unfolding are bottom-up algorithms
+for identifying communities in large graphs. We will explore these two
+algorithms in more detail in the following sections.</p>
+
+<p>Label propagation begins by assigning each node in the graph to its
+own community. The nodes are then processed in a random order. For
+each node, we examine its neighbors and update the node&apos;s community to
+match the community held by the majority of its neighbors. If there is
+a tie, it is broken uniformly at random. The algorithm terminates when
+every node belongs to a community that is shared by a majority of its
+neighbors.</p>
+
+
+<p>The fast unfolding algorithm operates in two phases. Initially,
+each node is assigned to its own community.</p>
+
+<p>In the first phase, the algorithm considers each node and its
+neighbors and evaluates whether moving the node into a neighbor&apos;s
+community would result in an overall increase in modularity, a measure
+of the quality of a community partition. If no modularity gain is
+achieved, the node remains in its original community.</p>
+
+<p>In the second phase, a new, smaller network is constructed in which
+each node represents a community identified in the first phase. An
+edge is added between two nodes if there was at least one edge between
+nodes in their corresponding communities in Phase 1. Edges between
+nodes within the same community in Phase 1 become self-loops in the
+new network.</p>
+
+<p>After the second phase is completed, the algorithm repeats by
+applying the first phase again to this newly constructed graph. This
+process continues until no further improvement in modularity is
+possible.</p>
+
+<p>One example of a modularity function used in the above algorithm is
+shown below.</p>
+
+<center>
+<img alt="Modularity Function" width='300' src="images/Louvain_Modularity.jpg">
+</center>
+
+<p>In the above formula, we calculate the overall modularity
+  score <i>Q</i> of a network that has been divided into <i>k</i>
+  communities where <i>e<sub>i</sub></i> and <i>d<sub>i</sub></i> are
+  respectively the number of nodes, and total degree of nodes in
+  community <i>i</i>, and <i>m</i> is the total number of edges in the
+  network.</p>
+
+<p>Both label propagation and fast unfolding algorithms can reveal
+emergent and potentially unanticipated communities in a graph. Because
+these algorithms involve randomness or local optimization choices,
+different executions may produce different community structures.</p>
+
+
+<h1>3. Ontology-based Inference Algorithms</h1>
+
+<p>Ontology-based inference is a key feature that distinguishes a
+knowledge graph system from a general graph-based system. We
+categorize ontology-based inference into two main types: taxonomic
+inference and rule-based inference</p>
+
+<p>Taxonomic inference relies on class hierarchies and instance
+relationships, allowing properties and relationships to be inherited
+across the hierarchy. Rule-based inference, in contrast, uses general
+logical rules to derive new facts from existing ones. Ontological
+inference can be accessed through a declarative query interface,
+enabling it to function as a specialized reasoning service for certain
+classes of queries.</p>
+ 
+<p>We begin by introducing rule-based inference and then use it as a
+foundation for explaining ontology-based inference more broadly.</p>
+
+
+
+<h2>3.1 Rule-based Inference</h2>
+
+<p>Many rule-based systems share a common foundation that can be
+understood through a simple rule language called Datalog. In this
+section, we introduce the basic form of Datalog, describe some useful
+extensions, and explain how Datalog programs are evaluated. We
+conclude with a real-world example that demonstrates how rule-based
+inference can be applied in practice.</p>
+
+<h3>3.1.1 Datalog</h3>
+
+<p>A Datalog program consists of a finte set of facts and rules. Facts
+are statements about the world, such as: "John is the father of
+Harry". Rules describe how new facts can be derived from other facts,
+for example, "If <i>X</i> is a parent of <i>Y</i> and if <i>Y</i> is a
+parent of <i>Z</i>, then <i>X</i> is a grand-parent
+of <i>Z</i>". Facts and rules are written as a clause of the following
+form:</p>
+
+<center>
+  <table style="font-family:courier;font-size:14px" width="600">
+    <tbody><tr><td>
+L<sub>0</sub> :- L<sub>1</sub>, ... ,L<sub>n</sub> 
+</td></tr><tr>
+  </tr></tbody></table>
+</center>
+
+<p>Each <tt>L<sub>i</sub></tt> is a literal of the
+form <tt>p<sub>i</sub></tt>(<tt>t<sub>1</sub>,
+... ,t<sub>n</sub></tt>) such that <tt>p<sub>i</sub></tt> is
+a <tt>predicate symbol</tt> and the <tt>t<sub>j</sub></tt> is
+a <i>term</i>. A term is either a <i>constant</i> (representing a
+specific object) or a <i>variable</i> (representing an unknown
+object).</p>
+
+
+<p>In a Datalog clause, The left-hand side is called its <i>head</i>,
+and the right-hand side is called its <i>body</i>. The body of a
+clause may be empty. Clauses with an empty body represent facts; while
+clauses with at least one literal in the body represent rules.</p>
+
+<p>For example, the fact that "John is the father of Harry" can be written
+as <tt>father(john, harry).</tt> The rule "If <i>X</i> is a parent
+of <i>Y</i> and if <i>Y</i> is a parent of <i>Z</i>, then <i>X</i> is
+a grand-parent of <i>Z</i>" can be written as: </p>
+
+<center>
+  <table style="font-family:courier;font-size:14px" width="600">
+    <tbody><tr><td>
+grand_parent(X,Z)  :- parent(X,Y), parent(Y,Z) 
+</td></tr><tr>
+  </tr></tbody></table>
+</center>
+
+
+
+<p>In this example, the symbols <tt>parent</tt>
+and <tt>grand_parent</tt> are predicate symbols, the
+symbols <tt>john</tt> and <tt>harry</tt> are constants, and the
+symbols <tt>X, Y</tt> and <tt>Z</tt> are variables.</p>
+
+<p>Any Datalog program <i>P</i> must satisfy the
+following <i>safety</i> conditions. First, each fact of <i>P</i> must
+be ground, that is, it does not contain any variables. Second, every
+variable that appears in the head of a rule of <i>P</i> must also
+appear in the body of the that rule. These conditions guarantee that
+the set of all facts that can be drived from a Datalog program is
+finite.</p>
+
+<p>A Datalog program determines what is true by starting from a set of
+known facts and repeatedly applying rules until nothing new can be
+inferred. The queries simply ask what can be derived from this
+process.</p>
+
+<h3>3.1.2 Extensions to Datalog</h3>
+
+<p>In the basic form of Datalog introduced above, the negation sign
+  "~" is not allowed, and therefore, we cannot infer negative facts.
+  With a simple extension, also known as the closed world assumption,
+  we can infer negative facts: if a fact cannot be derived from a set
+  of Datalog clauses, then we conclude that the negation of this fact
+  is true. Negative facts are written as positive facts precded by the
+  negation symbol "~".  For example, in the simple program introduced
+  until now, we can conclude ~parent(john, peter).</p>
+
+
+<p>With the extension described above, we can also allow negated
+literals in the bodies of rules. To guarantee a unique result, we need
+to impose an additional condition called
+stratification. Stratification requires that no predicate appearing in
+the head of a rule can also appear negated in the body of the same
+rule, either directly or indirectly through multiple rule
+applications. This condition ensures that the Datalog program produces
+  a unique set of conclusions.>/p>
+
+<p>
+Pure Datalog is limited to reasoning over individual facts and does not
+provide constructs for reasoning about collections of facts. In many
+practical applications, however, it is necessary to compute aggregate
+properties such as counts, minima, maxima, or sums. For this reason,
+most practical Datalog engines support <em>aggregate predicates</em>
+as an extension to the core language.
+</p>
+
+<p>
+Aggregates allow a rule to refer to a set of values derived from the
+body of the rule and to compute a single summary value over that set.
+Common aggregates include <tt>count</tt>, <tt>sum</tt>, <tt>min</tt>,
+<tt>max</tt>, and <tt>avg</tt>.
+</p>
+
+<p>
+For example, the following rule computes the number of children for
+each person:
+</p>
+
+<center>
+  <table style="font-family:courier;font-size:14px" width="600">
+    <tbody>
+      <tr>
+        <td>
+num_children(X, N) :- countofall(Y, parent(X, Y), N).
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</center>
+
+<p>
+Here, <tt>countofall</tt> binds <tt>N</tt> to the number of distinct
+values of <tt>Y</tt> for which <tt>parent(X,Y)</tt> holds. The aggregate
+is evaluated after all bindings for the body of the rule have been
+determined.
+</p>
+
+<p>Other important extensions to Datalog include the use of function
+symbols, allowing disjunctions in the head of a rule, and supporting
+negation that does not rely on the closed world assumption. These
+features are generally supported in a family of languages known as
+Answer Set Programming (ASP).</p>
+    
+
+<h3>3.1.3 Evaluating Datalog Programs</h3>
+
+<p>o enable rule-based reasoning on a knowledge graph, a Datalog rule
+engine is typically connected to the graph&apos;s data. In this section, we
+will examine several reasoning strategies commonly used by Datalog
+engines.</p>
+
+<p>In a bottom up reasoning strategy, also known as the Chase, all
+  rules are against the knowledge graph, adding new facts until no
+  more facts can be derived. In some cases, it may be desirable to 
+  put in place termination strategies to deal with
+  situations where additional reasoning offers no additional
+  insight. Once we have computed the Chase, the reasoning can proceed
+  using traditional query processing methods.</p>
+
+<p>In top down query processing, we begin from the query to be
+  answered, and apply the rules on as needed basis.  A top down
+  strategy requires a tighter interaction between the query engine of
+  the knowledge graph with the rule evaluation.  This approach,
+  however, can use lot less space as compared to the bottom up
+  reasoning strategy.</p>
+
+<p>Highly efficient and scalable rule engines use query optimization
+  and rewriting techniques. They also rely on caching strategies to
+  achieve efficient execution.</p>
+
+
+<h3>3.1.4 Example Scenario Requiring Rule-based Reasoning</h3>
+
+<p>Consider a property graph with the schema shown below. Companies
+produce products that contain chemicals. People are involved in studies
+about chemicals, and they can be funded by companies.</p>
+
+<center>
+<img alt="An Example Property Graph Schema" width='300' src="images/existential_rule.jpg" />
+</center>
+
+<p>Given this property graph, we may want to determine whether a person
+  could have a conflict of interest when participating in a study.  We can define the
+  conflict relationship using the following Datalog rule.</p>
+
+<center>
+  <table style="font-family:courier;font-size:14px" width="600">
+    <tbody><tr><td>
+	  coi(X,Y,Z) :- 
+      involved_in(X,Y) & about(Y,P) & funded_by(X,Z) & has_interest(Y,P)
+      </td>
+      </tr><tr><td>
+	  has_interest(X,Z) :-  produces(X,Y) & contains(Y,Z)
+  </tr></tbody></table>
+</center>
+
+<p>The relation <i>has_interest</i> does not exist in the property graph
+  schema, but a rule engine can compute it using its definition.
+  Using this computed relation, the rule engine can derive 
+  the <i>coi</i> relation.</p>
+
+<p>In some cases, we may want to add the
+computed values of the <i>coi</i> relation back into the knowledge
+graph. As <i>coi</i> is a ternary relation, we need to reify it.
+As reification requires adding new objects in the graph, we can
+specify it using an existential rule as shown below.</p>
+
+<center>
+  <table style="font-family:courier;font-size:14px" width="600">
+    <tbody><tr><td>
+	 &Exists;c conflict_of(c,X) & conflict_reason(c,Y) & conflict_with(c,Z) :- 
+      involved_in(X,Y) & about(Y,P) & funded_by(X,Z) & has_interest(Y,P)
+      </td></tr>
+</tbody></table>
+</center>
+
+<p> In general, existential rules are needed whenever we need to
+  create new objects in a knowledge graph. Relationship reification
+  is a common example.  Sometimes, we may need to create new
+  objects to satisfy certain constraints.  For example, consider the
+  constraint: every person must have two parents. For a given person,
+  the parents may not be known, and if we want our knowledge graph to
+  remain consistent with this constraint, we must introduce two new
+  objects representing the parents of a person. As this can lead to
+  infinite number of new objects, it is typical to set a limit on how
+  the new objects are created.</p>
+
+<h2>3.2 Taxonomic Reasoning</h2>
+
+<p>Taxonomic reasoning is useful in situations where it is useful to
+organize knowledge into classes. Classes can be thought of as unary
+relations -- that is a set of objects that share a common property. In
+this section, we will introduce the key concepts such as class
+membership, class specialization, disjoint classes, value restriction,
+inheritance and various inferences that can be drawn using them.</p>
+
+<p>Both property graph and RDF data models support classes. In
+  property graphs, the node types correspond to classes.  In RDF, an
+  extension called RDF schema (RDFS) allows the definition of
+  classes. More advanced RDF extensions such as the Web Ontology
+  Language (OWL) and the Semantic Web Rule Language (SWRL), provide
+  full support for defining classes and rules.</p>
+
+<p>There is no strict boundary  between rule-based reasoning and
+  taxonomic reasoning. We will use Datalog as a specification language
+  for taxonomic reasoning, and a Datalog engine can perform those inferences.
+  Specialized taxonomic reasoning systems, however, may leverage graph
+  algorithms that take advantage of the class hierarchies.</p>
+
+
+<p>We will introduce the basic concepts of taxonomies such as class
+  membership, disjointness, constraints and inheritance using Datalog
+  as a specification language without making any specfic reference to
+  RDF or property graph model of graphs..</p>
+
+
+
+<h3>3.2.1 Class Membership</h3>
+
+<p>Suppose we wish to model data about kinship. We can define the
+unary relations of <tt>male</tt> and <tt>female</tt> as classes, that
+have members <tt>art</tt>, <tt>bob</tt>, <tt>bea</tt>, <tt>coe</tt>,
+etc. The member of a class is referred to as an instance of that
+class. For example, <tt>art</tt> is an instance of the
+class <tt>male</tt>.</p>
+
+
+<p>For every unary predicate that we also wish to refer to as a class, we
+introduce an object constant with the same name as the name of the
+relation constant as follows. </p>
+
+<center>
+  <table style="font-family:courier;font-size:14px" width="600">
+    <tbody><tr><td>class(male)</td><td>class(female)</td></tr>
+  </tbody></table>
+</center>
+
+<p>Thus, <tt>male</tt> is both a relation constant, and an object
+constant. This is an example use of <em>metaknowledge</em>, and is
+also sometimes known as <em>punning</em>.</p>
+
+<p>To represent that <tt>art</tt> is an instance of the
+class <tt>male</tt>, we introduce a relation
+called <tt>instance_of</tt> and use it as shown below.</p>
+
+<center>
+  <table style="font-family:courier;font-size:14px" width="600">
+    <tbody><tr><td>instance_of(art,male)</td><td>instance_of(bea,female)</td></tr>
+    </tbody><tbody><tr><td>instance_of(bob,male)</td><td>instance_of(coe,female)</td></tr>
+    </tbody><tbody><tr><td>instance_of(cal,male)</td><td>instance_of(cory,female)</td></tr>
+    </tbody><tbody><tr><td>instance_of(cam,male)</td></tr>
+  </tbody></table>
+</center>
+
+<h3>3.2.2 Class Specialization</h3>
+
+<p>Classes can be organized into a hierarchy. For example, we can introduce a class
+<tt>person</tt>. Both <tt>male</tt> and <tt>female</tt> are then
+<em>subclasses</em> of <tt>person</tt>.</p>
+
+<center>
+  <table style="font-family:courier;font-size:14px" width="600">
+    <tbody>
+      <tr>
+        <td>subclass_of(male, person)</td>
+        <td>subclass_of(female, person)</td>
+      </tr>
+    </tbody>
+  </table>
+</center>
+
+<p>The <tt>subclass_of</tt> relationship is <em>transitive</em>. That is, if
+<tt>A</tt> is a subclass of <tt>B</tt>, and <tt>B</tt> is a subclass of
+<tt>C</tt>, then <tt>A</tt> is also a subclass of <tt>C</tt>. For example,
+if <tt>mother</tt> is a subclass of <tt>female</tt>, then
+<tt>mother</tt> is also a subclass of <tt>person</tt>.</p>
+
+<center>
+  <table style="font-family:courier;font-size:14px" width="600">
+    <tbody>
+      <tr>
+        <td>
+          subclass_of(A, C) :- subclass_of(A, B) &amp; subclass_of(B, C)
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</center>
+
+<p>The <tt>subclass_of</tt> and <tt>instance_of</tt> relationships are
+closely related. If <tt>A</tt> is a subclass of <tt>B</tt>, then
+<strong>every instance of <tt>A</tt> is also an instance of <tt>B</tt></strong>.
+In our example, all instances of <tt>male</tt> are also instances of
+<tt>person</tt>.</p>
+
+<center>
+  <table style="font-family:courier;font-size:14px" width="600">
+    <tbody>
+      <tr>
+        <td>
+          instance_of(I, B) :- subclass_of(A, B) &amp; instance_of(I, A)
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</center>
+
+<p>A class hierarchy must not contain cycles. A cycle would imply that a
+class is a subclass of itself, which is semantically incorrect and
+undermines the meaning of specialization.</p>
+
+<h3>3.2.3 Class Disjointness</h3>
+
+
+<p>We say that a class <tt>A</tt> is <em>disjoint</em> from another class
+<tt>B</tt> if no individual can be an instance of both classes at the
+same time. We may explicitly declare two classes to be disjoint, or we
+may declare a set of classes to form a <em>partition</em>, meaning that
+the classes in the set are pairwise disjoint.</p>
+
+<p>In our kinship example, the classes <tt>male</tt> and <tt>female</tt>
+are disjoint. If an individual were inferred to be an instance of both,
+this would indicate an inconsistency in the data. We capture such
+inconsistencies using a distinguished atom <tt>illegal</tt>, which
+signals that the condition specified in the body of the rule is not
+allowed.</p>
+
+<center>
+  <table style="font-family:courier;font-size:14px" width="600">
+    <tbody>
+      <tr>
+        <td>
+          illegal :- disjoint(A, B) &amp; instance_of(I, A) &amp; instance_of(I, B)
+        </td>
+      </tr>
+      <tr>
+        <td>
+          disjoint(A1, A2) :- partition(A1, ..., An)
+        </td>
+      </tr>
+      <tr>
+        <td>
+          disjoint(A2, A3) :- partition(A1, ..., An)
+        </td>
+      </tr>
+      <tr>
+        <td>
+          disjoint(An-1, An) :- partition(A1, ..., An)
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</center>
+
+<h3>3.2.4 Class Definition</h3>
+
+<p>
+Classes can be defined using <em>necessary</em> and <em>sufficient</em>
+relation values. A relation value is <em>necessary</em> for a class if
+every instance of the class must satisfy it. For example,
+<tt>age</tt> may be a necessary relation value for the class
+<tt>person</tt>, since every person has an age, but having an age alone
+is not sufficient to conclude that something is a person.
+</p>
+
+<p>
+A relation value (or set of relation values) is <em>sufficient</em> for a
+class if any individual that satisfies those relations can be inferred
+to be an instance of the class.
+</p>
+
+<p>
+For example, consider the class <tt>brown_haired_person</tt>. It is
+both necessary and sufficient that an individual is a <tt>person</tt>
+and has brown hair in order to belong to this class.
+</p>
+
+<center>
+  <table style="font-family:courier;font-size:14px" width="600" cellspacing="0" cellpadding="0">
+    <tbody>
+      <tr>
+        <td>
+<xmp>
+instance_of(X, brown_haired_person) :-
+    instance_of(X, person) &
+    has_hair_color(X, brown).
+</xmp>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</center>
+
+<p>
+Classes that are described only using necessary relation values are
+called <em>primitive</em> classes. In contrast, classes for which we
+specify both necessary and sufficient relation values are called
+<em>defined</em> classes.
+</p>
+
+<p>
+In a rule-based setting, a sufficient class definition is characterized
+by the presence of an <tt>instance_of</tt> literal in the head of the
+rule, allowing the reasoner to infer class membership whenever the
+conditions in the body are satisfied.
+</p>
+
+<h3>3.2.5 Value Restriction</h3>
+
+<p>
+Value restrictions constrain the arguments of a relation to be
+instances of specific classes. In the kinship example, we may wish to
+restrict the <tt>parent</tt> relationship so that both of its arguments
+are always instances of the class <tt>person</tt>.
+</p>
+
+<p>
+With such a restriction in place, if the reasoner is asked to prove
+<tt>parent(table, chair)</tt>, it can immediately conclude that this
+fact is not true, since neither <tt>table</tt> nor <tt>chair</tt> is an
+instance of <tt>person</tt>. Value restrictions thus act as integrity
+constraints that rule out semantically invalid facts.
+</p>
+
+<p>
+A restriction on the first argument of a relation is called a
+<em>domain</em> restriction, while a restriction on the second argument
+is called a <em>range</em> restriction. Similar restrictions can be
+defined for relations of higher arity.
+</p>
+
+<center>
+  <table style="font-family:courier;font-size:14px" width="600">
+    <tbody><tr><td>
+	      illegal  :- domain(parent,person) &amp; parent(X,Y) &amp; ~instance_of(X,person)
+      </td></tr>
+      <tr><td>
+	  illegal  :- range(parent,person)  &amp; parent(X,Y)  &amp; ~instance_of(Y,person)
+      </td></tr>
+  </tbody></table>
+</center>
+
+
+
+<p>
+For example, if the knowledge graph contains the fact
+<tt>parent(art, chair)</tt> and we know that <tt>art</tt> is a
+<tt>person</tt> but <tt>chair</tt> is not, the range restriction will
+cause the atom <tt>illegal</tt> to be derived, indicating an
+inconsistency in the data or rules.
+</p>
+
+<p>
+As with disjointness constraints, value restrictions do not derive new
+facts but instead detect violations. Their correct interpretation
+relies on the ability to infer negative facts (such as
+<tt>~instance_of(chair, person)</tt>), typically under a closed world
+assumption or a stratified form of negation.
+</p>
+
+<h3>3.2.6 Cardinality and Number Constraints</h3>
+
+<p>
+We can further restrict the values of relations by specifying
+<em>cardinality</em> and <em>numeric</em> constraints. A cardinality
+constraint restricts the number of values a relation may have for a
+given argument, while a numeric constraint restricts the range of
+numeric values that a relation may take.
+</p>
+
+<p>
+For example, we may require that every person has exactly two parents,
+and that the age of a person lies between 0 and 100 years.
+</p>
+
+<center>
+  <table style="font-family:courier;font-size:14px" width="600">
+    <tbody>
+
+      <tr>
+        <td>
+illegal :- instance_of(X, person) &
+           ~countofall(P, parent(P, X), 2).
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+illegal :- instance_of(X, person) &
+           age(X, Y) &
+           Y &lt; 0.
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+illegal :- instance_of(X, person) &
+           age(X, Y) &
+           Y &gt; 100.
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+</center>
+
+<p>
+The first rule expresses a cardinality constraint: for every instance
+of <tt>person</tt>, the number of distinct values <tt>P</tt> such that
+<tt>parent(P,X)</tt> holds must be exactly two. The aggregate predicate
+<tt>countofall</tt> is assumed to return the number of distinct
+bindings that satisfy its second argument.
+</p>
+
+<p>
+The second and third rules express numeric constraints on the
+<tt>age</tt> relation, ruling out values that fall outside the allowed
+range. As with other constraints, these rules do not derive new facts
+but instead detect violations by concluding <tt>illegal</tt>.
+</p>
+
+<p>
+In practice, enforcing cardinality constraints may require additional
+mechanisms beyond pure Datalog. If parent information is missing, a
+reasoner may either report a violation, or --  when existential rules are
+allowed -- introduce fresh objects to satisfy the constraint. To prevent
+unbounded object creation, systems typically impose limits or adopt
+restricted forms of existential reasoning.
+</p>
+
+
+<h3>3.2.7 Inheritance</h3>
+
+<p>
+When an object belongs to a class, it automatically takes on the
+properties associated with that class. This process is known as
+<em>inheritance</em>. For example, if we state that
+<tt>art</tt> is an instance of the class
+<tt>brown_haired_person</tt>, we can infer that
+<tt>has_hair_color(art, brown)</tt> holds.
+</p>
+
+<p>
+An object may belong to more than one class at the same time. While
+this is often useful, it can lead to problems when different classes
+impose conflicting requirements. For example, if
+<tt>art</tt> is an instance of both
+<tt>brown_haired_person</tt> and <tt>bald_person</tt>, one class
+requires that <tt>art</tt> has hair, while the other requires that
+<tt>art</tt> has no hair. These requirements cannot both be satisfied
+and result in a contradiction.
+</p>
+
+<p>
+When such conflicts occur, a reasoning system must decide how to handle
+them. One approach is to reject the information that causes the
+conflict. Another approach is to use specialized techniques, known as
+<em>paraconsistent reasoning</em>, which allow reasoning to continue
+even in the presence of inconsistent information.
+</p>
+
+<h3>3.2.8 Reasoning with Classes</h3>
+
+<p>
+When working with classes in a knowledge graph, there are four main types
+of inference that are particularly useful:
+</p>
+
+<ol>
+  <li>
+    Determining whether one class is a subclass of another. For example,
+    is <tt>male</tt> a subclass of <tt>person</tt>?
+  </li>
+  <li>
+    Determining whether a given object is an instance of a class. For
+    example, is <tt>art</tt> an instance of <tt>brown_haired_person</tt>?
+  </li>
+  <li>
+    Determining whether a specific fact (a ground relation atom) is
+    true or false. For example, is <tt>parent(art, cal)</tt> true?
+  </li>
+  <li>
+    Finding all possible values of variables that make a relation true.
+    For example, who are the children of <tt>art</tt>?
+  </li>
+</ol>
+
+<p>
+The first two types of reasoning -- subclass and instance checks -- can be
+implemented as simple path-finding operations over the graph of classes
+and instances. The last two types -- evaluating ground facts and computing
+variable bindings -- are handled by a Datalog engine using its rule-based
+inference mechanisms.
+</p> 
+
+<h1>4. Summary</h1>
+
+<p>
+In this chapter, we explored different types of inference algorithms
+for knowledge graphs.  We discussed graph-based algorithms such as
+path finding and community detection, which are widely supported by
+practical graph engines. These engines typically provide only limited
+support for ontology-based and rule-based reasoning.  More recently,
+knowledge graph engines have begun to emerge that support both
+general-purpose graph algorithms and advanced reasoning capabilities,
+enabling more sophisticated analysis and inference over complex
+datasets.
+</p>
+
+<h1>5. Further Reading</h1>
+
+<p>An excellent reference for detailed description of different graph algorithms along with the code for Neo4j and Apache Spark graph databases is available in <a href="https://www.oreilly.com/library/view/graph-algorithms/9781492047674/">[Needham
+&amp; Hodler 2019]</a>. A comprehensive account of Datalog and logic programming is available as a textbook <a href="https://www.amazon.com/Introduction-Programming-Synthesis-Artificial-Intelligence/dp/3031004582/">[Genesereth
+    &amp; Chaudhri 2020]</a>. The description of the ontology based inference is inspired by a large scale knowledge construction project <a href="https://static.cambridge.org/content/id/urn:cambridge.org:id:article:S1471068413000112/resource/name/tlp2013022.pdf">[Chaudhri
+    et. al. 2013]</a>
+  <p>
+
+
+
+
+<p><a href="https://www.oreilly.com/library/view/graph-algorithms/9781492047674/">[Needham
+&amp; Hodler 2019]</a> Needham, Mark and Amy E. Hodler. Graph Algorithms:
+Practical Examples in Apache Spark and Neo4j. OReilly Media,
+  2019. ISBN 9781492047681.</p>
+
+<p><a href="https://www.amazon.com/Introduction-Programming-Synthesis-Artificial-Intelligence/dp/3031004582/">[Genesereth
+    &amp; Chaudhri 2020]</a> Genesereth, M., & Chaudhri,
+    V. K. (2020). Introduction to Logic Programming. Springer
+    International
+    Publishing. https://www.amazon.com/Introduction-Programming-Synthesis-Artificial-Intelligence/dp/3031004582/</p>
+
+
+<p><a href="https://static.cambridge.org/content/id/urn:cambridge.org:id:article:S1471068413000112/resource/name/tlp2013022.pdf">[Chaudhri
+et. al. 2013]</a> Chaudhri, V. K., Heymans, S., Wessel, M., & Son,
+T. C. (2013). Object-oriented knowledge bases in logic
+programming. Theory and Practice of Logic Programming, 13(4-5), 1-12.
+https://static.cambridge.org/content/id/urn:cambridge.org:id:article:S1471068413000112/resource/name/tlp2013022.pdf</p>
+
+    
+
+
+
+<!--=======================================================================-->
+
+
+      </td>
+    </tr>
+  </table>
+  <br/>
+</center>
+
+<!--=======================================================================-->
+
+
+        </td>
+      </tr>
+    </table>
+  </center>
+</body>
+
+<!--=======================================================================-->
+
+
+</html>

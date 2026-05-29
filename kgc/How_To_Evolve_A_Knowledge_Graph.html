@@ -1,0 +1,321 @@
+<html>
+
+<!--=======================================================================-->
+
+
+<head>
+  <title>How to Evolve a Knowledge Graph?</title>
+</head>
+
+<!--=======================================================================-->
+
+
+<body style='background-color:#990000'>
+  <center>
+    <table width='720' cellspacing='0' cellpadding='0' bgcolor='#ffffff'>
+      <tr>
+        <td>
+
+<!--=======================================================================-->
+
+  <table width='100%' height='120' cellspacing='0' cellpadding='0' bgcolor='#f8f7f7'>
+    <tr>
+      <td width='40'>&nbsp;</td>
+      <td width='120' align='center' valign='center'>
+        <a href='http://www.stanford.edu/class/cs520/'><img width='128' src='images/flyer-v2c.jpg'/>CS520</a>
+      </td>
+      <td align='center' valign='center'>
+
+        <span style='font-size:36px'>Knowledge Graphs</span><br/>
+      </td>
+      <td width='120' align='center' style='color:#000066;font-size:18px'>
+        <i>What<br/>should AI<br/>Know ?</i>
+      </td>
+      <td width='40'>&nbsp;</td>
+    </tr>
+  </table>
+
+<!--=======================================================================-->
+
+
+<hr style='border-top: 1px solid #888888;margin:0'/>
+<table width='100%' height='40' cellspacing='0' cellpadding='0' bgcolor='#f8f7f7'>
+  <tr><td align='center' style='font-size:18px'>8. How to Evolve a Knowledge Graph?</td></tr>
+</table>
+<hr style='border-top: 1px solid #888888;margin:0'/>
+
+<!--=======================================================================-->
+
+<center>
+  <br/>
+  <table width='640' cellpadding='0'>
+    <tr>
+      <td>
+
+<!--=======================================================================-->
+
+<h3>1. Introduction</h3>
+
+<p>Once a knowledge graph is built, it needs to evolve over time to
+reflect changes in the real world and updates in business
+requirements. These changes can happen at two levels: the schema (the
+structure of the graph) or individual facts (the data stored in the
+graph). Updating facts is usually easier than updating the schema,
+because schema changes can affect a large portion of the data and
+sometimes even the software that relies on the schema.</p>
+
+<p>Evolving a knowledge graph involves both social and technical
+challenges. Social challenges arise because design decisions often
+involve subjectivity and require agreement from multiple
+stakeholders. Changes can impact the work of different stakeholders,
+so proper workflows are needed to roll out updates
+smoothly. Unfortunately, there are few standard guidelines for
+managing these social processes.</p>
+
+<p>The technical
+problems involved in evolving a knowledge graph have been fundamental
+to database and knowledge base management, and have been researched
+under the topics of schema evolution, view maintenance, and truth
+maintenance.  Each of these techniques is meant for a different
+category of updates, and is backed by significant theory that can be
+  adapted for the context of knowledge graphs.</p>
+
+<p>Which approach to use often depends on business priorities and the
+cost of making changes. In large-scale knowledge graphs, many
+inconsistencies may persist simply because they do not affect critical
+business functionality.</p>
+
+<p>In this chapter, we will start by looking at concrete examples of
+changes in knowledge graphs. We will then introduce schema evolution,
+view maintenance, and truth maintenance, focusing on how these
+techniques are relevant to knowledge graphs and how they can be
+  adapted in practice.</p>
+
+<h3>2. Examples of Changes to a Knowledge Graph</h3>
+
+<p>Knowledge graphs can change for many reasons. Here, we consider
+five common categories: changes in the world, changes in requirements,
+changes in data sources, changes that affect previous inferences, and
+changes that require redesign. This classification helps structure our
+examples, though other approaches are possible.</p>
+
+<p><b>Changes in the world:</b> Consider Amazon's product knowledge
+graph. New products are constantly added by suppliers, some products
+are discontinued, and inventory levels must be updated as items are
+sold or restocked. Some new products may even require introducing new
+properties, such as "battery life" for electronics.</p>
+
+<p><b>Changes in requirements:</b> In the Google Knowledge Graph, the
+concept of <i>Artist</i> was originally defined to include
+only <i>Person</i>. Over time, new data showed that virtual performers
+like <i>Vocaloids</i> should also be classified as artists. To
+accommodate users&apos; expectations, the schema had to be
+updated.</p>
+
+<p><b>Changes in sources:</b> When building a music album knowledge
+graph, information may come from multiple sources. New sources are
+often added, and existing sources change over time. The knowledge
+graph must stay synchronized with these updates to maintain
+accuracy.</p>
+
+<p><b>Changes affecting inference:</b> A knowledge graph may infer
+that any program shown in a movie theater is a movie. But theaters now
+show sporting events or operas, which breaks this inference
+rule. Updating the relevant inference rules is necessary to avoid
+incorrect conclusions.</p>
+
+<p><b>Changes requiring redesign:</b> Initially, a knowledge graph may
+represent the <i>CEO</i> of a company as a relation pointing directly
+to a <i>Person</i>. Later, it may be redesigned so that the <i>CEO</i>
+relation points to an object containing additional information, such
+as the period during which the person held the role.</p>
+
+<h3>3. Schema Evolution Techniques</h3>
+
+<p>Schema evolution in relational databases, often called database
+reorganization, handles adding or removing columns. In knowledge
+graphs, schema evolution is more complex. Common operations
+include:</p>
+
+<ul>
+  <li>Adding or removing a class from the class hierarchy</li>
+  <li>Adding or removing a superclass for an existing class</li>
+  <li>Adding or removing a type for an individual</li>
+  <li>Adding or removing a relation or property from a class</li>
+</ul>
+
+<p>Complexity arises because changes can propagate through the
+hierarchy, affecting subclasses, instances, and inherited
+properties.</p>
+
+<p><b>Removing or renaming a property:</b> These changes must be
+propagated to all affected entities. Summaries of impacted areas are
+often generated to guide updates.</p>
+
+<p><b>Adding a new class:</b> If a new class is added without
+specifying a superclass, it is typically assigned to a system-defined
+root class to avoid orphan classes.</p>
+
+<p><b>Deleting a class:</b> When we delete a class from the class hierarchy, or remove the
+  superclass of a class, we need to make decisions about what to do
+  about its subclasses, and its instances.  If its subclasses have
+  another superclass, this does not pose a problem. But, if the class
+  being deleted is the only superclass of a class, we need to either
+  delete all the subclasses, and their instances or we need to assign
+  a new superclass. To assign a new superclass to class <i>A</i> whose
+  only superclass <i>B</i> is being deleted, the new superclass could
+  be one or all immediate superclasses of <i>B</i>.  Furthermore, if
+  there was any property associated with the class that is being
+  deleted, we need to either delete those properties from all the
+  classes and instances where it was inherited, or ensure that the
+  property is associated with another class that will remain in the
+  knowledge graph after the deletion of the class for which this property
+  was originally defined.</p>
+
+<p><b>Transitive relationships:</b> Consider a situation in
+  which <i>A</i> is a superclass of <i>B</i>, and <i>B</i> is a
+  superclass of <i>C</i>. If <i>A</i> is asserted as a direct
+  superclass of <i>C</i>, the update may be rejected, since this
+  relationship is already implied by transitivity in many systems.</p>
+
+<p><b>Maintaining acyclicity:</b> Adding new superclass relationships
+must not create cycles in the class hierarchy. Systems often detect
+and prevent such cycles.</p>
+
+<p><b>Changing constraints on relations:</b> Relaxing constraints
+usually does not affect existing data, but tightening constraints may
+invalidate some data, requiring repair actions.</p>
+
+<h3>4. View Maintenance Techniques</h3>
+
+<p>In relational databases, a <i>view</i> is a named query that can be
+reused simply by referencing its name. The query is defined based on
+one or more <i>base tables</i>. If we choose to store the results of a
+view, it is called a <i>materialized view</i>. When the underlying
+base tables change, the materialized view must be updated to reflect
+these changes.</p>
+
+<p>The simplest approach is to recompute the entire view from scratch,
+but there are more efficient methods called <i>incremental view
+maintenance</i> algorithms that update only the affected parts.</p>
+
+<p>For example, consider a knowledge graph that contains information
+about employees and departments. We create a view that lists all
+employees in the "Sales" department. If an employee transfers to a
+different department, an incremental update can adjust the view
+without recomputing the entire list from scratch.</p>
+
+<p>In the context of knowledge graphs, the use of view computation and
+  maintenance techniques is currently not very common.  There are
+  situations where data in the knowledge graph is processed, and the
+  results are stored.  For such situations, view definition and
+  maintenance techniques are directly applicable. Leveraging view
+  update methods for such situations is open for future work.</p>
+
+
+<h3>5. Truth Maintenance Techniques</h3>
+
+<p>Truth maintenance techniques were originally developed in rule-based
+systems to keep track of conclusions that are derived from existing
+facts and rules. When the underlying facts or rules change, the system
+can determine which derived conclusions must be updated or removed.</p>
+
+<p>A common implementation of truth maintenance is known as a
+<i>justification-based</i> system. Whenever the system derives a new
+conclusion, it records a <i>justification</i> explaining how that
+conclusion was obtained. This justification typically includes the
+facts and rules that were used in the derivation. Later, if a fact or a
+rule changes, the system can identify all conclusions that depended on
+it and update them accordingly.</p>
+
+<p>For example, suppose a system derives the conclusion that
+<i>"Alice is an employee"</i> based on the facts <i>"Alice works for
+Company X"</i> and the rule <i>"Anyone who works for a company is an
+employee."</i> If the first fact is later removed, the justification
+for the conclusion no longer holds, and the derived conclusion must be
+retracted.</p>
+
+<p>In current knowledge graph practice, most inferences are computed by
+application code, and the justifications for these
+inferences are not explicitly stored. As a result, when data or rules
+change, inferred facts are often recomputed from scratch.</p>
+
+<p>As knowledge graph systems continue to mature, explicitly tracking
+the sources and justifications of inferences is likely to become more
+important. Doing so would enable more efficient update mechanisms and
+support better management of evolving knowledge graphs.</p>
+
+<h3>6. Summary</h3>
+
+<p>Knowledge graphs are created to meet specific business needs and
+typically have a long life cycle. They must evolve in response to
+changes in the real world and shifting business requirements.</p>
+
+<p>The evolution of a knowledge graph must take into account how it is
+used by its user community and should follow well-defined social and
+engineering processes. It can also benefit from established design
+principles and algorithms.</p>
+
+<p>In this chapter, we showed how techniques from schema evolution,
+view maintenance, and truth maintenance provide useful foundations for
+managing change in knowledge graphs. While these techniques originated
+in database and rule-based systems, they are increasingly relevant to
+modern knowledge graph systems and are likely to play a central role
+in their future development.</p>
+
+<h3>7. Further Reading</h3>
+
+<p>Classic work on schema evolution techniques was done in the context
+of object-oriented database
+systms <a href="https://dl.acm.org/doi/abs/10.1145/38713.38748">[Banerjee
+et. al. 1989]</a>. A recent overview of incremental view maintenance
+techniques was presented as an invited lecture at a recent conference
+on the Principles of Database
+Systems <a href="https://arxiv.org/pdf/2404.17679">[Olteanu
+2024]</a>. The classic work on truth maintenance systems was done by
+Jon
+Doyle <a href="https://dspace.mit.edu/bitstream/handle/1721.1/6926/AITR-419.pdf">[Doyle
+1978]</a>.</p>
+
+
+<p><a href="https://dl.acm.org/doi/abs/10.1145/38713.38748">[Banerjee
+et. al. 1989]</a> Banerjee, Jay; Kim, Won; Kim, Hyoung Joo; and Korth,
+Henry F. 1987. Semantics and implementation of schema evolution in
+object-oriented databases. In Proceedings of the ACM SIGMOD
+International Conference on Management of Data (SIGMOD 87), pages
+311-322. ACM. DOI: 10.1145/38713.38748.</p>
+
+<p><a href="https://arxiv.org/pdf/2404.17679"> [Olteanu
+2024]</a>Olteanu, Dan. 2024. Recent Increments in Incremental View
+  Maintenance. arXiv:2404.17679. Invited Gems of PODS 2024 paper.</p>
+
+<p><a href="https://dspace.mit.edu/bitstream/handle/1721.1/6926/AITR-419.pdf">[Doyle
+1978]</a> Doyle, Jon. 1978. Truth Maintenance Systems for Problem
+Solving. MIT AI Lab Technical Report AI-TR-419, Department of
+Electrical Engineering and Computer Science, Massachusetts Institute
+of Technology.</p>
+
+  
+
+  <!--=======================================================================-->
+
+
+      </td>
+    </tr>
+  </table>
+  <br/>
+</center>
+
+<!--=======================================================================-->
+
+
+        </td>
+      </tr>
+    </table>
+  </center>
+</body>
+
+<!--=======================================================================-->
+
+
+</html>
