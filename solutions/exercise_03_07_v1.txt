@@ -1,0 +1,90 @@
+
+Examine the schema in Wikidata
+
+Pick one company. Say Apple. Query all its properties.
+
+
+SELECT DISTINCT
+  ?property
+  ?propertyLabel
+  ?propertyDescription
+WHERE {
+  wd:Q312 ?prop ?value .
+
+  ?property wikibase:directClaim ?prop .
+
+  SERVICE wikibase:label {
+    bd:serviceParam wikibase:language "en".
+  }
+}
+ORDER BY ?propertyLabel
+
+
+It returns 253 properties. Some of the properties relevant to the task are:
+
+We want to pick properties that are:
+pick the properties that are most relevant to understand company's business, customers, competitors, subsidiaries or parent organlzations.
+
+We can pick the following as the most relevant to our task:
+
+# board member  -> Person 
+chief executive officer  -> Person
+child organization or unit  -> Subsidiary
+#country  => Country
+#employees -> Number
+#founder   -> Person
+#headquarters location -> Country
+industry  -> String
+#market capitalization  -> Number
+operating area  -> Geographical Area
+owner of --> organization
+part of  -> Organization
+product or material produced  -> Product
+ticker symbol -> String
+total revenue -> Number
+
+
+Examining the schema introduced at: https://huggingface.co/datasets/domyn/FinReflectKG
+The following relationships seem worth retaining:
+
+
+Parent_Of
+Subsidiary_Of
+Produces
+Operates_In
+Supplies
+Depends_On
+Invests_In
+Has_Stake_In
+Partners_With
+Complies_With
+supply
+
+
+We will create our own vocabulary but maintain mappings as appropriate.
+
+has_industry
+has_product
+has_owner
+has_subsidiary
+has_parent
+has_founder
+has_CEO
+has_board_member
+has_headquarter_location
+has_country
+has_operating_area
+has_employees
+has_stock_exchange
+has_market_capitalization
+has_total_revenue
+has_investor
+has_stake_in
+has_partner
+has_complies_with
+
+
+
+CORE_RELATIONS = {
+    "supply",
+}

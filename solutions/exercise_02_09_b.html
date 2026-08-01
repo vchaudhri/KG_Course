@@ -1,0 +1,454 @@
+<html>
+
+<!--=======================================================================-->
+
+<head>
+  <title>Exercise 2.9 - Winterthur Example in Wikidata</title>
+
+<!--=======================================================================-->
+
+<body style='background-color:#990000'>
+  <center>
+    <table width='720' cellpadding='40' bgcolor='#ffffff'>
+      <tr>
+        <td>
+
+<!--=======================================================================-->
+
+<center>
+  <span style='font-size:36px'>Knowledge Graphs</span>
+</center>
+<br/>
+
+<!--=======================================================================-->
+
+<center>
+  <table width='640' cellspacing='1' cellpadding='10' bgcolor='#eeeeee' border='1'>
+    <tr><td align='center' style='font-size:18px'>Exercise 2.9b - Winterthur Example in Wikidata</td></tr>
+  </table>
+</center>
+
+<!--=======================================================================-->
+
+
+  <p>Exercise 2.9 Perform the following tasks for the Winterthur graph shown in Figure 2 of Chapter 1.
+
+  <table>
+    <tr>
+      <td width='20'></td>
+      <td width='20' valign='top'>(<i>b</i>)</td>
+      <td>Visit the Wikidata SPARQL endpoint at
+      https://query.wikidata.org/sparql. Write a SPARQL query to
+      extract the triples that appear in the Figure 2 of Chapter 1.</td>
+    </tr>
+  </table>
+</p>
+
+  
+  <!--=======================================================================-->
+
+
+<center>
+  <br/>
+  <table width='640' cellpadding='0'>
+    <tr>
+      <td>
+
+
+	<h3>Overview</h3>
+
+	    <p>We will first determine the Wikidata identifiers for
+	    all the subject and object nodes that we wish to retrieve.  It is
+	    straightforward to do that using the traversal illustrated
+	    in 2.9(a). Through the same process, we will identify the
+	    property identifiers.  We will formulate a query to match
+	    the exact edges we are interested in. Finally, we will
+	    enhance the query to print the results in a user friendly
+	    manner with the labels of each identifier in the
+	      result.</p>
+
+
+	    <h4>Determine the Wikidata identifiers for each subject node</h4>
+	     <p>Let us first determine the identifiers for each node
+	     we are interested in retrieving.  The table below lists
+	     the identifiers for the four nodes used in this
+	     query. The Wikidata node identifiers are referred to as
+	     QIDs.<br>
+  
+
+	       <center>
+  <table class="answer-table">
+    <thead>
+      <tr>
+        <th>Node</th>
+        <th>Wikidata Identifier</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Winterthur</td>
+        <td><code>Q9125</code></td>
+      </tr>
+      <tr>
+        <td>Zurich Metropolitan Area</td>
+        <td><code>Q690149</code></td>
+      </tr>
+      <tr>
+        <td>Ontario</td>
+        <td><code>Q488134</code></td>
+      </tr>
+      <tr>
+        <td>United States</td>
+        <td><code>Q30</code></td>
+      </tr>
+    </tbody>
+  </table>
+</center>
+	    
+	      
+	       <h4>Determine the Wikidata identifiers for each property</h4>
+
+<p>
+  Let us next determine the Wikidata identifiers for each property we
+  are interested in retrieving. As with nodes, we can locate a
+  property's identifier as we were traversing the graph in
+  2.9(a). Unlike node identifiers, which begin with the
+  letter <strong>Q</strong>, property identifiers begin with the
+  letter <strong>P</strong>. These identifiers are commonly referred
+  to as <strong>Property IDs (PIDs)</strong>.
+</p>
+
+<p>
+  The table below lists the three properties used in the query and their
+  corresponding Wikidata Property IDs.
+</p>
+
+<center>
+<table class="answer-table">
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Property ID (PID)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>twinned administrative body</td>
+      <td><code>P190</code></td>
+    </tr>
+    <tr>
+      <td>part of</td>
+      <td><code>P361</code></td>
+    </tr>
+    <tr>
+      <td>country</td>
+      <td><code>P17</code></td>
+    </tr>
+  </tbody>
+</table>
+</center>
+	<h4>Determine the Wikidata identifiers for each object node</h4>
+
+
+<p>
+  To retrieve exactly the subgraph shown in the figure, we must  determine
+  the Wikidata identifiers (QIDs) for each object node that appears in the
+  figure. The table below lists these identifiers.
+</p>
+
+<table class="answer-table">
+  <thead>
+    <tr>
+      <th>Object Node</th>
+      <th>Wikidata Identifier (QID)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Switzerland</td>
+      <td><code>Q39</code></td>
+    </tr>
+    <tr>
+      <td>Zurich Metropolitan Area</td>
+      <td><code>Q690149</code></td>
+    </tr>
+    <tr>
+      <td>Ontario</td>
+      <td><code>Q488134</code></td>
+    </tr>
+    <tr>
+      <td>United States</td>
+      <td><code>Q30</code></td>
+    </tr>
+  </tbody>
+</table>
+
+
+<h4>Formulate the query to retrieve the edges of interest</h4>
+
+<p>
+  We are now ready to formulate the SPARQL query. The query uses the
+  Wikidata identifiers collected in the previous steps to retrieve exactly
+  the edges shown in Figure&nbsp;2 of Chapter 1. The three <code>VALUES</code> clauses
+  specify the candidate subject nodes, properties, and object nodes,
+  respectively. The triple pattern <code>?s ?p ?o</code> then matches only
+  those triples in the Wikidata graph that satisfy all three constraints.
+</p>
+
+<pre><code>
+SELECT ?s ?p ?o
+WHERE {
+  {
+    VALUES (?s ?p ?o) {
+      (wd:Q30      wdt:P361 wd:Q49)
+      (wd:Q9125    wdt:P190 wd:Q488134)
+      (wd:Q9125    wdt:P361 wd:Q690149)
+      (wd:Q488134  wdt:P17  wd:Q30)
+    }
+
+    ?s ?p ?o .
+  }
+UNION
+{
+  VALUES (?s ?p ?o) {
+    (wd:Q690149 wdt:P361 wd:Q39)
+  }
+
+  ?s wdt:P361+ ?o .
+    }
+    }
+</code></pre>
+
+
+<h4>Explanation</h4>
+
+<p>
+This query retrieves the five relationships shown in Figure 2. The query consists
+of two branches combined using the <code>UNION</code> operator.
+</p>
+
+<p>
+The first branch retrieves four relationships that are stored explicitly in
+Wikidata. The <code>VALUES</code> clause specifies the desired subject, property,
+and object combinations, and the triple pattern
+<code>?s ?p ?o .</code> matches those triples directly.
+</p>
+
+<p>
+The second branch retrieves the relationship between the Zurich metropolitan area
+and Switzerland. Unlike the other four relationships, this relationship is not
+stored as a direct triple in Wikidata. Instead, the query follows one or more
+<em>part of</em> relationships using the property path
+<code>wdt:P361+</code>. The <code>+</code> operator means "one or more
+occurrences of the <em>part of</em> property." Consequently, the query succeeds
+even though there is no direct triple connecting the Zurich metropolitan area
+to Switzerland.
+</p>
+
+<p>
+The <code>VALUES</code> clause in the second branch binds <code>?p</code> to
+<code>wdt:P361</code> so that both branches return the same variables
+(<code>?s</code>, <code>?p</code>, and <code>?o</code>).
+</p>
+
+<p>
+Finally, the <code>UNION</code> operator combines the results from the two
+branches into a single result set containing all five relationships shown in
+Figure 2.
+</p>
+
+
+<p>
+The query returns the following triples. Notice that the results are
+displayed using Wikidata identifiers rather than human-readable names.
+In the next step, we will revise the query so that it returns labels
+instead of identifiers.
+</p>
+
+<center>
+
+  <table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Subject</th>
+      <th>Property</th>
+      <th>Object</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="http://www.wikidata.org/entity/Q30">Q30</a></td>
+      <td><a href="http://www.wikidata.org/prop/direct/P361">P361</a></td>
+      <td><a href="http://www.wikidata.org/entity/Q49">Q49</a></td>
+    </tr>
+    <tr>
+      <td><a href="http://www.wikidata.org/entity/Q9125">Q9125</a></td>
+      <td><a href="http://www.wikidata.org/prop/direct/P190">P190</a></td>
+      <td><a href="http://www.wikidata.org/entity/Q488134">Q488134</a></td>
+    </tr>
+    <tr>
+      <td><a href="http://www.wikidata.org/entity/Q9125">Q9125</a></td>
+      <td><a href="http://www.wikidata.org/prop/direct/P361">P361</a></td>
+      <td><a href="http://www.wikidata.org/entity/Q690149">Q690149</a></td>
+    </tr>
+    <tr>
+      <td><a href="http://www.wikidata.org/entity/Q488134">Q488134</a></td>
+      <td><a href="http://www.wikidata.org/prop/direct/P17">P17</a></td>
+      <td><a href="http://www.wikidata.org/entity/Q30">Q30</a></td>
+    </tr>
+    <tr>
+      <td><a href="http://www.wikidata.org/entity/Q690149">Q690149</a></td>
+      <td><a href="http://www.wikidata.org/prop/direct/P361">P361</a></td>
+      <td><a href="http://www.wikidata.org/entity/Q39">Q39</a></td>
+    </tr>
+  </tbody>
+  </table>
+</center>
+
+
+<p>
+  The query returns the Wikidata identifiers of the matching subjects,
+  properties, and objects. In the next step, we will enhance the query so
+  that it displays human-readable labels instead of identifiers.
+</p>
+
+<h4>Revise the query to return human-readable labels</h4>
+
+<p>
+  Although the query in the previous step retrieved the desired edges, the
+  results are difficult to interpret because they are displayed using
+  Wikidata identifiers. We can make the results more readable by modifying
+  the query to return the English labels associated with each subject,
+  property, and object.
+</p>
+
+<p>
+  The revised query introduces the
+  <code>SERVICE wikibase:label</code> block, which retrieves the
+  English labels corresponding to the Wikidata identifiers. The query also
+  introduces the variable <code>?pEntity</code>, which binds each direct
+  property (for example, <code>wdt:P17</code>) to its corresponding
+  Wikidata property entity (<code>wd:P17</code>). This allows the query to
+  retrieve the label of each property in the same way that it retrieves the
+  labels of subjects and objects.
+</p>
+
+<pre><code>
+SELECT ?s ?sLabel ?pLabel ?o ?oLabel
+WHERE {
+  {
+    VALUES (?s ?p ?pEntity ?o) {
+      (wd:Q30      wdt:P361 wd:P361 wd:Q49)
+      (wd:Q9125    wdt:P190 wd:P190 wd:Q488134)
+      (wd:Q9125    wdt:P361 wd:P361 wd:Q690149)
+      (wd:Q488134  wdt:P17  wd:P17  wd:Q30)
+    }
+
+    ?s ?p ?o .
+  }
+
+  UNION
+
+  {
+    VALUES (?s ?p ?pEntity ?o) {
+      (wd:Q690149 wdt:P361 wd:P361 wd:Q39)
+    }
+
+    ?s wdt:P361+ ?o .
+  }
+
+  SERVICE wikibase:label {
+    bd:serviceParam wikibase:language "en".
+  }
+}
+</code></pre>
+
+<p>The <code>wikibase:label</code> service automatically
+  binds a variable named <code>?xLabel</code> to the human-readable label of
+  the entity stored in <code>?x</code>. For example,
+  <code>?sLabel</code>, <code>?pEntityLabel</code>, and
+  <code>?oLabel</code> contain the labels of the entities bound to
+  <code>?s</code>, <code>?pEntity</code>, and <code>?o</code>,
+  respectively. The names <code>?sLabel</code> and
+  <code>?oLabel</code> are therefore not declared explicitly in the query.
+</p>
+
+
+<p>
+  Executing the revised query produces the same six triples as before, but
+  the results are now displayed using human-readable labels instead of
+  Wikidata identifiers, making them much easier to understand.
+</p>
+
+
+<p>
+The revised query returns the same six triples as before, but it also
+retrieves the English labels for each subject, property, and object. The
+results are now much easier to interpret.
+</p>
+
+<center>
+  <table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Subject</th>
+      <th>Property</th>
+      <th>Object</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="http://www.wikidata.org/entity/Q30">United States</a></td>
+      <td>part of</td>
+      <td><a href="http://www.wikidata.org/entity/Q49">North America</a></td>
+    </tr>
+    <tr>
+      <td><a href="http://www.wikidata.org/entity/Q9125">Winterthur</a></td>
+      <td>twinned administrative body</td>
+      <td><a href="http://www.wikidata.org/entity/Q488134">Ontario</a></td>
+    </tr>
+    <tr>
+      <td><a href="http://www.wikidata.org/entity/Q9125">Winterthur</a></td>
+      <td>part of</td>
+      <td><a href="http://www.wikidata.org/entity/Q690149">Zurich metropolitan area</a></td>
+    </tr>
+    <tr>
+      <td><a href="http://www.wikidata.org/entity/Q488134">Ontario</a></td>
+      <td>country</td>
+      <td><a href="http://www.wikidata.org/entity/Q30">United States</a></td>
+    </tr>
+    <tr>
+      <td><a href="http://www.wikidata.org/entity/Q690149">Zurich metropolitan area</a></td>
+      <td>part of</td>
+      <td><a href="http://www.wikidata.org/entity/Q39">Switzerland</a></td>
+    </tr>
+  </tbody>
+  </table>
+  </center>
+
+
+
+	<p>The first query retrieved the correct graph structure but
+	displayed the results using Wikidata identifiers. The revised
+	query retrieves the same graph while also obtaining English
+	labels for each identifier, making the output much easier for
+	people to read. This separation between querying the graph and
+	presenting the results is a common pattern in SPARQL
+	applications.</p?
+
+
+<!--=======================================================================-->
+      </td>
+    </tr>
+  </table>
+
+
+  <!--=======================================================================-->
+
+      </td>
+    </tr>
+  </table>
+  <br/>
+</center>
+
+</html>

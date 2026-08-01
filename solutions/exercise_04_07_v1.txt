@@ -1,0 +1,384 @@
+
+
+Create a list of S&P 100
+
+Extract S&P100 from Wikidata
+
+SELECT
+    ?company
+    ?companyLabel
+    ?property
+    ?propertyLabel
+    ?value
+    ?valueLabel
+WHERE {
+
+  VALUES ?ticker {
+    "AAPL"
+  }
+
+  ?company p:P414 ?stmt .
+  ?stmt ps:P414 wd:Q82059 . 
+  ?stmt pq:P249 ?ticker .
+
+
+  VALUES ?prop {
+	 wdt:P2139
+  }
+
+  ?company ?prop ?value .
+
+  ?property wikibase:directClaim ?prop 
+
+  SERVICE wikibase:label {
+      bd:serviceParam wikibase:language "en".
+  }
+}
+
+
+
+
+
+Extract s&P 100 from the FinReflectKG
+
+
+
+
+SELECT
+    ?company
+    ?companyLabel
+    ?property
+    ?propertyLabel
+    ?value
+    ?valueLabel
+WHERE {
+
+  VALUES ?ticker {
+    "AAPL"
+    "ABBV"
+    "ABT"
+    "ACN"
+    "ADBE"
+    "AMAT"
+    "AMD"
+    "AMGN"
+    "AMT"
+    "AMZN"
+    "AVGO"
+    "AXP"
+    "BA"
+    "BAC"
+    "BKNG"
+    "BLK"
+    "BMY"
+    "BNY"
+    "BRK.B"
+    "C"
+    "CAT"
+    "CL"
+    "CMCSA"
+    "COF"
+    "COP"
+    "COST"
+    "CRM"
+    "CSCO"
+    "CVS"
+    "CVX"
+    "DE"
+    "DHR"
+    "DIS"
+    "DUK"
+    "EMR"
+    "FDX"
+    "GD"
+    "GE"
+    "GEV"
+    "GILD"
+    "GM"
+    "GOOG"
+    "GOOGL"
+    "GS"
+    "HD"
+    "HON"
+    "IBM"
+    "INTC"
+    "INTU"
+    "ISRG"
+    "JNJ"
+    "JPM"
+    "KO"
+    "LIN"
+    "LLY"
+    "LMT"
+    "LOW"
+    "LRCX"
+    "MA"
+    "MCD"
+    "MDLZ"
+    "MDT"
+    "META"
+    "MMM"
+    "MO"
+    "MRK"
+    "MS"
+    "MSFT"
+    "MU"
+    "NEE"
+    "NFLX"
+    "NKE"
+    "NOW"
+    "NVDA"
+    "ORCL"
+    "PEP"
+    "PFE"
+    "PG"
+    "PLTR"
+    "PM"
+    "QCOM"
+    "RTX"
+    "SBUX"
+    "SCHW"
+    "SO"
+    "SPG"
+    "T"
+    "TMO"
+    "TMUS"
+    "TSLA"
+    "TXN"
+    "UBER"
+    "UNH"
+    "UNP"
+    "UPS"
+    "USB"
+    "V"
+    "VZ"
+    "WFC"
+    "WMT"
+    "XOM"
+  }
+
+  ?company p:P414 ?stmt .
+  ?stmt ps:P414 wd:Q82059 . 
+  ?stmt pq:P249 ?ticker .
+
+
+  VALUES ?property {
+	 wd:P1056
+	 wd:P127
+	 wd:P169
+	 wd:P1830
+	 wd:P2139
+	 wd:P355
+	 wd:P361
+	 wd:P452
+	 wd:P249
+  }
+  ?property wikibase:claim ?claimPredicate .
+  ?property wikibase:statementProperty ?statementProperty .
+
+  ?company ?claimPredicate ?stmt .
+  ?stmt ?statementProperty ?value .
+
+  OPTIONAL {
+      ?stmt ?pq ?qualifierValue .
+      FILTER(STRSTARTS(STR(?pq), STR(pq:)))
+
+      ?qualifierProperty wikibase:qualifier ?pq .
+  }
+
+  SERVICE wikibase:label {
+      bd:serviceParam wikibase:language "en".
+
+  }
+}
+
+
+
+
+
+Extract s&P 100 from the FinReflectKG
+
+
+Merge the two
+
+=====
+Nodes
+
+Organization
+├── LegalEntity
+│   ├── Company
+│   ├── NonProfitOrganization
+│   └── GovernmentAgency
+└── OrganizationalUnit
+
+Organization
+Person
+
+
+MATCH (n)
+DETACH DELETE n;
+
+
+
+
+LOAD CSV WITH HEADERS FROM 'file:///finkg/wikidata_snp100_company_data.csv' AS row
+MERGE (c:Entity:Company {wikidata_id: row.company})
+SET c.name = row.companyLabel;
+
+
+LOAD CSV WITH HEADERS FROM 'file:///finkg/wikidata_snp100_company_data.csv' AS row
+MERGE (c:Entity:Company {wikidata_id: row.company})
+FOREACH (_ IN CASE
+    WHEN row.property ENDS WITH '/P169'
+    THEN [1]
+    ELSE []
+END |
+    MERGE (p:Entity:Person {wikidata_id: row.value})
+    SET p.name = row.valueLabel
+    MERGE (c)-[r:CEO]->(p)
+    SET r.wikidata_property = row.property
+)
+
+
+LOAD CSV WITH HEADERS FROM 'file:///finkg/wikidata_snp100_company_data.csv' AS row
+MERGE (c:Entity:Company {wikidata_id: row.company})
+FOREACH (_ IN CASE
+    WHEN row.property ENDS WITH '/P1056'
+    THEN [1]
+    ELSE []
+END |
+    SET c.has_product = row.valueLabel
+)
+
+
+LOAD CSV WITH HEADERS FROM 'file:///finkg/wikidata_snp100_company_data.csv' AS row
+MERGE (c:Entity:Company {wikidata_id: row.company})
+FOREACH (_ IN CASE
+    WHEN row.property ENDS WITH '/P112'
+    THEN [1]
+    ELSE []
+END |
+    MERGE (p:Entity:Person {wikidata_id: row.value})
+    SET p.name = row.valueLabel
+    MERGE (c)-[r:has_founder]->(p)
+    SET r.wikidata_property = row.property
+)
+
+
+LOAD CSV WITH HEADERS FROM 'file:///finkg/wikidata_snp100_company_data.csv' AS row
+MERGE (c:Entity:Company {wikidata_id: row.company})
+FOREACH (_ IN CASE
+    WHEN row.property ENDS WITH '/P127'
+    THEN [1]
+    ELSE []
+END |
+    MERGE (e:Entity {wikidata_id: row.value})
+    SET e.name = row.valueLabel
+    MERGE (c)-[r:has_owned_by]->(e)
+    SET r.wikidata_property = row.property
+)
+
+LOAD CSV WITH HEADERS FROM 'file:///finkg/wikidata_snp100_company_data.csv' AS row
+MERGE (c:Entity:Company {wikidata_id: row.company})
+FOREACH (_ IN CASE
+    WHEN row.property ENDS WITH '/P159'
+    THEN [1]
+    ELSE []
+END |
+    SET c.has_headquarters_location = row.valueLabel
+)
+
+LOAD CSV WITH HEADERS FROM 'file:///finkg/wikidata_snp100_company_data.csv' AS row
+MERGE (c:Entity:Company {wikidata_id: row.company})
+FOREACH (_ IN CASE
+    WHEN row.property ENDS WITH '/P17'
+    THEN [1]
+    ELSE []
+END |
+    SET c.has_country = row.valueLabel
+)
+
+LOAD CSV WITH HEADERS FROM 'file:///finkg/wikidata_snp100_company_data.csv' AS row
+MERGE (c:Entity:Company {wikidata_id: row.company})
+FOREACH (_ IN CASE
+    WHEN row.property ENDS WITH '/P1830'
+    THEN [1]
+    ELSE []
+END |
+    MERGE (e:Entity {wikidata_id: row.value})
+    SET e.name = row.valueLabel
+    MERGE (c)-[r:has_owner_of]->(e)
+    SET r.wikidata_property = row.property
+)
+
+LOAD CSV WITH HEADERS FROM 'file:///finkg/wikidata_snp100_company_data.csv' AS row
+MERGE (c:Entity:Company {wikidata_id: row.company})
+FOREACH (_ IN CASE
+    WHEN row.property ENDS WITH '/P2139'
+    THEN [1]
+    ELSE []
+END |
+    SET c.has_total_revenue = row.valueLabel
+)
+
+
+LOAD CSV WITH HEADERS FROM 'file:///finkg/wikidata_snp100_company_data.csv' AS row
+MERGE (c:Entity:Company {wikidata_id: row.company})
+FOREACH (_ IN CASE
+    WHEN row.property ENDS WITH '/P2226'
+    THEN [1]
+    ELSE []
+END |
+    SET c.has_market_capitalization = row.valueLabel
+)
+
+FOREACH (_ IN CASE WHEN row.property ENDS WITH '/P169' THEN [1] ELSE [] END |
+    MERGE (c)-[:CEO]->(p)
+)
+
+FOREACH (_ IN CASE WHEN row.property ENDS WITH '/P112' THEN [1] ELSE [] END |
+    MERGE (c)-[:FOUNDER]->(p)
+)
+
+FOREACH (_ IN CASE WHEN row.property ENDS WITH '/P127' THEN [1] ELSE [] END |
+    MERGE (c)-[:OWNED_BY]->(p)
+)
+
+
+==== Check which properties have statements ====
+
+SELECT DISTINCT
+       ?property
+WHERE {
+
+  VALUES ?property {
+     wd:P1056
+     wd:P112
+     wd:P127
+     wd:P1448
+     wd:P159
+     wd:P169
+     wd:P17
+     wd:P1830
+     wd:P2139
+     wd:P2226
+     wd:P276
+     wd:P31
+     wd:P355
+     wd:P361
+     wd:P452
+     wd:P488
+     wd:P3320
+  }
+
+  ?property wikibase:claim ?claimPredicate .
+
+  wd:Q312 ?claimPredicate ?stmt1 .
+
+  }
+}
+ORDER BY ?property
+
+
+
+

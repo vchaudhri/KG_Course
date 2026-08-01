@@ -1,0 +1,40 @@
+
+Choose Nodes, Labels and Properties
+
+Nodes:
+  Company
+	Properties:
+		has_ticker_symbol
+  		has_name
+		
+
+
+  	Edges
+		has_headwind
+			edge_property: has_duration
+  		has_tailwind
+			edge_property: has_duration
+
+
+  Causal Factor
+  	      Properties:
+		has_description
+		has_materiality
+		has_externality
+		has_obviousness
+
+
+Competition
+Regulatory Change
+Economic Condition
+Product Launch
+Analyst Perception
+  
+		
+
+
+
+
+
+
+
