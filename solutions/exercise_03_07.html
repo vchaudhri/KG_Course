@@ -1,0 +1,317 @@
+<html>
+
+<!--=======================================================================-->
+
+<head>
+  <title>Exercise 3.7 - Company Knowledge Graph   </title>
+
+      <!-- Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet">
+
+    
+  <!-- Prism CSS -->
+<link href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism.min.css" rel="stylesheet" />
+
+<!-- Prism Core -->
+<script src="https://cdn.jsdelivr.net/npm/prismjs/prism.min.js"></script>
+
+<!-- SPARQL language support -->
+<script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-sparql.min.js"></script>
+
+</head>
+
+<!--=======================================================================-->
+
+<body style='background-color:#990000'>
+  <center>
+    <table width='720' cellpadding='40' bgcolor='#ffffff'>
+      <tr>
+        <td>
+
+<!--=======================================================================-->
+
+<center>
+  <span style='font-size:36px'>Knowledge Graphs</span>
+</center>
+<br/>
+
+<!--=======================================================================-->
+
+<center>
+  <table width='640' cellspacing='1' cellpadding='10' bgcolor='#eeeeee' border='1'>
+    <tr><td align='center' style='font-size:18px'>Exercise 3.7 - Company Knowledge Graph   </td></tr>
+  </table>
+</center>
+
+<!--=======================================================================-->
+
+
+<br>
+
+<p id="3.7">Exercise 3.7. Design a Company knowledge graph to support  a business
+  intelligence dashboard.</p>
+
+  <p>The dashboard is to aggregate information from multiple sources
+about a company to get better insight into its business, customers,
+competitors, subsidiaries or parent organlzations. Assume that the two
+sources are Wikidata and Security and Exchange Commission Filings. </p>
+
+  <p>Begin the process by reviewing the RDF schema for Company
+ (identifier Q783794) in Wikidata. Reuse as much of this schema as
+ necessary, and extend it as you see fit.  Document your choices.</p>
+
+  <p>For SEC filings, use
+  the <a href="https://huggingface.co/datasets/domyn/FinReflectKG">FinReflectKG</a>
+  dataset. Extend
+  the schema you had extracted from Wikidata in the previous step to
+  handle any new information that appears in FinReflectKG. </p>
+
+
+  <h3>Examining Company Schema in Wikidata</h3>
+
+ <p>We examine the company schema in Wikidata by posing the following
+ SPARQL query in the Wikidata <a href="https://query.wikidata.org/">
+     query interface</a>.
+
+<center>
+<table width="600">
+    <tr><td><tt>SELECT DISTINCT ?property ?propertyLabel ?propertyDescription</tt></td></tr>
+    <tr><td><tt>WHERE {</tt></td></tr>
+    <tr><td><tt>&nbsp;&nbsp;wd:Q312 ?prop ?value .</tt></td></tr>
+    <tr><td><tt></tt></td></tr>
+    <tr><td><tt>&nbsp;&nbsp;?property wikibase:directClaim ?prop .</tt></td></tr>
+    <tr><td><tt></tt></td></tr>
+    <tr><td><tt>&nbsp;&nbsp;SERVICE wikibase:label {</tt></td></tr>
+    <tr><td><tt>&nbsp;&nbsp;&nbsp;&nbsp;bd:serviceParam wikibase:language "en".</tt></td></tr>
+    <tr><td><tt>&nbsp;&nbsp;}</tt></td></tr>
+    <tr><td><tt>}</tt></td></tr>
+    <tr><td><tt>ORDER BY ?propertyLabel</tt></td></tr>
+</table>
+</center>
+<br>
+
+<p>The query returns more than 250 properties. Many of these
+properties are not relevant to the current task. Let us pick the
+  following properties to work with.</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Property ID</th>
+            <th>Property Label</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><a href="https://www.wikidata.org/wiki/Property:P1056" target="_blank">P1056</a></td>
+            <td>product or material produced</td>
+        </tr>
+        <tr>
+            <td><a href="https://www.wikidata.org/wiki/Property:P127" target="_blank">P127</a></td>
+            <td>owned by</td>
+        </tr>
+        <tr>
+            <td><a href="https://www.wikidata.org/wiki/Property:P169" target="_blank">P169</a></td>
+            <td>chief executive officer</td>
+        </tr>
+        <tr>
+            <td><a href="https://www.wikidata.org/wiki/Property:P1830" target="_blank">P1830</a></td>
+            <td>owner of</td>
+        </tr>
+        <tr>
+            <td><a href="https://www.wikidata.org/wiki/Property:P355" target="_blank">P355</a></td>
+            <td>child organization or unit</td>
+        </tr>
+        <tr>
+            <td><a href="https://www.wikidata.org/wiki/Property:P361" target="_blank">P361</a></td>
+            <td>part of</td>
+        </tr>
+        <tr>
+            <td><a href="https://www.wikidata.org/wiki/Property:P452" target="_blank">P452</a></td>
+            <td>industry</td>
+        </tr>
+    </tbody>
+</table>
+
+<br>
+
+<h3>Examining FinReflectKG Schema</h3>
+
+<p><a href="https://arxiv.org/pdf/2508.17906">FinReflectKG</a> is a
+financial knowledge graph dataset extracted from S &amp; P 500
+companies' SEC 10-K filings spanning 2014-2024, containing 17.51
+million normalized triplets with full textual context.  The following
+discussion is based on the schema
+description <a href="https://huggingface.co/datasets/domyn/FinReflectKG">included</a>
+with the dataset.</p>
+
+<p>The core elements of the FinReflectKG triple are shown below.</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Field</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><i>triplet_id</i></td>
+            <td>Unique identifier for each triplet.</td>
+        </tr>
+        <tr>
+            <td><i>entity</i></td>
+            <td>Source entity (normalized, e.g., <i>aapl</i>).</td>
+        </tr>
+        <tr>
+            <td><i>entity_type</i></td>
+            <td>Category of the source entity (e.g., <i>ORG</i>, <i>PERSON</i>, <i>GPE</i>).</td>
+        </tr>
+        <tr>
+            <td><i>relationship</i></td>
+            <td>Relationship type (normalized, e.g., <i>discloses</i>, <i>operates_in</i>).</td>
+        </tr>
+        <tr>
+            <td><i>target</i></td>
+            <td>Target entity (normalized).</td>
+        </tr>
+        <tr>
+            <td><i>target_type</i></td>
+            <td>Category of the target entity.</td>
+        </tr>
+        <tr>
+            <td><i>start_date</i></td>
+            <td>Relationship start date (format: <i>Month YYYY</i>).</td>
+        </tr>
+        <tr>
+            <td><i>end_date</i></td>
+            <td>Relationship end date (format: <i>Month YYYY</i> or <i>default_end_timestamp</i>).</td>
+        </tr>
+        <tr>
+            <td><i>extraction_type</i></td>
+            <td>How the temporal information was obtained (<i>default</i> or <i>extracted</i>).</td>
+        </tr>
+    </tbody>
+</table>
+<br>
+
+<p>The above triples could be straightforwardly mapped into RDF
+triples, but before jumping into that conclusion, let us examine the
+contents of the triples more closely.</p>
+
+
+<p>The <i>entity_type</i> and <i>target_type</i> in this dataset are
+quite diverse, ranging from organizations, people, events, abstract
+concepts, raw materials, policies, etc.  We will, therefore, need to
+filter the dataset so that it best adds to the design we are creating
+here.
+</p>
+
+<p>The dataset also has an extensive set of relationship types. In principle, all of the
+  relationships could be in a company knowledge graph, but to maintain a reasonable scope
+  for this exercise, we choose the following relationships.</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Relationship</th>
+            <th>Definition</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><i>parent_of</i></td>
+            <td>One organization is the parent company of another organization.</td>
+        </tr>
+        <tr>
+            <td><i>subsidiary_of</i></td>
+            <td>One organization is a subsidiary of another organization.</td>
+        </tr>
+        <tr>
+            <td><i>produces</i></td>
+            <td>An organization manufactures or produces a product, service, or material.</td>
+        </tr>
+        <tr>
+            <td><i>supply</i></td>
+            <td>One organization supplies goods, materials, or services to another organization as part of a supply chain.</td>
+        </tr>
+        <tr>
+            <td><i>invests_in</i></td>
+            <td>An organization has made an investment in another organization.</td>
+        </tr>
+        <tr>
+            <td><i>has_stake_in</i></td>
+            <td>An organization owns an equity stake or ownership interest in another organization.</td>
+        </tr>
+    </tbody>
+</table>
+<br>
+<p>
+We have chosen the above relationships to closely correspond to several of the Wikidata properties introduced earlier, although the mapping is not always exact. For example,
+<i>produces</i> aligns directly with
+<i>product or material produced (P1056)</i>, while
+<i>parent_of</i> and
+<i>subsidiary_of</i> correspond to organizational hierarchy relationships such as
+<i>child organization or unit (P355)</i> and
+<i>part of (P361)</i>. In contrast,
+<i>invests_in</i> and
+<i>has_stake_in</i> have only approximate equivalents in
+<i>owned by (P127)</i>, since they distinguish between investment, partial ownership, and corporate control. Finally,
+<i>supply</i> has no close counterpart among the Wikidata properties
+considered here, reflecting FinReflectKG's emphasis on modeling
+business relationships such as supply chains that are not explicitly
+represented in the selected Wikidata schema.
+</p>
+
+ <h3>Company Knowledge Graph schema</h3>
+
+ <p>For this exercise, we will use the Wikidata schema as the
+   foundation. We will use the Wikidata identifiers for the companies.
+   We will import only those triples from FinReflectKG that satisfiy
+   the Wikidata property constraints. The key entity types in our
+   schema will be <i>Entity</i> which can be either and <i>Company</i>
+   or a <i>Person</i>, <i>Industry</i>, and <i>Offering</i> (a
+   generalized label for prodcut or service) .  As <i>invests_in</i>
+   and <i>has_stake_in</i> have only approximate equivalents in
+<i>owned by (P127)</i>, we will add them as additional relationships.
+ We will add the <i>supply</i> relationship to our schema.</p>
+
+
+ 
+<center>
+<table>
+  <tr>
+    <td align='center'>
+  <table>
+    <tr><td><img src='exercise_03_07.png' height='400' /></td></tr>
+ </table>
+    </td>
+  </tr>
+</table>
+</center>
+
+
+
+  
+  <!--=======================================================================-->
+
+      </td>
+    </tr>
+  </table>
+  <br/>
+</center>
+      </td>
+    </tr>
+  </table>
+</center>
+
+<!--=======================================================================-->
+
+      <br/>
+    </td></tr></table>
+  </center>
+</body>
+
+</html>

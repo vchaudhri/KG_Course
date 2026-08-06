@@ -1,0 +1,197 @@
+<html>
+
+<!--=======================================================================-->
+
+<head>
+  <title>Exercise 3.6 - Causal Graph for Investing</title>
+
+<!--=======================================================================-->
+
+<body style='background-color:#990000'>
+  <center>
+    <table width='720' cellpadding='40' bgcolor='#ffffff'>
+      <tr>
+        <td>
+
+<!--=======================================================================-->
+
+<center>
+  <span style='font-size:36px'>Knowledge Graphs</span>
+</center>
+<br/>
+
+<!--=======================================================================-->
+
+<center>
+  <table width='640' cellspacing='1' cellpadding='10' bgcolor='#eeeeee' border='1'>
+    <tr><td align='center' style='font-size:18px'>Exercise 3.6 - Causal Graph for Investing</td></tr>
+  </table>
+</center>
+
+<!--=======================================================================-->
+
+ 
+   <p id="3.6">Exercise 3.6. Design a property graph schema for a
+   causal graph for investing. Your design should take into account
+   the following domain knowledge.
+
+
+   <p>In investing, <i>headwind</i> and <i>tailwind</i> are metaphors
+   used to describe the factors that could cause a difference to the
+   performance of a stock.</p>
+
+   <p>A <i>headwind</i> is any specific company, market or economic
+factor that could causally hinder a company&apos;s growth, or reduce
+its profitability, in the near future. These could include things like
+increased competition, regulatory changes, unfavorable economic
+conditions, or any other causal factor that makes it more difficult
+for the company to succeed. If a stock is facing headwinds, it means
+it is encountering challenges that could potentially lower its value
+in the near future.</p>
+
+<p>On the other hand, a <I>tailwind</i> refers to any such factor that
+could causally boost the company&apos;s growth or increase its
+profitability. These could include things like favorable economic
+conditions, beneficial regulatory changes, or a successful new product
+launch. A stock with tailwinds is benefiting from positive conditions
+or events that are causally responsible for an increase in its value
+in the near future.<p>
+
+<p>Headwinds and tailwinds should be unitary in nature, i.e., not
+decomposable into more specific assertions. For example, <i>Company is
+facing increasing competition, and is having difficulty hiring
+critical talent</i> should be decomposed into two distinct
+headwinds.</p>
+
+<p>The factors that do not causally affect company performance cannot
+  be headwinds or tailwinds.  Examples of factors that are not
+  headwinds or tailwinds:
+  
+  <ul>
+    <li>valuations (factors that lead to high or low valuations may
+    be candidate head/tail winds)</li>
+    
+    <li>observations of company performance improvement</li>
+    
+    <li>analyst perceptions -- e.g., uncertainity in an analyst&apos;s
+    predictions, or variances in thier views</li>
+    
+    <li>one-off factors that affected performance in last quarter, but
+    will not have an impact in future quarters</li>
+    
+  </ul>
+</p>
+
+
+<p>A headwind / tailwind should have four well-defined attributes:
+
+  <ul>
+    <li>materiality: possible values -- mild, medium, high. Measures
+      whether this factor is expected to have a material impact on
+      company performance. For instance, materiality is low for
+      factors that will affect only a small portion of company
+      business.</li>
+    
+    <li>duration: possible values -- short (1-2 quarters), medium (3-5
+      quarters), long (more than 5 quarters). It measures expected
+      duration of this factor.</li>
+
+    <li>externality: possible values -- true, false or both. If the
+      factor external to (not controlled by) the company then the
+      externality is true.  The factor is false if the company
+      controls the factor. Its value is both if the factor may be both
+      internally and externally controlled.</li>
+
+    <li>obviousness: possible values -- low, medium, or high. Measures
+    how strongly does an analyst believe in the effect of the
+    parameter.</li>
+  </ul>
+</p>
+
+<h3>Sample Solution</h3>
+
+<p>We begin by identifying nodes, labels and properties. Obvious
+  candidate nodes are <i>Company</i> and <i>Causal Factor</i> </p>
+
+
+<p>A <i>Company</i> node would have properties <i>has_name</i>
+and <i>has_ticker_symbol</i>.  For now, we will restrict ourselves to
+  publicly traded companies.</p>
+
+
+<p>A <i>Causal Factor</i> would have only one 
+  property: <i>description</i>.
+
+  
+<p>We next identify the relations in our schema.</p>
+
+<p>Relations in our schema our <i>:HEADWIND</i>
+  and <i>:TAILWIND</i>. Each of these relationships would have the
+  properties <i>materiality</i>, <i>duration</i>, <i>externality</i>
+  and <i>obviousness</i>.  We choose to associate the properties with
+  the relation because these can change from quarter to quarter. Two
+  additional useful properties of each of these relations
+  are <i>reported in quarter</i> to indicate in which quarter this
+  particular relationship was reported, and <i>provenance</i> to
+  record the source from where the relationship was obtained.</p>
+
+<p>We use two relationship types rather than one relationship (e.g.,
+<I>:CAUSAL_IMPACT</I>, and give it a <I>direction</I> proeprty with two values:
+<I>headwind</I>, and <I>tailwind</I>) for the following reasons. The
+terms headwind/tailwind constitute a fixed, mutually exclusive
+vocabulary in this domain (like LIKES/DISLIKES), and having it as the
+relationship type - rather than a property - lets us write direct,
+indexable queries such as MATCH (f:Factor)-[:HEADWIND]->(c:Company)
+without a filter clause.</p>
+
+
+<p>Even though not required in the specification, we can introduce
+a <i>causes</i> relationship between two causal factors to denote the
+causal relationship between them. This relationship can model
+multi-step causal chains rather than only direct effects on
+companies. It is meant to capture time-independnt causal
+influences.</p>
+
+
+<p>Similarly, we introduce a <i>competes</i> relationship between two
+companies to indicate that they are competitors.</p>
+
+<p>Even though additional properties of these relationship (for
+example, two companies may compete in one geographical but not in
+another), but for now, we begin with this simplest design.</p>
+
+
+
+<center>
+<table>
+  <tr>
+    <td align='center'>
+  <table>
+    <tr><td><img src='exercise_03_06.png' height='400' /></td></tr>
+ </table>
+    </td>
+  </tr>
+</table>
+</center>
+
+  
+  <!--=======================================================================-->
+
+      </td>
+    </tr>
+  </table>
+  <br/>
+</center>
+      </td>
+    </tr>
+  </table>
+</center>
+
+<!--=======================================================================-->
+
+      <br/>
+    </td></tr></table>
+  </center>
+</body>
+
+</html>
