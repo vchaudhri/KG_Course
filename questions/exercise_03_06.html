@@ -108,57 +108,11 @@ headwinds.</p>
   </ul>
 </p>
 
-<h3>Sample Solution</h3>
 
-<p>We begin by identifying nodes, labels and properties. Obvious
-  candidate nodes are <i>Company</i> and <i>Causal Factor</i> </p>
+<p>
+<a href="../solutions/exercise_03_06.html">Sample Solution</a>
+</op>
 
-
-<p>A <i>Company</i> node would have properties <i>has_name</i>
-and <i>has_ticker_symbol</i>.  For now, we will restrict ourselves to
-  publicly traded companies.</p>
-
-
-<p>A <i>Causal Factor</i> would have only one 
-  property: <i>description</i>.
-
-  
-<p>We next identify the relations in our schema.</p>
-
-<p>Relations in our schema our <i>:HEADWIND</i>
-  and <i>:TAILWIND</i>. Each of these relationships would have the
-  properties <i>materiality</i>, <i>duration</i>, <i>externality</i>
-  and <i>obviousness</i>.  We choose to associate the properties with
-  the relation because these can change from quarter to quarter. Two
-  additional useful properties of each of these relations
-  are <i>reported in quarter</i> to indicate in which quarter this
-  particular relationship was reported, and <i>provenance</i> to
-  record the source from where the relationship was obtained.</p>
-
-<p>We use two relationship types rather than one relationship (e.g.,
-<I>:CAUSAL_IMPACT</I>, and give it a <I>direction</I> proeprty with two values:
-<I>headwind</I>, and <I>tailwind</I>) for the following reasons. The
-terms headwind/tailwind constitute a fixed, mutually exclusive
-vocabulary in this domain (like LIKES/DISLIKES), and having it as the
-relationship type - rather than a property - lets us write direct,
-indexable queries such as MATCH (f:Factor)-[:HEADWIND]->(c:Company)
-without a filter clause.</p>
-
-
-<p>Even though not required in the specification, we can introduce
-a <i>causes</i> relationship between two causal factors to denote the
-causal relationship between them. This relationship can model
-multi-step causal chains rather than only direct effects on
-companies. It is meant to capture time-independnt causal
-influences.</p>
-
-
-<p>Similarly, we introduce a <i>competes</i> relationship between two
-companies to indicate that they are competitors.</p>
-
-<p>Even though additional properties of these relationship (for
-example, two companies may compete in one geographical but not in
-another), but for now, we begin with this simplest design.</p>
 
 
 
