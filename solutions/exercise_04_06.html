@@ -1,0 +1,516 @@
+<html>
+
+<!--=======================================================================-->
+
+<head>
+  <title>Exercise 4.6 - Creating a Knowledge by Integrating Data   </title>
+
+<!--=======================================================================-->
+
+<body style='background-color:#990000'>
+  <center>
+    <table width='720' cellpadding='40' bgcolor='#ffffff'>
+      <tr>
+        <td>
+
+<!--=======================================================================-->
+
+<center>
+  <span style='font-size:36px'>Knowledge Graphs</span>
+</center>
+<br/>
+
+<!--=======================================================================-->
+
+<center>
+  <table width='640' cellspacing='1' cellpadding='10' bgcolor='#eeeeee' border='1'>
+    <tr><td align='center' style='font-size:18px'>Exercise 4.6 - Creating a Knowledge by Integrating Data     </td></tr>
+  </table>
+</center>
+
+<!--=======================================================================-->
+
+<p id="4.6">Exercise
+4.6. Create a knowledge graph of companies by linking the records
+across Wikidata and the SEC data considered as part the problem 3.7.
+To connect the two data sets, you can either implement your own record
+linker, or use any available open-source tools. Report on the quality
+of the resulting data set in terms of the precision and recall of
+identifying the correct links across the SEC company data and the
+Wikidata company information.
+</p>
+
+
+<h3>Extracting Companies from Wikidata</h3>
+
+<p>To scope the project, we will begin by extracting information about
+the companies in the S&amp;P 100 index. A curated list of these
+companies is available
+in <a href="https://en.wikipedia.org/wiki/S%26P_100">Wikipedia</a>. We
+start by
+simply <a href="./exercise_04_06/snp100_from_wikipedia.csv">scraping</a>
+this list, and incorporating the list of tickers
+in <a href="exercise_04_06/snp.py">our code.</a></p>
+
+<p>To locate a company in Wikidata, we can search either by the
+company name or by its ticker symbol. A search based on the ticker
+symbol is generally more accurate because ticker symbols uniquely
+identify companies within a stock exchange. We will begin by
+explaining the statement model in Wikidata that is necessary to
+correctly query the ticker symbols. We next explain the approach for
+building a mapping table that relates a ticker symbol to each
+company. Finally, we show how to extract the properties of companies
+from Wikidata.
+</p>
+
+
+<h4>Understaing Wikdata Statements</h4>
+
+<p>In Wikidata, the association between a company and its ticker
+symbol is represented as a <i>statement</i> (also called
+a <i>claim</i>) in addition to a simple RDF triple. This allows
+additional information, such as the stock exchange on which the ticker
+symbol is used, the date on which the listing became effective, and
+supporting references, to be attached to the statement. Understanding
+this representation is helpful when writing SPARQL queries to extract
+information from Wikidata. Detailed documentation is available as part
+of official
+Wikidata <a href="https://www.mediawiki.org/wiki/Wikibase/Indexing/RDF_Dump_Format">RDF
+dump specification</a>, but we present below a simplified discussion
+relevant to the current task.</p>
+
+<p>
+Each Wikidata statement consists of a <i>main value</i> (the primary
+fact being asserted) together with
+optional <i>qualifiers</i>, <i>references</i>, and a <i>rank</i>. The
+main value captures the core assertion; qualifiers provide contextual
+details such as time, location, or applicability; references record
+the sources supporting the assertion; and the rank indicates whether
+the statement is preferred, normal, or deprecated. This statement
+model allows Wikidata to represent multiple, potentially conflicting,
+assertions about the same property while preserving their provenance
+and context.
+</p>
+
+<p>
+As an example, consider the property <i>ticker symbol (P249)</i> for
+Apple. One statement records the ticker symbol "AAPL". A company may
+have different ticker symbols on different stock exchanges, so the
+ticker symbol alone is not sufficient. A qualifier such as <i>stock
+exchange (P414)</i> specifies that the ticker symbol "AAPL" is used on
+the NASDAQ exchange. The statement may also include references, such
+as an official NASDAQ listing or an SEC filing, documenting the source
+of the information. Together, the ticker symbol, its qualifiers, and
+its references form a complete statement describing where the ticker
+symbol is valid and how the information is supported.
+</p>
+
+<p>
+Because a statement consists of several components, Wikidata defines
+multiple <i>property namespaces</i> that allow SPARQL queries to
+access each component independently. The prefix <code>wd:</code>
+denotes Wikidata entities, such as companies, people, and stock
+exchanges. The remaining namespaces all use the same property
+identifier but interpret it differently depending on the part of the
+statement being accessed. For example, the property
+identifier <code>P249</code> always refers to the <i>ticker symbol</i>
+property. When prefixed with <code>wdt:</code>, it retrieves the
+ticker symbol directly; when prefixed with <code>p:</code>, it links a
+company to the corresponding statement; when prefixed
+with <code>ps:</code>, it retrieves the statement's main value; when
+prefixed with <code>pq:</code>, it retrieves qualifiers associated
+with the statement; and when prefixed with <code>pr:</code>, it
+retrieves properties of the statement's references. Additional
+variants, such as <code>psv:</code>, <code>pqv:</code>,
+and <code>prv:</code>, return structured value objects for complex
+datatypes. Thus, the namespace determines <i>how</i> the property is
+interpreted, while the property identifier determines <i>what</i>
+property is being accessed.
+</p>
+
+<p>
+The different property namespaces can be illustrated using
+Apple's <i>ticker symbol (P249)</i>. A simple query uses the direct
+property <code>wdt:P249</code>, for example, <code>wd:Q312 wdt:P249
+"AAPL"</code>, which directly returns Apple's ticker symbol. To
+retrieve additional information, the query first follows the claim
+property to a statement node using <code>wd:Q312 p:P249
+?statement</code>. The main value is then obtained
+using <code>?statement ps:P249 "AAPL"</code>. Qualifiers are attached
+to the same statement node; for example, <code>?statement pq:P414
+wd:Q82059</code> indicates that the ticker symbol applies to the
+NASDAQ stock exchange. References are linked from the statement node
+using <code>?statement prov:wasDerivedFrom ?reference</code>, where
+properties such as <code>?reference pr:P248 wd:Q...</code> identify
+the source supporting the statement. Thus, each namespace corresponds
+to a different stage in traversing the statement: <code>wdt:</code>
+retrieves the fact directly, <code>p:</code> reaches the
+statement, <code>ps:</code> retrieves the statement's main
+value, <code>pq:</code> accesses its qualifiers, and <code>pr:</code>
+describes its supporting references.
+</p>
+
+<h4>Mapping Ticker Symbols to Wikidata Identifiers</h4>
+
+<p>It took several iterations to formulate the query in
+the <a href="exercise_04_06/ticker_to_wid_mapping.py">sample code</a>
+that starts from a ticker symbol and obtains its Wikidata
+identifier. The biggest problem is that the many ticker symbols have
+an associated end date, that is, they are no longer current, and must
+be excluded from our results. The query did not return a match for the
+ticker symbol BNY, because it has been recently updated, and on the
+date this code was run, Wikidata had not been updated.  To correct for
+this, we manually added the entry for BNY.</p>
+
+<p>The final table connecting each ticker symbol to its Wikidata
+identifier will serve as the foundation of the knowledge graph we will
+build. We will use the ticker symbols to help us integrate the
+FinReflectKG data into what we will extract from Wikidata.</p>
+
+<h3>Extracting Data from FinReflectKG</h3>
+
+
+<p>
+The source
+dataset, <a href="https://huggingface.co/datasets/domyn/FinReflectKG">FinReflectKG</a>,
+is distributed through Hugging Face as a collection of Parquet files
+containing millions of facts extracted from SEC filings. Rather than
+loading these files individually, we download the dataset locally.</p>
+
+<p>Before extracting a subset,
+ we <a href="exercise_04_06/FinReflectKG.py">examine</a> the content
+ of the data.  It contains 17,513,372 extracted relationship triples.
+ Each row represents a single relationship together with its
+ provenance and contextual information.
+</p>
+
+<table border="1" cellpadding="6" cellspacing="0">
+  <thead>
+    <tr style="background-color:#f2f2f2;">
+      <th>Field</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>triplet_id</code></td>
+      <td>string</td>
+      <td>Unique identifier for the extracted relationship.</td>
+    </tr>
+    <tr>
+      <td><code>entity</code></td>
+      <td>string</td>
+      <td>Source entity participating in the relationship.</td>
+    </tr>
+    <tr>
+      <td><code>entity_type</code></td>
+      <td>string</td>
+      <td>Semantic type of the source entity (e.g., ORG, PERSON, PRODUCT).</td>
+    </tr>
+    <tr>
+      <td><code>relationship</code></td>
+      <td>string</td>
+      <td>Name of the relationship extracted from the text.</td>
+    </tr>
+    <tr>
+      <td><code>target</code></td>
+      <td>string</td>
+      <td>Target entity participating in the relationship.</td>
+    </tr>
+    <tr>
+      <td><code>target_type</code></td>
+      <td>string</td>
+      <td>Semantic type of the target entity.</td>
+    </tr>
+    <tr>
+      <td><code>start_date</code></td>
+      <td>string</td>
+      <td>Beginning of the temporal interval associated with the relationship, when available.</td>
+    </tr>
+    <tr>
+      <td><code>end_date</code></td>
+      <td>string</td>
+      <td>End of the temporal interval associated with the relationship, when available.</td>
+    </tr>
+    <tr>
+      <td><code>extraction_type</code></td>
+      <td>string</td>
+      <td>Method used to extract the relationship.</td>
+    </tr>
+    <tr>
+      <td><code>ticker</code></td>
+      <td>string</td>
+      <td>Stock ticker of the company whose SEC filing contains the extracted fact.</td>
+    </tr>
+    <tr>
+      <td><code>year</code></td>
+      <td>int64</td>
+      <td>Reporting year of the source filing.</td>
+    </tr>
+    <tr>
+      <td><code>source_file</code></td>
+      <td>string</td>
+      <td>SEC filing from which the relationship was extracted.</td>
+    </tr>
+    <tr>
+      <td><code>page_id</code></td>
+      <td>string</td>
+      <td>Identifier of the page containing the extracted text.</td>
+    </tr>
+    <tr>
+      <td><code>chunk_id</code></td>
+      <td>string</td>
+      <td>Identifier of the text chunk used during extraction.</td>
+    </tr>
+    <tr>
+      <td><code>chunk_text</code></td>
+      <td>string</td>
+      <td>Original text from which the relationship was extracted.</td>
+    </tr>
+    <tr>
+      <td><code>triplet_length</code></td>
+      <td>int64</td>
+      <td>Length of the extracted relationship representation.</td>
+    </tr>
+    <tr>
+      <td><code>chunk_text_length</code></td>
+      <td>int64</td>
+      <td>Length of the source text chunk.</td>
+    </tr>
+    <tr>
+      <td><code>has_context</code></td>
+      <td>boolean</td>
+      <td>Indicates whether additional contextual information accompanies the extracted relationship.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>In the table below, we show representative <i>has_stake_in</i>
+relationships in this dataset. he examples illustrate that the
+relationship is applied to a diverse collection of semantic categories
+rather than being restricted to equity ownership between
+organizations.</p>
+
+
+<table border="1" cellpadding="6" cellspacing="0">
+  <thead>
+    <tr style="background-color:#f2f2f2;">
+      <th>Ticker</th>
+      <th>Entity</th>
+      <th>Entity Type</th>
+      <th>Target</th>
+      <th>Target Type</th>
+      <th>Observation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>EL</td>
+      <td>Lauder family</td>
+      <td>PERSON</td>
+      <td>EL</td>
+      <td><code>ORG</code></td>
+      <td>A representative ownership relationship between a person and an organization.</td>
+    </tr>
+
+    <tr>
+      <td>ARNC</td>
+      <td>Arconic</td>
+      <td>ORG</td>
+      <td>CBG</td>
+      <td><code>COMP</code></td>
+      <td>Target is classified as a company rather than an organization, illustrating inconsistent typing.</td>
+    </tr>
+
+    <tr>
+      <td>BBY</td>
+      <td>Best Buy</td>
+      <td>ORG</td>
+      <td>North America Retail Segment</td>
+      <td><code>SEGMENT</code></td>
+      <td>Business segment incorrectly appears as the target of an ownership relationship.</td>
+    </tr>
+
+    <tr>
+      <td>BAC</td>
+      <td>Bank of America</td>
+      <td>ORG</td>
+      <td>Mortgage-backed Security</td>
+      <td><code>FIN_INST</code></td>
+      <td>Financial instrument is modeled as an owned entity rather than as an investment asset.</td>
+    </tr>
+
+    <tr>
+      <td>PFE</td>
+      <td>Pfizer</td>
+      <td>ORG</td>
+      <td>Paxlovid</td>
+      <td><code>PRODUCT</code></td>
+      <td>Product appears as the target; a <code>produces</code> relationship would be more appropriate.</td>
+    </tr>
+  </tbody>
+</table>
+
+
+<p>
+These observations motivated the introduction of relationship-specific
+type constraints during preprocessing. Rather than accepting every
+extracted <i>has_stake_in</i> relationship, we retain only those whose
+source is either an organization or person and whose target is an
+organization. This simple filtering step retains semantically clean
+relationships.  We curate the constraints for each of the relationship of interest
+as shown below.
+</p>
+
+
+<table border="1" cellpadding="6" cellspacing="0">
+  <thead>
+    <tr style="background-color:#f2f2f2;">
+      <th>Relationship</th>
+      <th>Allowed Source Types</th>
+      <th>Allowed Target Types</th>
+      <th>Semantic Interpretation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>parent_of</code></td>
+      <td>ORG</td>
+      <td>ORG</td>
+      <td>Corporate parent subsidiary relationship.</td>
+    </tr>
+    <tr>
+      <td><code>subsidiary_of</code></td>
+      <td>ORG</td>
+      <td>ORG</td>
+      <td>Corporate subsidiary relationship.</td>
+    </tr>
+    <tr>
+      <td><code>produces</code></td>
+      <td>ORG</td>
+      <td>PRODUCT</td>
+      <td>Organization manufactures or markets a product.</td>
+    </tr>
+    <tr>
+      <td><code>invests_in</code></td>
+      <td>ORG, PERSON</td>
+      <td>ORG</td>
+      <td>Organization or person invests in another organization.</td>
+    </tr>
+    <tr>
+      <td><code>has_stake_in</code></td>
+      <td>ORG, PERSON</td>
+      <td>ORG</td>
+      <td>Organization or person owns an equity stake in another organization.</td>
+    </tr>
+    <tr>
+      <td><code>supply</code></td>
+      <td>ORG</td>
+      <td>ORG</td>
+      <td>Supplier customer relationship between organizations.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>
+Applying the
+constraints eliminates many semantically invalid relationships, such as
+organizations having ownership stakes in business segments, financial
+instruments, or products, thereby producing a substantially cleaner knowledge
+graph for downstream entity reconciliation and graph loading.
+</p>
+
+<p>
+The filtered results produce merely 4207 rows. It is a very small
+subset of the overall dataset, but enough to illustrated the
+challenges faced in integrating data from two different sources.
+</p>
+
+<h3>Loading Data into Neo4j</h3>
+
+<p>We will now load the company data derived from Wikdiata and the
+  FinReflectKG into Neo4j to form an integrated graph.</p>
+
+<h4>Loading the Wikidata Information</h4>
+
+<p>The <a href="exercise_04_06/neo4j_loader.py">loading
+process</a> first creates all the company nodes, and then connects them
+using edges.</p>
+
+<p>For creating the company nodes, we leverage the curated list of
+companies we have
+created <a href="exercise_04_06/ticker_to_wid_mapping_enhanced.csv">previously</a>. We
+use the <i>wikidata_id</i> as the merge key for the company. We record
+the company name, and its ticker symbol as node properties.</p>
+
+
+<p>For creating edges, we leverage the data
+we <a href="exercise_04_06/wikidata_snp100_company_data.csv">previously
+extracted</a>. We group the Neo4j requests by property. As some of the
+qualifier properties are not always present, we handle them using
+conditionals in the Cypher query. Furthermore, as Neo4j does not allow
+the property names to be passed as variables, we are forced explicitly
+enumerate all the properties. The qualifier properties are added as
+edge properties.</p>
+
+<p>
+ Since each qualifier associated with a Wikidata statement is
+represented as a separate row in the CSV file, multiple rows may
+correspond to the same relationship. The relationship is therefore
+merged on the statement identifier, and the qualifier rows are used to
+populate additional properties on that relationship. This design
+faithfully preserves the Wikidata statement model while producing a
+compact property graph.
+</p>
+
+<p>
+Several improvements to the loader are possible including scanning the
+property rows only once, generating the Cypher edge creation command
+programmatically, and better code organization.
+</p>
+
+<h4>Integrating FinReflectKG</h4>
+
+<p>FinReflectKG data contains companies and people, which also exist
+  in Wikidata, but it does not have their Wikidata identifiers.
+  Mapping the text identifiers for companies and people into Wikidata
+  identifiers is the primary data integration task we address in the
+  sample solution.</p>
+
+<p>To perform the reconciliation,
+we <a href="exercise_04_06\reconciliation.py">use</a> the Wikidata
+reonciliation service that takes input text, and produces a Wikidata
+identifier for it.  We record the results returned by this service as
+two seprate CSV files -- one for
+<a href="exercise_04_06\company_to_wikidata_reconciliation.csv">companies</a>,
+and hte other
+for <a href="exercise_04_06\person_to_wikidata_reconciliation.csv">people</a>.</p>
+
+<p>While loading the FinReflectKG data into Neo4j, we retain only
+those rows which we were able to successfuly reconcile.  Even though
+that further limits the incremental data to the graph, but this
+exercise is illustrative to appreciate the complexity of merging two
+datasets coming from different sources</p>
+
+
+  <!--=======================================================================-->
+
+      </td>
+    </tr>
+  </table>
+  <br/>
+</center>
+      </td>
+    </tr>
+  </table>
+</center>
+
+<!--=======================================================================-->
+
+      <br/>
+    </td></tr></table>
+  </center>
+</body>
+
+</html>

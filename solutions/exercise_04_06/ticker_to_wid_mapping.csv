@@ -1,0 +1,101 @@
+ticker,company,companyLabel
+META,Q380,Meta
+TMUS,Q3511885,T-Mobile US
+INTC,Q248,Intel
+ORCL,Q19900,Oracle Corporation
+V,Q328840,Visa Inc.
+NVDA,Q182477,Nvidia
+FDX,Q459477,FedEx
+COF,Q1034654,Capital One
+AVGO,Q790060,Broadcom
+UPS,Q155026,United Parcel Service
+TSLA,Q478214,Tesla
+MDT,Q642189,Medtronic plc
+C,Q219508,Citigroup
+ACN,Q338825,Accenture
+CSCO,Q173395,Cisco
+GE,Q1485061,GE Aerospace
+GOOG,Q20800404,Alphabet Inc.
+ISRG,Q2743863,Intuitive Surgical
+JPM,Q192314,JPMorgan Chase
+PM,Q1852556,Philip Morris International
+AAPL,Q312,Apple Inc.
+BA,Q66,Boeing
+CL,Q609466,Colgate-Palmolive Company
+PFE,Q206921,Pfizer
+LRCX,Q1342041,Lam Research
+JNJ,Q333718,Johnson & Johnson
+AMD,Q128896,AMD
+NKE,Q483915,Nike
+BRK.B,Q217583,Berkshire Hathaway
+MA,Q489921,Mastercard
+CAT,Q459965,Caterpillar Inc.
+DUK,Q1264404,Duke Energy
+CVS,Q624375,CVS Health
+COST,Q715583,Costco
+VZ,Q467752,Verizon
+UNP,Q20183163,Union Pacific Corporation
+PG,Q212405,Procter & Gamble
+RTX,Q89368734,RTX
+AMAT,Q7449678,Semitool
+GD,Q502940,General Dynamics
+GILD,Q663596,Gilead Sciences
+GM,Q81965,General Motors
+MO,Q445007,Altria
+SO,Q2304693,Southern Company
+LMT,Q7240,Lockheed Martin
+AMZN,Q3884,Amazon
+ABT,Q306764,Abbott Laboratories
+MDLZ,Q12857502,Mondelez International
+WMT,Q483551,Q483551
+AXP,Q194360,American Express
+WFC,Q744149,Wells Fargo
+NOW,Q7455653,ServiceNow
+TXN,Q193412,Texas Instruments
+NFLX,Q116452644,"Netflix, Inc."
+USB,Q739084,U.S. Bancorp
+IBM,Q37156,IBM
+SCHW,Q1066028,Charles Schwab Corporation
+UBER,Q780442,Uber
+CRM,Q941127,Salesforce
+LIN,Q682759,Linde Group
+BAC,Q487907,Bank of America
+INTU,Q1318848,Intuit
+CVX,Q319642,Chevron Corporation
+DE,Q496302,Deere & Company
+SBUX,Q37158,Starbucks
+LOW,Q1373493,Lowe's
+PLTR,Q2047336,Palantir Technologies
+LLY,Q632240,Eli Lilly and Company
+AMGN,Q470517,Amgen
+DHR,Q1159256,Danaher Corporation
+HON,Q898208,Honeywell
+QCOM,Q544847,Qualcomm
+MMM,Q159433,3M
+CMCSA,Q1113804,Comcast
+GS,Q193326,Goldman Sachs
+ABBV,Q14662364,AbbVie
+KO,Q3295867,The Coca-Cola Company
+AMT,Q4745263,American Tower Corporation
+TMO,Q643674,Thermo Fisher Scientific Inc.
+SPG,Q2287759,Simon Property Group
+GEV,Q118957699,GE Vernova
+MS,Q334204,Morgan Stanley
+HD,Q864407,The Home Depot
+UNH,Q2103926,UnitedHealth Group
+BMY,Q266423,Bristol-Myers Squibb
+MU,Q1197548,Micron Technology
+NEE,Q967868,NextEra Energy
+T,Q35476,AT&T
+GOOGL,Q20800404,Alphabet Inc.
+BLK,Q219635,BlackRock
+PEP,Q334800,PepsiCo
+EMR,Q1335585,Emerson Electric
+XOM,Q156238,ExxonMobil
+COP,Q214763,ConocoPhillips
+DIS,Q7414,The Walt Disney Company
+ADBE,Q11463,Adobe
+BKNG,Q7242653,priceline.com
+MRK,Q247489,Merck & Co.
+MSFT,Q2283,Microsoft
+MCD,Q38076,McDonald's
