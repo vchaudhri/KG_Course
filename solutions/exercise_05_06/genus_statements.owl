@@ -1,0 +1,1354 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="https://okn.us/openstax/book/principles-of-finance#"
+     xml:base="https://okn.us/openstax/book/principles-of-finance"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="https://okn.us/openstax/book/principles-of-finance"/>
+
+    <owl:AnnotationProperty rdf:about="https://okn.us/openstax/book/principles-of-finance#originalMention"/>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#ability">
+        <rdfs:label>ability</rdfs:label>
+        <originalMention>ability</originalMention>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#account">
+        <rdfs:label>account</rdfs:label>
+        <originalMention>an account</originalMention>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#accounting_standard">
+        <rdfs:label>accounting standard</rdfs:label>
+        <originalMention>accounting standards</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#common_set_of_accounting_principles_standards_and_procedure"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#accounting_system">
+        <rdfs:label>accounting system</rdfs:label>
+        <originalMention>a method of accounting</originalMention>
+        <originalMention>accounting system</originalMention>
+        <originalMention>an accounting method</originalMention>
+        <originalMention>an accounting system</originalMention>
+        <originalMention>method of accounting</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#method"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#primary_system"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#procedure"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#agreement">
+        <rdfs:label>agreement</rdfs:label>
+        <originalMention>a formal arrangement</originalMention>
+        <originalMention>an agreement</originalMention>
+        <originalMention>an agreement between two parties</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#contractual_agreement_between_two_party"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#standardized_contract"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#all_costs_associated_with_having_inventory_in_stock">
+        <rdfs:label>all costs associated with having inventory in stock</rdfs:label>
+        <originalMention>all costs associated with having inventory in stock</originalMention>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#american_stock_exchange">
+        <rdfs:label>american stock exchange</rdfs:label>
+        <originalMention>an American stock exchange</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#financial_market"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#legal_entity"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#market"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#market_for_longer_term_financial_instrument"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#analysis">
+        <rdfs:label>analysis</rdfs:label>
+        <originalMention>analysis</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#framework_for_financial_analysis"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#process_of_spreading_business_costs_in_accounting"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#asset">
+        <rdfs:label>asset</rdfs:label>
+        <originalMention>an asset</originalMention>
+        <originalMention>an asset or bundle of assets</originalMention>
+        <originalMention>an asset or item</originalMention>
+        <originalMention>asset</originalMention>
+        <originalMention>assets</originalMention>
+        <originalMention>tangible or intangible resources</originalMention>
+        <originalMention>the resources</originalMention>
+        <originalMention>the total assets of a company</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#municipal_or_corporate_bond"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#numerical_values_taken_from_financial_statement"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#payment"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#security"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#value_of_an_asset"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#attempting_to_profit">
+        <rdfs:label>attempting to profit</rdfs:label>
+        <originalMention>attempting to profit</originalMention>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#average_of_a_firms_debt_and_equity_costs_of_capital">
+        <rdfs:label>average of a firms debt and equity costs of capital</rdfs:label>
+        <originalMention>the average of a firm’s debt and equity costs of capital</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#cost"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#metric"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#weighted_average"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#bell_shaped_distribution_curve">
+        <rdfs:label>bell shaped distribution curve</rdfs:label>
+        <originalMention>a bell-shaped distribution curve</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#continuous_probability_distribution"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#graphical_display"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#benchmark_interest_rate">
+        <rdfs:label>benchmark interest rate</rdfs:label>
+        <originalMention>a benchmark interest rate</originalMention>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#bond">
+        <rdfs:label>bond</rdfs:label>
+        <originalMention>a bond</originalMention>
+        <originalMention>bonds</originalMention>
+        <originalMention>long-term debt obligations</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#asset"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#contractual_agreement_between_two_party"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#cost"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#debt_security"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#government_debt_instrument"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#investment"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#payment"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#security"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#sources_of_financing"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#bond_issued_by_a_corporation">
+        <rdfs:label>bond issued by a corporation</rdfs:label>
+        <originalMention>bond issued by a corporation</originalMention>
+        <originalMention>fixed-income corporate debt securities</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#asset"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#bond"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#contractual_agreement_between_two_party"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#cost"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#holding"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#investment"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#municipal_or_corporate_bond"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#payment"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#security"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#sources_of_financing"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#cash_business_transaction">
+        <rdfs:label>cash business transaction</rdfs:label>
+        <originalMention>cash business transactions</originalMention>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#cash_business_transactions_reported_on_the_statement_of_cash_flow">
+        <rdfs:label>cash business transactions reported on the statement of cash flow</rdfs:label>
+        <originalMention>cash business transactions reported on the statement of cash flows</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#cash_business_transaction"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#central_bank_system">
+        <rdfs:label>central bank system</rdfs:label>
+        <originalMention>the central bank system</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#central_banking_system_of_the_united_state"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#system"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#central_banking_system_of_the_united_state">
+        <rdfs:label>central banking system of the united state</rdfs:label>
+        <originalMention>the central banking system of the United States</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#system"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#chart">
+        <rdfs:label>chart</rdfs:label>
+        <originalMention>a chart</originalMention>
+        <originalMention>a graphic representation of a general ledger account</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#account"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#bell_shaped_distribution_curve"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#choosing_to_purchase_or_sell_the_asset_underlying_a_held_option">
+        <rdfs:label>choosing to purchase or sell the asset underlying a held option</rdfs:label>
+        <originalMention>choosing to purchase or sell the asset underlying a held option</originalMention>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#collateral">
+        <rdfs:label>collateral</rdfs:label>
+        <originalMention>the collateral</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#asset"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#collection_of_financial_investment">
+        <rdfs:label>collection of financial investment</rdfs:label>
+        <originalMention>a collection of financial investments</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#asset"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#common_set_of_accounting_principles_standards_and_procedure">
+        <rdfs:label>common set of accounting principles standards and procedure</rdfs:label>
+        <originalMention>a common set of accounting principles, standards, and procedures</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#principle"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#procedure"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#system"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#common_type_of_unsecured_bond">
+        <rdfs:label>common type of unsecured bond</rdfs:label>
+        <originalMention>a common type of unsecured bond</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#asset"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#bond"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#debt_security"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#sources_of_financing"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#company">
+        <rdfs:label>company</rdfs:label>
+        <originalMention>a closely held corporation</originalMention>
+        <originalMention>a company</originalMention>
+        <originalMention>a corporation</originalMention>
+        <originalMention>a form of business</originalMention>
+        <originalMention>a form of corporate entity</originalMention>
+        <originalMention>a legal structure for a corporation</originalMention>
+        <originalMention>a US-specific form of a private limited company; a business structure</originalMention>
+        <originalMention>an existing corporation</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#for_profit_organization"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#legal_entity"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#legal_term"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#person_or_an_entity"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#compound_annual_return">
+        <rdfs:label>compound annual return</rdfs:label>
+        <originalMention>the compound annual return</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#metric"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#ratio"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#concept">
+        <rdfs:label>concept</rdfs:label>
+        <originalMention>the concept</originalMention>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#continual_addition_of_interest">
+        <rdfs:label>continual addition of interest</rdfs:label>
+        <originalMention>the continual addition of interest</originalMention>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#continuous_probability_distribution">
+        <rdfs:label>continuous probability distribution</rdfs:label>
+        <originalMention>a continuous probability distribution</originalMention>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#contractual_agreement_between_two_party">
+        <rdfs:label>contractual agreement between two party</rdfs:label>
+        <originalMention>a contractual agreement between two parties</originalMention>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#cost">
+        <rdfs:label>cost</rdfs:label>
+        <originalMention>a company’s total debt</originalMention>
+        <originalMention>a cost</originalMention>
+        <originalMention>an expense</originalMention>
+        <originalMention>costs</originalMention>
+        <originalMention>debt or obligation</originalMention>
+        <originalMention>decrease in organizational value</originalMention>
+        <originalMention>decreases in organizational value</originalMention>
+        <originalMention>expenses</originalMention>
+        <originalMention>financial obligations</originalMention>
+        <originalMention>liabilities</originalMention>
+        <originalMention>probable future sacrifice of economic benefits</originalMention>
+        <originalMention>the debt</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#risk"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#security"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#sources_of_financing"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#credit">
+        <rdfs:label>credit</rdfs:label>
+        <originalMention>credit</originalMention>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#data">
+        <rdfs:label>data</rdfs:label>
+        <originalMention>data</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#record_of_financial_information"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#date">
+        <rdfs:label>date</rdfs:label>
+        <originalMention>the date</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#metric"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#period"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#debt_security">
+        <rdfs:label>debt security</rdfs:label>
+        <originalMention>debt securities</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#asset"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#contractual_agreement_between_two_party"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#cost"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#payment"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#security"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#sources_of_financing"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#development_oversight_and_management">
+        <rdfs:label>development oversight and management</rdfs:label>
+        <originalMention>the development, oversight, and management</originalMention>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#difference">
+        <rdfs:label>difference</rdfs:label>
+        <originalMention>the difference</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#metric"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#numerical_values_taken_from_financial_statement"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#discount">
+        <rdfs:label>discount</rdfs:label>
+        <originalMention>discount</originalMention>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#discount_rate">
+        <rdfs:label>discount rate</rdfs:label>
+        <originalMention>the discount rate</originalMention>
+        <originalMention>the target interest rate</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#metric"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#document">
+        <rdfs:label>document</rdfs:label>
+        <originalMention>a document</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#chart"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#letter_issued_by_a_bank"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#official_statement"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#part_of_securities_and_exchange_commission_sec_rule_415"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#record_of_financial_information"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#report"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#set_of_formal_document"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#economic_theory">
+        <rdfs:label>economic theory</rdfs:label>
+        <originalMention>an economic theory</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#principle"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#theory"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#equation_of_the_form_yabx">
+        <rdfs:label>equation of the form yabx</rdfs:label>
+        <originalMention>an equation of the form y^=a+bx</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#line"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#mathematical_function"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#equity">
+        <rdfs:label>equity</rdfs:label>
+        <originalMention>an excess</originalMention>
+        <originalMention>cumulative, undistributed net income or net loss</originalMention>
+        <originalMention>equity</originalMention>
+        <originalMention>equity in a firm</originalMention>
+        <originalMention>portion of the net worth (equity)</originalMention>
+        <originalMention>residual interest</originalMention>
+        <originalMention>total book value (assets – liabilities) of a firm</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#asset"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#concept"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#income"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#metric"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#numerical_values_taken_from_financial_statement"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#security"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#estimate">
+        <rdfs:label>estimate</rdfs:label>
+        <originalMention>a forecast for the dependent variable</originalMention>
+        <originalMention>an estimate</originalMention>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#executive_level_officer">
+        <rdfs:label>executive level officer</rdfs:label>
+        <originalMention>an executive-level officer</originalMention>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#expected_return_of_a_security">
+        <rdfs:label>expected return of a security</rdfs:label>
+        <originalMention>the expected return of a security</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#metric"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#extra_return">
+        <rdfs:label>extra return</rdfs:label>
+        <originalMention>extra return</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#difference"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#metric"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#payment"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#total_return"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#face_value_of_a_convertible_bond">
+        <rdfs:label>face value of a convertible bond</rdfs:label>
+        <originalMention>the face value of a convertible bond</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#holding"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#metric"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#value"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#value_of_an_asset"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#facilitate_a_market_and_the_trading_of_security">
+        <rdfs:label>facilitate a market and the trading of security</rdfs:label>
+        <originalMention>facilitate a market and the trading of securities</originalMention>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#feature_of_certain_bonds_or_other_fixed_income_instrument">
+        <rdfs:label>feature of certain bonds or other fixed income instrument</rdfs:label>
+        <originalMention>a feature of certain bonds or other fixed-income instruments</originalMention>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#federal_court_procedure">
+        <rdfs:label>federal court procedure</rdfs:label>
+        <originalMention>federal court procedures</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#legal_term"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#procedure"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#financial_market">
+        <rdfs:label>financial market</rdfs:label>
+        <originalMention>financial markets</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#system"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#financial_statement">
+        <rdfs:label>financial statement</rdfs:label>
+        <originalMention>a financial statement</originalMention>
+        <originalMention>financial statement</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#document"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#record_of_financial_information"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#set_of_formal_document"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#first_time">
+        <rdfs:label>first time</rdfs:label>
+        <originalMention>the first time</originalMention>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#for_profit_organization">
+        <rdfs:label>for profit organization</rdfs:label>
+        <originalMention>a for-profit organization</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#legal_entity"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#framework_for_financial_analysis">
+        <rdfs:label>framework for financial analysis</rdfs:label>
+        <originalMention>framework for financial analysis</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#method"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#system"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#general_increase">
+        <rdfs:label>general increase</rdfs:label>
+        <originalMention>a general increase</originalMention>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#government_debt_instrument">
+        <rdfs:label>government debt instrument</rdfs:label>
+        <originalMention>government debt instruments</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#asset"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#contractual_agreement_between_two_party"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#cost"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#debt_security"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#security"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#sources_of_financing"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#grade">
+        <rdfs:label>grade</rdfs:label>
+        <originalMention>a type of score</originalMention>
+        <originalMention>grades</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#measure_of_portfolio_performance"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#method"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#metric"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#graphical_display">
+        <rdfs:label>graphical display</rdfs:label>
+        <originalMention>a graphical display</originalMention>
+        <originalMention>graphical display</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#line"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#group_of_people">
+        <rdfs:label>group of people</rdfs:label>
+        <originalMention>a group of people</originalMention>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#group_within_the_united_states_department_of_labor">
+        <rdfs:label>group within the united states department of labor</rdfs:label>
+        <originalMention>a group within the United States Department of Labor</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#group_of_people"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#holding">
+        <rdfs:label>holding</rdfs:label>
+        <originalMention>holding</originalMention>
+        <originalMention>position</originalMention>
+        <originalMention>the value of an asset or holding</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#asset"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#concept"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#metric"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#numerical_values_taken_from_financial_statement"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#value"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#horizontal_axis">
+        <rdfs:label>horizontal axis</rdfs:label>
+        <originalMention>the horizontal axis</originalMention>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#income">
+        <rdfs:label>income</rdfs:label>
+        <originalMention>income</originalMention>
+        <originalMention>increases in organizational value</originalMention>
+        <originalMention>inflows or other enhancements of assets of an entity or settlements of its liabilities (or a combination of both)</originalMention>
+        <originalMention>the increase in a capital asset’s value</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#metric"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#value"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#independent_nongovernmental_organization">
+        <rdfs:label>independent nongovernmental organization</rdfs:label>
+        <originalMention>an independent, nongovernmental organization</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#company"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#legal_entity"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#person_or_an_entity"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#independent_service_agency">
+        <rdfs:label>independent service agency</rdfs:label>
+        <originalMention>independent service agencies</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#company"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#legal_entity"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#initial_shareholder_of_a_company_at_the_time_of_its_incorporation">
+        <rdfs:label>initial shareholder of a company at the time of its incorporation</rdfs:label>
+        <originalMention>an initial shareholder of a company at the time of its incorporation</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#person_or_an_entity"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#interest_rate">
+        <rdfs:label>interest rate</rdfs:label>
+        <originalMention>the interest rate</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#metric"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#inventory_management_method">
+        <rdfs:label>inventory management method</rdfs:label>
+        <originalMention>inventory management method</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#method"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#procedure"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#investment">
+        <rdfs:label>investment</rdfs:label>
+        <originalMention>investments</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#asset"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#investment_company"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#option"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#investment_company">
+        <rdfs:label>investment company</rdfs:label>
+        <originalMention>investment companies</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#company"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#for_profit_organization"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#group_of_people"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#independent_nongovernmental_organization"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#legal_entity"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#person_or_an_entity"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#large_independent_agency_of_the_united_states_federal_government">
+        <rdfs:label>large independent agency of the united states federal government</rdfs:label>
+        <originalMention>a large, independent agency of the United States federal government</originalMention>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#legal_entity">
+        <rdfs:label>legal entity</rdfs:label>
+        <originalMention>a legal entity</originalMention>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#legal_term">
+        <rdfs:label>legal term</rdfs:label>
+        <originalMention>legal term</originalMention>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#letter_issued_by_a_bank">
+        <rdfs:label>letter issued by a bank</rdfs:label>
+        <originalMention>a letter issued by a bank</originalMention>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#limited_liability_company_llc_or_limited_liability_partnership_llp">
+        <rdfs:label>limited liability company llc or limited liability partnership llp</rdfs:label>
+        <originalMention>a limited liability company (LLC) or limited liability partnership (LLP)</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#company"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#for_profit_organization"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#independent_nongovernmental_organization"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#legal_entity"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#person"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#person_or_an_entity"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#line">
+        <rdfs:label>line</rdfs:label>
+        <originalMention>a line</originalMention>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#long_term_debt_obligations_issued_by_the_us_government">
+        <rdfs:label>long term debt obligations issued by the us government</rdfs:label>
+        <originalMention>long-term debt obligations issued by the US government</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#asset"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#bond"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#contractual_agreement_between_two_party"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#cost"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#debt_security"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#government_debt_instrument"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#investment"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#us_government_debt_obligation"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#major_expenditure">
+        <rdfs:label>major expenditure</rdfs:label>
+        <originalMention>a major expenditure</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#cost"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#market">
+        <rdfs:label>market</rdfs:label>
+        <originalMention>economies or markets</originalMention>
+        <originalMention>market</originalMention>
+        <originalMention>markets</originalMention>
+        <originalMention>the market</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#financial_market"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#market_for_longer_term_financial_instrument">
+        <rdfs:label>market for longer term financial instrument</rdfs:label>
+        <originalMention>market for longer-term financial instruments</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#market"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#mathematical_function">
+        <rdfs:label>mathematical function</rdfs:label>
+        <originalMention>a mathematical function</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#bell_shaped_distribution_curve"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#continuous_probability_distribution"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#measure_of_center_of_a_data_set">
+        <rdfs:label>measure of center of a data set</rdfs:label>
+        <originalMention>a measure of center of a data set</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#metric"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#measure_of_inflation">
+        <rdfs:label>measure of inflation</rdfs:label>
+        <originalMention>a measure of inflation</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#metric"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#measure_of_portfolio_performance">
+        <rdfs:label>measure of portfolio performance</rdfs:label>
+        <originalMention>a measure of portfolio performance</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#metric"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#measure_of_the_association_between_two_variable">
+        <rdfs:label>measure of the association between two variable</rdfs:label>
+        <originalMention>a measure of the association between two variables</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#method"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#metric"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#measure_of_the_price">
+        <rdfs:label>measure of the price</rdfs:label>
+        <originalMention>a measure of the prices</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#metric"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#measure_of_the_spread_of_a_data_set">
+        <rdfs:label>measure of the spread of a data set</rdfs:label>
+        <originalMention>a measure of the spread of a data set</originalMention>
+        <originalMention>the measure of the spread of data values</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#metric"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#measure_of_the_volatility_of_a_stock">
+        <rdfs:label>measure of the volatility of a stock</rdfs:label>
+        <originalMention>the measure of the volatility of a stock</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#measure_of_the_spread_of_a_data_set"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#metric"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#meeting">
+        <rdfs:label>meeting</rdfs:label>
+        <originalMention>a meeting</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#meeting_or_presentation"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#meeting_or_presentation">
+        <rdfs:label>meeting or presentation</rdfs:label>
+        <originalMention>a meeting or presentation</originalMention>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#members_of_the_labor_force">
+        <rdfs:label>members of the labor force</rdfs:label>
+        <originalMention>members of the labor force</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#group_of_people"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#person"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#person_or_an_entity"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#merger_of_a_company">
+        <rdfs:label>merger of a company</rdfs:label>
+        <originalMention>the merger of a company</originalMention>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#method">
+        <rdfs:label>method</rdfs:label>
+        <originalMention>a mathematical method</originalMention>
+        <originalMention>a method</originalMention>
+        <originalMention>a method for estimating the value of an investment</originalMention>
+        <originalMention>a methodology</originalMention>
+        <originalMention>a quantitative method</originalMention>
+        <originalMention>approach</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#mathematical_function"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#procedure"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#method_for_valuating_a_company">
+        <rdfs:label>method for valuating a company</rdfs:label>
+        <originalMention>a method for valuating a company</originalMention>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#method_of_comparing_projects_of_different_live">
+        <rdfs:label>method of comparing projects of different live</rdfs:label>
+        <originalMention>a method of comparing projects of different lives</originalMention>
+        <originalMention>a method of comparing projects of differing lives</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#method"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#method_of_organizing_and_summarizing_a_data_set">
+        <rdfs:label>method of organizing and summarizing a data set</rdfs:label>
+        <originalMention>a method of organizing and summarizing a data set</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#chart"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#method"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#metric">
+        <rdfs:label>metric</rdfs:label>
+        <originalMention>a measure</originalMention>
+        <originalMention>a metric</originalMention>
+        <originalMention>a number</originalMention>
+        <originalMention>a reward-to-risk measure of portfolio performance</originalMention>
+        <originalMention>data value</originalMention>
+        <originalMention>data values</originalMention>
+        <originalMention>measures</originalMention>
+        <originalMention>metrics</originalMention>
+        <originalMention>numbers</originalMention>
+        <originalMention>the amount</originalMention>
+        <originalMention>the measure</originalMention>
+        <originalMention>the number of days</originalMention>
+        <originalMention>the quantity of a good or service</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#benchmark_interest_rate"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#cost"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#data"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#discount"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#estimate"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#method"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#method_of_comparing_projects_of_different_live"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#method_of_organizing_and_summarizing_a_data_set"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#period"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#weighted_average"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#middle_value">
+        <rdfs:label>middle value</rdfs:label>
+        <originalMention>the middle value</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#metric"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#minimum_balance_of_cash">
+        <rdfs:label>minimum balance of cash</rdfs:label>
+        <originalMention>minimum balance of cash</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#asset"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#metric"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#payment"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#minimum_return">
+        <rdfs:label>minimum return</rdfs:label>
+        <originalMention>the minimum amount of return</originalMention>
+        <originalMention>the minimum return</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#metric"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#total_return"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#mix_of_financing">
+        <rdfs:label>mix of financing</rdfs:label>
+        <originalMention>the mix of financing</originalMention>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#monetary_legal_settlement">
+        <rdfs:label>monetary legal settlement</rdfs:label>
+        <originalMention>monetary legal settlements</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#asset"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#cost"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#metric"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#payment"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#municipal_or_corporate_bond">
+        <rdfs:label>municipal or corporate bond</rdfs:label>
+        <originalMention>a municipal or corporate bond</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#security"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#sources_of_financing"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#network_of_participants_and_activity">
+        <rdfs:label>network of participants and activity</rdfs:label>
+        <originalMention>the network of participants and activities</originalMention>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#nonprofit_corporation">
+        <rdfs:label>nonprofit corporation</rdfs:label>
+        <originalMention>a nonprofit corporation</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#company"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#legal_entity"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#number_of_shares_of_common_stock">
+        <rdfs:label>number of shares of common stock</rdfs:label>
+        <originalMention>the number of shares of common stock</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#metric"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#numerical_values_taken_from_financial_statement">
+        <rdfs:label>numerical values taken from financial statement</rdfs:label>
+        <originalMention>numerical values taken from financial statements</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#data"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#metric"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#record_of_financial_information"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#weighted_average"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#official_statement">
+        <rdfs:label>official statement</rdfs:label>
+        <originalMention>an official statement</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#letter_issued_by_a_bank"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#one_of_the_three_main_areas_of_finance">
+        <rdfs:label>one of the three main areas of finance</rdfs:label>
+        <originalMention>one of the three main areas of finance</originalMention>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#operating_cash">
+        <rdfs:label>operating cash</rdfs:label>
+        <originalMention>operating cash</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#asset"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#metric"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#numerical_values_taken_from_financial_statement"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#payment"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#set_of_cash_flows_over_a_period_of_time"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#opportunity_cost">
+        <rdfs:label>opportunity cost</rdfs:label>
+        <originalMention>an opportunity cost</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#all_costs_associated_with_having_inventory_in_stock"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#concept"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#option">
+        <rdfs:label>option</rdfs:label>
+        <originalMention>an option</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#asset"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#security"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#standardized_contract"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#paired_data">
+        <rdfs:label>paired data</rdfs:label>
+        <originalMention>paired data</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#data"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#metric"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#numerical_values_taken_from_financial_statement"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#part_of_securities_and_exchange_commission_sec_rule_415">
+        <rdfs:label>part of securities and exchange commission sec rule 415</rdfs:label>
+        <originalMention>part of Securities and Exchange Commission (SEC) Rule 415</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#rule"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#part_of_the_business_cycle">
+        <rdfs:label>part of the business cycle</rdfs:label>
+        <originalMention>the part of the business cycle</originalMention>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#partnership">
+        <rdfs:label>partnership</rdfs:label>
+        <originalMention>a partnership</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#company"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#for_profit_organization"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#legal_entity"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#limited_liability_company_llc_or_limited_liability_partnership_llp"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#payment">
+        <rdfs:label>payment</rdfs:label>
+        <originalMention>a payment</originalMention>
+        <originalMention>a single cash payment</originalMention>
+        <originalMention>a stream of periodic payments</originalMention>
+        <originalMention>a stream of regular, periodic payments</originalMention>
+        <originalMention>a sum of money</originalMention>
+        <originalMention>annual interest amounts paid, or coupon payments made</originalMention>
+        <originalMention>the amount of money</originalMention>
+        <originalMention>the periodic dollar value of interest</originalMention>
+        <originalMention>the total dollar value of legal tender</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#cash_business_transaction"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#cash_business_transactions_reported_on_the_statement_of_cash_flow"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#discount"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#metric"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#set_of_cash_flows_over_a_period_of_time"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#value"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#percentage_increase">
+        <rdfs:label>percentage increase</rdfs:label>
+        <originalMention>the percentage increase</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#metric"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#period">
+        <rdfs:label>period</rdfs:label>
+        <originalMention>a period</originalMention>
+        <originalMention>amount of time</originalMention>
+        <originalMention>the length of time</originalMention>
+        <originalMention>the period</originalMention>
+        <originalMention>the time period</originalMention>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#person">
+        <rdfs:label>person</rdfs:label>
+        <originalMention>a person</originalMention>
+        <originalMention>individual</originalMention>
+        <originalMention>the person</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#executive_level_officer"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#group_of_people"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#initial_shareholder_of_a_company_at_the_time_of_its_incorporation"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#person_or_an_entity"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#person_or_an_entity">
+        <rdfs:label>person or an entity</rdfs:label>
+        <originalMention>a person or an entity</originalMention>
+        <originalMention>an individual or institution</originalMention>
+        <originalMention>individuals or a firm</originalMention>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#point">
+        <rdfs:label>point</rdfs:label>
+        <originalMention>the point</originalMention>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#present_discounted_value">
+        <rdfs:label>present discounted value</rdfs:label>
+        <originalMention>the current value of a future amount</originalMention>
+        <originalMention>the present, discounted value</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#metric"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#present_value_of_the_cash_inflows_of_a_project">
+        <rdfs:label>present value of the cash inflows of a project</rdfs:label>
+        <originalMention>the present value of the cash inflows of a project</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#metric"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#price">
+        <rdfs:label>price</rdfs:label>
+        <originalMention>the market value</originalMention>
+        <originalMention>the price</originalMention>
+        <originalMention>the value of a company traded on the stock market</originalMention>
+        <originalMention>the value of a firm’s stock</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#concept"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#holding"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#metric"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#numerical_values_taken_from_financial_statement"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#value"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#value_of_an_asset"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#price_of_one_currency">
+        <rdfs:label>price of one currency</rdfs:label>
+        <originalMention>the price of one currency</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#metric"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#price"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#primary_system">
+        <rdfs:label>primary system</rdfs:label>
+        <originalMention>the primary system</originalMention>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#principle">
+        <rdfs:label>principle</rdfs:label>
+        <originalMention>a principle</originalMention>
+        <originalMention>principle</originalMention>
+        <originalMention>standards</originalMention>
+        <originalMention>the principle</originalMention>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#procedure">
+        <rdfs:label>procedure</rdfs:label>
+        <originalMention>a procedure</originalMention>
+        <originalMention>the process</originalMention>
+        <originalMention>the process of performance analysis</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#continual_addition_of_interest"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#development_oversight_and_management"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#merger_of_a_company"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#process_of_spreading_business_costs_in_accounting">
+        <rdfs:label>process of spreading business costs in accounting</rdfs:label>
+        <originalMention>the process of spreading business costs in accounting</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#development_oversight_and_management"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#procedure"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#project">
+        <rdfs:label>project</rdfs:label>
+        <originalMention>projects</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#asset"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#ratio">
+        <rdfs:label>ratio</rdfs:label>
+        <originalMention>a financial ratio</originalMention>
+        <originalMention>a ratio</originalMention>
+        <originalMention>ratio</originalMention>
+        <originalMention>ratios</originalMention>
+        <originalMention>the present value of cash inflows divided by the present value of cash outflows</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#data"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#mathematical_function"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#measure_of_portfolio_performance"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#method"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#metric"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#numerical_values_taken_from_financial_statement"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#weighted_average"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#reason_for_holding_an_amount_of_cash">
+        <rdfs:label>reason for holding an amount of cash</rdfs:label>
+        <originalMention>a reason for holding an amount of cash</originalMention>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#record_of_financial_information">
+        <rdfs:label>record of financial information</rdfs:label>
+        <originalMention>a record of financial information</originalMention>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#reduction_in_taxes_paid">
+        <rdfs:label>reduction in taxes paid</rdfs:label>
+        <originalMention>the reduction in taxes paid</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#metric"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#report">
+        <rdfs:label>report</rdfs:label>
+        <originalMention>a report</originalMention>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#risk">
+        <rdfs:label>risk</rdfs:label>
+        <originalMention>a risk</originalMention>
+        <originalMention>risk</originalMention>
+        <originalMention>the possibility</originalMention>
+        <originalMention>the risk</originalMention>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#risk_of_investment_loss">
+        <rdfs:label>risk of investment loss</rdfs:label>
+        <originalMention>the risk of investment losses</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#metric"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#risk"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#risk_taken_by_a_bond_investor">
+        <rdfs:label>risk taken by a bond investor</rdfs:label>
+        <originalMention>the risk taken by a bond investor</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#metric"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#risk"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#rule">
+        <rdfs:label>rule</rdfs:label>
+        <originalMention>a rule</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#agreement"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#scheduling_of_periodic_repayment_of_a_debt">
+        <rdfs:label>scheduling of periodic repayment of a debt</rdfs:label>
+        <originalMention>the scheduling of periodic repayment of a debt</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#procedure"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#security">
+        <rdfs:label>security</rdfs:label>
+        <originalMention>a security</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#sources_of_financing"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#seller">
+        <rdfs:label>seller</rdfs:label>
+        <originalMention>seller</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#group_of_people"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#person"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#person_or_an_entity"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#set_of_cash_flows_over_a_period_of_time">
+        <rdfs:label>set of cash flows over a period of time</rdfs:label>
+        <originalMention>a set of cash flows over a period of time</originalMention>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#set_of_formal_document">
+        <rdfs:label>set of formal document</rdfs:label>
+        <originalMention>a set of formal documents</originalMention>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#shares_of_ownership_in_a_corporation">
+        <rdfs:label>shares of ownership in a corporation</rdfs:label>
+        <originalMention>shares of ownership in a corporation</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#asset"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#security"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#short_term_debt_obligation">
+        <rdfs:label>short term debt obligation</rdfs:label>
+        <originalMention>short-term debt obligations</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#asset"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#bond"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#collection_of_financial_investment"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#cost"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#debt_security"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#government_debt_instrument"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#investment"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#security"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#sources_of_financing"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#sources_of_financing">
+        <rdfs:label>sources of financing</rdfs:label>
+        <originalMention>sources of financing</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#investment_company"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#specific_type_of_delaware_general_corporation">
+        <rdfs:label>specific type of delaware general corporation</rdfs:label>
+        <originalMention>a specific type of Delaware general corporation</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#company"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#for_profit_organization"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#legal_entity"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#standardized_contract">
+        <rdfs:label>standardized contract</rdfs:label>
+        <originalMention>a standardized contract</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#contractual_agreement_between_two_party"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#state_official">
+        <rdfs:label>state official</rdfs:label>
+        <originalMention>state officials</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#group_of_people"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#person"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#person_or_an_entity"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#stock_valuation_indicator_or_multiple">
+        <rdfs:label>stock valuation indicator or multiple</rdfs:label>
+        <originalMention>a stock valuation indicator or multiple</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#method"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#metric"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#strategic_management_responsibility">
+        <rdfs:label>strategic management responsibility</rdfs:label>
+        <originalMention>a strategic management responsibility</originalMention>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#study_and_application">
+        <rdfs:label>study and application</rdfs:label>
+        <originalMention>the study and application</originalMention>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#study_of_the_economy">
+        <rdfs:label>study of the economy</rdfs:label>
+        <originalMention>the study of the economy</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#study_of_the_economy_as_a_whole"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#study_of_the_economy_as_a_whole">
+        <rdfs:label>study of the economy as a whole</rdfs:label>
+        <originalMention>the study of the economy as a whole</originalMention>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#subdivision_of_the_national_bureau_of_economic_research_nber">
+        <rdfs:label>subdivision of the national bureau of economic research nber</rdfs:label>
+        <originalMention>a subdivision of the National Bureau of Economic Research (NBER)</originalMention>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#sum_of_all_cash_flows_received_from_an_investment">
+        <rdfs:label>sum of all cash flows received from an investment</rdfs:label>
+        <originalMention>the sum of all cash flows received from an investment</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#metric"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#system">
+        <rdfs:label>system</rdfs:label>
+        <originalMention>system</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#accounting_system"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#taking_an_action">
+        <rdfs:label>taking an action</rdfs:label>
+        <originalMention>taking an action</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#attempting_to_profit"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#choosing_to_purchase_or_sell_the_asset_underlying_a_held_option"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#terms_that_are_part_of_a_sales_credit_agreement">
+        <rdfs:label>terms that are part of a sales credit agreement</rdfs:label>
+        <originalMention>the terms that are part of a sales credit agreement</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#agreement"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#theory">
+        <rdfs:label>theory</rdfs:label>
+        <originalMention>a theory</originalMention>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#total_amount_of_capital">
+        <rdfs:label>total amount of capital</rdfs:label>
+        <originalMention>the total amount of capital</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#numerical_values_taken_from_financial_statement"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#total_return">
+        <rdfs:label>total return</rdfs:label>
+        <originalMention>the actual return</originalMention>
+        <originalMention>the sum of an asset’s annual returns over a number of years</originalMention>
+        <originalMention>the total return</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#metric"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#numerical_values_taken_from_financial_statement"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#type_of_inventory_financing">
+        <rdfs:label>type of inventory financing</rdfs:label>
+        <originalMention>a type of inventory financing</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#sources_of_financing"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#us_government_debt_obligation">
+        <rdfs:label>us government debt obligation</rdfs:label>
+        <originalMention>US government debt obligations</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#asset"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#bond"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#concept"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#cost"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#debt_security"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#government_debt_instrument"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#security"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#short_term_debt_obligation"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#value">
+        <rdfs:label>value</rdfs:label>
+        <originalMention>the value</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#metric"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#present_discounted_value"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#present_value_of_the_cash_inflows_of_a_project"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#value_of_an_asset">
+        <rdfs:label>value of an asset</rdfs:label>
+        <originalMention>the value of an asset</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#concept"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#metric"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#numerical_values_taken_from_financial_statement"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#value"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#vertical_axis">
+        <rdfs:label>vertical axis</rdfs:label>
+        <originalMention>the vertical axis</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#concept"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#very_large_cds">
+        <rdfs:label>very large cds</rdfs:label>
+        <originalMention>large CDs issued by financial institutions</originalMention>
+        <originalMention>very large CDs</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#asset"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#concept"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#contractual_agreement_between_two_party"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#cost"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#debt_security"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#investment"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#security"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#weighted_average">
+        <rdfs:label>weighted average</rdfs:label>
+        <originalMention>a weighted average</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#mathematical_function"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#method"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#when_a_firm_has_trouble">
+        <rdfs:label>when a firm has trouble</rdfs:label>
+        <originalMention>when a firm has trouble</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#concept"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#when_an_issuer_fails_to_make_scheduled_interest_or_principal_payment">
+        <rdfs:label>when an issuer fails to make scheduled interest or principal payment</rdfs:label>
+        <originalMention>when an issuer fails to make scheduled interest or principal payments</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#concept"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#worlds_largest_stock_exchange_by_market_capitalization_of_its_listed_company">
+        <rdfs:label>worlds largest stock exchange by market capitalization of its listed company</rdfs:label>
+        <originalMention>the world’s largest stock exchange by market capitalization of its listed companies</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#american_stock_exchange"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#concept"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://okn.us/openstax/book/principles-of-finance#yield">
+        <rdfs:label>yield</rdfs:label>
+        <originalMention>the yield</originalMention>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#concept"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#metric"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#numerical_values_taken_from_financial_statement"/>
+        <rdfs:subClassOf rdf:resource="https://okn.us/openstax/book/principles-of-finance#ratio"/>
+    </owl:Class>
+
+</rdf:RDF>

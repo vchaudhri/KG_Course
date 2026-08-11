@@ -1,0 +1,338 @@
+<html>
+
+<!--=======================================================================-->
+
+<head>
+  <title>Exercise 5.6 - Boostrapping a Knowledge Graph from a Textbook</title>
+
+<!--=======================================================================-->
+
+<body style='background-color:#990000'>
+  <center>
+    <table width='720' cellpadding='40' bgcolor='#ffffff'>
+      <tr>
+        <td>
+
+<!--=======================================================================-->
+
+<center>
+  <span style='font-size:36px'>Knowledge Graphs</span>
+</center>
+<br/>
+
+<!--=======================================================================-->
+
+<center>
+  <table width='640' cellspacing='1' cellpadding='10' bgcolor='#eeeeee' border='1'>
+    <tr><td align='center' style='font-size:18px'>Exercise 5.6 Boostrasping a Knowledge Graph from a Textbook</td></tr>
+  </table>
+</center>
+
+<!--=======================================================================-->
+
+ 
+
+
+
+<p id="5.6"><a href="questions/exercise_05_06.html">Exercise 5.6</a>. 
+The goal of this project is to bootstrap a knowledge graph from a
+textbook, following the approach described by
+<a href="https://www.akbc.ws/2021/assets/pdfs/nDe2D8DDXKR.pdf" target="_blank">Chaudhri et al. (2022)</a>. 
+You may use any textbook from the 
+<a href="https://openstax.org/" target="_blank">OpenStax</a> textbook library. 
+While the previous work used BERT for information extraction, in this project you will use state-of-the-art language models such as Gemini or ChatGPT.
+</p>
+
+<h3>Overview</h3>
+
+<p>The knowledge graph creation methodology in the paper cited above can
+be summarized as follows. Use textbook-specific supervision to
+bootstrap concept extraction with a language model, use weak supervision to
+bootstrap relationship extraction, use students as scalable human
+annotators through an educational relationship-selection task,
+statistically denoise their judgments, and use expert validation to
+create high-quality training data that progressively improves the
+  automated system.</p>
+
+
+<p>For the present project, we will work with the OpenStax textbook
+on <a href="https://openstax.org/details/books/principles-finance">Principles
+of Finance</a>. Starting from the textbook available
+in <a href="https://github.com/openstax/osbooks-principles-finance">github</a>,
+we will perform the basic tasks of concept extraction and relation
+extraction. Human validation will be limited to only self-review. A
+better quality knowledge graph is possible only through the
+  involvement of finance experts.</p>
+
+<p>All the sample code provided with this exercise has been generated
+by Claude. Of course, it took extensive iteration and validation to
+get its present form, but it is remarkable how easy it was to pull
+this analysis together as compared to a few years ago.</p>
+
+
+<h3>Concept Extraction</h3>
+
+
+<p>The OpenStax textbooks come with a glossary of terms at the end of
+  each chapter. These terms are already validated by the textbook
+  authors. We will use these terms as the starting point to settle on
+  the nodes for our knowledge graph. The definitions can be extracted
+  by <a href="exercise_05_06/definitions.py">crawling</a> the textbook
+  source which is available in a variant of XML.  This step produces
+  <a href="exercise_05_06/definitions.csv">424 glossary terms</a>.</p>
+
+<p>Most terms are one-off appearances tied to a single chapter, but
+the small cluster of cross-cutting concepts - municipal bonds, income
+statement, preferred stock, and depreciation - each surface in up to
+three different chapters, hinting that these are core vocabulary the
+curriculum deliberately revisits.  While definition length varies
+enormously (from a six-word gloss on SPACs (special purpose
+acquisition companies) to an 87-word treatment of "revenue"),
+reflecting how much more conceptual scaffolding some financial terms
+require than others.</p>
+
+<p>We will next analyze the definitions of these terms to identify
+additional terms and the relationships of interest.  We will use the
+notion
+of <a href="https://artint.info/2e/html2e/ArtInt2e.Ch14.S3.html">Aristotelean
+definitions</a> as a tool for this analysis. </p>
+
+
+<p>An Aristotelian definition consists of two parts: (1) a genus (or
+family) -- An existing definition that serves as a portion of the new
+of that genus; (2) the differentia: The portion of the definition that
+is not provided by the genus. For example, consider the following two
+definitions:</p>
+
+<ul>
+<li>a triangle: A plane figure that has 3 straight bounding sides.</li>
+<li>a quadrilateral: A plane figure that has 4 straight bounding sides.</li>
+</ul>
+
+<p>These definitions have one genus and two differentiae. The genus
+for both triangle and a quadrilateral is a plane figure. The
+differentia for a triangle is that has 3 straight bounding sides, and
+the differentia for a quadrilateral is that has 4 straight bounding
+  sides.</p>
+
+<p>We perform this analysis by invoking Gemini.
+The <a href="exercise_05_06/aristotelean_classifer.py">sample code</a>
+takes the consolidated definitions from the previous step and, for
+each term/meaning pair, asks Gemini whether the definition follows the
+classical Aristotelian form -- "X is a [genus] that/which
+[differentia]" -- naming the immediate broader category the term
+belongs to (genus), then what distinguishes it from other members of
+that category (differentia).</p>
+
+<p>For definitions that do not fit that form (e.g., are circular, give
+an example instead of a category, describe a process/formula, have no
+clear genus, etc.), it also asks Gemini to suggest a plausible genus
+  and differentia, grounded in the textbook's own definition text.</p>
+
+<p>The
+  analysis <a href="exercise_05_06/definitions_classified.csv">revealed</a>
+  that more than 90% of the definitions include a clear genus and
+  differentia. For example, a <i>derivative</i> is defined as
+  a <i>security</i> that derives its value from another asset. In some
+  cases, the definitions simply explain an abbreviation, for example,
+  EBIT (earnings before interest and taxes), or define synonyms (for
+  example, gross working capital is defined as synonymous with the
+  current assets of a company."</p>
+
+<p>The most common genus term is <i>risk</i> that appears 13 times as
+the categorical anchor for terms like real interest rate risk, default
+  risk, and reinvestment risk.</p>
+
+<p>Genus phrases extracted from the definitions are written in the
+author's own natural language, so two genus values can express the
+exact same underlying category while sharing almost no surface
+form. For example, <i>a financial institution</i> and <i>an
+organization providing financial services</i> have little lexical
+similarity and their semantic equivalaence cannot be detected measures
+like edit distance or Jaccard similarity.  Therefore, we use Gemini to
+<a href="exercise_05_06/genus_similarity.py">judge the semantic
+relationship</a> between each pair of concepts as equivalent,
+subsumption of genuinely unrelated.
+</p>
+
+  <p>Based on
+    the <a href="exercise_05_06/genus_pairwise_similarity.csv">results</a> of
+    similarity analysis, 287 genus phrases resulted in 178 classes.
+    For example, one cluster of semantically equivalent genus terms includes
+     <i>metric</i> which is equivalent to <i>a measure</i>, <i>a
+    number</i>, <i>quantitity</i>, etc.  The analysis also produced
+    384 <i>subclass_of</i> relationships.  </i>
+
+
+<p>We next combine the glossary terms with the genus terms, with each
+glossary term treated as a subclass of its genus term. The terms that
+did not have a genus were considered a subclass of the most general
+class <i>Thing</i>. The resulting taxonomy was written out as
+an <a href="exercise_05_06/genus_statements.owl">OWL file</a> which
+can be loaded into <a href="https://protege.stanford.edu/">Protege</a>
+and browsed.</p>
+
+
+<p>Finally, we run
+  a <a href="exercise_05_06/taxonomy_eval.py">taxonomy</a> quality
+  evaluation to check for obvious flaws in the extracted term
+  graph. Perhaps, the most salient flaw is that the taxonomy is not a
+  directed acyclic graph and contains 43 cycles indicating logical
+  inconsistencies. For example, consider the cycle: bond &rarr;
+  bond_issued_by_a_corporation &rarr; debt_security &rarr; bond.  In
+  this cycle, the subclass of relationship between a bond and a
+  bond_issued_by_a_corporation is incorrect and should be removed. For
+  this taxonomy to be a useful starting point, we must eliminate the
+  cycles.</p>
+
+<p> Some of this processing can be done automatically by weighing the
+  evidence for each edge, and removing the edge with the weakest
+  evidence in a cycle.  After automatically removing the cycles by
+  removing the edge with least evidence, we are left with a taxonomy
+  that has 603 classes, 816 subclass_of edges No cycles detected
+  (valid DAG). Furthermore, it has 424 leaves, and a max depth of 20
+  with a meaning branching factor of 4.56.</p>
+
+
+<p>We have, thus bootstrapped, a graph of key terms appearing in the
+textbook that should be further refined with expert input.</p>
+
+<h3>Relation Extraction</h3>
+
+<p>The starting point for relation extraction is the observation that
+a well-formed Aristotelian definition, with <i>genus</i>
+and <i>differentia</i>, implicitly contains a small set of factual
+claims about a term within its differentia clause. For example, a
+definition such as &ldquo;A commercial bank accepts deposits from
+customers and provides loans to individuals and businesses&rdquo; is
+not simply prose that distinguishes the term from other financial
+institutions. It is asserting specific relationships (e.g., accept
+deposit, provide loans) it has to other entities (indviduals and
+  businesses).</p>
+
+<p> Rather than defining a fixed ontology of relationship types in
+advance and forcing every differentia to fit it, we ask Gemini
+to <a href="exercise_05_06/differentia_pipeline/differentia_analyzer.py">analyze</a>
+each differentia on its own terms and extract the characteristics it
+actually expresses, using the term and genus only as disambiguating
+context. This deliberately avoids importing assumptions from outside
+the text. The goal is to discover the relationship vocabulary that
+naturally occurs in the differentiae of a real textbook, rather than
+  to test whether they fit an external vocabulary.</p>
+
+<p>By analyzing all 423 glossary terms, Gemini extracted 895 raw
+characteristics, averaging 2.12 per term, with every single term
+yielding at least one (no zero-extraction cases).  Across those 895
+differential strings, there exist 648 distinct relationship strings
+indicating that the raw relationship vocabulary is highly fragmented.
+For example, near-synonymous phrasings like <i>is used
+for</i>, <i>used to</i>, and <i>has purpose</i> all show up as
+distinct strings, one per differentia&rsquo;s own wording.</p>
+
+<p>Therefore, we make a second pass to
+<a href="exercise_05_06/differentia_pipeline/relationaship_normalizer.py">analyze</a>
+the initial relation vocabulary across the whole corpus and
+consolidate it into a smaller set of canonical relationships for
+merging synonymous relation phrases &mdash; with one structural
+difference: normalization batches run <em>sequentially</em>, each one
+told what canonical relationships prior batches already settled on, so
+a later batch reuses an existing relationship <i>used_for</i> instead
+of independently coining a new relationship <i>serves_purpose_of</i>
+as a near-duplicate. </p>
+
+<p>All 648 raw phrasings of the relationships that were extracted from
+the 423 terms were consolidated into 446 canonical relationships, with
+<i>has_purpose</i> (32 uses), <i>applies_to</i> (19),
+and <i>consists_of</i> (16) the most common. </p>
+
+<p>For the differentia values, we use only conservative, purely
+lexical normalization &mdash; trimming whitespace, stripping a leading
+article, standardizing case &mdash; while we preserve function words
+like &ldquo;of,&rdquo; &ldquo;for,&rdquo; and &ldquo;by&rdquo; as they
+can carry real semantic weight in a value. We did not do any
+cross-term deduplication or entity linking at this stage;
+&ldquo;corporation,&rdquo; &ldquo;firm,&rdquo; and
+&ldquo;business&rdquo; remain three separate values even where they
+  clearly denote the same real-world concept.
+
+<p>Only 14.4% of the differentia values were actually altered by the
+lexical cleanup laving 793 distinct normalized values.  Further
+refinement of differentia values is a gap treated as a known,
+explicitly deferred piece of future work rather than an oversight
+&mdash; value-level entity resolution is a large enough problem to
+deserve its own dedicated pass rather than being bolted on as an
+afterthought here.</p>
+
+<p>Once the relationship vocabulary has been extracted, a natural
+follow-up question is how much of it corresponds to relations already
+recognized outside the textbook &mdash; both as an external sanity
+check on the extraction, and as a first step toward interoperability
+with existing knowledge bases. The classical upper ontologies (e.g.,
+<a href="https://bfo-ontology.github.io/">Basic Formal
+Ontologies</a>), are unlikelty to overlap substantially with the
+textbook vocabluary.  We chose Wikidata as a target against which to
+align the extracted vocabulary. The choice of Wikidata as a reference
+ontology is driven by the observation that it sits at a more useful
+altitude: a foundational layer (<i>instance of</i>, <i>subclass
+of</i>, <i>part of</i>) and genuine business relations, giving real
+prospects of substantive overlap while still being an external,
+non-arbitrary reference.</p>
+
+<p>A <a href="exercise_05_06/wikidata_relation_alignment.py">curated</a>
+subset of roughly 40 general-purpose Wikidata properties was selected
+as the reference set.  The reference set comprises six categories
+chosen to maximize the likelihood of genuine overlap with a
+finance-textbook relationship vocabulary: core structural properties
+(instance of, subclass of, part of), a documented causal-relation
+family (has cause, has effect, has contributing factor, influenced
+by), temporal/process properties, location/organizational properties,
+usage/study properties, and business-specific properties (subsidiary,
+industry, stock exchange).</p>
+
+<p>Each of the 446 canonical relationships was classified against this
+reference set by using Gemini, using real example instances from the
+corpus as grounding context. 108 of those
+relationships <a href="exercise_05_06/wikidata_relation_alignment.csv">
+matched</a> one of the 40 curated Wikidata properties, and the rest had no
+match.  These matches landed on 26 of those selected properties.  For
+example, the Wikidata relationships <i>start time</i> and <i>point in
+time</i> each were matched with 9 relationships, and <i>has part</i>
+was matched with 8 relationships.</p>
+
+
+<h3>Summary</h3>
+
+<p>Through this exercise, we have illustrated how we can leverage
+already existing glossary data in a textbook to boostrap a knowledge
+graph.  This data now could be presented to a domain expert for
+validation and further refinement.  Many of the refinements will
+depend on the specific use case we wish to uss it for.  For example,
+if the ultimate use case is causal analysis, a deeper dive on causal
+relations and causal events will likely be the most productive place
+to focus.  We will explore this in Exercise 5.7.
+</p>
+
+  
+ 
+
+
+  <!--=======================================================================-->
+
+      </td>
+    </tr>
+  </table>
+  <br/>
+</center>
+      </td>
+    </tr>
+  </table>
+</center>
+
+<!--=======================================================================-->
+
+      <br/>
+    </td></tr></table>
+  </center>
+</body>
+
+</html>

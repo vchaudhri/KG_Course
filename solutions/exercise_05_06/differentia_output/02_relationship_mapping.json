@@ -1,0 +1,2196 @@
+{
+  "mapping": {
+    "ability_to_purchase": "can_purchase",
+    "accepted_by": "accepted_by",
+    "accepted_on": "accepted_on",
+    "according_to": "according_to",
+    "acquired_with_goal_of": "acquired_for_purpose_of",
+    "action": "is_action",
+    "activity": "is_activity",
+    "acts_on_behalf_of": "acts_on_behalf_of",
+    "added_to": "added_to",
+    "adjusted_to_account_for": "adjusted_for",
+    "adjusts_for": "adjusts_for",
+    "affects": "affects",
+    "age_measured_by": "age_measured_by",
+    "aims_to_achieve": "aims_to_achieve",
+    "allocated_to": "allocated_to",
+    "allocates": "allocates",
+    "allocates_over": "allocates_over",
+    "allows_business_to": "enables",
+    "allows_company_to_register_with": "enables_registration_with",
+    "allows_debtor_to": "enables",
+    "allows_delay_before_issuing_shares_up_to": "allows_delay_up_to",
+    "allows_for_comparison_of": "enables_comparison_of",
+    "allows_investors_to": "enables",
+    "allows_issuer_to": "enables",
+    "allows_transaction_of": "enables_transaction_of",
+    "also_called": "also_known_as",
+    "also_known_as": "also_known_as",
+    "appears_on": "appears_on",
+    "applies_during": "applies_during",
+    "applies_for": "applies_for",
+    "applies_principles_to": "applies_principles_to",
+    "applies_to": "applies_to",
+    "applies_to_data_set_with_property": "applies_to_data_set_with_property",
+    "applies_to_data_values_falling_within": "applies_to_data_values_within",
+    "applies_to_distribution_type": "applies_to_distribution_type",
+    "applies_to_number_of_variables": "applies_to_number_of_variables",
+    "applies_to_period": "applies_to_period",
+    "applies_to_relationship_type": "applies_to_relationship_type",
+    "arises_because": "arises_because",
+    "arises_from": "arises_from",
+    "arises_from_activities_that_are": "arises_from",
+    "assigns_to": "assigns_to",
+    "associated_with": "associated_with",
+    "assumes_projects_can_be": "assumes_projects_can_be",
+    "attended_by": "attended_by",
+    "available_to": "available_to",
+    "backed_by": "backed_by",
+    "based_on": "based_on",
+    "based_on_theory_that": "based_on_theory_that",
+    "begins_with_event": "begins_with_event",
+    "belongs_to": "belongs_to",
+    "bond_credit_quality": "has_credit_quality",
+    "bond_maturity_dates": "has_maturity_date",
+    "borrowed_and_lent_by": "transacted_by",
+    "borrowing_party": "borrowing_party",
+    "breaks_down": "breaks_down_into",
+    "brings_together": "brings_together",
+    "buyer_has_to_take_advantage_of": "enables",
+    "calculated_as": "calculated_as",
+    "calculated_at": "calculated_at",
+    "calculated_before_effects_of": "calculated_before_effects_of",
+    "calculated_by": "calculated_by",
+    "calculated_by_adding": "calculated_by_adding",
+    "calculated_by_dividing": "calculated_by_dividing",
+    "calculated_by_dividing_by": "calculated_by_dividing_by",
+    "calculated_by_subtracting": "calculated_by_subtracting",
+    "calculates": "calculates",
+    "calculates_on": "calculates_on",
+    "calculation_method": "has_calculation_method",
+    "calculation_method_step_1": "calculation_method_step_1",
+    "calculation_method_step_2": "calculation_method_step_2",
+    "can_be": "can_be",
+    "can_be_diversified_away": "can_be_diversified_away",
+    "can_be_eliminated": "can_be_eliminated",
+    "can_trade": "can_trade",
+    "can_vary_in_amount": "can_vary_in_amount",
+    "caused_by": "caused_by",
+    "causes": "causes",
+    "ceases_validity_for": "ceases_validity_for",
+    "change_in_amount": "change_in_amount",
+    "characterized_by": "has_characteristic",
+    "charged_by": "charged_by",
+    "charged_to": "charged_to",
+    "collected_from": "collected_from",
+    "combines_characteristics_of": "combines_characteristics_of",
+    "combines_liability_of": "combines_liability_of",
+    "combines_taxation_of": "combines_taxation_of",
+    "communicates_between": "communicates_between",
+    "compared_to": "compared_to",
+    "compares": "compares",
+    "compares_against": "compares_against",
+    "compares_projects_by": "compares_projects_by",
+    "comparison_point": "comparison_point",
+    "comparison_to_previous_state": "comparison_to_previous_state",
+    "condition": "has_condition",
+    "condition_for_payment": "condition_for_payment",
+    "condition_for_return": "condition_for_return",
+    "conducted_via": "conducted_via",
+    "conducts_business_in": "conducts_business_in",
+    "connects_between": "connects_between",
+    "consequence": "has_consequence",
+    "consequently_impacts": "consequently_impacts",
+    "considers_indicator": "considers_indicator",
+    "consists_of": "consists_of",
+    "consists_of_sequence": "consists_of_sequence",
+    "consumer_willingness_to_pay_for": "consumer_willingness_to_pay_for",
+    "consumption_use_or_expiration_timeframe": "has_consumption_use_or_expiration_timeframe",
+    "contains": "contains",
+    "context": "has_context",
+    "contingent_on": "contingent_on",
+    "contributes_to": "contributes_to",
+    "conversion_timeframe": "has_conversion_timeframe",
+    "convertibility": "has_convertibility",
+    "convertibility_period": "has_convertibility_period",
+    "convertible_into": "convertible_into",
+    "converts": "converts",
+    "converts_assets_into": "converts_assets_into",
+    "coupon_rate_comparison": "coupon_rate_comparison",
+    "coverage_amount": "has_coverage_amount",
+    "coverage_for": "coverage_for",
+    "covers_period": "applies_to_period",
+    "created_by": "created_by",
+    "created_following": "arises_from",
+    "created_to_protect": "has_purpose_of_protecting",
+    "creates_from_accepted_asset": "creates_from_accepted_asset",
+    "deals_in": "deals_in",
+    "deals_with": "deals_with",
+    "degree_of_difference": "has_degree_of_difference",
+    "delivered_to": "delivered_to",
+    "derived_from": "derived_from",
+    "derives_value_from": "derives_value_from",
+    "describes": "describes",
+    "describes_relationship_between": "describes_relationship_between",
+    "describes_time_period_before": "describes_time_period_before",
+    "determination_method": "has_determination_method",
+    "determines": "determines",
+    "determines_amount_of": "determines_amount_of",
+    "determines_which": "determines_which",
+    "develops": "develops",
+    "difference_from": "difference_from",
+    "direction": "has_direction",
+    "direction_of_flow": "has_direction_of_flow",
+    "directs_and_controls": "directs_and_controls",
+    "displays_data_type": "displays_data_type",
+    "distinguished_from": "distinguished_from",
+    "divided_by": "divided_by",
+    "dividend_condition": "has_condition",
+    "dividend_priority_over": "has_priority_over",
+    "divides_by": "divides_by",
+    "divides_data_set_into": "divides_data_set_into",
+    "divides_into": "divides_into",
+    "documents_submitted_by": "documents_submitted_by",
+    "does_not_record_transactions_until": "does_not_record_transactions_until",
+    "due_to": "caused_by",
+    "due_within": "due_within",
+    "earned_by": "earned_by",
+    "earned_over": "earned_over",
+    "earned_through": "earned_through",
+    "earning_status": "has_earning_status",
+    "earns_money_on": "earns_money_on",
+    "effect_of_higher_price": "has_consequence",
+    "effect_on_purchasing_power": "affects",
+    "eliminable_by": "can_be_eliminated",
+    "eliminated_by": "can_be_eliminated",
+    "enables": "enables",
+    "enables_action": "enables",
+    "enables_company_to": "enables",
+    "ends_with_event": "ends_with_event",
+    "enforces_rules_governing": "enforces",
+    "entitles_holder_to": "entitles_to",
+    "equation_is": "is_calculated_as",
+    "estimates": "estimates",
+    "examines_how": "examines",
+    "example_of_creation": "is_example_of",
+    "example_of_installment": "is_example_of",
+    "example_real_asset": "is_example_of",
+    "examples": "is_example_of",
+    "examples_of_asset_type": "is_example_of",
+    "examples_of_measurements_modeled": "is_example_of",
+    "examples_of_period": "is_example_of",
+    "exchange_timing": "has_timing",
+    "exchanges_cash_flows": "exchanges",
+    "exchanges_cash_flows_for": "exchanges_for",
+    "exercisable_at_price": "exercisable_at",
+    "exercisable_by": "exercisable_by",
+    "exercisable_on": "exercisable_on",
+    "exercisable_on_date": "exercisable_on",
+    "exercisable_timing": "has_timing",
+    "exhibits_elements_of": "exhibits",
+    "exhibits_fit_when_plotted": "exhibits_fit",
+    "exists_to": "has_purpose",
+    "expectation": "has_expectation",
+    "expected_settlement_period": "has_expected_period",
+    "expected_to_be_consumed_used_or_expire_through": "has_consumption_use_or_expiration_timeframe",
+    "expected_to_be_converted_to": "expected_to_be_converted_to",
+    "expected_to_continue": "expected_to_continue",
+    "expected_to_generate": "expected_to_generate",
+    "expenses_costs_on": "expenses_on",
+    "expenses_costs_over": "expenses_over",
+    "expenses_payment_requirement": "expenses_requirement",
+    "expenses_recorded_when": "has_timing",
+    "exponent_is": "is_calculated_as",
+    "expressed_as": "is_calculated_as",
+    "expressed_in": "has_context",
+    "expressed_on_a": "has_context",
+    "expresses_returns_on": "describes",
+    "expression_format": "has_characteristic",
+    "facilitates_transaction_of": "enables_transaction_of",
+    "fields_of_focus": "focuses_on",
+    "filed_with": "communicates_between",
+    "financed_by": "backed_by",
+    "firm_offers": "can_purchase",
+    "firm_status": "has_characteristic",
+    "firms_are_willing_to_sell": "can_purchase",
+    "focuses_on": "focuses_on",
+    "focuses_on_application_by": "focuses_on",
+    "for": "applies_to",
+    "for_entity": "applies_to",
+    "for_one_dollar_of": "comparison_point",
+    "for_payment_type": "applies_to",
+    "for_period": "applies_to_period",
+    "for_type_of_transaction": "applies_to_relationship_type",
+    "frequency": "has_timing",
+    "frequently_is": "is_example_of",
+    "function_nature": "has_characteristic",
+    "gain_through": "earned_through",
+    "gdp_state": "has_characteristic",
+    "generated_using": "generated_using",
+    "generates": "generates",
+    "given_by": "created_by",
+    "given_level_of": "has_characteristic",
+    "given_to": "granted_to",
+    "gives_idea_of": "describes",
+    "gives_owner_right_at": "exercisable_at",
+    "gives_owner_right_on": "exercisable_on",
+    "gives_owner_right_to": "entitles_to",
+    "granted_to": "granted_to",
+    "grants_right_but_not_obligation_to": "grants_right_to",
+    "grants_right_to": "grants_right_to",
+    "grants_shareholders": "grants_right_to",
+    "growth_mechanism": "has_growth_mechanism",
+    "growth_of_amount": "has_growth_of_amount",
+    "growth_rate": "has_growth_rate",
+    "guarantee_for_payments_made_to": "guarantees_payments_to",
+    "guarantee_for_payments_under": "guarantees_payments_under",
+    "guaranteed_by": "guaranteed_by",
+    "has_amount_of_investment": "has_amount_of_investment",
+    "has_authority_level": "has_authority_level",
+    "has_balance_used_to": "has_balance_used_to",
+    "has_concern_in": "has_concern_in",
+    "has_cost_level": "has_cost_level",
+    "has_credit_rating": "has_credit_rating",
+    "has_debt_outstanding": "has_debt_outstanding",
+    "has_interest_in": "has_interest_in",
+    "has_interest_rate_type": "has_interest_rate_type",
+    "has_investment_earning_rate_of_interest": "has_investment_earning_rate_of_interest",
+    "has_liability_type": "has_liability_type",
+    "has_maturities_of": "has_maturities_of",
+    "has_maturity": "has_maturity",
+    "has_maturity_of": "has_maturity_of",
+    "has_maturity_period": "has_maturity_period",
+    "has_number_of_shareholders": "has_number_of_shareholders",
+    "has_owners_represented_by": "has_owners_represented_by",
+    "has_position_importance": "has_position_importance",
+    "has_price_characteristic": "has_price_characteristic",
+    "has_property": "has_property",
+    "has_risk_level": "has_risk_level",
+    "has_security": "has_security",
+    "has_tax_advantages_relative_to": "has_tax_advantages_relative_to",
+    "has_taxation_type": "has_taxation_type",
+    "has_term": "has_term",
+    "heads_agencies_responsible_for": "heads_agencies_responsible_for",
+    "helps_analysts": "helps_analysts",
+    "helps_interpret": "helps_interpret",
+    "holds": "holds",
+    "horizontal_axis_shows": "horizontal_axis_shows",
+    "impact_type": "has_impact_type",
+    "impacted_by": "impacted_by",
+    "impacts": "impacts",
+    "impacts_value_of": "impacts_value_of",
+    "in_an_effort_to": "aims_to_achieve",
+    "in_context": "has_context",
+    "in_same_industry_as": "associated_with",
+    "includes": "consists_of",
+    "includes_examples": "is_example_of",
+    "includes_expenditure_type": "has_property",
+    "includes_instruments": "consists_of",
+    "includes_objectives_for": "aims_to_achieve",
+    "includes_type": "has_property",
+    "income_basis": "based_on",
+    "incorporated_under": "governed_by",
+    "incorporated_under_laws_of": "governed_by",
+    "incurred_as_result_of": "caused_by",
+    "incurred_when": "arises_from",
+    "indicate": "indicates",
+    "indicates": "indicates",
+    "indicates_fees_for_late_payment": "indicates_condition",
+    "indicates_investor_willingness_to_pay": "indicates_condition",
+    "indicates_payment_due": "indicates_condition",
+    "indicates_possible_discounts": "indicates_condition",
+    "indicates_risk_of_default": "indicates_condition",
+    "indicates_spread_of": "indicates_range",
+    "indicates_time_until": "indicates_duration",
+    "indicator_of": "indicates",
+    "integrates": "combines",
+    "intended_for_resale": "has_purpose",
+    "intended_to_measure": "aims_to_achieve",
+    "intent": "aims_to_achieve",
+    "intent_of": "aims_to_achieve",
+    "interest_payments_cease_for": "ceases_for",
+    "internal_factors_include": "consists_of",
+    "investment_status": "has_property",
+    "investor_expects_to_achieve": "aims_to_achieve",
+    "involved_in": "associated_with",
+    "involves": "consists_of",
+    "involves_comparing": "compares",
+    "involves_exchange_of": "exchanges",
+    "involves_failure_to": "has_consequence",
+    "involves_inability_to_make": "has_consequence",
+    "involves_inability_to_reinvest": "has_consequence",
+    "involves_issuer_action": "involves_action_by",
+    "involves_issuer_of": "involves_issuer_of",
+    "involves_loss_of": "involves_loss_of",
+    "involves_number_of_parties": "involves_number_of_parties",
+    "involves_selling": "involves_selling",
+    "involves_transfer_of": "involves_transfer_of",
+    "involves_using_as_security": "involves_using_as_security",
+    "is_a": "is_a",
+    "is_a_form_of": "is_a_form_of",
+    "is_actively_seeking": "is_seeking",
+    "is_also_referred_to_as": "also_known_as",
+    "is_an_estimate_of": "estimates",
+    "is_an_excess_of": "is_excess_of",
+    "is_anticipated": "is_expected",
+    "is_based_in": "is_located_in",
+    "is_based_on": "based_on",
+    "is_below": "is_below",
+    "is_common_in": "is_common_in",
+    "is_considered_earned_when": "is_earned_when",
+    "is_current": "is_current",
+    "is_currently_working": "is_working",
+    "is_difference_between": "difference_from",
+    "is_earned_when_revenues_and_gains_are": "is_earned_when",
+    "is_equal_to": "is_equal_to",
+    "is_evidence_of": "is_evidence_of",
+    "is_expressed_as": "is_expressed_as",
+    "is_expressed_in_terms_of": "is_expressed_in_terms_of",
+    "is_in": "is_in",
+    "is_in_charge_of": "is_in_charge_of",
+    "is_located_in": "is_located_in",
+    "is_located_on": "is_located_on",
+    "is_looking": "is_seeking",
+    "is_multiplied_by": "is_multiplied_by",
+    "is_net_of": "is_net_of",
+    "is_of": "is_of",
+    "is_part_of": "is_part_of",
+    "is_sum_of": "is_sum_of",
+    "is_synonymous_with": "also_known_as",
+    "is_type_of_agency": "is_type_of_agency",
+    "is_value_of": "is_value_of",
+    "issued_at": "issued_at",
+    "issued_by": "issued_by",
+    "issued_to_pay_for": "issued_to_pay_for",
+    "issuer": "issuer",
+    "issues": "issues",
+    "issues_to": "issues_to",
+    "legal_distinction_between_owner_and_business": "has_legal_distinction_between_owner_and_business",
+    "legally_owns": "legally_owns",
+    "lending_party": "lending_party",
+    "level_of_analysis": "has_level_of_analysis",
+    "liability_of_partners": "has_liability_of_partners",
+    "likelihood_of_staying_in_business": "has_likelihood_of_staying_in_business",
+    "liquidity": "has_liquidity",
+    "lists": "lists",
+    "loan_term": "has_loan_term",
+    "located_on_side": "is_located_on_side",
+    "location": "has_location",
+    "location_of_production": "has_location_of_production",
+    "made_at": "made_at",
+    "made_during_period": "made_during_period",
+    "made_on": "made_on",
+    "maintains": "maintains",
+    "maintains_inventory_level": "maintains_inventory_level",
+    "makes": "makes",
+    "makes_election_to_be_taxed_under": "makes_election_to_be_taxed_under",
+    "makes_final_decision_in_matters_of": "makes_final_decision_in_matters_of",
+    "manages_type_of_assets": "manages_type_of_assets",
+    "manages_type_of_liabilities": "manages_type_of_liabilities",
+    "market": "has_market",
+    "market_basket_contents": "has_market_basket_contents",
+    "market_location": "has_market_location",
+    "marketability_implies": "marketability_implies",
+    "matches": "matches",
+    "maturity": "has_maturity",
+    "may_derive_from": "may_derive_from",
+    "means": "means",
+    "means_of_financing_for": "means_of_financing_for",
+    "measured_in": "measured_in",
+    "measures": "measures",
+    "measures_association_between": "measures_association_between",
+    "measures_likelihood_of_change_in": "measures_likelihood_of_change_in",
+    "measures_movement_relative_to": "measures_movement_relative_to",
+    "measures_number_of_days": "measures_number_of_days",
+    "measures_portion_of": "measures_portion_of",
+    "measures_prices_for": "measures_prices_for",
+    "measures_prices_paid_by": "measures_prices_paid_by",
+    "measures_rate_of_increase_of": "measures_rate_of_increase_of",
+    "measures_time_for": "measures_time_for",
+    "measures_time_to_turn_into": "measures_time_to_turn_into",
+    "measures_value_of": "measures_value_of",
+    "mechanism": "has_mechanism",
+    "members_are_equivalent_to": "members_are_equivalent_to",
+    "members_have": "members_have",
+    "memorandum_of_association_defines": "memorandum_of_association_defines",
+    "memorandum_of_association_is_a": "is_a",
+    "memorandum_of_association_prepared_in": "prepared_in",
+    "merges_with": "merges_with",
+    "method": "has_method",
+    "method_of_raising_capital": "method_of_raising_capital",
+    "minimizes": "minimizes",
+    "most_commonly_between": "most_commonly_between",
+    "must_be_deposited_by": "must_be_deposited_by",
+    "must_be_maintained_by": "must_be_maintained_by",
+    "must_be_posted_to_guarantee": "must_be_posted_to_guarantee",
+    "must_be_provided_to": "must_be_provided_to",
+    "name_appears_on": "appears_on",
+    "nature": "has_nature",
+    "nature_of_flow": "has_nature_of_flow",
+    "needed_to_meet": "needed_to_meet",
+    "not_paid_as": "not_paid_as",
+    "notes_issued_in_terms_of": "issued_in_terms_of",
+    "occurrence_timing": "has_timing",
+    "occurs_at": "occurs_at",
+    "occurs_between": "occurs_between",
+    "occurs_due_to": "arises_from",
+    "occurs_during": "occurs_during",
+    "occurs_in_period": "occurs_in_period",
+    "occurs_on": "occurs_on",
+    "occurs_within": "occurs_within",
+    "of_entity_type": "of_entity_type",
+    "of_similar_size_to": "compared_to",
+    "offer": "offers",
+    "offered_to": "offered_to",
+    "offset_by": "offset_by",
+    "offsets_risk_of": "offsets_risk_of",
+    "often_accepts": "often_accepts",
+    "often_trade": "often_trade",
+    "often_used_by": "used_by",
+    "often_used_to_indicate": "indicates",
+    "operated_by": "operated_by",
+    "operates_in": "operates_in",
+    "opposed_to": "opposed_to",
+    "organizes_by": "organizes_by",
+    "originates_from": "arises_from",
+    "outcome_of_choosing_one": "has_consequence",
+    "oversees": "oversees",
+    "owned_by": "owned_by",
+    "owned_or_controlled_by": "owned_or_controlled_by",
+    "owner_has": "owner_has",
+    "owner_is_known_as": "owner_is_known_as",
+    "paid_at": "paid_at",
+    "paid_by": "paid_by",
+    "paid_for": "paid_for",
+    "paid_out_of": "paid_out_of",
+    "paid_regularly": "paid_regularly",
+    "paid_to": "paid_to",
+    "paid_when": "paid_when",
+    "pairing_structure": "has_structure",
+    "part_of": "is_part_of",
+    "payment_method": "has_method",
+    "payment_or_receipt_occurs_at": "occurs_at",
+    "payment_timing": "has_timing",
+    "payments_are_specified_in": "payments_are_specified_in",
+    "payments_include": "payments_include",
+    "performs_function": "performs_function",
+    "period": "has_period",
+    "period_is_usually": "period_is_usually",
+    "pertains_to": "pertains_to",
+    "pertains_to_collectibility_of": "pertains_to_collectibility_of",
+    "physical_nature": "has_nature",
+    "plots": "displays_data_type",
+    "predicted_value_obtained_from": "derived_from",
+    "predicts": "estimates",
+    "presents_data_form": "displays_data_type",
+    "presents_data_type": "displays_data_type",
+    "price_status": "has_price_characteristic",
+    "primary_purpose": "has_purpose",
+    "profit_and_liability_sharing": "has_liability_of_partners",
+    "promised_by": "guaranteed_by",
+    "protects_from": "has_purpose_of_protecting",
+    "provided_by": "issued_by",
+    "provides": "enables",
+    "provides_coverage_to": "coverage_for",
+    "provides_percentages_of": "measures_portion_of",
+    "provides_return_as": "has_growth_mechanism",
+    "purchased_by": "can_purchase",
+    "purpose": "has_purpose",
+    "purpose_1": "has_purpose",
+    "purpose_2": "has_purpose",
+    "purpose_of_holding": "has_purpose",
+    "purpose_of_issuance": "has_purpose",
+    "purpose_of_use": "has_purpose",
+    "purpose_other_than": "has_purpose",
+    "quantity_demanded_equals": "is_equal_to",
+    "ranking_by_total_market_capitalization_of_shares_traded": "compares_projects_by",
+    "realized_when": "earned_when",
+    "reason_for_return": "condition_for_return",
+    "receivable_for": "is_earned_when",
+    "receives": "earned_by",
+    "records_asset_on": "records_transactions_when",
+    "records_transactions_when": "does_not_record_transactions_until",
+    "recovers": "earned_through",
+    "redeemable": "convertible_into",
+    "reduced_by": "offset_by",
+    "reduces": "minimizes",
+    "refers_to_asset_type": "is_a",
+    "reflect": "indicates",
+    "reflects": "indicates",
+    "reflects_at": "occurs_at",
+    "regulated_by": "governed_by",
+    "reinvestment_rate_is": "is_calculated_as",
+    "relates_to": "pertains_to",
+    "relationship_between_quantity_of_purchases_and_price": "describes_relationship_between",
+    "relationship_to_each_other": "describes_relationship_between",
+    "relationship_to_owners": "describes_relationship_between",
+    "relative_to": "compared_to",
+    "remains_after": "is_net_of",
+    "removes_from": "removes_from",
+    "removes_from_index": "removes_from",
+    "repayment_method": "has_method",
+    "repayment_occurs_for": "applies_for",
+    "repetition_continues_until": "continues_until",
+    "replaces": "replaces",
+    "reported_on": "reported_on",
+    "reports_difference_between": "reports_difference_between",
+    "represents": "represents",
+    "represents_translation_of": "represents_translation_of",
+    "required_for": "required_for",
+    "requires": "requires",
+    "requires_equality_of": "requires_equality_of",
+    "responsible_for": "responsible_for",
+    "result_of": "arises_from",
+    "results_from": "arises_from",
+    "results_in": "causes",
+    "results_when": "occurs_when",
+    "returned_to": "returned_to",
+    "revenue_receipt_requirement": "has_requirement",
+    "revenue_recorded_when": "recorded_when",
+    "reward_for": "reward_for",
+    "risk_due_to": "caused_by",
+    "risk_level": "has_risk_level",
+    "role": "has_role",
+    "run_by": "operated_by",
+    "scope": "has_scope",
+    "security_for": "security_for",
+    "sells_at": "sells_at",
+    "sells_type_of_option": "sells_type_of_option",
+    "serves_as": "serves_as",
+    "serves_as_evidence_that": "is_evidence_of",
+    "serves_as_intermediary_to": "serves_as_intermediary_to",
+    "set_by": "set_by",
+    "sets_NPV_of_project_equal_to": "equates_NPV_of_project_to",
+    "sets_future_value_of": "equates_future_value_of",
+    "sets_policy_for": "sets_policy_for",
+    "share_represents": "represents",
+    "shareholder_expectation": "has_expectation",
+    "shows_amounts_owed_by": "shows_amounts_owed_by",
+    "shows_estimation_of": "shows_estimation_of",
+    "shows_how_much_company_pays_out_in_dividends": "shows_dividend_payout_amount",
+    "shows_how_well_company_manages": "measures_management_effectiveness_of",
+    "shows_how_well_company_uses": "measures_resource_utilization_effectiveness_of",
+    "shows_relationship_between": "describes_relationship_between",
+    "shows_values_of": "shows_values_of",
+    "sold_to": "sold_to",
+    "source_of_money": "source_of_money",
+    "span": "has_period",
+    "starts_with": "begins_with_event",
+    "state_of_securities": "has_state",
+    "states_that_company_must_recognize_revenue_in_period_when": "requires_revenue_recognition_when",
+    "states_total_value_of_levered_company_is": "states_total_value_of_levered_company_is",
+    "status": "has_status",
+    "status_of_collection": "has_collection_status",
+    "stems_from": "arises_from",
+    "studies": "studies",
+    "summarized_based_on": "summarized_based_on",
+    "sums": "sums",
+    "supervises_activities_of": "supervises_activities_of",
+    "supervision_manner": "has_supervision_manner",
+    "takes_company_to_collect_payment_from": "time_to_collect_payment_from",
+    "takes_company_to_use_cash_to_provide": "time_to_use_cash_to_provide",
+    "targeted_by": "targeted_by",
+    "tax_requirement": "has_tax_requirement",
+    "taxation_of_owners": "has_taxation_type",
+    "taxes_owners_as": "taxes_owners_as",
+    "term": "has_term",
+    "then_dividing_by": "divides_by",
+    "time_displayed_on": "time_displayed_on",
+    "time_period": "has_period",
+    "timeframe": "has_timeframe",
+    "timing": "has_timing",
+    "to_parties": "involves_number_of_parties",
+    "tracked_by": "tracked_by",
+    "tradability": "marketability_implies",
+    "trade_date": "occurs_on",
+    "trades": "trades",
+    "trades_in": "deals_in",
+    "trading_status": "has_status",
+    "transacted_by": "transacted_by",
+    "transfer_timing": "has_timing",
+    "transfer_to": "transfers_to",
+    "trouble_with": "has_concern_in",
+    "type_of_cost": "has_cost_level",
+    "type_of_entity": "of_entity_type",
+    "typically_has": "has_characteristic",
+    "under_act": "governed_by",
+    "usage": "has_purpose",
+    "used_as_benchmark_for": "used_as_benchmark_for",
+    "used_by": "used_by",
+    "used_for": "used_for",
+    "used_for_duration": "used_for_duration",
+    "used_in": "used_in",
+    "used_in_context": "has_context",
+    "used_to": "used_for",
+    "used_to_assess": "used_to_assess",
+    "used_to_determine": "used_to_determine",
+    "used_to_explain": "used_to_explain",
+    "used_to_finance": "used_to_finance",
+    "used_to_model": "used_to_model",
+    "used_to_resolve": "used_to_resolve",
+    "used_to_show": "used_to_show",
+    "useful_for_calculating_probabilities_within": "useful_for_calculating_probabilities_within",
+    "uses": "uses",
+    "uses_metrics_from": "uses_metrics_from",
+    "uses_rate": "uses_rate",
+    "usually_compared_to_market_price": "usually_compared_to_market_price",
+    "usually_compared_to_present_value": "usually_compared_to_present_value",
+    "varies_by": "varies_by",
+    "vertical_axis_shows": "vertical_axis_shows",
+    "visual_split_into": "divides_into",
+    "weighted_by": "weighted_by",
+    "weights_are": "has_property",
+    "where_intersect": "occurs_at",
+    "will_grow_to_at": "will_grow_to",
+    "will_grow_to_over": "will_grow_to",
+    "willingness_to_purchase": "has_willingness_to_purchase",
+    "worth_more_today_than": "has_greater_value_than",
+    "writes_rules_governing": "governs",
+    "yields": "produces"
+  },
+  "canonical_to_raw": {
+    "accepted_by": [
+      "accepted_by"
+    ],
+    "accepted_on": [
+      "accepted_on"
+    ],
+    "according_to": [
+      "according_to"
+    ],
+    "acquired_for_purpose_of": [
+      "acquired_with_goal_of"
+    ],
+    "acts_on_behalf_of": [
+      "acts_on_behalf_of"
+    ],
+    "added_to": [
+      "added_to"
+    ],
+    "adjusted_for": [
+      "adjusted_to_account_for"
+    ],
+    "adjusts_for": [
+      "adjusts_for"
+    ],
+    "affects": [
+      "affects",
+      "effect_on_purchasing_power"
+    ],
+    "age_measured_by": [
+      "age_measured_by"
+    ],
+    "aims_to_achieve": [
+      "aims_to_achieve",
+      "in_an_effort_to",
+      "includes_objectives_for",
+      "intended_to_measure",
+      "intent",
+      "intent_of",
+      "investor_expects_to_achieve"
+    ],
+    "allocated_to": [
+      "allocated_to"
+    ],
+    "allocates": [
+      "allocates"
+    ],
+    "allocates_over": [
+      "allocates_over"
+    ],
+    "allows_delay_up_to": [
+      "allows_delay_before_issuing_shares_up_to"
+    ],
+    "also_known_as": [
+      "also_called",
+      "also_known_as",
+      "is_also_referred_to_as",
+      "is_synonymous_with"
+    ],
+    "appears_on": [
+      "appears_on",
+      "name_appears_on"
+    ],
+    "applies_during": [
+      "applies_during"
+    ],
+    "applies_for": [
+      "applies_for",
+      "repayment_occurs_for"
+    ],
+    "applies_principles_to": [
+      "applies_principles_to"
+    ],
+    "applies_to": [
+      "applies_to",
+      "for",
+      "for_entity",
+      "for_payment_type"
+    ],
+    "applies_to_data_set_with_property": [
+      "applies_to_data_set_with_property"
+    ],
+    "applies_to_data_values_within": [
+      "applies_to_data_values_falling_within"
+    ],
+    "applies_to_distribution_type": [
+      "applies_to_distribution_type"
+    ],
+    "applies_to_number_of_variables": [
+      "applies_to_number_of_variables"
+    ],
+    "applies_to_period": [
+      "applies_to_period",
+      "covers_period",
+      "for_period"
+    ],
+    "applies_to_relationship_type": [
+      "applies_to_relationship_type",
+      "for_type_of_transaction"
+    ],
+    "arises_because": [
+      "arises_because"
+    ],
+    "arises_from": [
+      "arises_from",
+      "arises_from_activities_that_are",
+      "created_following",
+      "incurred_when",
+      "occurs_due_to",
+      "originates_from",
+      "result_of",
+      "results_from",
+      "stems_from"
+    ],
+    "assigns_to": [
+      "assigns_to"
+    ],
+    "associated_with": [
+      "associated_with",
+      "in_same_industry_as",
+      "involved_in"
+    ],
+    "assumes_projects_can_be": [
+      "assumes_projects_can_be"
+    ],
+    "attended_by": [
+      "attended_by"
+    ],
+    "available_to": [
+      "available_to"
+    ],
+    "backed_by": [
+      "backed_by",
+      "financed_by"
+    ],
+    "based_on": [
+      "based_on",
+      "income_basis",
+      "is_based_on"
+    ],
+    "based_on_theory_that": [
+      "based_on_theory_that"
+    ],
+    "begins_with_event": [
+      "begins_with_event",
+      "starts_with"
+    ],
+    "belongs_to": [
+      "belongs_to"
+    ],
+    "borrowing_party": [
+      "borrowing_party"
+    ],
+    "breaks_down_into": [
+      "breaks_down"
+    ],
+    "brings_together": [
+      "brings_together"
+    ],
+    "calculated_as": [
+      "calculated_as"
+    ],
+    "calculated_at": [
+      "calculated_at"
+    ],
+    "calculated_before_effects_of": [
+      "calculated_before_effects_of"
+    ],
+    "calculated_by": [
+      "calculated_by"
+    ],
+    "calculated_by_adding": [
+      "calculated_by_adding"
+    ],
+    "calculated_by_dividing": [
+      "calculated_by_dividing"
+    ],
+    "calculated_by_dividing_by": [
+      "calculated_by_dividing_by"
+    ],
+    "calculated_by_subtracting": [
+      "calculated_by_subtracting"
+    ],
+    "calculates": [
+      "calculates"
+    ],
+    "calculates_on": [
+      "calculates_on"
+    ],
+    "calculation_method_step_1": [
+      "calculation_method_step_1"
+    ],
+    "calculation_method_step_2": [
+      "calculation_method_step_2"
+    ],
+    "can_be": [
+      "can_be"
+    ],
+    "can_be_diversified_away": [
+      "can_be_diversified_away"
+    ],
+    "can_be_eliminated": [
+      "can_be_eliminated",
+      "eliminable_by",
+      "eliminated_by"
+    ],
+    "can_purchase": [
+      "ability_to_purchase",
+      "firm_offers",
+      "firms_are_willing_to_sell",
+      "purchased_by"
+    ],
+    "can_trade": [
+      "can_trade"
+    ],
+    "can_vary_in_amount": [
+      "can_vary_in_amount"
+    ],
+    "caused_by": [
+      "caused_by",
+      "due_to",
+      "incurred_as_result_of",
+      "risk_due_to"
+    ],
+    "causes": [
+      "causes",
+      "results_in"
+    ],
+    "ceases_for": [
+      "interest_payments_cease_for"
+    ],
+    "ceases_validity_for": [
+      "ceases_validity_for"
+    ],
+    "change_in_amount": [
+      "change_in_amount"
+    ],
+    "charged_by": [
+      "charged_by"
+    ],
+    "charged_to": [
+      "charged_to"
+    ],
+    "collected_from": [
+      "collected_from"
+    ],
+    "combines": [
+      "integrates"
+    ],
+    "combines_characteristics_of": [
+      "combines_characteristics_of"
+    ],
+    "combines_liability_of": [
+      "combines_liability_of"
+    ],
+    "combines_taxation_of": [
+      "combines_taxation_of"
+    ],
+    "communicates_between": [
+      "communicates_between",
+      "filed_with"
+    ],
+    "compared_to": [
+      "compared_to",
+      "of_similar_size_to",
+      "relative_to"
+    ],
+    "compares": [
+      "compares",
+      "involves_comparing"
+    ],
+    "compares_against": [
+      "compares_against"
+    ],
+    "compares_projects_by": [
+      "compares_projects_by",
+      "ranking_by_total_market_capitalization_of_shares_traded"
+    ],
+    "comparison_point": [
+      "comparison_point",
+      "for_one_dollar_of"
+    ],
+    "comparison_to_previous_state": [
+      "comparison_to_previous_state"
+    ],
+    "condition_for_payment": [
+      "condition_for_payment"
+    ],
+    "condition_for_return": [
+      "condition_for_return",
+      "reason_for_return"
+    ],
+    "conducted_via": [
+      "conducted_via"
+    ],
+    "conducts_business_in": [
+      "conducts_business_in"
+    ],
+    "connects_between": [
+      "connects_between"
+    ],
+    "consequently_impacts": [
+      "consequently_impacts"
+    ],
+    "considers_indicator": [
+      "considers_indicator"
+    ],
+    "consists_of": [
+      "consists_of",
+      "includes",
+      "includes_instruments",
+      "internal_factors_include",
+      "involves"
+    ],
+    "consists_of_sequence": [
+      "consists_of_sequence"
+    ],
+    "consumer_willingness_to_pay_for": [
+      "consumer_willingness_to_pay_for"
+    ],
+    "contains": [
+      "contains"
+    ],
+    "contingent_on": [
+      "contingent_on"
+    ],
+    "continues_until": [
+      "repetition_continues_until"
+    ],
+    "contributes_to": [
+      "contributes_to"
+    ],
+    "convertible_into": [
+      "convertible_into",
+      "redeemable"
+    ],
+    "converts": [
+      "converts"
+    ],
+    "converts_assets_into": [
+      "converts_assets_into"
+    ],
+    "coupon_rate_comparison": [
+      "coupon_rate_comparison"
+    ],
+    "coverage_for": [
+      "coverage_for",
+      "provides_coverage_to"
+    ],
+    "created_by": [
+      "created_by",
+      "given_by"
+    ],
+    "creates_from_accepted_asset": [
+      "creates_from_accepted_asset"
+    ],
+    "deals_in": [
+      "deals_in",
+      "trades_in"
+    ],
+    "deals_with": [
+      "deals_with"
+    ],
+    "delivered_to": [
+      "delivered_to"
+    ],
+    "derived_from": [
+      "derived_from",
+      "predicted_value_obtained_from"
+    ],
+    "derives_value_from": [
+      "derives_value_from"
+    ],
+    "describes": [
+      "describes",
+      "expresses_returns_on",
+      "gives_idea_of"
+    ],
+    "describes_relationship_between": [
+      "describes_relationship_between",
+      "relationship_between_quantity_of_purchases_and_price",
+      "relationship_to_each_other",
+      "relationship_to_owners",
+      "shows_relationship_between"
+    ],
+    "describes_time_period_before": [
+      "describes_time_period_before"
+    ],
+    "determines": [
+      "determines"
+    ],
+    "determines_amount_of": [
+      "determines_amount_of"
+    ],
+    "determines_which": [
+      "determines_which"
+    ],
+    "develops": [
+      "develops"
+    ],
+    "difference_from": [
+      "difference_from",
+      "is_difference_between"
+    ],
+    "directs_and_controls": [
+      "directs_and_controls"
+    ],
+    "displays_data_type": [
+      "displays_data_type",
+      "plots",
+      "presents_data_form",
+      "presents_data_type"
+    ],
+    "distinguished_from": [
+      "distinguished_from"
+    ],
+    "divided_by": [
+      "divided_by"
+    ],
+    "divides_by": [
+      "divides_by",
+      "then_dividing_by"
+    ],
+    "divides_data_set_into": [
+      "divides_data_set_into"
+    ],
+    "divides_into": [
+      "divides_into",
+      "visual_split_into"
+    ],
+    "documents_submitted_by": [
+      "documents_submitted_by"
+    ],
+    "does_not_record_transactions_until": [
+      "does_not_record_transactions_until",
+      "records_transactions_when"
+    ],
+    "due_within": [
+      "due_within"
+    ],
+    "earned_by": [
+      "earned_by",
+      "receives"
+    ],
+    "earned_over": [
+      "earned_over"
+    ],
+    "earned_through": [
+      "earned_through",
+      "gain_through",
+      "recovers"
+    ],
+    "earned_when": [
+      "realized_when"
+    ],
+    "earns_money_on": [
+      "earns_money_on"
+    ],
+    "enables": [
+      "allows_business_to",
+      "allows_debtor_to",
+      "allows_investors_to",
+      "allows_issuer_to",
+      "buyer_has_to_take_advantage_of",
+      "enables",
+      "enables_action",
+      "enables_company_to",
+      "provides"
+    ],
+    "enables_comparison_of": [
+      "allows_for_comparison_of"
+    ],
+    "enables_registration_with": [
+      "allows_company_to_register_with"
+    ],
+    "enables_transaction_of": [
+      "allows_transaction_of",
+      "facilitates_transaction_of"
+    ],
+    "ends_with_event": [
+      "ends_with_event"
+    ],
+    "enforces": [
+      "enforces_rules_governing"
+    ],
+    "entitles_to": [
+      "entitles_holder_to",
+      "gives_owner_right_to"
+    ],
+    "equates_NPV_of_project_to": [
+      "sets_NPV_of_project_equal_to"
+    ],
+    "equates_future_value_of": [
+      "sets_future_value_of"
+    ],
+    "estimates": [
+      "estimates",
+      "is_an_estimate_of",
+      "predicts"
+    ],
+    "examines": [
+      "examines_how"
+    ],
+    "exchanges": [
+      "exchanges_cash_flows",
+      "involves_exchange_of"
+    ],
+    "exchanges_for": [
+      "exchanges_cash_flows_for"
+    ],
+    "exercisable_at": [
+      "exercisable_at_price",
+      "gives_owner_right_at"
+    ],
+    "exercisable_by": [
+      "exercisable_by"
+    ],
+    "exercisable_on": [
+      "exercisable_on",
+      "exercisable_on_date",
+      "gives_owner_right_on"
+    ],
+    "exhibits": [
+      "exhibits_elements_of"
+    ],
+    "exhibits_fit": [
+      "exhibits_fit_when_plotted"
+    ],
+    "expected_to_be_converted_to": [
+      "expected_to_be_converted_to"
+    ],
+    "expected_to_continue": [
+      "expected_to_continue"
+    ],
+    "expected_to_generate": [
+      "expected_to_generate"
+    ],
+    "expenses_on": [
+      "expenses_costs_on"
+    ],
+    "expenses_over": [
+      "expenses_costs_over"
+    ],
+    "expenses_requirement": [
+      "expenses_payment_requirement"
+    ],
+    "focuses_on": [
+      "fields_of_focus",
+      "focuses_on",
+      "focuses_on_application_by"
+    ],
+    "generated_using": [
+      "generated_using"
+    ],
+    "generates": [
+      "generates"
+    ],
+    "governed_by": [
+      "incorporated_under",
+      "incorporated_under_laws_of",
+      "regulated_by",
+      "under_act"
+    ],
+    "governs": [
+      "writes_rules_governing"
+    ],
+    "granted_to": [
+      "given_to",
+      "granted_to"
+    ],
+    "grants_right_to": [
+      "grants_right_but_not_obligation_to",
+      "grants_right_to",
+      "grants_shareholders"
+    ],
+    "guaranteed_by": [
+      "guaranteed_by",
+      "promised_by"
+    ],
+    "guarantees_payments_to": [
+      "guarantee_for_payments_made_to"
+    ],
+    "guarantees_payments_under": [
+      "guarantee_for_payments_under"
+    ],
+    "has_amount_of_investment": [
+      "has_amount_of_investment"
+    ],
+    "has_authority_level": [
+      "has_authority_level"
+    ],
+    "has_balance_used_to": [
+      "has_balance_used_to"
+    ],
+    "has_calculation_method": [
+      "calculation_method"
+    ],
+    "has_characteristic": [
+      "characterized_by",
+      "expression_format",
+      "firm_status",
+      "function_nature",
+      "gdp_state",
+      "given_level_of",
+      "typically_has"
+    ],
+    "has_collection_status": [
+      "status_of_collection"
+    ],
+    "has_concern_in": [
+      "has_concern_in",
+      "trouble_with"
+    ],
+    "has_condition": [
+      "condition",
+      "dividend_condition"
+    ],
+    "has_consequence": [
+      "consequence",
+      "effect_of_higher_price",
+      "involves_failure_to",
+      "involves_inability_to_make",
+      "involves_inability_to_reinvest",
+      "outcome_of_choosing_one"
+    ],
+    "has_consumption_use_or_expiration_timeframe": [
+      "consumption_use_or_expiration_timeframe",
+      "expected_to_be_consumed_used_or_expire_through"
+    ],
+    "has_context": [
+      "context",
+      "expressed_in",
+      "expressed_on_a",
+      "in_context",
+      "used_in_context"
+    ],
+    "has_conversion_timeframe": [
+      "conversion_timeframe"
+    ],
+    "has_convertibility": [
+      "convertibility"
+    ],
+    "has_convertibility_period": [
+      "convertibility_period"
+    ],
+    "has_cost_level": [
+      "has_cost_level",
+      "type_of_cost"
+    ],
+    "has_coverage_amount": [
+      "coverage_amount"
+    ],
+    "has_credit_quality": [
+      "bond_credit_quality"
+    ],
+    "has_credit_rating": [
+      "has_credit_rating"
+    ],
+    "has_debt_outstanding": [
+      "has_debt_outstanding"
+    ],
+    "has_degree_of_difference": [
+      "degree_of_difference"
+    ],
+    "has_determination_method": [
+      "determination_method"
+    ],
+    "has_direction": [
+      "direction"
+    ],
+    "has_direction_of_flow": [
+      "direction_of_flow"
+    ],
+    "has_earning_status": [
+      "earning_status"
+    ],
+    "has_expectation": [
+      "expectation",
+      "shareholder_expectation"
+    ],
+    "has_expected_period": [
+      "expected_settlement_period"
+    ],
+    "has_greater_value_than": [
+      "worth_more_today_than"
+    ],
+    "has_growth_mechanism": [
+      "growth_mechanism",
+      "provides_return_as"
+    ],
+    "has_growth_of_amount": [
+      "growth_of_amount"
+    ],
+    "has_growth_rate": [
+      "growth_rate"
+    ],
+    "has_impact_type": [
+      "impact_type"
+    ],
+    "has_interest_in": [
+      "has_interest_in"
+    ],
+    "has_interest_rate_type": [
+      "has_interest_rate_type"
+    ],
+    "has_investment_earning_rate_of_interest": [
+      "has_investment_earning_rate_of_interest"
+    ],
+    "has_legal_distinction_between_owner_and_business": [
+      "legal_distinction_between_owner_and_business"
+    ],
+    "has_level_of_analysis": [
+      "level_of_analysis"
+    ],
+    "has_liability_of_partners": [
+      "liability_of_partners",
+      "profit_and_liability_sharing"
+    ],
+    "has_liability_type": [
+      "has_liability_type"
+    ],
+    "has_likelihood_of_staying_in_business": [
+      "likelihood_of_staying_in_business"
+    ],
+    "has_liquidity": [
+      "liquidity"
+    ],
+    "has_loan_term": [
+      "loan_term"
+    ],
+    "has_location": [
+      "location"
+    ],
+    "has_location_of_production": [
+      "location_of_production"
+    ],
+    "has_market": [
+      "market"
+    ],
+    "has_market_basket_contents": [
+      "market_basket_contents"
+    ],
+    "has_market_location": [
+      "market_location"
+    ],
+    "has_maturities_of": [
+      "has_maturities_of"
+    ],
+    "has_maturity": [
+      "has_maturity",
+      "maturity"
+    ],
+    "has_maturity_date": [
+      "bond_maturity_dates"
+    ],
+    "has_maturity_of": [
+      "has_maturity_of"
+    ],
+    "has_maturity_period": [
+      "has_maturity_period"
+    ],
+    "has_mechanism": [
+      "mechanism"
+    ],
+    "has_method": [
+      "method",
+      "payment_method",
+      "repayment_method"
+    ],
+    "has_nature": [
+      "nature",
+      "physical_nature"
+    ],
+    "has_nature_of_flow": [
+      "nature_of_flow"
+    ],
+    "has_number_of_shareholders": [
+      "has_number_of_shareholders"
+    ],
+    "has_owners_represented_by": [
+      "has_owners_represented_by"
+    ],
+    "has_period": [
+      "period",
+      "span",
+      "time_period"
+    ],
+    "has_position_importance": [
+      "has_position_importance"
+    ],
+    "has_price_characteristic": [
+      "has_price_characteristic",
+      "price_status"
+    ],
+    "has_priority_over": [
+      "dividend_priority_over"
+    ],
+    "has_property": [
+      "has_property",
+      "includes_expenditure_type",
+      "includes_type",
+      "investment_status",
+      "weights_are"
+    ],
+    "has_purpose": [
+      "exists_to",
+      "intended_for_resale",
+      "primary_purpose",
+      "purpose",
+      "purpose_1",
+      "purpose_2",
+      "purpose_of_holding",
+      "purpose_of_issuance",
+      "purpose_of_use",
+      "purpose_other_than",
+      "usage"
+    ],
+    "has_purpose_of_protecting": [
+      "created_to_protect",
+      "protects_from"
+    ],
+    "has_requirement": [
+      "revenue_receipt_requirement"
+    ],
+    "has_risk_level": [
+      "has_risk_level",
+      "risk_level"
+    ],
+    "has_role": [
+      "role"
+    ],
+    "has_scope": [
+      "scope"
+    ],
+    "has_security": [
+      "has_security"
+    ],
+    "has_state": [
+      "state_of_securities"
+    ],
+    "has_status": [
+      "status",
+      "trading_status"
+    ],
+    "has_structure": [
+      "pairing_structure"
+    ],
+    "has_supervision_manner": [
+      "supervision_manner"
+    ],
+    "has_tax_advantages_relative_to": [
+      "has_tax_advantages_relative_to"
+    ],
+    "has_tax_requirement": [
+      "tax_requirement"
+    ],
+    "has_taxation_type": [
+      "has_taxation_type",
+      "taxation_of_owners"
+    ],
+    "has_term": [
+      "has_term",
+      "term"
+    ],
+    "has_timeframe": [
+      "timeframe"
+    ],
+    "has_timing": [
+      "exchange_timing",
+      "exercisable_timing",
+      "expenses_recorded_when",
+      "frequency",
+      "occurrence_timing",
+      "payment_timing",
+      "timing",
+      "transfer_timing"
+    ],
+    "has_willingness_to_purchase": [
+      "willingness_to_purchase"
+    ],
+    "heads_agencies_responsible_for": [
+      "heads_agencies_responsible_for"
+    ],
+    "helps_analysts": [
+      "helps_analysts"
+    ],
+    "helps_interpret": [
+      "helps_interpret"
+    ],
+    "holds": [
+      "holds"
+    ],
+    "horizontal_axis_shows": [
+      "horizontal_axis_shows"
+    ],
+    "impacted_by": [
+      "impacted_by"
+    ],
+    "impacts": [
+      "impacts"
+    ],
+    "impacts_value_of": [
+      "impacts_value_of"
+    ],
+    "indicates": [
+      "indicate",
+      "indicates",
+      "indicator_of",
+      "often_used_to_indicate",
+      "reflect",
+      "reflects"
+    ],
+    "indicates_condition": [
+      "indicates_fees_for_late_payment",
+      "indicates_investor_willingness_to_pay",
+      "indicates_payment_due",
+      "indicates_possible_discounts",
+      "indicates_risk_of_default"
+    ],
+    "indicates_duration": [
+      "indicates_time_until"
+    ],
+    "indicates_range": [
+      "indicates_spread_of"
+    ],
+    "involves_action_by": [
+      "involves_issuer_action"
+    ],
+    "involves_issuer_of": [
+      "involves_issuer_of"
+    ],
+    "involves_loss_of": [
+      "involves_loss_of"
+    ],
+    "involves_number_of_parties": [
+      "involves_number_of_parties",
+      "to_parties"
+    ],
+    "involves_selling": [
+      "involves_selling"
+    ],
+    "involves_transfer_of": [
+      "involves_transfer_of"
+    ],
+    "involves_using_as_security": [
+      "involves_using_as_security"
+    ],
+    "is_a": [
+      "is_a",
+      "memorandum_of_association_is_a",
+      "refers_to_asset_type"
+    ],
+    "is_a_form_of": [
+      "is_a_form_of"
+    ],
+    "is_action": [
+      "action"
+    ],
+    "is_activity": [
+      "activity"
+    ],
+    "is_below": [
+      "is_below"
+    ],
+    "is_calculated_as": [
+      "equation_is",
+      "exponent_is",
+      "expressed_as",
+      "reinvestment_rate_is"
+    ],
+    "is_common_in": [
+      "is_common_in"
+    ],
+    "is_current": [
+      "is_current"
+    ],
+    "is_earned_when": [
+      "is_considered_earned_when",
+      "is_earned_when_revenues_and_gains_are",
+      "receivable_for"
+    ],
+    "is_equal_to": [
+      "is_equal_to",
+      "quantity_demanded_equals"
+    ],
+    "is_evidence_of": [
+      "is_evidence_of",
+      "serves_as_evidence_that"
+    ],
+    "is_example_of": [
+      "example_of_creation",
+      "example_of_installment",
+      "example_real_asset",
+      "examples",
+      "examples_of_asset_type",
+      "examples_of_measurements_modeled",
+      "examples_of_period",
+      "frequently_is",
+      "includes_examples"
+    ],
+    "is_excess_of": [
+      "is_an_excess_of"
+    ],
+    "is_expected": [
+      "is_anticipated"
+    ],
+    "is_expressed_as": [
+      "is_expressed_as"
+    ],
+    "is_expressed_in_terms_of": [
+      "is_expressed_in_terms_of"
+    ],
+    "is_in": [
+      "is_in"
+    ],
+    "is_in_charge_of": [
+      "is_in_charge_of"
+    ],
+    "is_located_in": [
+      "is_based_in",
+      "is_located_in"
+    ],
+    "is_located_on": [
+      "is_located_on"
+    ],
+    "is_located_on_side": [
+      "located_on_side"
+    ],
+    "is_multiplied_by": [
+      "is_multiplied_by"
+    ],
+    "is_net_of": [
+      "is_net_of",
+      "remains_after"
+    ],
+    "is_of": [
+      "is_of"
+    ],
+    "is_part_of": [
+      "is_part_of",
+      "part_of"
+    ],
+    "is_seeking": [
+      "is_actively_seeking",
+      "is_looking"
+    ],
+    "is_sum_of": [
+      "is_sum_of"
+    ],
+    "is_type_of_agency": [
+      "is_type_of_agency"
+    ],
+    "is_value_of": [
+      "is_value_of"
+    ],
+    "is_working": [
+      "is_currently_working"
+    ],
+    "issued_at": [
+      "issued_at"
+    ],
+    "issued_by": [
+      "issued_by",
+      "provided_by"
+    ],
+    "issued_in_terms_of": [
+      "notes_issued_in_terms_of"
+    ],
+    "issued_to_pay_for": [
+      "issued_to_pay_for"
+    ],
+    "issuer": [
+      "issuer"
+    ],
+    "issues": [
+      "issues"
+    ],
+    "issues_to": [
+      "issues_to"
+    ],
+    "legally_owns": [
+      "legally_owns"
+    ],
+    "lending_party": [
+      "lending_party"
+    ],
+    "lists": [
+      "lists"
+    ],
+    "made_at": [
+      "made_at"
+    ],
+    "made_during_period": [
+      "made_during_period"
+    ],
+    "made_on": [
+      "made_on"
+    ],
+    "maintains": [
+      "maintains"
+    ],
+    "maintains_inventory_level": [
+      "maintains_inventory_level"
+    ],
+    "makes": [
+      "makes"
+    ],
+    "makes_election_to_be_taxed_under": [
+      "makes_election_to_be_taxed_under"
+    ],
+    "makes_final_decision_in_matters_of": [
+      "makes_final_decision_in_matters_of"
+    ],
+    "manages_type_of_assets": [
+      "manages_type_of_assets"
+    ],
+    "manages_type_of_liabilities": [
+      "manages_type_of_liabilities"
+    ],
+    "marketability_implies": [
+      "marketability_implies",
+      "tradability"
+    ],
+    "matches": [
+      "matches"
+    ],
+    "may_derive_from": [
+      "may_derive_from"
+    ],
+    "means": [
+      "means"
+    ],
+    "means_of_financing_for": [
+      "means_of_financing_for"
+    ],
+    "measured_in": [
+      "measured_in"
+    ],
+    "measures": [
+      "measures"
+    ],
+    "measures_association_between": [
+      "measures_association_between"
+    ],
+    "measures_likelihood_of_change_in": [
+      "measures_likelihood_of_change_in"
+    ],
+    "measures_management_effectiveness_of": [
+      "shows_how_well_company_manages"
+    ],
+    "measures_movement_relative_to": [
+      "measures_movement_relative_to"
+    ],
+    "measures_number_of_days": [
+      "measures_number_of_days"
+    ],
+    "measures_portion_of": [
+      "measures_portion_of",
+      "provides_percentages_of"
+    ],
+    "measures_prices_for": [
+      "measures_prices_for"
+    ],
+    "measures_prices_paid_by": [
+      "measures_prices_paid_by"
+    ],
+    "measures_rate_of_increase_of": [
+      "measures_rate_of_increase_of"
+    ],
+    "measures_resource_utilization_effectiveness_of": [
+      "shows_how_well_company_uses"
+    ],
+    "measures_time_for": [
+      "measures_time_for"
+    ],
+    "measures_time_to_turn_into": [
+      "measures_time_to_turn_into"
+    ],
+    "measures_value_of": [
+      "measures_value_of"
+    ],
+    "members_are_equivalent_to": [
+      "members_are_equivalent_to"
+    ],
+    "members_have": [
+      "members_have"
+    ],
+    "memorandum_of_association_defines": [
+      "memorandum_of_association_defines"
+    ],
+    "merges_with": [
+      "merges_with"
+    ],
+    "method_of_raising_capital": [
+      "method_of_raising_capital"
+    ],
+    "minimizes": [
+      "minimizes",
+      "reduces"
+    ],
+    "most_commonly_between": [
+      "most_commonly_between"
+    ],
+    "must_be_deposited_by": [
+      "must_be_deposited_by"
+    ],
+    "must_be_maintained_by": [
+      "must_be_maintained_by"
+    ],
+    "must_be_posted_to_guarantee": [
+      "must_be_posted_to_guarantee"
+    ],
+    "must_be_provided_to": [
+      "must_be_provided_to"
+    ],
+    "needed_to_meet": [
+      "needed_to_meet"
+    ],
+    "not_paid_as": [
+      "not_paid_as"
+    ],
+    "occurs_at": [
+      "occurs_at",
+      "payment_or_receipt_occurs_at",
+      "reflects_at",
+      "where_intersect"
+    ],
+    "occurs_between": [
+      "occurs_between"
+    ],
+    "occurs_during": [
+      "occurs_during"
+    ],
+    "occurs_in_period": [
+      "occurs_in_period"
+    ],
+    "occurs_on": [
+      "occurs_on",
+      "trade_date"
+    ],
+    "occurs_when": [
+      "results_when"
+    ],
+    "occurs_within": [
+      "occurs_within"
+    ],
+    "of_entity_type": [
+      "of_entity_type",
+      "type_of_entity"
+    ],
+    "offered_to": [
+      "offered_to"
+    ],
+    "offers": [
+      "offer"
+    ],
+    "offset_by": [
+      "offset_by",
+      "reduced_by"
+    ],
+    "offsets_risk_of": [
+      "offsets_risk_of"
+    ],
+    "often_accepts": [
+      "often_accepts"
+    ],
+    "often_trade": [
+      "often_trade"
+    ],
+    "operated_by": [
+      "operated_by",
+      "run_by"
+    ],
+    "operates_in": [
+      "operates_in"
+    ],
+    "opposed_to": [
+      "opposed_to"
+    ],
+    "organizes_by": [
+      "organizes_by"
+    ],
+    "oversees": [
+      "oversees"
+    ],
+    "owned_by": [
+      "owned_by"
+    ],
+    "owned_or_controlled_by": [
+      "owned_or_controlled_by"
+    ],
+    "owner_has": [
+      "owner_has"
+    ],
+    "owner_is_known_as": [
+      "owner_is_known_as"
+    ],
+    "paid_at": [
+      "paid_at"
+    ],
+    "paid_by": [
+      "paid_by"
+    ],
+    "paid_for": [
+      "paid_for"
+    ],
+    "paid_out_of": [
+      "paid_out_of"
+    ],
+    "paid_regularly": [
+      "paid_regularly"
+    ],
+    "paid_to": [
+      "paid_to"
+    ],
+    "paid_when": [
+      "paid_when"
+    ],
+    "payments_are_specified_in": [
+      "payments_are_specified_in"
+    ],
+    "payments_include": [
+      "payments_include"
+    ],
+    "performs_function": [
+      "performs_function"
+    ],
+    "period_is_usually": [
+      "period_is_usually"
+    ],
+    "pertains_to": [
+      "pertains_to",
+      "relates_to"
+    ],
+    "pertains_to_collectibility_of": [
+      "pertains_to_collectibility_of"
+    ],
+    "prepared_in": [
+      "memorandum_of_association_prepared_in"
+    ],
+    "produces": [
+      "yields"
+    ],
+    "recorded_when": [
+      "revenue_recorded_when"
+    ],
+    "records_transactions_when": [
+      "records_asset_on"
+    ],
+    "removes_from": [
+      "removes_from",
+      "removes_from_index"
+    ],
+    "replaces": [
+      "replaces"
+    ],
+    "reported_on": [
+      "reported_on"
+    ],
+    "reports_difference_between": [
+      "reports_difference_between"
+    ],
+    "represents": [
+      "represents",
+      "share_represents"
+    ],
+    "represents_translation_of": [
+      "represents_translation_of"
+    ],
+    "required_for": [
+      "required_for"
+    ],
+    "requires": [
+      "requires"
+    ],
+    "requires_equality_of": [
+      "requires_equality_of"
+    ],
+    "requires_revenue_recognition_when": [
+      "states_that_company_must_recognize_revenue_in_period_when"
+    ],
+    "responsible_for": [
+      "responsible_for"
+    ],
+    "returned_to": [
+      "returned_to"
+    ],
+    "reward_for": [
+      "reward_for"
+    ],
+    "security_for": [
+      "security_for"
+    ],
+    "sells_at": [
+      "sells_at"
+    ],
+    "sells_type_of_option": [
+      "sells_type_of_option"
+    ],
+    "serves_as": [
+      "serves_as"
+    ],
+    "serves_as_intermediary_to": [
+      "serves_as_intermediary_to"
+    ],
+    "set_by": [
+      "set_by"
+    ],
+    "sets_policy_for": [
+      "sets_policy_for"
+    ],
+    "shows_amounts_owed_by": [
+      "shows_amounts_owed_by"
+    ],
+    "shows_dividend_payout_amount": [
+      "shows_how_much_company_pays_out_in_dividends"
+    ],
+    "shows_estimation_of": [
+      "shows_estimation_of"
+    ],
+    "shows_values_of": [
+      "shows_values_of"
+    ],
+    "sold_to": [
+      "sold_to"
+    ],
+    "source_of_money": [
+      "source_of_money"
+    ],
+    "states_total_value_of_levered_company_is": [
+      "states_total_value_of_levered_company_is"
+    ],
+    "studies": [
+      "studies"
+    ],
+    "summarized_based_on": [
+      "summarized_based_on"
+    ],
+    "sums": [
+      "sums"
+    ],
+    "supervises_activities_of": [
+      "supervises_activities_of"
+    ],
+    "targeted_by": [
+      "targeted_by"
+    ],
+    "taxes_owners_as": [
+      "taxes_owners_as"
+    ],
+    "time_displayed_on": [
+      "time_displayed_on"
+    ],
+    "time_to_collect_payment_from": [
+      "takes_company_to_collect_payment_from"
+    ],
+    "time_to_use_cash_to_provide": [
+      "takes_company_to_use_cash_to_provide"
+    ],
+    "tracked_by": [
+      "tracked_by"
+    ],
+    "trades": [
+      "trades"
+    ],
+    "transacted_by": [
+      "borrowed_and_lent_by",
+      "transacted_by"
+    ],
+    "transfers_to": [
+      "transfer_to"
+    ],
+    "used_as_benchmark_for": [
+      "used_as_benchmark_for"
+    ],
+    "used_by": [
+      "often_used_by",
+      "used_by"
+    ],
+    "used_for": [
+      "used_for",
+      "used_to"
+    ],
+    "used_for_duration": [
+      "used_for_duration"
+    ],
+    "used_in": [
+      "used_in"
+    ],
+    "used_to_assess": [
+      "used_to_assess"
+    ],
+    "used_to_determine": [
+      "used_to_determine"
+    ],
+    "used_to_explain": [
+      "used_to_explain"
+    ],
+    "used_to_finance": [
+      "used_to_finance"
+    ],
+    "used_to_model": [
+      "used_to_model"
+    ],
+    "used_to_resolve": [
+      "used_to_resolve"
+    ],
+    "used_to_show": [
+      "used_to_show"
+    ],
+    "useful_for_calculating_probabilities_within": [
+      "useful_for_calculating_probabilities_within"
+    ],
+    "uses": [
+      "uses"
+    ],
+    "uses_metrics_from": [
+      "uses_metrics_from"
+    ],
+    "uses_rate": [
+      "uses_rate"
+    ],
+    "usually_compared_to_market_price": [
+      "usually_compared_to_market_price"
+    ],
+    "usually_compared_to_present_value": [
+      "usually_compared_to_present_value"
+    ],
+    "varies_by": [
+      "varies_by"
+    ],
+    "vertical_axis_shows": [
+      "vertical_axis_shows"
+    ],
+    "weighted_by": [
+      "weighted_by"
+    ],
+    "will_grow_to": [
+      "will_grow_to_at",
+      "will_grow_to_over"
+    ]
+  },
+  "n_raw_relationships": 648,
+  "n_canonical_relationships": 446
+}

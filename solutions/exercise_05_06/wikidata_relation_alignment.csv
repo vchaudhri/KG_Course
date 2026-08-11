@@ -1,0 +1,447 @@
+﻿canonical_relationship,example_instances,match_property_id,match_property_label,match_property_id_verified,match_type,is_causal
+accepted_by,required rate of return -> investor,,,,NONE,False
+accepted_on,required rate of return -> investment,,,,NONE,False
+according_to,exercising -> terms of the option contract,,,,NONE,False
+acquired_for_purpose_of,investment -> generating financial gain,,,,NONE,False
+acts_on_behalf_of,agent -> another person or group,,,,NONE,False
+added_to,compounding interest -> original principal sum of a loan or deposit,,,,NONE,False
+adjusted_for,real interest rate -> effects of inflation,,,,NONE,False
+adjusts_for,indirect method -> items that impact new income but do not require outlay of cash,,,,NONE,False
+affects,appreciate -> one unit of a currency will purchase more of a foreign currency; depreciate -> one unit of a currency will purchase less of a foreign currency; transaction exposure -> value of a business’s expected receipts or expenses,P737,influenced by,True,EXACT,True
+age_measured_by,accounts receivable aging schedule -> number of days since the sale,,,,NONE,False
+aims_to_achieve,assets -> provide economic value; capital budgeting -> maximize shareholder value; GDP deflator -> what gdp would be if prices did not change from one year to the next,,,,NONE,False
+allocated_to,earnings per share (EPS) -> each outstanding share of common stock,,,,NONE,False
+allocates,depreciation -> costs of a tangible asset,,,,NONE,False
+allocates_over,depreciation -> asset’s economic life,,,,NONE,False
+allows_delay_up_to,shelf registration -> two years,,,,NONE,False
+also_known_as,"growth rate -> interest rate in the context of the time value of money; NYSE (New York Stock Exchange) -> ""big board""; secretaries of state -> secretaries of the commonwealth in massachusetts, pennsylvania, and virginia",,,,NONE,False
+appears_on,contra-asset -> balance sheet; subscriber -> memorandum of association,,,,NONE,False
+applies_during,statement of stockholders’ equity -> given period,P580,start time,True,ANALOGOUS,False
+applies_for,"cash deficit -> given period; cash surplus -> given period; maturity date -> par, or face, value",P580,start time,True,ANALOGOUS,False
+applies_principles_to,business finance -> maximize the value of a firm,,,,NONE,False
+applies_to,"bankruptcies -> distressed businesses; best-fit linear regression model -> (x, y) data points; credit period -> business purchaser",P1535,used by,True,ANALOGOUS,False
+applies_to_data_set_with_property,percentiles -> ordered,,,,NONE,False
+applies_to_data_values_within,"empirical rule -> one, two, and three standard deviations from the mean",,,,NONE,False
+applies_to_distribution_type,empirical rule -> bell-shaped (normal),,,,NONE,False
+applies_to_number_of_variables,correlation coefficient -> two,,,,NONE,False
+applies_to_period,cash budget -> specific period of time; income statement -> given period of time; present value (PV) -> specified period of time,P580,start time,True,ANALOGOUS,False
+applies_to_relationship_type,cash rate -> loans; correlation coefficient -> linear,,,,NONE,False
+arises_because,interest tax shield -> interest payments on debt are a tax-deductible expense,P828,has cause,True,EXACT,True
+arises_from,credit risk -> bond issuer default; financial risk -> inflation; gains -> incidental or peripheral to the primary purpose of the business,P828,has cause,True,EXACT,True
+assigns_to,probability distribution -> probabilities,,,,NONE,False
+associated_with,comparable company analysis (comps) -> other businesses; duration risk -> sensitivity of a bond’s price to a 1% change in interest rates; expense -> providing goods or services,,,,NONE,False
+assumes_projects_can_be,equal annuity approach -> repeated forever,,,,NONE,False
+attended_by,annual meeting -> general membership and shareholders,P710,participant,True,SPECIALIZATION,False
+available_to,money supply -> consumers,P1535,used by,True,ANALOGOUS,False
+backed_by,"capital structure -> debt capital, preferred stock capital, and common stock capital; US Treasury bills (T-bills) -> treasury department",,,,NONE,False
+based_on,"cash flow -> accounting rules, accruals, and reports; consumer price index (CPI) -> cost of a market basket of goods; discounted cash flow (DCF) -> present value of its expected future cash flows",P144,based on,True,EXACT,True
+based_on_theory_that,dividend discount model (DDM) -> present-day price is worth the sum of all of its future dividend payments when discounted back to their present value,P144,based on,True,SPECIALIZATION,True
+begins_with_event,cash cycle or cash conversion cycle -> business begins production and acquires resources from its suppliers; indirect method -> net income,P580,start time,True,SPECIALIZATION,False
+belongs_to,capital -> company,P127,owned by,False,ANALOGOUS,False
+borrowing_party,London Interbank Offered Rate (LIBOR) -> one another,,,,NONE,False
+breaks_down_into,DuPont method -> return on equity into smaller elements,P527,has part,True,ANALOGOUS,False
+brings_together,brokers -> potential buyers and sellers of a product,,,,NONE,False
+calculated_as,"capital gain yield -> difference between sale price and original price, divided by original price; interest tax shield -> corporate tax rate multiplied by interest payments; Jensen’s alpha -> raw portfolio return minus the expected portfolio return predicted by the capm",,,,NONE,False
+calculated_at,present value -> assumed interest rate,,,,NONE,False
+calculated_before_effects_of,EBIT -> interest or taxes,,,,NONE,False
+calculated_by,arithmetic average return -> dividing by the number of years; current ratio -> dividing current assets by current liabilities; geometric mean -> multiplying the data values and then raising the product to the exponent 1n,,,,NONE,False
+calculated_by_adding,holding period percentage return -> amount received when the stock is sold to any dividends earned while holding the stock,,,,NONE,False
+calculated_by_dividing,holding period percentage return -> difference by the price originally paid,,,,NONE,False
+calculated_by_dividing_by,conversion price -> its conversion ratio,,,,NONE,False
+calculated_by_subtracting,holding period percentage return -> price originally paid for the stock; net debt -> cash or risk-free assets; net book value -> total liabilities,,,,NONE,False
+calculates,equity multiples -> expected or achieved total return,,,,NONE,False
+calculates_on,equity multiples -> initial investment,,,,NONE,False
+calculation_method_step_1,arithmetic mean -> adding up the data values,,,,NONE,False
+calculation_method_step_2,arithmetic mean -> dividing the sum by the number of data values,,,,NONE,False
+can_be,"financial instrument -> bought, sold, or traded",,,,NONE,False
+can_be_diversified_away,systematic risk -> cannot,,,,NONE,False
+can_be_eliminated,diversifiable risk -> without the loss of expected return; diversifiable risk -> holding a portfolio of securities; non-diversifiable risk -> not simply holding a portfolio of securities,,,,NONE,False
+can_purchase,demand -> consumers; initial public offering (IPO) -> stock; savings bonds -> investors,,,,NONE,False
+can_trade,negotiable certificate of deposit -> prior to maturity; negotiable certificates of deposit (NCDs) -> prior to maturity in a broad secondary market,,,,NONE,False
+can_vary_in_amount,mixed stream -> from one period to the next,,,,NONE,False
+caused_by,bad debt expense -> uncollectible accounts receivables; economic risk -> change in exchange rates; inflation risk -> rising prices,P828,has cause,True,EXACT,True
+causes,inflation -> reduction in purchasing power; inflation risk -> reduced purchasing power of goods and services,P1542,has effect,True,EXACT,True
+ceases_for,maturity date -> bondholder,P582,end time,True,ANALOGOUS,False
+ceases_validity_for,expiration date -> option contract,P582,end time,True,ANALOGOUS,False
+change_in_amount,constant perpetuity -> no,,,,NONE,False
+charged_by,cash rate -> central bank,,,,NONE,False
+charged_to,cash rate -> commercial banks; prime rate -> creditworthy corporate customers,,,,NONE,False
+collected_from,sample data -> subset or part of a population,P361,part of,True,ANALOGOUS,False
+combines,"investor relations (IR) -> finance, communication, marketing, and securities law compliance",P527,has part,True,ANALOGOUS,False
+combines_characteristics_of,hybrid form of business -> corporation; hybrid form of business -> sole proprietorship or partnership,P31,instance of,True,ANALOGOUS,False
+combines_liability_of,limited liability corporation (LLC) -> corporation,P31,instance of,True,ANALOGOUS,False
+combines_taxation_of,limited liability corporation (LLC) -> partnership or sole proprietorship,P31,instance of,True,ANALOGOUS,False
+communicates_between,articles of incorporation -> government body; investor relations (IR) -> company and the financial community or other constituencies,,,,NONE,False
+compared_to,beta -> benchmark such as the s&p 500 index; comparable company analysis (comps) -> other businesses; debt-to-equity ratio -> amount of stockholders’ equity,,,,NONE,False
+compares,benchmarking -> financial condition and operating results; price-to-book (P/B) ratio -> company’s market capitalization or market value to its book value,,,,NONE,False
+compares_against,"benchmarking -> standard, called a benchmark",,,,NONE,False
+compares_projects_by,NASDAQ (National Association of Securities Dealers Automated Quotations) -> second behind the new york stock exchange; replacement chain approach -> repeating shorter projects multiple times,,,,NONE,False
+comparison_point,depreciate -> than it did previously; price-to-earnings (P/E) ratio -> company’s earnings,,,,NONE,False
+comparison_to_previous_state,appreciate -> than it did previously,,,,NONE,False
+condition_for_payment,cash discount -> pays the invoice within a certain number of days as specified by credit terms,,,,NONE,False
+condition_for_return,dividends -> reward for their investment; yield to maturity (YTM) -> if the investment is held until maturity,,,,NONE,False
+conducted_via,conference call -> telephone or internet,,,,NONE,False
+conducts_business_in,foreign corporation (out of state or out of country) -> state or jurisdiction other than where it was originally incorporated,P131,located in the administrative territorial entity,True,ANALOGOUS,False
+connects_between,supply chain -> company and its suppliers and the company and its customers,,,,NONE,False
+consequently_impacts,firm-specific risk -> returns to investors,P1542,has effect,True,EXACT,True
+considers_indicator,precedent transaction analysis (precedents) -> price paid for similar companies in the past,,,,NONE,False
+consists_of,carrying costs -> storage costs; carrying costs -> insurance; carrying costs -> inventory obsolescence,P527,has part,True,EXACT,False
+consists_of_sequence,business cycle -> economic expansion followed by economic contraction,P527,has part,True,ANALOGOUS,False
+consumer_willingness_to_pay_for,economic value -> particular asset or service,,,,NONE,False
+contains,allowance for doubtful accounts -> estimated amount of accounts receivable; bill of lading -> detailed list of goods that have been shipped,P527,has part,True,EXACT,False
+contingent_on,duration -> interest rates move,,,,NONE,True
+continues_until,replacement chain approach -> they reach the lifetime of the longest project,P582,end time,True,ANALOGOUS,False
+contributes_to,investor relations (IR) -> company’s securities achieving fair valuation,P1479,has contributing factor,True,EXACT,True
+convertible_into,convertible bonds -> predetermined number of common stock or equity shares; negotiable certificate of deposit -> only at maturity; negotiable certificates of deposit (NCDs) -> at maturity,,,,NONE,False
+converts,direct method -> accrual basis revenue and expenses to cash basis collections and payments,,,,NONE,False
+converts_assets_into,liquidity -> cash,,,,NONE,False
+coupon_rate_comparison,discount bond -> lower than prevailing interest rates; premium bond -> higher than the current prevailing interest rates being offered,,,,NONE,False
+coverage_for,Securities Investor Protection Corporation (SIPC) -> brokerage customers; Securities Investor Protection Corporation (SIPC) -> cash and securities held by the firm,,,,NONE,False
+created_by,bill of lading -> carrier (shipping company); Fisher effect -> economist irving fisher; money market mutual funds -> investment companies,P176,manufacturer,True,ANALOGOUS,True
+creates_from_accepted_asset,financial intermediary -> another form of financial asset,,,,NONE,False
+deals_in,money market -> short-term financial securities; money market -> low-risk financial securities; money market -> highly liquid financial securities,P1056,product or material produced,False,ANALOGOUS,False
+deals_with,investments -> products and processes,P1269,facet of,False,ANALOGOUS,False
+delivered_to,press release -> members of the news media,,,,NONE,False
+derived_from,geometric average return -> effective annual rate and time value of money formulas; residual -> linear regression equation,P144,based on,True,ANALOGOUS,True
+derives_value_from,derivative -> another asset,P144,based on,True,ANALOGOUS,True
+describes,annual report -> public corporation’s operations and financial condition; effective annual rate (EAR) -> annualized or yearly basis; quarterly report -> public corporation’s operations and financial condition,,,,NONE,False
+describes_relationship_between,"accounting equation -> assets, liabilities, and owner's equity; corporation -> separate and distinct; Fisher effect -> inflation and both real and nominal interest rates",,,,NONE,False
+describes_time_period_before,net terms -> must pay invoice,,,,NONE,False
+determines,chief financial officer (CFO) -> optimal capital structure for the firm; indirect method -> net cash flows from operating activities; retirement planning -> objectives for retirement,P828,has cause,True,ANALOGOUS,True
+determines_amount_of,coupon rate -> annual interest paid by the bond issuer,P828,has cause,True,ANALOGOUS,True
+determines_which,capital budgeting -> long-term or fixed assets to acquire,P828,has cause,True,ANALOGOUS,True
+develops,retirement planning -> strategies and tactics,,,,NONE,False
+difference_from,interquartile range (IQR) -> third quartile (q3) and first quartile (q1); net working capital -> current assets and current liabilities; outliers -> other data values in a data set,,,,NONE,False
+directs_and_controls,corporate governance -> firm,,,,NONE,False
+displays_data_type,bar graph -> categorical data; bar graph -> summarized form; histogram -> continuous data,,,,NONE,False
+distinguished_from,cash flow -> income,,,,NONE,False
+divided_by,stock returns -> stock price at the beginning of the period,,,,NONE,False
+divides_by,bond returns -> bond price at the beginning of the period; Sharpe ratio -> standard deviation of the portfolio; Treynor ratio -> beta of the portfolio,,,,NONE,False
+divides_data_set_into,percentiles -> hundredths,P527,has part,True,ANALOGOUS,False
+divides_into,quartiles -> quarters; T-account -> left and right sides,P527,has part,True,ANALOGOUS,False
+documents_submitted_by,"Electronic Data Gathering, Analysis, and Retrieval system (EDGAR) -> companies and others",,,,NONE,False
+does_not_record_transactions_until,cash basis -> exchange of cash occurs; cash-basis accounting -> there is an exchange of cash; cash-basis accounting -> there is an exchange of cash,,,,NONE,False
+due_within,"current liabilities -> one year or a company's standard operating cycle, whichever is greater",,,,NONE,False
+earned_by,brokers -> commission at transaction; realized return -> investor; risk premium -> taking on risk,,,,NONE,False
+earned_over,realized return -> given time period,,,,NONE,False
+earned_through,investment -> increased income; investment -> appreciation in value; payback period -> initial cost of investment,,,,NONE,False
+earned_when,capital gains -> asset is sold,,,,NONE,False
+earns_money_on,dealers -> spread between ask and bid prices for the asset,,,,NONE,False
+enables,bankruptcies -> liquidate its assets; bankruptcies -> devise a reorganization plan; best-fit linear regression model -> best-fit straight line,,,,NONE,True
+enables_comparison_of,effective annual rate (EAR) -> various investments,,,,NONE,False
+enables_registration_with,shelf registration -> sec,,,,NONE,False
+enables_transaction_of,primary market -> new securities; secondary markets -> securities,,,,NONE,False
+ends_with_event,cash cycle or cash conversion cycle -> receives cash from its customers,P582,end time,True,ANALOGOUS,False
+enforces,financial industry regulatory authority (FINRA) -> registered brokers and broker-dealer firms,,,,NONE,False
+entitles_to,call option -> buy underlying asset; preferred stock -> fixed dividend per share; put option -> sell underlying asset,,,,NONE,False
+equates_NPV_of_project_to,internal rate of return (IRR) -> zero,,,,NONE,False
+equates_future_value_of,modified internal rate of return (MIRR) -> cash inflows of a project equal to present value of cash outflows of the project,,,,NONE,False
+estimates,cash forecast -> firm’s future cash inflows and outflows; dividend discount model (DDM) -> price of a company’s stock; forecast -> future performance,,,,NONE,False
+examines,sensitivity analysis -> output variable changes in response to a change in an input variable,,,,NONE,False
+exchanges,"marking to market -> daily; swap -> something, such as obligations to make specified payment streams",,,,NONE,False
+exchanges_for,marking to market -> futures contract,,,,NONE,False
+exercisable_at,call option -> specified price; option -> specified price; put option -> specified price,,,,NONE,False
+exercisable_by,American option -> holder,,,,NONE,False
+exercisable_on,call option -> some future date; European option -> expiration date only; option -> some future date,,,,NONE,False
+exhibits,limited liability partnership (LLP) -> partnerships and corporations,,,,NONE,False
+exhibits_fit,linear correlation -> approximate straight-line,,,,NONE,False
+expected_to_be_converted_to,current assets -> cash,,,,NONE,False
+expected_to_continue,constant perpetuity -> indefinitely; growing perpetuity -> indefinitely; perpetuity -> indefinitely,,,,NONE,False
+expected_to_generate,capital investment -> substantial cash inflow in return,P1542,has effect,True,ANALOGOUS,True
+expenses_on,capitalize -> income statement,,,,NONE,False
+expenses_over,capitalize -> asset’s economic life,,,,NONE,False
+expenses_requirement,accrual-basis accounting -> not necessarily when paid; accrual basis -> not necessarily when paid,,,,NONE,False
+focuses_on,"Bureau of Labor Statistics -> labor, statistics, and economics; business finance -> managers; macroeconomics -> unemployment",P1269,facet of,False,ANALOGOUS,False
+generated_using,prediction -> linear model,,,,NONE,False
+generates,method of least squares -> linear equation,P1056,product or material produced,False,ANALOGOUS,True
+governed_by,"domestic corporation (in state) -> country or state in which it does business; Electronic Data Gathering, Analysis, and Retrieval system (EDGAR) -> securities act of 1933; Electronic Data Gathering, Analysis, and Retrieval system (EDGAR) -> securities exchange act of 1934",,,,NONE,False
+governs,financial industry regulatory authority (FINRA) -> registered brokers and broker-dealer firms,,,,NONE,False
+granted_to,bill of lading -> seller; cash discount -> customer who has purchased goods or services on account (credit); trade credit -> business,,,,NONE,False
+grants_right_to,option -> purchase or sell an asset; option -> purchase or sell an asset; stock corporation -> certain ownership rights to shape company policies,,,,NONE,False
+guaranteed_by,mortgage bond -> real asset; par value -> bond issuers,,,,NONE,False
+guarantees_payments_to,letter of credit -> specified entity (such as a supplier),,,,NONE,False
+guarantees_payments_under,letter of credit -> specified conditions,,,,NONE,False
+has_amount_of_investment,underinvested -> insufficient,,,,NONE,False
+has_authority_level,principal -> highest,,,,NONE,False
+has_balance_used_to,contra-asset -> offset (reduce) its related asset,P1542,has effect,True,ANALOGOUS,True
+has_calculation_method,interest -> typically calculated from an annualized rate,,,,NONE,False
+has_characteristic,common-size -> percentage of a base amount; expansion -> growing; levered equity -> has debt outstanding,,,,NONE,False
+has_collection_status,allowance for doubtful accounts -> will not be collected,,,,NONE,False
+has_concern_in,financial distress -> meeting debt obligations; stakeholder -> business,,,,NONE,False
+has_condition,demand -> ceteris paribus; preferred stock -> if declared by the corporation; risk-free rate -> no risk of not receiving the principal and interest as promised,,,,NONE,False
+has_consequence,credit risk -> pay interest on schedule; credit risk -> repay principal on schedule; default risk -> payments,P1542,has effect,True,EXACT,True
+has_consumption_use_or_expiration_timeframe,"current assets -> business operations; current assets -> within one year or the business’s operating cycle, whichever is shorter",,,,NONE,False
+has_context,"book value per share -> per-share basis; business finance -> risky environment; long-term asset -> normal, ongoing course of business",,,,NONE,False
+has_conversion_timeframe,current assets -> one year or less; liquid asset -> within a short period of time,,,,NONE,False
+has_convertibility,liquid asset -> readily converted into cash; marketable securities -> to cash quickly,,,,NONE,False
+has_convertibility_period,gross working capital -> within a period of 12 months,,,,NONE,False
+has_cost_level,efficient markets -> minimal; stockout costs -> lost revenue,,,,NONE,False
+has_coverage_amount,"Securities Investor Protection Corporation (SIPC) -> up to $500,000",,,,NONE,False
+has_credit_quality,yield curve -> equal,,,,NONE,False
+has_credit_rating,junk bonds -> low,,,,NONE,False
+has_debt_outstanding,unlevered equity -> no,,,,NONE,False
+has_degree_of_difference,outliers -> significant,,,,NONE,False
+has_determination_method,spot rate -> market-determined,,,,NONE,False
+has_direction,annuity -> received or paid,,,,NONE,False
+has_direction_of_flow,cash flow -> into and out of a business,,,,NONE,False
+has_earning_status,uninvested -> not earning interest or any return,,,,NONE,False
+has_expectation,investor -> receiving financial returns; public benefit corporation -> company to make a profit; public benefit corporation -> return some of that money to them in the form of dividends,,,,NONE,False
+has_expected_period,noncurrent liabilities -> more than one year,,,,NONE,False
+has_greater_value_than,time value of money (TMV) -> exact same amount of money at some point in the future,,,,NONE,False
+has_growth_mechanism,"fixed-income securities -> fixed, periodic interest payments; fixed-income securities -> eventual return of principal at maturity; growing perpetuity -> usually by a fixed percentage",,,,NONE,False
+has_growth_of_amount,growing perpetuity -> in the future,,,,NONE,False
+has_growth_rate,future value -> certain rate of return,,,,NONE,False
+has_impact_type,political risk -> disrupting,,,,NONE,True
+has_interest_in,stakeholder -> business,,,,NONE,False
+has_interest_rate_type,floating-rate bonds -> variable,,,,NONE,False
+has_investment_earning_rate_of_interest,underinvested -> insufficient,,,,NONE,False
+has_legal_distinction_between_owner_and_business,sole proprietor (and sole proprietorship) -> no,,,,NONE,False
+has_level_of_analysis,microeconomics -> individual,,,,NONE,False
+has_liability_of_partners,limited liability partnership (LLP) -> limited for some or all partners; partnership -> equally,,,,NONE,False
+has_liability_type,limited liability corporation (LLC) -> limited,,,,NONE,False
+has_likelihood_of_staying_in_business,solvency -> high in the future,,,,NONE,False
+has_liquidity,marketable securities -> liquid,,,,NONE,False
+has_loan_term,London Interbank Offered Rate (LIBOR) -> short-term,,,,NONE,False
+has_location,compensating balance -> bank account; diversification -> in a portfolio; mode -> in a data set,P131,located in the administrative territorial entity,True,ANALOGOUS,False
+has_location_of_production,gross domestic product (GDP) -> within an economy,P740,location of formation,True,ANALOGOUS,False
+has_market,London Interbank Offered Rate (LIBOR) -> international interbank market,,,,NONE,False
+has_market_basket_contents,consumer price index (CPI) -> goods that a typical urban family of four might purchase,,,,NONE,False
+has_market_location,discount bond -> secondary market,,,,NONE,False
+has_maturities_of,"Treasury notes (T-notes) -> 2, 3, 5, 7, or 10 years",,,,NONE,False
+has_maturity,marketable securities -> in a year or less; US Treasury bills (T-bills) -> one year or less,,,,NONE,False
+has_maturity_date,yield curve -> differing,,,,NONE,False
+has_maturity_of,Treasury bonds -> greater than 10 years; Treasury notes -> 2 to 10 years,,,,NONE,False
+has_maturity_period,Treasury bills (T-bills) -> one year or less,,,,NONE,False
+has_mechanism,natural hedge -> company activity that would increase in value at the same time,,,,NONE,False
+has_method,floor planning -> proceeds from the sale of inventory; speculating -> betting on the uncertain future; structured settlements -> installments,,,,NONE,False
+has_nature,global markets -> multinational; intangible assets -> not physical; stock value -> fundamental,,,,NONE,False
+has_nature_of_flow,cash flow -> actual,,,,NONE,False
+has_number_of_shareholders,close (closely held) corporation -> limited,,,,NONE,False
+has_owners_represented_by,non-stock corporation -> no shares of stock,,,,NONE,False
+has_period,demand -> given; global markets -> several different countries or jurisdictions; gross domestic product (GDP) -> during a year,,,,NONE,False
+has_position_importance,principal -> most important,,,,NONE,False
+has_price_characteristic,efficient markets -> current; efficient markets -> fair; futures contract -> locked in today,,,,NONE,False
+has_priority_over,preferred stock -> holders of that corporation’s common stock,,,,NONE,False
+has_property,expected value -> associated probabilities; money market investments -> t-bills; money market investments -> federal notes,,,,NONE,False
+has_purpose,articles of incorporation -> to legally document the creation of a corporation; conference call -> relay company information; dealers -> for easy purchase and sale,,,,NONE,False
+has_purpose_of_protecting,bankruptcies -> creditor collection efforts; Securities and Exchange Commission (SEC) -> investors and the national banking system,,,,NONE,True
+has_requirement,accrual-basis accounting -> not necessarily received; accrual basis -> not necessarily received,,,,NONE,False
+has_risk_level,junk bonds -> riskier than other bonds; money market investments -> low,P5642,risk factor,False,ANALOGOUS,True
+has_role,Bureau of Labor Statistics -> primary fact-finding agency for the us government,,,,NONE,False
+has_scope,money supply -> within an economy,,,,NONE,False
+has_security,commercial paper (CP) -> unsecured,,,,NONE,False
+has_state,secondary markets -> already owned,,,,NONE,False
+has_status,discount bond -> currently trading for less than its par value; premium bond -> above its par value in the secondary market; uninvested -> being held in reserve,,,,NONE,False
+has_structure,bivariate data -> each value of one variable is paired with a value of a second variable,,,,NONE,False
+has_supervision_manner,board of directors (BOD) -> jointly,,,,NONE,False
+has_tax_advantages_relative_to,municipal bonds (munis) -> corporate bonds,,,,NONE,False
+has_tax_requirement,S corporation -> does not require corporation to pay income taxes,,,,NONE,False
+has_taxation_type,C corporation -> separate from the entity; limited liability corporation (LLC) -> pass-through,,,,NONE,False
+has_term,commercial paper (CP) -> short-term; marketable securities -> short-term,,,,NONE,False
+has_timeframe,money supply -> at any single point in time,P585,point in time,True,ANALOGOUS,False
+has_timing,accrual-basis accounting -> legally incurred; accrual basis -> legally incurred; American option -> at any time up to and including the exercise date,P585,point in time,True,ANALOGOUS,False
+has_willingness_to_purchase,demand -> consumers,,,,NONE,False
+heads_agencies_responsible_for,secretaries of state -> chartering of businesses (usually including partnerships and corporations) that wish to operate within their state; secretaries of state -> maintaining all records on business activities within the state (in most states),P108,employer,True,ANALOGOUS,False
+helps_analysts,ratios -> gain insight and meaning,P737,influenced by,True,ANALOGOUS,True
+helps_interpret,data visualization -> patterns and trends in a data set,P737,influenced by,True,ANALOGOUS,True
+holds,dealers -> portfolio of the underlying asset,P1830,owner of,False,ANALOGOUS,False
+horizontal_axis_shows,histogram -> class intervals,,,,NONE,False
+impacted_by,economic exposure -> change in exchange rates,P737,influenced by,True,EXACT,True
+impacts,economic exposure -> business's sales and number of customers; economic risk -> number of customers a business has; economic risk -> business sales,P1542,has effect,True,EXACT,True
+impacts_value_of,translation risk -> items on a company’s financial statements,P1542,has effect,True,SPECIALIZATION,True
+indicates,"balance sheet -> firm’s asset, liability, and equity account balances; bond ratings -> overall credit quality; credit rating -> business’s creditworthiness",,,,NONE,False
+indicates_condition,credit terms -> when; credit terms -> true; credit terms -> true,,,,NONE,False
+indicates_duration,credit period -> must pay invoice,P580,start time,True,ANALOGOUS,False
+indicates_range,interquartile range (IQR) -> middle half of data; interquartile range (IQR) -> middle 50% of data,,,,NONE,False
+involves_action_by,call risk -> redeem a callable bond,P710,participant,True,ANALOGOUS,False
+involves_issuer_of,default risk -> financial security,,,,NONE,False
+involves_loss_of,financial risk -> money or purchasing power,,,,NONE,True
+involves_number_of_parties,"conference call -> all interested parties, including institutional and individual investors, as well as buy-and-sell side analysts; partnership -> two or more",,,,NONE,False
+involves_selling,factoring -> accounts receivables,,,,NONE,False
+involves_transfer_of,liabilities -> assets or services,,,,NONE,False
+involves_using_as_security,factoring -> accounts receivables,,,,NONE,False
+is_a,amortization -> intangible assets; bill of lading -> receipt; subscriber -> legal document,P31,instance of,True,EXACT,False
+is_a_form_of,special purpose acquisition companies (SPACs) -> ipo,P279,subclass of,True,EXACT,False
+is_action,investor -> invests capital,,,,NONE,False
+is_activity,"money market mutual funds -> purchase and then manage short-term, low-risk, liquid financial portfolios of securities",,,,NONE,False
+is_below,junk bonds -> investment grade,,,,NONE,False
+is_calculated_as,"dividend yield -> percentage; geometric mean -> 1n, where n is the number of data values; method of least squares -> best fit to points on scatter plot",,,,NONE,False
+is_common_in,letter of credit -> international trade transactions,,,,NONE,False
+is_current,spot rate -> true,,,,NONE,False
+is_earned_when,conversion ratio -> each convertible bond that is converted; net income -> greater than expenses and losses; revenue recognition -> product or service has been provided,,,,NONE,False
+is_equal_to,capital asset pricing model (CAPM) -> risk-free rate plus a premium for the amount of risk taken; equilibrium price -> quantity supplied,,,,NONE,False
+is_evidence_of,bill of lading -> goods have been shipped to the buyer; letter of credit -> guarantee for payments,,,,NONE,False
+is_example_of,"amortization -> patents or copyrights; cash budget -> monthly, quarterly, or annually; financial intermediary -> taking demand deposits to create mortgage loans",P31,instance of,True,EXACT,False
+is_excess_of,cash deficit -> cash outflows over cash inflows; cash surplus -> cash inflows over cash outflows,,,,NONE,False
+is_expected,yield to maturity (YTM) -> on a bond,,,,NONE,False
+is_expressed_as,nominal interest rate -> quoted or stated,,,,NONE,False
+is_expressed_in_terms_of,exchange rate -> another currency,,,,NONE,False
+is_in,median -> ordered data set; owner’s equity -> assets of an entity,P361,part of,True,ANALOGOUS,False
+is_in_charge_of,comptroller -> financial reporting; comptroller -> oversight of accounting activities necessary to develop financial reports,,,,NONE,False
+is_located_in,Federal Reserve -> united states; NASDAQ (National Association of Securities Dealers Automated Quotations) -> new york city; NYSE (New York Stock Exchange) -> new york city,P131,located in the administrative territorial entity,True,EXACT,False
+is_located_on,credit -> right side of an account,P706,located in/on physical feature,True,ANALOGOUS,False
+is_located_on_side,debit -> left,,,,NONE,False
+is_multiplied_by,coupon rate -> face value of a bond,,,,NONE,False
+is_net_of,after-tax cost of debt -> taxes; owner’s equity -> deducting its liabilities,,,,NONE,False
+is_of,bond price -> future cash stream generated by a bond; exchange rate -> one currency; expected value -> values of a variable,,,,NONE,False
+is_part_of,x-axis -> rectangular coordinate system; y-axis -> rectangular coordinate system,P361,part of,True,EXACT,False
+is_seeking,pro forma -> forward; unemployed -> job,,,,NONE,False
+is_sum_of,bond price -> present values of all likely coupon payments and the present value of the par value at maturity,,,,NONE,False
+is_type_of_agency,Business Cycle Dating Committee -> us government,P31,instance of,True,SPECIALIZATION,False
+is_value_of,future value (FV) -> current amount,,,,NONE,False
+is_working,unemployed -> no,,,,NONE,False
+issued_at,zero-coupon bonds -> deep discount from face value,,,,NONE,False
+issued_by,commercial paper (CP) -> firms; debenture -> corporation; floor planning -> financial institution,P176,manufacturer,True,ANALOGOUS,False
+issued_in_terms_of,"US Treasury note rate -> two, three, five, seven, and 10 years",,,,NONE,False
+issued_to_pay_for,savings bonds -> certain public or government programs,,,,NONE,False
+issuer,savings bonds -> us government,P176,manufacturer,True,ANALOGOUS,False
+issues,stock corporation -> shares of stock,P1056,product or material produced,False,EXACT,False
+issues_to,stock corporation -> shareholders (also known as stockholders),,,,NONE,False
+legally_owns,shareholder (stockholder) -> one or more shares of the share capital,P1830,owner of,False,EXACT,False
+lending_party,London Interbank Offered Rate (LIBOR) -> major global banks,,,,NONE,False
+lists,statement of cash flows -> cash inflows and cash outflows,,,,NONE,False
+made_at,single payment or lump sum -> one time,P585,point in time,True,ANALOGOUS,False
+made_during_period,quick payment -> falls within the discount period,P580,start time,True,ANALOGOUS,False
+made_on,quick payment -> account payable,,,,NONE,False
+maintains,Business Cycle Dating Committee -> chronology of us business cycles,,,,NONE,False
+maintains_inventory_level,just-in-time inventory -> as little as possible,,,,NONE,False
+makes,Treasury bonds -> periodic interest payments; Treasury bonds -> principal payment at maturity; Treasury notes -> periodic interest payment,P1056,product or material produced,False,ANALOGOUS,False
+makes_election_to_be_taxed_under,S corporation -> subchapter s of chapter 1 of the internal revenue code,,,,NONE,False
+makes_final_decision_in_matters_of,chief financial officer (CFO) -> capital budgeting,,,,NONE,False
+manages_type_of_assets,working capital management -> short-term,,,,NONE,False
+manages_type_of_liabilities,working capital management -> short-term,,,,NONE,False
+marketability_implies,liquidity risk -> can be bought or sold quickly enough to prevent or minimize a loss; marketable securities -> bought or sold on a public exchange (market),,,,NONE,False
+matches,expense recognition -> expenses with associated revenues,,,,NONE,False
+may_derive_from,discount rate -> stated contract rates; discount rate -> costs to borrow; discount rate -> expected rates of return on investments,P828,has cause,True,ANALOGOUS,True
+means,ceteris paribus -> holding all other things constant,,,,NONE,False
+means_of_financing_for,commercial paper (CP) -> inventory or payables,,,,NONE,False
+measured_in,cash cycle or cash conversion cycle -> days,,,,NONE,False
+measures,accounts receivable turnover ratio -> how many times in a period a company will collect cash from accounts receivable; correlation coefficient -> strength and direction; debt-to-assets ratio -> portion of debt used by a company relative to the amount of assets,,,,NONE,False
+measures_association_between,correlation -> two numeric variables,,,,NONE,False
+measures_likelihood_of_change_in,duration -> bond prices,,,,NONE,False
+measures_management_effectiveness_of,efficiency ratios -> assets,,,,NONE,False
+measures_movement_relative_to,beta -> market,,,,NONE,False
+measures_number_of_days,days’ sales in inventory -> it takes a company,,,,NONE,False
+measures_portion_of,debt-to-equity ratio -> debt used by a company; earnings per share (EPS) -> corporation’s profit; empirical rule -> data values,,,,NONE,False
+measures_prices_for,producer price index (PPI) -> supplies and raw materials,,,,NONE,False
+measures_prices_paid_by,producer price index (PPI) -> producers of goods and services,,,,NONE,False
+measures_rate_of_increase_of,growth rate -> dollar amount of dividends paid on a specific stock holding,,,,NONE,False
+measures_resource_utilization_effectiveness_of,efficiency ratios -> assets,,,,NONE,False
+measures_time_for,discounted payback period -> present value of future cash inflows to equal initial cost,,,,NONE,False
+measures_time_to_turn_into,days’ sales in inventory -> inventory into sales,,,,NONE,False
+measures_value_of,price-to-cash-flow (P/CF) ratio -> stock's price,,,,NONE,False
+members_are_equivalent_to,non-stock corporation -> stockholders in a stock corporation,,,,NONE,False
+members_have,non-stock corporation -> right to vote,,,,NONE,False
+memorandum_of_association_defines,subscriber -> company's relationship with shareholders,,,,NONE,False
+merges_with,vertical integration -> its supplier,,,,NONE,False
+method_of_raising_capital,seasoned equity offering (SEO) -> offering additional shares of stock to the public,,,,NONE,False
+minimizes,method of least squares -> differences between predicted and observed values for y; noncash expenses -> net income,,,,NONE,True
+most_commonly_between,agency theory -> shareholders (principals) and company executives (agents),,,,NONE,False
+must_be_deposited_by,compensating balance -> business,,,,NONE,False
+must_be_maintained_by,compensating balance -> business,,,,NONE,False
+must_be_posted_to_guarantee,margin -> trader will honor a futures contract,,,,NONE,False
+must_be_provided_to,annual report -> shareholders; quarterly report -> shareholders,,,,NONE,False
+needed_to_meet,"working capital -> daily, weekly, and monthly operating cash flow needs",,,,NONE,False
+not_paid_as,structured settlements -> lump sum cash amount,,,,NONE,False
+occurs_at,balance sheet -> given point in time; equilibrium -> demand and supply curves for a good or service; future value -> point in the future,P585,point in time,True,ANALOGOUS,False
+occurs_between,compounding period -> points in time when interest is paid or added to the principal; interest income -> issue date and date of maturity,P585,point in time,True,ANALOGOUS,False
+occurs_during,inventory turnover -> period; supply -> given time period,P580,start time,True,ANALOGOUS,False
+occurs_in_period,expense recognition -> in which the revenues were generated,P580,start time,True,ANALOGOUS,False
+occurs_on,"financial risk -> investment, business transaction, or venture; futures contract -> some future date",P585,point in time,True,ANALOGOUS,False
+occurs_when,effective interest rate -> compounding occurs multiple times within a year,,,,NONE,False
+occurs_within,growth rate -> specific time period,P580,start time,True,ANALOGOUS,False
+of_entity_type,investor -> firm or mutual fund; shareholder (stockholder) -> public or private corporation,P31,instance of,True,EXACT,False
+offered_to,initial public offering (IPO) -> public,,,,NONE,False
+offers,zero-coupon bonds -> no interest or coupon payments,P1056,product or material produced,False,ANALOGOUS,False
+offset_by,cash cycle or cash conversion cycle -> time it takes to pay suppliers (payables deferral period); free cash flow -> expected capital expenditures,P1479,has contributing factor,True,ANALOGOUS,True
+offsets_risk_of,natural hedge -> decrease in value,P5642,risk factor,False,ANALOGOUS,True
+often_accepts,financial intermediary -> one form of financial asset,,,,NONE,False
+often_trade,negotiable certificate of deposit -> prior to maturity,,,,NONE,False
+operated_by,sole proprietor (and sole proprietorship) -> single individual; sole proprietor (and sole proprietorship) -> single individual,P108,employer,True,ANALOGOUS,False
+operates_in,financial industry regulatory authority (FINRA) -> united states,P131,located in the administrative territorial entity,True,ANALOGOUS,False
+opposed_to,single payment or lump sum -> number of smaller payments or deposits made in installments,,,,NONE,False
+organizes_by,accounts receivable aging schedule -> age of the account,,,,NONE,False
+oversees,financial markets and institutions -> our financial system,,,,NONE,False
+owned_by,public benefit corporation -> shareholders,P127,owned by,False,EXACT,False
+owned_or_controlled_by,"assets -> company, individual, or other entity",P127,owned by,False,SPECIALIZATION,False
+owner_has,put option -> no obligation,,,,NONE,False
+owner_is_known_as,sole proprietor (and sole proprietorship) -> sole trader,,,,NONE,False
+paid_at,par value -> maturity,P585,point in time,True,ANALOGOUS,False
+paid_by,coupon payment -> bond issuer; dividend -> company; exercise price (strike price) -> option holder,,,,NONE,False
+paid_for,exercise price (strike price) -> underlying asset; premium -> option contract; strike price (exercise price) -> underlying asset,,,,NONE,False
+paid_out_of,dividend -> its profits or reserves,,,,NONE,False
+paid_regularly,dividend -> typically quarterly,,,,NONE,False
+paid_to,coupon payment -> bondholder; dividend -> its shareholders; interest -> lender,,,,NONE,False
+paid_when,exercise price (strike price) -> exercising an option; strike price (exercise price) -> exercising the option,P585,point in time,True,ANALOGOUS,False
+payments_are_specified_in,default risk -> terms of a financial contract,,,,NONE,False
+payments_include,loan amortization -> both interest payment and repayment of the principal,P527,has part,True,ANALOGOUS,False
+performs_function,rating agencies (bond rating services) -> credit risk evaluation,,,,NONE,False
+period_is_usually,accounts receivable turnover ratio -> year,,,,NONE,False
+pertains_to,annual meeting -> corporation; operating activities -> ongoing day-to-day operations; term risk -> potentially earning lower returns,P1269,facet of,False,EXACT,False
+pertains_to_collectibility_of,allowance for doubtful accounts -> accounts receivable,P1269,facet of,False,SPECIALIZATION,False
+prepared_in,subscriber -> formation and registration process of a company,P571,inception,True,ANALOGOUS,False
+produces,convertible bonds -> interest payments,P1056,product or material produced,False,EXACT,False
+recorded_when,accrual-basis accounting -> earned; accrual basis -> earned,P585,point in time,True,ANALOGOUS,False
+records_transactions_when,capitalize -> balance sheet,,,,NONE,False
+removes_from,core inflation index -> food and energy prices; core inflation index -> cpi,,,,NONE,True
+replaces,lump sum -> series of future payments,,,,NONE,False
+reported_on,financing activities -> statement of cash flows; investing activities -> statement of cash flows; operating activities -> statement of cash flows,,,,NONE,False
+reports_difference_between,statement of stockholders’ equity -> beginning and ending balances of each stockholders’ equity account,,,,NONE,False
+represents,cash ratio -> firm’s cash and cash equivalents divided by current liabilities; common stock -> partial ownership of a corporation; effective interest rate -> true cost of borrowing,,,,NONE,False
+represents_translation_of,profit margin -> sales revenue into income,,,,NONE,False
+required_for,compensating balance -> obtaining a loan,,,,NONE,False
+requires,capital investment -> large up-front investment,,,,NONE,False
+requires_equality_of,double-entry accounting -> sum of debits and sum of credits,,,,NONE,False
+requires_revenue_recognition_when,revenue recognition -> it is earned,,,,NONE,False
+responsible_for,Federal Reserve System (the Fed) -> administering fiscal policy for the country; treasurer -> monitoring cash flow at a firm,,,,NONE,False
+returned_to,dividends -> owners of a corporation,,,,NONE,False
+reward_for,market risk premium -> taking on the average amount of market risk; risk-free rate -> lending money,,,,NONE,False
+security_for,factoring -> loan from a financial institution,,,,NONE,False
+sells_at,deep discount bonds -> significantly lower values than their par values,,,,NONE,False
+sells_type_of_option,option writer -> call or put option,,,,NONE,False
+serves_as,Bureau of Labor Statistics -> principal agency of the us federal statistical system,P31,instance of,True,ANALOGOUS,False
+serves_as_intermediary_to,financial intermediary -> enable easier and more efficient exchanges among transacting parties,,,,NONE,False
+set_by,Federal Reserve funds rate (federal funds rate) -> federal reserve,,,,NONE,False
+sets_policy_for,chief financial officer (CFO) -> working capital management,,,,NONE,False
+shows_amounts_owed_by,accounts receivable aging schedule -> customers,,,,NONE,False
+shows_dividend_payout_amount,dividend yield -> each year relative to its stock price,,,,NONE,False
+shows_estimation_of,"cash budget -> cash inflows, outflows, and cash balances",,,,NONE,False
+shows_values_of,scatter plot (scatter diagram) -> independent variable plotted on the x-axis; scatter plot (scatter diagram) -> dependent variable plotted on the y-axis,,,,NONE,False
+sold_to,factoring -> financial institution,,,,NONE,False
+source_of_money,payback period -> investment,,,,NONE,False
+states_total_value_of_levered_company_is,trade-off theory -> value of the firm without leverage + value of the interest tax shield - financial distress costs,,,,NONE,False
+studies,financial markets and institutions -> firms and regulatory agencies,P2579,studied by,True,EXACT,False
+summarized_based_on,bar graph -> frequency or relative frequency,,,,NONE,False
+sums,bond returns -> periodic interest payments and the change in bond price in a given period; stock returns -> periodic dividend payments plus the change in stock price in a given period,,,,NONE,False
+supervises_activities_of,board of directors (BOD) -> organization,,,,NONE,False
+targeted_by,federal funds rate -> federal reserve,,,,NONE,False
+taxes_owners_as,S corporation -> individuals,,,,NONE,False
+time_displayed_on,time series graph -> horizontal axis,,,,NONE,False
+time_to_collect_payment_from,operating cycle -> customer,,,,NONE,False
+time_to_use_cash_to_provide,operating cycle -> product or service,,,,NONE,False
+tracked_by,GDP deflator -> bureau of economic analysis,,,,NONE,False
+trades,secondary market -> used securities,,,,NONE,False
+transacted_by,Federal Reserve funds rate (federal funds rate) -> commercial banks; secondary markets -> investors,,,,NONE,False
+transfers_to,liabilities -> other entities,,,,NONE,False
+used_as_benchmark_for,prime rate -> home equity lines of credit and credit card rates,,,,NONE,False
+used_by,capital employed -> firm or on a project; capital structure -> firm; cash ratio -> investors and lenders,P1535,used by,True,EXACT,False
+used_for,capital employed -> acquisition of profits; current ratio -> determine a company’s liquidity; investments -> create individual and institutional portfolios,,,,NONE,False
+used_for_duration,long-term asset -> more than one year; noncurrent assets -> more than one year,,,,NONE,False
+used_in,discount rate -> time value of money calculations; financial leverage -> company's capital structure; ratios -> formulas,,,,NONE,False
+used_to_assess,cash ratio -> organization’s liquidity; market value ratios -> firm’s overall market price,,,,NONE,False
+used_to_determine,coupon rate -> annual interest or coupon payment amounts; direct method -> net cash flows from operating activities; discount rate -> present value of future cash inflows,,,,NONE,True
+used_to_explain,agency theory -> issues in the relationship between business principals and their agents,,,,NONE,False
+used_to_finance,capital market -> long-term projects for organizations,,,,NONE,False
+used_to_model,normal distribution -> many measurements,,,,NONE,False
+used_to_resolve,agency theory -> issues in the relationship between business principals and their agents,,,,NONE,False
+used_to_show,time series graph -> measurement data plotted versus time,P1056,product or material produced,False,ANALOGOUS,False
+useful_for_calculating_probabilities_within,exponential distribution -> time between events,P1535,used by,True,ANALOGOUS,False
+uses,data visualization -> graphical displays; quick ratio -> most liquid assets,P1535,used by,True,EXACT,False
+uses_metrics_from,comparable company analysis (comps) -> other businesses,P1535,used by,True,SPECIALIZATION,False
+uses_rate,present value (PV) -> known discount or interest rate,P1535,used by,True,SPECIALIZATION,False
+usually_compared_to_market_price,economic value -> greater than or equal to the current market price,,,,NONE,False
+usually_compared_to_present_value,economic value -> greater than or equal to the present value of the asset,,,,NONE,False
+varies_by,US Treasury note rate -> length of time,,,,NONE,False
+vertical_axis_shows,histogram -> frequency or relative frequency,P1056,product or material produced,False,ANALOGOUS,False
+weighted_by,weighted average cost of capital (WACC) -> fractions of the firm’s value that correspond to debt and equity,,,,NONE,False
+will_grow_to,future value (FV) -> given interest rate; future value (FV) -> given period of time,P1542,has effect,True,ANALOGOUS,True
