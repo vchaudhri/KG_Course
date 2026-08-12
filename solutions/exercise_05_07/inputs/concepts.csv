@@ -1,0 +1,28 @@
+concept_id,canonical_label,category,first_seen,last_seen,n_quarters_present,n_mentions
+C01,Foreign exchange (FX) translation effects,Macro/FX,FY24Q1,FY26Q2,10,11
+C10,Firefly / Creative GenAI monetization & ARR growth,AI & Product Innovation,FY24Q1,FY26Q2,10,26
+C11,GenStudio / AEP enterprise AI-driven growth (Digital Experience),AI & Product Innovation,FY24Q1,FY26Q2,10,13
+C06,Freemium/MAU-first strategy trade-off (dampens near-term ARR),Company Strategy / Pricing,FY24Q1,FY26Q2,9,12
+C04,"Enterprise large-deal bookings, retention & top-account growth",Enterprise / Demand Environment,FY24Q1,FY26Q2,8,10
+C05,"Creative Cloud pricing & packaging (Pro tier, value-based pricing)",Pricing,FY24Q1,FY25Q4,7,9
+C02,Macroeconomic uncertainty & cyclicality,Macro/Demand,FY24Q1,FY25Q4,6,8
+C08,Acrobat AI Assistant & Document Cloud AI-driven growth,AI & Product Innovation,FY24Q2,FY26Q1,6,6
+C21,Emerging markets demand strength,Demand Environment,FY24Q1,FY25Q3,6,7
+C03,AI/GenAI strategic opportunity & AI-influenced ARR (company-wide),AI & Product Innovation,FY25Q2,FY26Q2,5,6
+C18,Competitive risk from AI/ad-platform ecosystem players,Competitive,FY24Q3,FY26Q2,5,6
+C22,"Investment spend & cost pressure on margins (AI infrastructure, marketing/events)",Cost Structure / Margin,FY24Q1,FY26Q2,5,5
+C12,Adobe Express AI-first growth,AI & Product Innovation,FY24Q1,FY25Q3,4,5
+C20,"Seasonal & calendar effects (holiday, back-to-school, Cyber Monday shift)",Seasonality,FY24Q2,FY26Q2,4,6
+C24,Analyst concern: growth deceleration / guidance optics,Company-wide / Guidance,FY24Q1,FY25Q4,4,4
+C09,Core product demand & go-to-market execution (non-AI-specific),Execution/Talent,FY24Q1,FY24Q3,3,5
+C14,Semrush acquisition (pending → closed),M&A / Corporate Action,FY25Q4,FY26Q2,3,3
+C19,IP / copyright & commercial-safety concerns around AI,Competitive / Legal-Regulatory,FY24Q4,FY25Q3,3,3
+C28,Debate: AI's net effect on Adobe's addressable market & pricing model,Competitive / Industry Thesis,FY24Q1,FY25Q3,3,5
+C27,Rise of LLM/agentic search & generative-engine-optimization (GEO) opportunity,Demand Environment / AI,FY25Q3,FY25Q4,2,3
+C07a,Legacy stock content business decline,Legacy / Publishing & Advertising,FY26Q1,FY26Q1,1,1
+C07b,Publishing & Advertising legacy business decline,Legacy / Publishing & Advertising,FY26Q2,FY26Q2,1,1
+C13,Figma termination payment,M&A / Corporate Action,FY24Q1,FY24Q1,1,1
+C15,Leadership transition (CFO departure / CEO search),Execution/Talent,FY26Q2,FY26Q2,1,1
+C23,Share repurchase / capital allocation,Company-wide / Capital Allocation,FY25Q1,FY25Q1,1,1
+C25,Reporting / business-mix reclassification effects,Company-wide / Reporting,FY24Q4,FY24Q4,1,2
+C26,Execution: ARR-to-revenue linearity,Execution/Talent,FY26Q1,FY26Q1,1,1

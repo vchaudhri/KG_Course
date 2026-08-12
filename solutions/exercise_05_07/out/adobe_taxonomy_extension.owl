@@ -1,0 +1,214 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://example.org/genus-kg#"
+     xml:base="http://example.org/genus-kg"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="http://example.org/genus-kg"/>
+
+    <owl:AnnotationProperty rdf:about="http://example.org/genus-kg#originalMention"/>
+
+    <owl:Class rdf:about="http://example.org/genus-kg#c01_foreign_exchange_fx_translation_effects">
+        <rdfs:comment>impacts_value_of: reported financial results when converting foreign currency denominated operations into the reporting currency</rdfs:comment>
+        <rdfs:label>c01 foreign exchange fx translation effects</rdfs:label>
+        <originalMention>Foreign exchange (FX) translation effects</originalMention>
+        <rdfs:subClassOf rdf:resource="http://example.org/genus-kg#translation_risk"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://example.org/genus-kg#c02_macroeconomic_uncertainty_cyclicality">
+        <rdfs:comment>impacts: a company's revenue and guidance due to general economic conditions and business cycles</rdfs:comment>
+        <rdfs:label>c02 macroeconomic uncertainty cyclicality</rdfs:label>
+        <originalMention>Macroeconomic uncertainty &amp; cyclicality</originalMention>
+        <rdfs:subClassOf rdf:resource="http://example.org/genus-kg#systematic_risk"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://example.org/genus-kg#c03_ai_genai_strategic_opportunity_ai_influenced_arr_company_wide">
+        <rdfs:comment>generates: annual recurring revenue and strategic growth opportunities through artificial intelligence and generative AI innovation</rdfs:comment>
+        <rdfs:label>c03 ai genai strategic opportunity ai influenced arr company wide</rdfs:label>
+        <originalMention>AI/GenAI strategic opportunity &amp; AI-influenced ARR (company-wide)</originalMention>
+        <rdfs:subClassOf rdf:resource="http://example.org/genus-kg#intangible_assets"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://example.org/genus-kg#c04_enterprise_large_deal_bookings_retention_top_account_growth">
+        <rdfs:comment>arises_from: large enterprise customer bookings, retention, and growth in top accounts</rdfs:comment>
+        <rdfs:label>c04 enterprise large deal bookings retention top account growth</rdfs:label>
+        <originalMention>Enterprise large-deal bookings, retention &amp; top-account growth</originalMention>
+        <rdfs:subClassOf rdf:resource="http://example.org/genus-kg#revenue"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://example.org/genus-kg#c05_creative_cloud_pricing_packaging_pro_tier_value_based_pricing">
+        <rdfs:comment>determines: the amount of revenue generated from Adobe's Creative Cloud services through specific price points and product bundles</rdfs:comment>
+        <rdfs:label>c05 creative cloud pricing packaging pro tier value based pricing</rdfs:label>
+        <originalMention>Creative Cloud pricing &amp; packaging (Pro tier, value-based pricing)</originalMention>
+        <rdfs:subClassOf rdf:resource="http://example.org/genus-kg#revenue"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://example.org/genus-kg#c06_freemium_mau_first_strategy_trade_off_dampens_near_term_arr">
+        <rdfs:comment>arises_from: a deliberate management choice to prioritize free/low-cost user acquisition (MAU growth, funnel-building) over near-term ARR -- made under the company's own control rather than imposed externally</rdfs:comment>
+        <rdfs:label>c06 freemium mau first strategy trade off dampens near term arr</rdfs:label>
+        <originalMention>Freemium/MAU-first strategy trade-off (dampens near-term ARR)</originalMention>
+        <rdfs:subClassOf rdf:resource="http://example.org/genus-kg#strategic_tradeoff"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://example.org/genus-kg#c07a_legacy_stock_content_business_decline">
+        <rdfs:comment>caused_by: customer shift to generative AI impacting revenue from traditional stock content business</rdfs:comment>
+        <rdfs:label>c07a legacy stock content business decline</rdfs:label>
+        <originalMention>Legacy stock content business decline</originalMention>
+        <rdfs:subClassOf rdf:resource="http://example.org/genus-kg#firm_specific_risk"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://example.org/genus-kg#c07b_publishing_advertising_legacy_business_decline">
+        <rdfs:comment>arises_from: decline in value of a legacy Publishing &amp; Advertising business unit, evidenced by goodwill impairment</rdfs:comment>
+        <rdfs:label>c07b publishing advertising legacy business decline</rdfs:label>
+        <originalMention>Publishing &amp; Advertising legacy business decline</originalMention>
+        <rdfs:subClassOf rdf:resource="http://example.org/genus-kg#loss"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://example.org/genus-kg#c08_acrobat_ai_assistant_document_cloud_ai_driven_growth">
+        <rdfs:comment>arises_from: AI Assistant features in Document Cloud, leading to new subscriptions and upsells</rdfs:comment>
+        <rdfs:label>c08 acrobat ai assistant document cloud ai driven growth</rdfs:label>
+        <originalMention>Acrobat AI Assistant &amp; Document Cloud AI-driven growth</originalMention>
+        <rdfs:subClassOf rdf:resource="http://example.org/genus-kg#revenue"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://example.org/genus-kg#c09_core_product_demand_go_to_market_execution_non_ai_specific">
+        <rdfs:comment>generates: from successful product adoption and sales execution for core offerings</rdfs:comment>
+        <rdfs:label>c09 core product demand go to market execution non ai specific</rdfs:label>
+        <originalMention>Core product demand &amp; go-to-market execution (non-AI-specific)</originalMention>
+        <rdfs:subClassOf rdf:resource="http://example.org/genus-kg#revenue"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://example.org/genus-kg#c10_firefly_creative_genai_monetization_arr_growth">
+        <rdfs:comment>expected_to_generate: from the monetization of new GenAI product innovations and associated pricing strategies</rdfs:comment>
+        <rdfs:label>c10 firefly creative genai monetization arr growth</rdfs:label>
+        <originalMention>Firefly / Creative GenAI monetization &amp; ARR growth</originalMention>
+        <rdfs:subClassOf rdf:resource="http://example.org/genus-kg#revenue"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://example.org/genus-kg#c11_genstudio_aep_enterprise_ai_driven_growth_digital_experience">
+        <rdfs:comment>contributes_to: enterprise adoption and subscription growth of AI-driven Digital Experience products</rdfs:comment>
+        <rdfs:label>c11 genstudio aep enterprise ai driven growth digital experience</rdfs:label>
+        <originalMention>GenStudio / AEP enterprise AI-driven growth (Digital Experience)</originalMention>
+        <rdfs:subClassOf rdf:resource="http://example.org/genus-kg#revenue"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://example.org/genus-kg#c12_adobe_express_ai_first_growth">
+        <rdfs:comment>expected_to_generate: AI-first growth and user acquisition for the Adobe Express product, driven by product innovation and external generative AI proliferation.</rdfs:comment>
+        <rdfs:label>c12 adobe express ai first growth</rdfs:label>
+        <originalMention>Adobe Express AI-first growth</originalMention>
+        <rdfs:subClassOf rdf:resource="http://example.org/genus-kg#investment"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://example.org/genus-kg#c13_figma_termination_payment">
+        <rdfs:comment>arises_from: termination of a corporate acquisition agreement</rdfs:comment>
+        <rdfs:label>c13 figma termination payment</rdfs:label>
+        <originalMention>Figma termination payment</originalMention>
+        <rdfs:subClassOf rdf:resource="http://example.org/genus-kg#monetary_legal_settlement"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://example.org/genus-kg#c14_semrush_acquisition_pending_closed">
+        <rdfs:comment>expected_to_generate: expanded capabilities in search engine optimization and brand visibility, adding annual recurring revenue</rdfs:comment>
+        <rdfs:label>c14 semrush acquisition pending closed</rdfs:label>
+        <originalMention>Semrush acquisition (pending → closed)</originalMention>
+        <rdfs:subClassOf rdf:resource="http://example.org/genus-kg#investment"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://example.org/genus-kg#c15_leadership_transition_cfo_departure_ceo_search">
+        <rdfs:comment>arises_from: changes in key executive personnel, such as CFO departure or CEO search</rdfs:comment>
+        <rdfs:label>c15 leadership transition cfo departure ceo search</rdfs:label>
+        <originalMention>Leadership transition (CFO departure / CEO search)</originalMention>
+        <rdfs:subClassOf rdf:resource="http://example.org/genus-kg#firm_specific_risk"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://example.org/genus-kg#c18_competitive_risk_from_ai_ad_platform_ecosystem_players">
+        <rdfs:comment>arises_from: competitive actions by AI and ad-platform ecosystem players impacting pricing power and market share</rdfs:comment>
+        <rdfs:label>c18 competitive risk from ai ad platform ecosystem players</rdfs:label>
+        <originalMention>Competitive risk from AI/ad-platform ecosystem players</originalMention>
+        <rdfs:subClassOf rdf:resource="http://example.org/genus-kg#firm_specific_risk"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://example.org/genus-kg#c19_ip_copyright_commercial_safety_concerns_around_ai">
+        <rdfs:comment>arises_from: intellectual property and commercial safety concerns regarding the training and usage of artificial intelligence models</rdfs:comment>
+        <rdfs:label>c19 ip copyright commercial safety concerns around ai</rdfs:label>
+        <originalMention>IP / copyright &amp; commercial-safety concerns around AI</originalMention>
+        <rdfs:subClassOf rdf:resource="http://example.org/genus-kg#firm_specific_risk"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://example.org/genus-kg#c20_seasonal_calendar_effects_holiday_back_to_school_cyber_monday_shift">
+        <rdfs:comment>arises_from: recurring calendar patterns affecting demand and sales timing</rdfs:comment>
+        <rdfs:label>c20 seasonal calendar effects holiday back to school cyber monday shift</rdfs:label>
+        <originalMention>Seasonal &amp; calendar effects (holiday, back-to-school, Cyber Monday shift)</originalMention>
+        <rdfs:subClassOf rdf:resource="http://example.org/genus-kg#systematic_risk"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://example.org/genus-kg#c21_emerging_markets_demand_strength">
+        <rdfs:comment>impacts: sales and customer acquisition due to strong demand in emerging markets</rdfs:comment>
+        <rdfs:label>c21 emerging markets demand strength</rdfs:label>
+        <originalMention>Emerging markets demand strength</originalMention>
+        <rdfs:subClassOf rdf:resource="http://example.org/genus-kg#economic_risk"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://example.org/genus-kg#c22_investment_spend_cost_pressure_on_margins_ai_infrastructure_marketing_events">
+        <rdfs:comment>arises_from: investment in AI infrastructure and marketing/events, creating pressure on margins</rdfs:comment>
+        <rdfs:label>c22 investment spend cost pressure on margins ai infrastructure marketing events</rdfs:label>
+        <originalMention>Investment spend &amp; cost pressure on margins (AI infrastructure, marketing/events)</originalMention>
+        <rdfs:subClassOf rdf:resource="http://example.org/genus-kg#expense"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://example.org/genus-kg#c23_share_repurchase_capital_allocation">
+        <rdfs:comment>expected_to_generate: increased earnings per share for remaining shareholders by reducing outstanding shares</rdfs:comment>
+        <rdfs:label>c23 share repurchase capital allocation</rdfs:label>
+        <originalMention>Share repurchase / capital allocation</originalMention>
+        <rdfs:subClassOf rdf:resource="http://example.org/genus-kg#investment"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://example.org/genus-kg#c24_analyst_concern_growth_deceleration_guidance_optics">
+        <rdfs:comment>consequently_impacts: investor perception of future growth and guidance credibility</rdfs:comment>
+        <rdfs:label>c24 analyst concern growth deceleration guidance optics</rdfs:label>
+        <originalMention>Analyst concern: growth deceleration / guidance optics</originalMention>
+        <rdfs:subClassOf rdf:resource="http://example.org/genus-kg#firm_specific_risk"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://example.org/genus-kg#c25_reporting_business_mix_reclassification_effects">
+        <rdfs:comment>affects: the categorization and recognition of financial metrics due to internal business model transitions or reclassification between reporting segments</rdfs:comment>
+        <rdfs:label>c25 reporting business mix reclassification effects</rdfs:label>
+        <originalMention>Reporting / business-mix reclassification effects</originalMention>
+        <rdfs:subClassOf rdf:resource="http://example.org/genus-kg#reporting_effect"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://example.org/genus-kg#c26_execution_arr_to_revenue_linearity">
+        <rdfs:comment>impacts: the consistency and efficiency of converting Annual Recurring Revenue (ARR) into recognized revenue within a given quarter</rdfs:comment>
+        <rdfs:label>c26 execution arr to revenue linearity</rdfs:label>
+        <originalMention>Execution: ARR-to-revenue linearity</originalMention>
+        <rdfs:subClassOf rdf:resource="http://example.org/genus-kg#revenue"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://example.org/genus-kg#c27_rise_of_llm_agentic_search_generative_engine_optimization_geo_opportunity">
+        <rdfs:comment>arises_from: the widespread adoption of LLM-driven discovery and agentic search, creating new opportunities for content and experience management</rdfs:comment>
+        <rdfs:label>c27 rise of llm agentic search generative engine optimization geo opportunity</rdfs:label>
+        <originalMention>Rise of LLM/agentic search &amp; generative-engine-optimization (GEO) opportunity</originalMention>
+        <rdfs:subClassOf rdf:resource="http://example.org/genus-kg#systematic_risk"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://example.org/genus-kg#c28_debate_ai_s_net_effect_on_adobe_s_addressable_market_pricing_model">
+        <rdfs:comment>arises_from: speculation regarding generative AI's potential to alter Adobe's addressable market and pricing model</rdfs:comment>
+        <rdfs:label>c28 debate ai s net effect on adobe s addressable market pricing model</rdfs:label>
+        <originalMention>Debate: AI's net effect on Adobe's addressable market &amp; pricing model</originalMention>
+        <rdfs:subClassOf rdf:resource="http://example.org/genus-kg#firm_specific_risk"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://example.org/genus-kg#reporting_effect">
+        <rdfs:comment>NEW GENUS -- This concept describes internal company decisions or transitions (like business model changes or reclassifications) that primarily affect how financial results (e.g., revenue, ARR) are categorized, recognized, or presented, often leading to discrepancies between reported metrics and underlying business trends. It is distinct from external risks or direct income/expense items.</rdfs:comment>
+        <rdfs:label>reporting effect</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://example.org/genus-kg#strategic_tradeoff">
+        <rdfs:comment>NEW GENUS -- Neither the risk branch (externally imposed uncertainty) nor the income/return branch (realized value creation) captures a deliberate, company-controlled exchange of one value driver for another -- trading near-term ARR for long-term MAU/funnel growth. Modeled as a sibling genus to risk and income directly under thing -- deliberately not under a more specific shared ancestor like the former 'metric' class, since that class isn't guaranteed to exist under the same name across re-exports of the taxonomy, while 'thing' always does.</rdfs:comment>
+        <rdfs:label>strategic tradeoff</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    </owl:Class>
+
+</rdf:RDF>

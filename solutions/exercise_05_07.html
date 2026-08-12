@@ -1,0 +1,296 @@
+<html>
+
+<!--=======================================================================-->
+
+<head>
+  <title>Exercise 5.7 - Extracting Headwinds/Tailwinds from Earnings Calls Transcripts</title>
+
+<!--=======================================================================-->
+
+<body style='background-color:#990000'>
+  <center>
+    <table width='720' cellpadding='40' bgcolor='#ffffff'>
+      <tr>
+        <td>
+
+<!--=======================================================================-->
+
+<center>
+  <span style='font-size:36px'>Knowledge Graphs</span>
+</center>
+<br/>
+
+<!--=======================================================================-->
+
+<center>
+  <table width='640' cellspacing='1' cellpadding='10' bgcolor='#eeeeee' border='1'>
+    <tr><td align='center' style='font-size:18px'>Exercise 5.7 Extracting Headwinds/Tailwinds from Earnings Calls Transcripts</td></tr>
+  </table>
+</center>
+
+<!--=======================================================================-->
+
+ 
+
+<p id="5.7"><a href="questions/exercise_05_07.html">Exercise 5.7</a>.
+  
+  The goal of this project is to build a knowledge graph of headwinds
+  and tailwinds facing a company as reported earnings calls
+  transcripts.
+For this project, you
+  can use any publicly available earnings calls transcripts. This
+  project will give you hands-on experience with text processing,
+  information extraction, and knowledge graph construction. Proceed in
+  the following steps.
+
+<ol>
+  <li>Select companies and time window
+    <ul>
+      <li>Choose a small number of well-known companies to focus
+      on.</li>
+      <li>Select a suitable time window so that you can work with
+      multiple transcripts for the same company across different
+      quarters.</li>
+    </ul>
+  </li>
+
+
+  <li>Identify financial headwinds and tailwinds
+    <ul>
+      <li>Process each transcript to extract factors that may
+      positively (tailwinds) or negatively (headwinds) affect the
+      company's stock performance.</li>
+      <li>Consider categorizing these factors (e.g., market trends,
+      regulatory changes, supply chain issues) to make the database
+      more informative.</li>
+    </ul>
+  </li>
+
+  <li>Optional analysis
+    <ul>
+      <li>Even though this task is meant for future chapters, Once
+      your database is populated, begin exploring patterns across
+      companies and quarters, or visualizing the relationships and
+      factors affecting stock performance.</li>
+    </ul>
+  </li>
+</ol>
+
+<h3>Select Companies and Time Window</h3>
+
+For the purpose of this exercise, we will use the earnings calls
+transcripts (ECTs) for Adobe. The primary reason for choosing Adobe is
+that it makes its
+ECTs <a href="https://www.adobe.com/investor-relations.html">available
+for free on its website</a>.  We downloaded Adobe ECTs
+for <a href="exercise_05_07/adobe_transcripts/">10 quarters</a>
+starting from the second quarter of 2024.
+
+<h3>Identify Financial Headwinds and Tailwinds</h3>
+
+We will approach this task in two steps. First, we will extract the
+financial headwinds and tailwinds from the ten quarters of earnings
+call transcripts. Next, we will situate the headwinds and tailwinds in
+a background taxonomy extracted from a finance textbook as part
+of <a href="exercise_05_06.html">Exercise 5.6</a>, and to the extent
+possible, with domain-independent Wikidata relationships. We will
+explain each of these steps in greater detail.
+
+<h4>Extract Raw Headwinds and Tailwinds and Canonicalize</h2>
+
+<p><a href="exercise_03_06.html">Recall that</a> for each headwind and
+tailwind, we are interested in four properties: <i>materiality</i>
+(mild, medium, or high impact on company performance), <i>duration</i>
+(short, 1&ndash;2 quarters; medium, 3&ndash;5 quarters; long, more
+than 5 quarters), <i>externality</i> (true if outside the company's
+control, false if internal, both if mixed), and <i>obviousness</i>
+(how strongly an analyst would believe the effect is real and
+significant, based on strength of evidence rather than how
+emphatically management states it).</p>
+
+<p>We added a fifth dimension, <i>scope</i> considering Adobe's
+business-line structure &mdash; Creative Cloud, Document
+Cloud/Acrobat, Digital Experience, Firefly/GenAI, Adobe Express,
+Publishing &amp; Advertising, or company-wide &mdash; because a single
+headwind rarely affects the whole business uniformly. Furthermore,
+Adobe moved reporting to the whole business level starting FY2026,
+which made this dimension more useful going forward rather than
+less.</p>
+
+<p>Each of the ten transcripts was read by an independent extraction
+pass powered by Claude, returning a JSON array in a fixed schema: quarter,
+raw label, scope, direction (headwind or tailwind), the four scored
+dimensions, a verbatim quote, the speaker and their role, the section
+of the call (prepared remarks or Q&amp;A), and a short rationale
+explaining the score. This produced <a href="exercise_05_07/adobe_headwinds_tailwinds.xlsx">161 raw mentions</a>  across the
+ten quarters.</p>
+
+
+<p>The 161 raw mentions were grouped
+ into <a href="exercise_05_07/adobe_headwinds_tailwinds.xlsx">27
+ canonical concepts</a>, again using Claude, using a keyword-matching
+ rule set &mdash; for example, every mention of FX/currency
+ translation effects across all ten quarters collapsed into one
+ concept, as did every mention of Firefly and GenAI monetization.  The
+ resulting concepts range from ones present in every quarter (FX
+ effects, Firefly/GenAI monetization, GenStudio/AEP growth) down to
+ single-quarter, one-off events (the Figma termination payment, the
+ Semrush acquisition, a CFO transition).</p>
+
+
+<p>Across the ten quarters covered, Adobe's Tailwinds substantially
+outnumber headwinds in the raw count &mdash; 112 tailwind mentions
+versus 49 headwind mentions &mdash; though that ratio partly reflects
+how much airtime management gives to framing AI monetization
+positively, rather than a claim that the business faced few real
+pressures. Three themes appear in every single quarter of the dataset:
+foreign exchange translation effects, Firefly/GenAI monetization and
+ARR growth, and GenStudio/AEP enterprise AI-driven growth. Their
+persistence says less about any one quarter and more about the fact
+that currency exposure and AI monetization have been the two
+throughlines of Adobe's narrative for two straight years.</p>
+
+<p>What the quarter-by-quarter view adds that a single snapshot can't
+is that several of these themes are not static labels &mdash; they
+change character over time, sometimes dramatically. Two examples
+illustrate two different ways that happens.</p>
+
+<p>Foreign exchange effects flipped direction cleanly, in step with
+the dollar. From FY2024 Q1 through FY2025 Q1, FX was called out as a
+headwind in every quarter &mdash; a strengthening U.S. dollar was
+consistently cited as shaving a point or so off reported growth
+relative to constant currency. Starting in FY2025 Q2, the same
+underlying factor reversed into a tailwind for five consecutive
+quarters through FY2026 Q2, as the dollar weakened and currency
+translation began adding to reported growth instead. It's the same
+economic exposure the whole way through &mdash; only the sign of the
+year-over-year currency move changed, not the nature of the risk
+itself.</p>
+
+<p>Creative Cloud pricing and packaging, by contrast, has
+toggled back and forth rather than trending in one direction.
+It opened as a headwind in FY2024 Q1 and Q2 (tough prior-year pricing
+comparisons), swung to a tailwind for the next two quarters as renewal
+upsell and consumption-based pricing kicked in, dipped back to a mild
+headwind in FY2025 Q2 (slower realization through annual renewal
+cycles), returned to a tailwind through Q3 and Q4 as value-based
+pricing and Pro-tier migration contributed to ARR, and then picked up
+a second, different headwind in that same FY2025 Q4 quarter &mdash;
+growing competitive pressure on pricing power. Unlike FX, this isn't
+one factor reversing sign; it's several distinct pricing dynamics
+layered under one label, which is worth keeping in mind when reading
+"pricing" as a single line in any summary table.</p>
+
+
+<h4>Situate the Headwinds/Tailwinds in a Finance Taxonomy</h4>
+
+<p>A natural next question is whether these 27 company-specific
+concepts could be given more general meaning by connecting them to an
+existing body of finance knowledge, rather than remaining a
+self-contained, Adobe-only vocabulary.  Recall
+from <a href="exercise_05_06.html">Exercise 5.6</a>, we
+have already created a finance taxonomy from <i>OpenStax Principles of
+Finance</i> textbook, with roughly 180 genus classes, a glossary of
+about 425 terms each with a genus and differentia, and a mapping of
+the vocabulary used to describe relationships between concepts onto
+specific Wikidata properties.</p>
+
+<p>The finance textbook taxonomy has two classes that are directly
+relevant to headwinds and tailwinds: <i>risk</i>
+and <i>income/return</i>.  A spot check suggested that the
+company-specific concepts could be categorized under these two
+classes.  For example, the concept of <i>macroeconomic uncertainty &
+cyclicality</i> naturally fits under risk and the concept
+of <i>enterprise large deal bookings</i> falls under income.  There
+was, however, one excpetion: a strategic trade-off concept (Adobe's
+freemium/MAU strategy, which dampens near-term revenue in exchange for
+long-term reach) that fits neither the risk branch nor the income
+branch.</p>
+
+<p>We can specify this task as starting from the 27 Adobe
+headwind/tailwind concepts and identifying a genus (an existing taxonomy
+class, or a new one only when nothing fit) and a differentia, where
+the differentia's relationship predicate would be reused from the
+textbook's own Wikidata-aligned vocabulary rather than invented
+freely, and only the differentia's specific content &mdash; the
+Adobe-specific condition &mdash; would be newly written.</p>
+
+<p>We used Claude to generate
+the <a href="exercise_05_07/gemini_matcher.py"> necessary Python
+script</a>  that we ran locally with a Gemini API key, structuered as
+follows. It first reads the textbook taxonomy, asks Gemini to choose a
+genus from a curated shortlist and write a differentia using only
+predicates from the textbook's causal-relationship vocabulary, and
+finally writes out the taxonomy.  The one concept with no genus home
+(the freemium trade-off) was resolved by creating a new
+class <i>strategic_tradeoff</i>.</p>
+
+<p>The end result is
+a <a href="exercise_05_07/out/adobe_taxonomy_extension.owl">taxonomy</a>
+in which Adobe's real headwinds and tailwinds, in quarter-by-quarter
+disclosures, are grounded in formal financial vocabulary rather than
+existing as an unconnected list &mdash; each concept now has a place
+in a class hierarchy, alongside textbook concepts like economic risk,
+diversifiable risk, and total return. </p>
+
+<h3>Analysis of the Result</h3>
+
+<p>We analyze below the benefits of connecting the headwinds/tailwinds
+extracted from the earnings calls transcripts with a taxonomy
+extracted from the textbook.</p>
+
+<p>A raw extraction assigns strings such as "Macro/FX", "AI & Product
+Innovation", to the headwinds/tailwinds. Grouping by formal genus, we
+can now ask "which Adobe concepts are structurally under risk, and
+which under income?" via the real subclass hierarchy, and get a
+classification that comes from the textbook's own logic rather than
+  LLM prediction.</p>
+
+<p>We can use the resulting data to perform blind spot analysis as
+follows. Take everything the textbook defines under risk, subtract the
+specific genus classes Adobe's own concepts actually landed on, and
+what's left is risk vocabulary the textbook considers material to a
+business but that never came up on a call - liquidity_risk,
+reinvestment_risk, political_risk, whatever the diff turns out to
+be. That's a concrete, non-obvious prompt list for an analyst's next
+earnings-call question, and it wasn't answerable at all before the
+mapping existed (there was nothing to diff against).</p>
+
+<p>We can use the taxonomy to calculate relatedness between two Adobe
+concepts via shared ancestry. Before, "how related are <i>Firefly
+monetization</i> and <i>AI infrastructure cost pressure</i> was
+answerable only by eyeballing category strings (or through another LLM
+call). Now both are embedded in the same graph, so their
+least-common-ancestor distance is a real, computable answer - close
+(few hops, e.g. both under a shared cost/investment branch)
+vs. distant (only converge at root concept).</p>
+
+<p>Cross company comparisons can be done more effectively. if we run
+the same pipeline against another company's earnings calls, their
+concepts would land in the same shared taxonomy. At that point we
+could ask "which companies have concepts under economic_risk" or
+"whose growth concepts cluster near total_return vs. near
+strategic_tradeoff". We can do cross-company comparison by structural
+genus membership instead of keyword overlap on transcripts. </p>
+
+
+  <!--=======================================================================-->
+
+      </td>
+    </tr>
+  </table>
+  <br/>
+</center>
+      </td>
+    </tr>
+  </table>
+</center>
+
+<!--=======================================================================-->
+
+      <br/>
+    </td></tr></table>
+  </center>
+</body>
+
+</html>
