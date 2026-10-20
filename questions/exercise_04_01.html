@@ -31,7 +31,7 @@ var exmark = '<img src="../images/newredex.jpg"/>'
 
 function showgrades ()
  {showgrade(document.getElementById('a').value,'12','ag');
-  showgrade(document.getElementById('b').value,'0.44','bg');
+  showgrade(document.getElementById('b').value,'0.57','bg');
   showgrade(document.getElementById('c').value,'yes','cg');
   showgrade(document.getElementById('d').value,'yes','dg');
   showgrade(document.getElementById('e').value,'yes','eg');
@@ -51,7 +51,7 @@ function showgrade (answer,correct,label)
 
 function showanswers ()
     {document.getElementById('a').value='12';
-  document.getElementById('b').value='0.44';
+  document.getElementById('b').value='0.57';
   document.getElementById('c').value='yes';
   document.getElementById('d').value='yes';
 	    document.getElementById('e').value='yes';
@@ -156,7 +156,7 @@ as the size of the intersection divided by the size of the
         <select id='b' onChange='showgrades()'>
           <option value='empty'></option>
           <option value='0.14'>0.14</option>
-          <option value='0.44'>0.44</option>
+          <option value='0.57'>0.57</option>
           <option value='0.94'>0.94</option>
           <option value='1.04'>1.04</option>
         </select>
@@ -184,9 +184,9 @@ Apple Corp, which of these strings will be equated by the Jaccard measure?</td>
       <td align='center'>
         <select id='d' onChange='showgrades()'>
           <option value='empty'></option>
-          <option value='no'>x and y</option>
+          <option value='yes'>x and y</option>
           <option value='no'>x and z</option>
-         <option value='yes'>y and z</option>
+         <option value='no'>y and z</option>
         </select>
       </td>
       <td id='dg' width='20'></td>
